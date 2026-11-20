@@ -42,7 +42,7 @@ export default function Contact() {
           <textarea required rows={5} placeholder="Write your message..." />
         </m.label>
         <m.div variants={reduceMotion ? undefined : staggerItem}>
-          <MotionButton type="submit" className="btn btn-dark">SEND MESSAGE ↗</MotionButton>
+          <MotionButton type="submit" className="btn btn-dark">SEND MESSAGE </MotionButton>
         </m.div>
         <AnimatePresence initial={false}>
           {sent && (

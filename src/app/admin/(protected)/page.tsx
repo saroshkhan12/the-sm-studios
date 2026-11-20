@@ -492,7 +492,7 @@ function EtsySection({
           {syncing ? "SYNCHRONIZING…" : "SYNC ETSY LISTINGS"}
         </MotionButton>
         <a className="btn btn-outline-light" href="/api/etsy/products" target="_blank" rel="noreferrer">
-          VIEW CATALOG JSON ↗
+          VIEW CATALOG JSON 
         </a>
       </m.section>
 
@@ -510,7 +510,7 @@ function EtsySection({
           <input type="file" accept=".csv,text/csv" onChange={handleFileChange} />
         </label>
         <MotionButton className="btn btn-outline-light" onClick={onExport}>
-          EXPORT PREVIEW CSV ↗
+          EXPORT PREVIEW CSV 
         </MotionButton>
       </section>
 

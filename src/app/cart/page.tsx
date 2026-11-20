@@ -87,7 +87,7 @@ export default function Cart() {
                   </div>
                   <div className="selection-actions">
                     <a className="btn btn-dark" href={item.url} target="_blank" rel="noopener noreferrer">
-                      CONTINUE ON ETSY ↗
+                      CONTINUE ON ETSY
                     </a>
                     <MotionButton className="remove-selection" type="button" onClick={() => update(() => removeFromCart(item.id))}>REMOVE</MotionButton>
                   </div>
@@ -102,7 +102,7 @@ export default function Cart() {
           </>
         ) : (
           <ScrollReveal className="empty-catalog compact">
-            <span>✳</span>
+            <span aria-hidden="true"></span>
             <h2>Your selection<br /><em>is waiting for art.</em></h2>
             <p>Save a piece from its detail page. There is no website checkout or payment collection.</p>
             <Link className="btn btn-dark" href="/shop">EXPLORE THE SHOP</Link>

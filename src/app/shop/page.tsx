@@ -242,7 +242,7 @@ export default function ShopPage() {
         </m.div>
       ) : products.length ? (
         <ScrollReveal className="empty-catalog compact" role="status">
-          <span>✳</span>
+          <span aria-hidden="true"></span>
           <h2>No pieces<br /><em>found this time.</em></h2>
           <p>Try another search or clear the current filters to explore the full collection.</p>
           <MotionButton type="button" className="btn btn-outline-dark" onClick={() => { setQuery(""); setType("all"); }}>
@@ -251,10 +251,10 @@ export default function ShopPage() {
         </ScrollReveal>
       ) : (
         <ScrollReveal className="empty-catalog">
-          <span>✳</span>
+          <span aria-hidden="true"></span>
           <h2>{configured ? "The collection is" : "Connect the studio to Etsy"}<br /><em>{configured ? "being curated." : "to publish products."}</em></h2>
           <p>{configured ? "No active Etsy listings have been synchronized yet. Run a sync from the admin integration panel." : "The Etsy API credentials are not configured yet. The catalog will populate from verified live listings after the secure server integration is configured."}</p>
-          <a href="https://thesmstudios.etsy.com" target="_blank" rel="noreferrer" className="btn btn-dark">VISIT OUR ETSY SHOP ↗</a>
+          <a href="https://thesmstudios.etsy.com" target="_blank" rel="noreferrer" className="btn btn-dark">VISIT OUR ETSY SHOP </a>
         </ScrollReveal>
       )}
     </div>

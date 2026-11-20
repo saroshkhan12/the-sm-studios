@@ -75,7 +75,7 @@ export function ProductPurchaseActions({
             if (!available) event.preventDefault();
           }}
         >
-          {available ? "BUY ON ETSY ↗" : "UNAVAILABLE ON ETSY"}
+          {available ? "BUY ON ETSY " : "UNAVAILABLE ON ETSY"}
         </m.a>
         <MotionButton type="button" className="btn btn-outline-dark" onClick={addSelection} disabled={!available}>
           SAVE TO YOUR SELECTION

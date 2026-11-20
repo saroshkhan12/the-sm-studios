@@ -145,8 +145,7 @@ export default async function Home() {
             </StaggerReveal>
           ) : (
             <ScrollReveal className="catalog-note">
-              <span className="note-symbol">✳</span>
-              <div>
+<span className="note-symbol" aria-hidden="true"></span>              <div>
                 <span className="eyebrow light">THE FIRST EDITION IS TAKING SHAPE</span>
                 <h3>Original work.<br /><em>Coming into focus.</em></h3>
                 <p>
@@ -192,8 +191,7 @@ export default async function Home() {
             aria-label="Explore Islamic Art"
           >
             <span className="world-visual-label">COLLECTION 02 · FORM &amp; SPIRIT</span>
-            <span className="world-islamic-arch"><span>✳</span></span>
-            <span className="world-visual-caption">A STUDY IN<br />LIGHT &amp; DEVOTION.</span>
+<span className="world-islamic-arch"><span aria-hidden="true"></span></span>            <span className="world-visual-caption">A STUDY IN<br />LIGHT &amp; DEVOTION.</span>
           </Link>
           <div className="world-copy">
             <span className="eyebrow">ISLAMIC ART &amp; SPIRITUAL EXPRESSIONS</span>
@@ -212,8 +210,7 @@ export default async function Home() {
           <StaggerItem className="world-small-reveal">
             <Link href="/collections/digital-artwork" className="world-small-card world-digital">
               <span className="eyebrow">THE DIGITAL ART STUDIO</span>
-              <span className="world-small-mark">✳</span>
-              <h3>Ideas without<br /><em>edges.</em></h3>
+<span className="world-small-mark" aria-hidden="true"></span>              <h3>Ideas without<br /><em>edges.</em></h3>
               <span className="text-link">EXPLORE DIGITAL ART <ArrowUpRight size={15} /></span>
             </Link>
           </StaggerItem>
@@ -232,8 +229,7 @@ export default async function Home() {
         <ScrollReveal className="manifesto-stamp" aria-label="THE SM STUDIOS">
           <span className="manifesto-stamp-kicker">THE</span>
           <strong>SM</strong>
-          <span className="manifesto-stamp-symbol">✳</span>
-          <span className="manifesto-stamp-footer">STUDIOS</span>
+<span className="manifesto-stamp-symbol" aria-hidden="true"></span>          <span className="manifesto-stamp-footer">STUDIOS</span>
         </ScrollReveal>
         <ScrollReveal className="manifesto-content">
           <span className="eyebrow">OUR CREATIVE PHILOSOPHY</span>
