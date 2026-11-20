@@ -1,9 +1,10 @@
+
 "use client";
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { m, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, LockKeyhole } from "lucide-react";
+import { ArrowUpRight, LockKeyhole, Eye, EyeOff } from "lucide-react";
 import { MotionButton } from "@/components/motion-button";
 
 export default function AdminLoginPage() {
@@ -11,6 +12,7 @@ export default function AdminLoginPage() {
   const reduceMotion = useReducedMotion();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
@@ -52,6 +54,7 @@ export default function AdminLoginPage() {
         <span className="eyebrow">PRIVATE STUDIO ACCESS</span>
         <h1>Welcome <em>back.</em></h1>
         <p>Sign in with the administrator credentials configured for this studio.</p>
+
         <form onSubmit={submit}>
           <label htmlFor="admin-username">ADMIN USERNAME</label>
           <input
@@ -62,21 +65,40 @@ export default function AdminLoginPage() {
             value={username}
             onChange={(event) => setUsername(event.target.value)}
           />
+
           <label htmlFor="admin-password">PASSWORD</label>
-          <input
-            id="admin-password"
-            type="password"
-            autoComplete="current-password"
-            required
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
+          <div className="admin-password-wrapper">
+            <input
+              id="admin-password"
+              type={showPassword ? "text" : "password"}
+              autoComplete="current-password"
+              required
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+            <button
+              type="button"
+              className="admin-password-toggle"
+              onClick={() => setShowPassword((visible) => !visible)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+              aria-pressed={showPassword}
+            >
+              {showPassword ? (
+                <EyeOff size={19} aria-hidden="true" />
+              ) : (
+                <Eye size={19} aria-hidden="true" />
+              )}
+            </button>
+          </div>
+
           {error && <p className="admin-form-message is-error" role="alert">{error}</p>}
+
           <MotionButton className="btn btn-light" type="submit" disabled={submitting}>
             {submitting ? "SIGNING IN…" : "SIGN IN"}
             {!submitting && <ArrowUpRight size={16} aria-hidden="true" />}
           </MotionButton>
         </form>
+
         <small>Admin access is private. Keep your credentials confidential.</small>
       </m.section>
     </main>

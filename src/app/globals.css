@@ -191,3 +191,55 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .product-card .product-info { padding-top:14px; }
 .shop-toolbar select { border:0; background:transparent; outline:none; color:inherit; font:inherit; min-width:140px; }
 .admin-card input[type=password] { display:block; width:min(100%,420px); margin-top:14px; padding:12px 14px; border:1px solid rgba(0,0,0,.18); background:transparent; }
+
+/* Admin login password visibility toggle */
+.admin-password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.admin-password-wrapper input {
+  width: 100%;
+  padding-right: 48px;
+}
+
+.admin-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #514638;
+  cursor: pointer;
+  transition: color 180ms ease, background 180ms ease;
+}
+
+.admin-password-toggle:hover {
+  color: #A65F49;
+  background: rgba(166, 95, 73, 0.10);
+}
+
+.admin-password-toggle:focus-visible {
+  outline: 2px solid #A65F49;
+  outline-offset: 2px;
+}
+
+.admin-password-toggle svg {
+  width: 19px;
+  height: 19px;
+  stroke-width: 1.7;
+}
+
+@media (hover: none) {
+  .admin-password-toggle:active {
+    background: rgba(166, 95, 73, 0.16);
+  }
+}
