@@ -28,6 +28,6 @@ export function CollectionCard({
       )}
       <span className="art-caption">THE SM STUDIOS / {item.number}</span>
     </div>
-    <div className="collection-meta"><div><span className="eyebrow">COLLECTION {item.number}</span><h3>{item.name}</h3><p>{item.subtitle}</p></div><span className="round-arrow">↗</span></div>
+    <div className="collection-meta"><div><span className="eyebrow">COLLECTION {item.number}</span><h3>{item.name}</h3><p>{item.subtitle}</p></div></div>
   </Link>;
 }
