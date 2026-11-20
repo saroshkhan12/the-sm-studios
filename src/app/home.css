@@ -1,0 +1,262 @@
+
+.worlds-section {
+  padding-top: 115px;
+  padding-bottom: 115px;
+}
+
+.world-feature {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 9%;
+  align-items: center;
+  margin-bottom: 110px;
+}
+
+.world-feature-reverse .world-visual {
+  order: 2;
+}
+
+.world-feature-reverse .world-copy {
+  order: 1;
+}
+
+.world-visual {
+  min-height: 480px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 300ms ease;
+}
+
+.world-visual:hover {
+  transform: translateY(-4px);
+}
+
+.world-visual-label,
+.world-visual-caption {
+  position: relative;
+  z-index: 1;
+  font-size: 8px;
+  letter-spacing: 1.7px;
+  line-height: 1.8;
+}
+
+.world-visual-caption {
+  align-self: flex-end;
+  text-align: right;
+}
+
+.world-palestine {
+  color: #f7f4ee;
+  background: #754039;
+}
+
+.world-palestine::before,
+.world-palestine::after {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(247, 244, 238, 0.42);
+  border-radius: 50%;
+}
+
+.world-palestine::before {
+  width: 360px;
+  height: 360px;
+  left: -90px;
+  top: 65px;
+}
+
+.world-palestine::after {
+  width: 270px;
+  height: 270px;
+  left: -45px;
+  top: 110px;
+}
+
+.world-visual-mark {
+  z-index: 1;
+  align-self: center;
+  font: clamp(48px, 7vw, 82px) "Cormorant Garamond", Georgia, serif;
+  color: #e7c7b1;
+}
+
+.world-islamic {
+  color: #f7f4ee;
+  background: #82745e;
+}
+
+.world-islamic::before {
+  content: "";
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  top: 95px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid rgba(247, 244, 238, 0.48);
+  border-radius: 50%;
+}
+
+.world-islamic-arch {
+  position: absolute;
+  width: 220px;
+  height: 290px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid rgba(247, 244, 238, 0.64);
+  border-bottom: 0;
+  border-radius: 120px 120px 0 0;
+  display: grid;
+  place-items: center;
+  color: #e8ceb0;
+  font-size: 54px;
+}
+
+.world-copy .eyebrow {
+  margin-bottom: 20px;
+}
+
+.world-copy h2 {
+  margin: 0;
+  font: clamp(42px, 5vw, 64px)/0.98 "Cormorant Garamond", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -1.5px;
+}
+
+.world-copy h2 em,
+.world-small-card h3 em {
+  color: var(--clay);
+  font-weight: 400;
+}
+
+.world-copy p {
+  max-width: 430px;
+  margin: 24px 0 28px;
+  color: #6d675f;
+  font-size: 12px;
+  line-height: 2;
+}
+
+.worlds-small {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.world-small-card {
+  min-height: 340px;
+  padding: 28px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.world-small-card .eyebrow,
+.world-small-card .text-link {
+  position: relative;
+  z-index: 1;
+}
+
+.world-small-card h3 {
+  position: relative;
+  z-index: 1;
+  margin: auto 0 22px;
+  font: 47px/0.95 "Cormorant Garamond", Georgia, serif;
+  font-weight: 400;
+}
+
+.world-small-mark {
+  position: absolute;
+  right: 24px;
+  top: 35px;
+  font: 130px "Cormorant Garamond", Georgia, serif;
+  opacity: 0.36;
+}
+
+.world-digital {
+  color: #f7f4ee;
+  background: #39363c;
+}
+
+.world-digital .eyebrow,
+.world-digital .text-link {
+  color: #e7c9b9;
+}
+
+.world-digital h3 em {
+  color: #d7b49f;
+}
+
+.world-apparel {
+  color: var(--ink);
+  background: #d9d4c3;
+}
+
+.newsletter-action .eyebrow {
+  font-size: 8px;
+}
+
+.newsletter-action p {
+  margin: 17px 0 24px;
+}
+
+@media (max-width: 900px) {
+  .worlds-section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .world-feature {
+    gap: 6%;
+    margin-bottom: 80px;
+  }
+
+  .world-visual {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 650px) {
+  .worlds-section {
+    padding-top: 45px;
+    padding-bottom: 55px;
+  }
+
+  .world-feature {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 65px;
+  }
+
+  .world-feature-reverse .world-visual,
+  .world-feature-reverse .world-copy {
+    order: initial;
+  }
+
+  .world-visual {
+    min-height: 360px;
+    padding: 22px;
+  }
+
+  .worlds-small {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .world-small-card {
+    min-height: 300px;
+    padding: 23px;
+  }
+
+  .world-small-card h3 {
+    font-size: 43px;
+  }
+
+}
