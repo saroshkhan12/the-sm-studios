@@ -1,0 +1,1182 @@
+/home2/khanspro/smstudios-production/the-sm-studios/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/smstudios-production/the-sm-studios/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/smstudios-production/the-sm-studios/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/smstudios-production/the-sm-studios/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/smstudios-production/the-sm-studios/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/smstudios-production/the-sm-studios/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/smstudios-production/the-sm-studios/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/smstudios-production/the-sm-studios/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+node:internal/modules/cjs/loader:1568
+  throw err;
+  ^
+
+Error: Cannot find module 'next'
+Require stack:
+- /home2/khanspro/smstudios-production/the-sm-studios/server.js
+- /usr/local/lsws/fcgi-bin/lsnode.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1564:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1142:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)
+    at Module._load (node:internal/modules/cjs/loader:1341:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.require (node:internal/modules/cjs/loader:1674:12)
+    at require (node:internal/modules/helpers:157:16)
+    at Object.<anonymous> (/home2/khanspro/smstudios-production/the-sm-studios/server.js:2:14)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/home2/khanspro/smstudios-production/the-sm-studios/server.js',
+    '/usr/local/lsws/fcgi-bin/lsnode.js'
+  ]
+}
+
+Node.js v24.22.3
+node:internal/modules/cjs/loader:1568
+  throw err;
+  ^
+
+Error: Cannot find module 'next'
+Require stack:
+- /home2/khanspro/smstudios-production/the-sm-studios/server.js
+- /usr/local/lsws/fcgi-bin/lsnode.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1564:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1142:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)
+    at Module._load (node:internal/modules/cjs/loader:1341:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.require (node:internal/modules/cjs/loader:1674:12)
+    at require (node:internal/modules/helpers:157:16)
+    at Object.<anonymous> (/home2/khanspro/smstudios-production/the-sm-studios/server.js:2:14)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/home2/khanspro/smstudios-production/the-sm-studios/server.js',
+    '/usr/local/lsws/fcgi-bin/lsnode.js'
+  ]
+}
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
+/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151
+            throw new Error(`Could not find a production build in the '${opts.config.distDir}' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id`);
+                  ^
+
+Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at setupFsCheck (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-utils/filesystem.js:151:19)
+    at async initialize (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/lib/router-server.js:64:23)
+    at async NextCustomServer.prepare (/home2/khanspro/nodevenv/smstudios-production/the-sm-studios/24/lib/node_modules/next/dist/server/next.js:242:28)
+
+Node.js v24.22.3
