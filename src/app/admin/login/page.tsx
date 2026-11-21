@@ -5,6 +5,7 @@ import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { m, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, LockKeyhole, Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
 import { MotionButton } from "@/components/motion-button";
 
 export default function AdminLoginPage() {
@@ -100,6 +101,7 @@ export default function AdminLoginPage() {
         </form>
 
         <small>Admin access is private. Keep your credentials confidential.</small>
+        <p className="admin-register-link"><Link href="/admin/register">Request an administrator account</Link></p>
       </m.section>
     </main>
   );
