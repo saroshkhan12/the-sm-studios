@@ -184,13 +184,21 @@ export async function authenticateAdmin(username: string, password: string, user
   const normalized = username.trim().toLowerCase();
   if (!normalized || !password || normalized.length > 200 || password.length > 1024) return null;
   return serializeWrites(async () => {
-    let accounts = await readAccounts();
-    if (!accounts.length) {
-      const configuredUser = process.env.ADMIN_USER, configuredPassword = process.env.ADMIN_PASSWORD;
-      if (!configuredUser || !configuredPassword) throw new AdminSetupError("Admin login is not configured on the server.");
-      if (!hashEquals(normalized, configuredUser.trim().toLowerCase()) || !hashEquals(password, configuredPassword)) return null;
-      const owner = await makeAccount({ username: configuredUser.trim(), password: configuredPassword, fullName: "", email: "", role: "Owner", status: "Active" });
-      accounts = [owner]; await writeAccounts(accounts);
+    const accounts = await readAccounts();
+    // Ensure the configured bootstrap Owner exists even if a visitor registered first.
+    // Legacy account.json migration above takes precedence and preserves the existing Owner.
+    if (!accounts.some((account) => account.role === "Owner")) {
+      const configuredUser = process.env.ADMIN_USER?.trim();
+      const configuredPassword = process.env.ADMIN_PASSWORD;
+      if (!configuredUser || !configuredPassword) {
+        throw new AdminSetupError("The Owner account is not configured on the server.");
+      }
+      if (accounts.some((account) => account.username.toLowerCase() === configuredUser.toLowerCase())) {
+        throw new AdminSetupError("The configured Owner username is already assigned to another account. Contact the site administrator.");
+      }
+      const owner = await makeAccount({ username: configuredUser, password: configuredPassword, fullName: "", email: "", role: "Owner", status: "Active" });
+      accounts.push(owner);
+      await writeAccounts(accounts);
     }
     const account = accounts.find((a) => a.username.toLowerCase() === normalized);
     if (!account || account.status !== "Active" || !(await passwordMatches(password, account.passwordSalt, account.passwordHash))) return null;
@@ -204,6 +212,7 @@ export async function authenticateAdmin(username: string, password: string, user
 export async function registerAdmin(input: { username: string; fullName: string; email: string; password: string }) {
   const username = input.username.trim(), normalized = username.toLowerCase();
   const fullName = input.fullName.trim(), email = input.email.trim().toLowerCase();
+  if (process.env.ADMIN_USER?.trim().toLowerCase() === normalized) throw new AdminInputError("This username is reserved for the studio Owner.");
   if (!/^[a-zA-Z0-9._-]{3,40}$/.test(username)) throw new AdminInputError("Username must be 3–40 characters and use letters, numbers, dots, underscores or hyphens.");
   if (!fullName || fullName.length > 100) throw new AdminInputError("Enter your full name (100 characters maximum).");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) throw new AdminInputError("Enter a valid email address.");
