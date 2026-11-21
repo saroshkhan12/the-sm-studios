@@ -85,6 +85,9 @@ export function adminErrorResponse(error: unknown, operation: string) {
   if (error instanceof AdminRequestError) {
     return adminJson({ error: error.message }, error.status);
   }
+  if (error instanceof AdminAuthorizationError) {
+    return adminJson({ error: error.message }, 403);
+  }
   if (error instanceof AdminInputError) {
     return adminJson({ error: error.message }, 400);
   }
