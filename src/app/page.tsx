@@ -129,7 +129,7 @@ export default async function Home() {
     <>
       <HeroSlider slides={heroSlides} />
 
-      <section className="brand-values" aria-label="Studio values">
+<section className="brand-values" aria-label="Studio values">
         <div>
           <Diamond aria-hidden="true" />
           <span className="benefit-copy"><strong>PREMIUM QUALITY</strong><small>Art &amp; Designs</small></span>
@@ -148,47 +148,48 @@ export default async function Home() {
         </div>
       </section>
 
-ction>
+<section className="editorial-manifesto">
+        <div className="editorial-manifesto-inner">
+          <ScrollReveal className="manifesto-artwork" variant="slideInLeft">
+            {philosophyArtwork?.image ? (
+              <Image
+                src={philosophyArtwork.image}
+                alt={philosophyArtwork.title}
+                fill
+                sizes="(max-width: 700px) 100vw, 48vw"
+                className="manifesto-image"
+              />
+            ) : (
+              <div className="manifesto-artwork-fallback" aria-hidden="true">
+                <span>THE SM</span>
+                <strong>STUDIOS</strong>
+              </div>
+            )}
+            <span className="manifesto-artwork-label">ART · CULTURE · IDENTITY</span>
+            <span className="manifesto-artwork-index">EST. IN IDEAS / 001</span>
+          </ScrollReveal>
 
-      <section className="featured-section">
-        <div className="section-wrap">
-          <ScrollReveal className="section-heading">
-            <div>
-              <span className="eyebrow light">THE STUDIO EDIT</span>
-              <h2>Featured <em>artwork.</em></h2>
-            </div>
-            <Link className="text-link light-link" href="/shop">
-              DISCOVER THE SHOP <ArrowUpRight size={15} />
+          <ScrollReveal className="editorial-manifesto-copy" variant="slideInRight">
+            <span className="eyebrow light">OUR CREATIVE PHILOSOPHY</span>
+            <h2>From activism<br />to art —<br /><em>designs that speak.</em></h2>
+            <span className="manifesto-rule" aria-hidden="true"></span>
+            <p>
+              Every design begins with an idea. Every artwork carries a story.
+              At THE SM STUDIOS, creativity is more than decoration. It is a
+              way to express identity, preserve culture, communicate emotion,
+              and connect people through art.
+            </p>
+            <p className="manifesto-signature">
+              A creative platform for ideas with meaning.
+            </p>
+            <Link href="/about" className="manifesto-link">
+              GET TO KNOW THE STUDIO <ArrowUpRight size={17} />
             </Link>
           </ScrollReveal>
-          {featuredProducts.length ? (
-            <StaggerReveal className="product-grid">
-              {featuredProducts.map((product) => (
-                <StaggerItem key={product.id}>
-                  <ProductCard product={product} />
-                </StaggerItem>
-              ))}
-            </StaggerReveal>
-          ) : (
-            <ScrollReveal className="catalog-note">
-              <span className="note-symbol" aria-hidden="true"></span>
-              <div>
-                <span className="eyebrow light">THE FIRST EDITION IS TAKING SHAPE</span>
-                <h3>Original work.<br /><em>Coming into focus.</em></h3>
-                <p>
-                  Our verified catalog is being prepared. We’ll share the
-                  artwork, details and prices as soon as they’re confirmed.
-                </p>
-                <Link className="btn btn-outline-light" href="/shop">
-                  VISIT THE SHOP <ArrowUpRight size={15} />
-                </Link>
-              </div>
-            </ScrollReveal>
-          )}
         </div>
       </section>
 
-      <section className="editorial-worlds" aria-labelledby="editorial-worlds-title">
+<section className="editorial-worlds" aria-labelledby="editorial-worlds-title">
         <div className="editorial-worlds-inner">
           <ScrollReveal className="editorial-intro">
             <div>
@@ -257,44 +258,41 @@ ction>
         </div>
       </section>
 
-      <section className="editorial-manifesto">
-        <div className="editorial-manifesto-inner">
-          <ScrollReveal className="manifesto-artwork" variant="slideInLeft">
-            {philosophyArtwork?.image ? (
-              <Image
-                src={philosophyArtwork.image}
-                alt={philosophyArtwork.title}
-                fill
-                sizes="(max-width: 700px) 100vw, 48vw"
-                className="manifesto-image"
-              />
-            ) : (
-              <div className="manifesto-artwork-fallback" aria-hidden="true">
-                <span>THE SM</span>
-                <strong>STUDIOS</strong>
-              </div>
-            )}
-            <span className="manifesto-artwork-label">ART · CULTURE · IDENTITY</span>
-            <span className="manifesto-artwork-index">EST. IN IDEAS / 001</span>
-          </ScrollReveal>
-
-          <ScrollReveal className="editorial-manifesto-copy" variant="slideInRight">
-            <span className="eyebrow light">OUR CREATIVE PHILOSOPHY</span>
-            <h2>From activism<br />to art —<br /><em>designs that speak.</em></h2>
-            <span className="manifesto-rule" aria-hidden="true"></span>
-            <p>
-              Every design begins with an idea. Every artwork carries a story.
-              At THE SM STUDIOS, creativity is more than decoration. It is a
-              way to express identity, preserve culture, communicate emotion,
-              and connect people through art.
-            </p>
-            <p className="manifesto-signature">
-              A creative platform for ideas with meaning.
-            </p>
-            <Link href="/about" className="manifesto-link">
-              GET TO KNOW THE STUDIO <ArrowUpRight size={17} />
+<section className="featured-section">
+        <div className="section-wrap">
+          <ScrollReveal className="section-heading">
+            <div>
+              <span className="eyebrow light">THE STUDIO EDIT</span>
+              <h2>Featured <em>artwork.</em></h2>
+            </div>
+            <Link className="text-link light-link" href="/shop">
+              DISCOVER THE SHOP <ArrowUpRight size={15} />
             </Link>
           </ScrollReveal>
+          {featuredProducts.length ? (
+            <StaggerReveal className="product-grid">
+              {featuredProducts.map((product) => (
+                <StaggerItem key={product.id}>
+                  <ProductCard product={product} />
+                </StaggerItem>
+              ))}
+            </StaggerReveal>
+          ) : (
+            <ScrollReveal className="catalog-note">
+              <span className="note-symbol" aria-hidden="true"></span>
+              <div>
+                <span className="eyebrow light">THE FIRST EDITION IS TAKING SHAPE</span>
+                <h3>Original work.<br /><em>Coming into focus.</em></h3>
+                <p>
+                  Our verified catalog is being prepared. We’ll share the
+                  artwork, details and prices as soon as they’re confirmed.
+                </p>
+                <Link className="btn btn-outline-light" href="/shop">
+                  VISIT THE SHOP <ArrowUpRight size={15} />
+                </Link>
+              </div>
+            </ScrollReveal>
+          )}
         </div>
       </section>
 
