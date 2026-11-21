@@ -148,29 +148,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="collections-section home-collections-section section-wrap">
-        <ScrollReveal className="section-heading">
-          <div>
-            <span className="eyebrow">OUR COLLECTIONS</span>
-            <h2>Explore Our <em>Collections</em></h2>
-          </div>
-          <Link className="text-link" href="/collections">
-            VIEW ALL COLLECTIONS <ArrowUpRight size={15} />
-          </Link>
-        </ScrollReveal>
-        <StaggerReveal className="collection-grid home-collection-grid">
-          {featuredCollections.map((item, index) => (
-            <StaggerItem className="collection-reveal" key={item.slug}>
-              <CollectionCard
-                item={item}
-                index={index}
-                image={products.find((product) => product.collection === item.slug)?.image}
-                sizes="(max-width: 650px) 44vw, (max-width: 1000px) 44vw, 23vw"
-              />
-            </StaggerItem>
-          ))}
-        </StaggerReveal>
-      </section>
+ction>
 
       <section className="featured-section">
         <div className="section-wrap">
