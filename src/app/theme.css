@@ -6215,3 +6215,15 @@ select:focus-visible {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Keep vertical page scrolling native while image carousels handle horizontal swipes. */
+.hero,
+.gallery-main {
+  touch-action: pan-y;
+  overscroll-behavior-x: contain;
+}
+
+.gallery-main {
+  -webkit-user-select: none;
+  user-select: none;
+}
