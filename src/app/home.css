@@ -224,3 +224,49 @@
   .editorial-collection-copy h3 { font-size: 35px; }
   .manifesto-artwork { min-height: 225px; }
 }
+
+
+/* Editorial showcase — retain its cinematic character with a more measured scale */
+.editorial-worlds { padding-top: 68px; padding-bottom: 76px; }
+.editorial-intro { margin-bottom: 38px; }
+.editorial-intro h2 { font-size: clamp(48px, 5.8vw, 78px); }
+.editorial-collection-grid { row-gap: 24px; }
+.editorial-collection-image,
+.editorial-palestine .editorial-collection-image,
+.editorial-islamic .editorial-collection-image { min-height: clamp(280px, 27vw, 360px); }
+.editorial-digital .editorial-collection-image,
+.editorial-apparel .editorial-collection-image { min-height: clamp(250px, 24vw, 320px); }
+.editorial-collection-copy { padding: 23px 26px 25px; }
+.editorial-collection-copy h3 { font-size: clamp(36px, 3.8vw, 52px); }
+.editorial-manifesto { padding-top: 72px; padding-bottom: 78px; }
+.editorial-manifesto-inner { gap: clamp(38px, 6vw, 86px); }
+.manifesto-artwork { min-height: clamp(320px, 34vw, 430px); }
+.editorial-manifesto-copy h2 { font-size: clamp(48px, 5.4vw, 72px); margin: 22px 0 25px; }
+@media (max-width: 760px) {
+  .editorial-worlds { padding-top: 58px; padding-bottom: 66px; }
+  .editorial-collection-image,
+  .editorial-palestine .editorial-collection-image,
+  .editorial-islamic .editorial-collection-image,
+  .editorial-digital .editorial-collection-image,
+  .editorial-apparel .editorial-collection-image { min-height: clamp(210px, 34vw, 275px); }
+  .editorial-collection-copy { padding: 17px; }
+  .editorial-collection-copy h3 { font-size: clamp(29px, 4.5vw, 38px); }
+  .editorial-manifesto { padding-top: 58px; padding-bottom: 66px; }
+  .manifesto-artwork { min-height: clamp(270px, 48vw, 350px); }
+}
+@media (max-width: 520px) {
+  .editorial-worlds { padding-top: 48px; padding-bottom: 56px; }
+  .editorial-intro { margin-bottom: 26px; }
+  .editorial-intro h2 { font-size: clamp(43px, 10.5vw, 54px); }
+  .editorial-collection-image,
+  .editorial-palestine .editorial-collection-image,
+  .editorial-islamic .editorial-collection-image,
+  .editorial-digital .editorial-collection-image,
+  .editorial-apparel .editorial-collection-image { min-height: clamp(205px, 62vw, 255px); }
+  .editorial-collection-copy { padding: 17px 18px 19px; }
+  .editorial-collection-copy h3 { font-size: clamp(35px, 9vw, 43px); }
+  .editorial-manifesto { padding-top: 48px; padding-bottom: 58px; }
+  .manifesto-artwork { min-height: clamp(225px, 68vw, 285px); }
+  .editorial-manifesto-inner { gap: 28px; }
+  .editorial-manifesto-copy h2 { font-size: clamp(42px, 10vw, 53px); }
+}
