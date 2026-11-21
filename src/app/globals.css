@@ -384,3 +384,76 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 @media (prefers-reduced-motion: reduce) {
   .home-collection-grid .collection-art-image { transition: none !important; }
 }
+
+
+/* Home collection index — premium charcoal and warm-gold treatment */
+.home-collections-section{
+  position:relative;
+  isolation:isolate;
+  background:
+    radial-gradient(ellipse at 12% 0%,rgba(190,151,83,.09),transparent 38%),
+    linear-gradient(135deg,#1d1c1a 0%,#242320 55%,#1b1a18 100%);
+  color:#f7f4ee;
+  padding-top:clamp(58px,6vw,82px);
+  padding-bottom:clamp(76px,8vw,108px);
+}
+.home-collections-section .section-heading h2{color:#f7f4ee}
+.home-collections-section .section-heading h2 em{color:#d6b36c}
+.home-collections-section .section-heading .eyebrow,
+.home-collections-section .collection-meta .eyebrow{color:#d6b36c}
+.home-collections-section .section-heading .text-link{
+  color:#f0dfbd;
+  border-color:rgba(214,179,108,.72);
+  transition:color .25s ease,border-color .25s ease,gap .25s ease;
+}
+.home-collections-section .section-heading .text-link:hover{color:#fff;border-color:#e5c987}
+.home-collections-section .collection-card{
+  display:block;
+  overflow:hidden;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(230,211,177,.16);
+  color:#f7f4ee;
+  transition:transform .3s ease,border-color .3s ease,background .3s ease;
+}
+.home-collections-section .collection-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(214,179,108,.58);
+  background:rgba(255,255,255,.045);
+}
+.home-collections-section .art-placeholder{background-color:#302d27}
+.home-collections-section .collection-art-image{transition:transform .65s cubic-bezier(.2,.7,.2,1)}
+.home-collections-section .collection-card:hover .collection-art-image{transform:scale(1.035)}
+.home-collections-section .collection-meta{padding:19px 18px 21px}
+.home-collections-section .collection-meta h3{
+  color:#f7f4ee;
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:clamp(25px,2.5vw,34px);
+  font-weight:500;
+  line-height:1.05;
+  margin:9px 0 7px;
+}
+.home-collections-section .collection-meta p{
+  color:rgba(247,244,238,.66);
+  font-size:11px;
+  line-height:1.7;
+  margin:0;
+}
+.home-collections-section .art-caption{color:rgba(255,248,236,.82)}
+@media(max-width:900px){
+  .home-collections-section{padding-top:58px;padding-bottom:76px}
+  .home-collections-section .collection-meta{padding:16px 14px 18px}
+}
+@media(max-width:650px){
+  .home-collections-section{padding-top:50px;padding-bottom:64px}
+  .home-collections-section .section-heading{align-items:flex-start;gap:20px}
+  .home-collections-section .section-heading h2{font-size:clamp(39px,9vw,52px)}
+  .home-collections-section .section-heading .text-link{font-size:8px;white-space:nowrap}
+  .home-collections-section .collection-meta h3{font-size:clamp(24px,6vw,30px)}
+  .home-collections-section .collection-meta p{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  .home-collections-section .collection-card,
+  .home-collections-section .collection-art-image{transition:none!important}
+  .home-collections-section .collection-card:hover,
+  .home-collections-section .collection-card:hover .collection-art-image{transform:none}
+}
