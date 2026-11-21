@@ -290,3 +290,97 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   font-size: 11px;
   line-height: 1.6;
 }
+
+
+/* Homepage collection index — compact, refined companion to the editorial showcase */
+.home-collections-section {
+  padding-top: 66px;
+  padding-bottom: 86px;
+  background: linear-gradient(180deg, #f7f4ee 0%, #f1ece3 100%);
+}
+.home-collections-section .section-heading {
+  align-items: end;
+  margin-bottom: 30px;
+}
+.home-collections-section .section-heading h2 {
+  margin-top: 11px;
+  font-size: clamp(38px, 4.2vw, 56px);
+  letter-spacing: -1.2px;
+}
+.home-collections-section .section-heading .eyebrow {
+  font-size: 8px;
+  letter-spacing: 2px;
+}
+.home-collections-section .section-heading .text-link {
+  margin-bottom: 5px;
+}
+.home-collection-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+.home-collection-grid .collection-reveal,
+.home-collection-grid .collection-card {
+  min-width: 0;
+  width: 100%;
+}
+.home-collection-grid .collection-card,
+.home-collection-grid .collection-card.card-1,
+.home-collection-grid .collection-card.card-4 {
+  transform: none;
+}
+.home-collection-grid .art-placeholder {
+  height: auto;
+  aspect-ratio: 4 / 4.8;
+  min-height: 0;
+  background: #e5ded2;
+}
+.home-collection-grid .collection-art-image {
+  object-fit: cover;
+  transition: transform .7s cubic-bezier(.2,.7,.2,1);
+}
+.home-collection-grid .collection-card:hover .collection-art-image {
+  transform: scale(1.035);
+}
+.home-collection-grid .art-caption {
+  bottom: 14px;
+  left: 14px;
+  color: #fffaf1;
+  text-shadow: 0 2px 10px rgba(0,0,0,.45);
+}
+.home-collection-grid .collection-meta {
+  align-items: flex-start;
+  padding-top: 14px;
+}
+.home-collection-grid .collection-meta h3 {
+  margin: 5px 0 4px;
+  font-size: clamp(20px, 2vw, 25px);
+  line-height: 1.05;
+}
+.home-collection-grid .collection-meta p {
+  font-size: 10px;
+  line-height: 1.6;
+}
+@media (max-width: 900px) {
+  .home-collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px 17px; }
+  .home-collections-section { padding-top: 58px; padding-bottom: 70px; }
+}
+@media (max-width: 650px) {
+  .home-collections-section { padding-top: 48px; padding-bottom: 62px; }
+  .home-collections-section .section-heading { gap: 14px; margin-bottom: 23px; }
+  .home-collections-section .section-heading h2 { font-size: clamp(36px, 9vw, 46px); }
+  .home-collection-grid { gap: 22px 13px; }
+  .home-collection-grid .art-placeholder { aspect-ratio: 4 / 4.6; }
+  .home-collection-grid .collection-meta { padding-top: 11px; }
+  .home-collection-grid .collection-meta h3 { font-size: clamp(19px, 5vw, 23px); }
+  .home-collection-grid .collection-meta p { font-size: 9px; line-height: 1.5; }
+  .home-collection-grid .collection-meta .eyebrow { font-size: 6px; letter-spacing: 1.2px; }
+}
+@media (max-width: 360px) {
+  .home-collection-grid { gap: 18px 10px; }
+  .home-collection-grid .collection-meta h3 { font-size: 18px; }
+  .home-collection-grid .collection-meta p { font-size: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-collection-grid .collection-art-image { transition: none !important; }
+}
