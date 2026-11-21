@@ -8,6 +8,7 @@ export type { AdminActivity, AdminPreferences, AdminProfile } from "@/lib/admin-
 export const ADMIN_SESSION_COOKIE = "sm_admin_session";
 export const ADMIN_SESSION_MAX_AGE = 8 * 60 * 60;
 export class AdminInputError extends Error {}
+export class AdminAuthorizationError extends Error {}
 export class AdminSetupError extends Error {}
 
 export type AdminSession = {
@@ -301,7 +302,7 @@ export async function readAdminActivity(token: string) {
 }
 export async function listAdminAccounts(token: string) {
   const found = await findSessionAccount(token);
-  if (!found || found.account.role !== "Owner") throw new AdminInputError("Owner access is required.");
+  if (!found || found.account.role !== "Owner") throw new AdminAuthorizationError("Owner access is required.");
   return (await readAccounts()).map((a): PublicAdminAccount => ({
     username: a.username, fullName: a.fullName, email: a.email, role: a.role, status: a.status,
     accountCreatedAt: a.createdAt, lastLoginAt: a.lastLoginAt,
