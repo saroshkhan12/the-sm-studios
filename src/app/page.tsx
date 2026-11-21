@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowUpRight, Diamond, Globe2, Heart, ShieldCheck } from "lucide-react";
 import { collections } from "@/data/catalog";
 import { readEtsyProducts } from "@/lib/etsy";
-import { CollectionCard } from "@/components/collection-card";
 import { ProductCard } from "@/components/product-card";
 import { HeroSlider } from "@/components/hero-slider";
 import { ScrollReveal, StaggerItem, StaggerReveal } from "@/components/scroll-reveal";
@@ -60,11 +59,6 @@ const editorialCollectionContent = [
 export default async function Home() {
   const products = await readEtsyProducts();
   const featuredProducts = products.slice(0, 4);
-  const featuredCollections = collections
-    .filter((item) =>
-      products.some((product) => product.collection === item.slug && product.image),
-    )
-    .slice(0, 4);
 
   const editorialCollections = editorialCollectionContent.map((item) => ({
     ...item,
