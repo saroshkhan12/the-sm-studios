@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
   const data = body as Record<string, unknown>;
   const name = typeof data.name === "string" ? data.name.trim() : "";
   const email = typeof data.email === "string" ? data.email.trim() : "";
-  const subject = typeof data.subject === "string" ? data.subject.trim().replace(/[\\r\\n]+/g, " ") : "";
+  const subject = typeof data.subject === "string" ? data.subject.trim().replace(/[\r\n]+/g, " ") : "";
   const message = typeof data.message === "string" ? data.message.trim() : "";
   const honeypot = typeof data.website === "string" ? data.website.trim() : "";
 
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
 
   if (!name || name.length > 100 || !subject || subject.length > 150 ||
       !message || message.length > 5000 || email.length > 254 ||
-      !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return json("Please check the form fields and try again.", 400);
   }
 
@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
       to: recipients,
       replyTo: { name, address: email },
       subject: `Website enquiry: ${subject}`,
-      text: `New contact form enquiry\\n\\nName: ${name}\\nEmail: ${email}\\nSubject: ${subject}\\n\\nMessage:\\n${message}`,
+      text: `New contact form enquiry\n\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`,
     });
 
     recentSubmissions.set(ip, now);
