@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
   ADMIN_SESSION_COOKIE,
+  AdminAuthorizationError,
   AdminInputError,
   AdminSetupError,
   getAdminSession,
