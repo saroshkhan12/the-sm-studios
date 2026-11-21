@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   ShoppingBag,
   UserRound,
+  Users,
 } from "lucide-react";
 import {
   AnimatePresence,
