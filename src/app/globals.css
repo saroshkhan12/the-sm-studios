@@ -243,3 +243,50 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
     background: rgba(166, 95, 73, 0.16);
   }
 }
+
+.admin-register-link {
+  margin-top: 28px;
+  padding: 20px 16px;
+  text-align: center;
+  border: 1px solid rgba(201, 164, 91, 0.55);
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    rgba(201, 164, 91, 0.12),
+    rgba(201, 164, 91, 0.035)
+  );
+}
+
+.admin-register-link > span {
+  display: block;
+  margin-bottom: 10px;
+  color: #c9a45b;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.admin-register-link a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #d9b66f;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.7px;
+  text-decoration: none;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.admin-register-link a:hover {
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.admin-register-link p {
+  margin: 9px 0 0;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 11px;
+  line-height: 1.6;
+}
