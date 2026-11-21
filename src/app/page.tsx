@@ -1,11 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowUpRight,
-  Diamond,
-  Globe2,
-  Heart,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowUpRight, Diamond, Globe2, Heart, ShieldCheck } from "lucide-react";
 import { collections } from "@/data/catalog";
 import { readEtsyProducts } from "@/lib/etsy";
 import { CollectionCard } from "@/components/collection-card";
@@ -15,16 +10,74 @@ import { ScrollReveal, StaggerItem, StaggerReveal } from "@/components/scroll-re
 
 export const dynamic = "force-dynamic";
 
+const editorialCollectionContent = [
+  {
+    slug: "palestine-identity",
+    number: "01",
+    eyebrow: "CULTURE & IDENTITY",
+    title: "Art with a voice.",
+    accent: "Culture without borders.",
+    description: "Artwork celebrating Palestinian culture, heritage and expression. Original pieces that give identity, history and culture a visual voice.",
+    action: "EXPLORE THE COLLECTION",
+    imageAlt: "Artwork from the Palestine and Identity collection",
+    className: "editorial-palestine",
+  },
+  {
+    slug: "islamic-art",
+    number: "02",
+    eyebrow: "FORM & SPIRIT",
+    title: "Form, light",
+    accent: "and devotion.",
+    description: "A considered visual world inspired by Islamic architecture, geometry, calligraphy and spiritual expression.",
+    action: "DISCOVER ISLAMIC ART",
+    imageAlt: "Artwork from the Islamic Art collection",
+    className: "editorial-islamic",
+  },
+  {
+    slug: "digital-artwork",
+    number: "03",
+    eyebrow: "THE DIGITAL ART STUDIO",
+    title: "Ideas without",
+    accent: "edges.",
+    description: "Experimental compositions and original digital worlds made to challenge the familiar.",
+    action: "EXPLORE DIGITAL ART",
+    imageAlt: "Digital artwork from THE SM STUDIOS",
+    className: "editorial-digital",
+  },
+  {
+    slug: "apparel",
+    number: "04",
+    eyebrow: "ART TO LIVE IN",
+    title: "Wear what",
+    accent: "you believe.",
+    description: "Wearable expression for people who see personal style as another way to tell a story.",
+    action: "EXPLORE APPAREL",
+    imageAlt: "Apparel from THE SM STUDIOS",
+    className: "editorial-apparel",
+  },
+] as const;
+
 export default async function Home() {
   const products = await readEtsyProducts();
   const featuredProducts = products.slice(0, 4);
   const featuredCollections = collections
     .filter((item) =>
-      products.some(
-        (product) => product.collection === item.slug && product.image,
-      ),
+      products.some((product) => product.collection === item.slug && product.image),
     )
     .slice(0, 4);
+
+  const editorialCollections = editorialCollectionContent.map((item) => ({
+    ...item,
+    product: products.find((product) => product.collection === item.slug && product.image),
+  }));
+
+  const philosophyArtwork =
+    products.find(
+      (product) =>
+        product.image &&
+        (product.collection === "palestine-identity" || product.collection === "islamic-art"),
+    ) ?? products.find((product) => product.image);
+
   const heroSlides = [
     {
       id: "identity",
@@ -34,8 +87,7 @@ export default async function Home() {
       firstAccent: "speaks.",
       secondLine: "Design that",
       secondAccent: "connects.",
-      description:
-        "Meaningful artwork, expressive designs, and creative pieces inspired by culture, identity, and imagination.",
+      description: "Meaningful artwork, expressive designs, and creative pieces inspired by culture, identity, and imagination.",
       href: "/shop",
     },
     {
@@ -61,12 +113,8 @@ export default async function Home() {
       href: "/collections/digital-artwork",
     },
   ].flatMap((slide) => {
-    const product = products.find(
-      (item) => item.collection === slide.collection && item.image,
-    );
-    const collection = collections.find(
-      (item) => item.slug === slide.collection,
-    );
+    const product = products.find((item) => item.collection === slide.collection && item.image);
+    const collection = collections.find((item) => item.slug === slide.collection);
     if (!product?.image || !collection) return [];
 
     return [{
@@ -145,7 +193,8 @@ export default async function Home() {
             </StaggerReveal>
           ) : (
             <ScrollReveal className="catalog-note">
-<span className="note-symbol" aria-hidden="true"></span>              <div>
+              <span className="note-symbol" aria-hidden="true"></span>
+              <div>
                 <span className="eyebrow light">THE FIRST EDITION IS TAKING SHAPE</span>
                 <h3>Original work.<br /><em>Coming into focus.</em></h3>
                 <p>
@@ -161,89 +210,114 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="worlds-section section-wrap">
-        <ScrollReveal className="world-feature" variant="slideInLeft">
-          <Link
-            href="/collections/palestine-identity"
-            className="world-visual world-palestine"
-            aria-label="Explore Palestine and Identity"
-          >
-            <span className="world-visual-label">COLLECTION 01 · CULTURE &amp; IDENTITY</span>
-            <span className="world-visual-mark">فلسطين</span>
-            <span className="world-visual-caption">ART WITH A VOICE.<br />CULTURE WITHOUT BORDERS.</span>
-          </Link>
-          <div className="world-copy">
-            <span className="eyebrow">PALESTINE &amp; IDENTITY</span>
-            <h2>Art with a voice.<br /><em>Culture without borders.</em></h2>
+      <section className="editorial-worlds" aria-labelledby="editorial-worlds-title">
+        <div className="editorial-worlds-inner">
+          <ScrollReveal className="editorial-intro">
+            <div>
+              <span className="eyebrow">A WORLD OF IDEAS · FOUR COLLECTIONS</span>
+              <h2 id="editorial-worlds-title">Find the art<br />that <em>moves you.</em></h2>
+            </div>
             <p>
-              Artwork celebrating Palestinian culture, heritage and expression.
-              Discover the original listings and their details in the shop.
+              From cultural identity to contemporary expression, each
+              collection opens a different window into the creative world of
+              THE SM STUDIOS.
             </p>
-            <Link className="text-link" href="/collections/palestine-identity">
-              EXPLORE THE COLLECTION <ArrowUpRight size={15} />
-            </Link>
-          </div>
-        </ScrollReveal>
-        <ScrollReveal className="world-feature world-feature-reverse" variant="slideInRight">
-          <Link
-            href="/collections/islamic-art"
-            className="world-visual world-islamic"
-            aria-label="Explore Islamic Art"
-          >
-            <span className="world-visual-label">COLLECTION 02 · FORM &amp; SPIRIT</span>
-<span className="world-islamic-arch"><span aria-hidden="true"></span></span>            <span className="world-visual-caption">A STUDY IN<br />LIGHT &amp; DEVOTION.</span>
-          </Link>
-          <div className="world-copy">
-            <span className="eyebrow">ISLAMIC ART &amp; SPIRITUAL EXPRESSIONS</span>
-            <h2>Form, light<br /><em>and devotion.</em></h2>
-            <p>
-              Explore a considered visual world inspired by Islamic
-              architecture, calligraphy and spiritual expression. Religious
-              text and original calligraphy are presented with care.
-            </p>
-            <Link className="text-link" href="/collections/islamic-art">
-              DISCOVER ISLAMIC ART <ArrowUpRight size={15} />
-            </Link>
-          </div>
-        </ScrollReveal>
-        <StaggerReveal className="worlds-small">
-          <StaggerItem className="world-small-reveal">
-            <Link href="/collections/digital-artwork" className="world-small-card world-digital">
-              <span className="eyebrow">THE DIGITAL ART STUDIO</span>
-<span className="world-small-mark" aria-hidden="true"></span>              <h3>Ideas without<br /><em>edges.</em></h3>
-              <span className="text-link">EXPLORE DIGITAL ART <ArrowUpRight size={15} /></span>
-            </Link>
-          </StaggerItem>
-          <StaggerItem className="world-small-reveal">
-            <Link href="/collections/apparel" className="world-small-card world-apparel">
-              <span className="eyebrow">ART TO LIVE IN</span>
-              <span className="world-small-mark">SM</span>
-              <h3>Wear what<br /><em>you believe.</em></h3>
-              <span className="text-link">EXPLORE APPAREL <ArrowUpRight size={15} /></span>
-            </Link>
-          </StaggerItem>
-        </StaggerReveal>
+          </ScrollReveal>
+
+          <StaggerReveal className="editorial-collection-grid">
+            {editorialCollections.map((item) => (
+              <StaggerItem className={"editorial-collection-item " + item.className} key={item.slug}>
+                <Link
+                  href={"/collections/" + item.slug}
+                  className="editorial-collection-card"
+                  aria-label={item.action + ": " + item.slug.replaceAll("-", " ")}
+                >
+                  <div className="editorial-collection-image">
+                    {item.product?.image ? (
+                      <Image
+                        src={item.product.image}
+                        alt={item.imageAlt}
+                        fill
+                        sizes="(max-width: 700px) 100vw, (max-width: 1050px) 50vw, 58vw"
+                        className="editorial-image"
+                      />
+                    ) : (
+                      <span className="editorial-art-fallback" aria-hidden="true">
+                        <span className="editorial-fallback-orbit"></span>
+                        <span className="editorial-fallback-mark">
+                          {item.slug === "palestine-identity"
+                            ? "فلسطين"
+                            : item.slug === "islamic-art"
+                              ? "۞"
+                              : item.slug === "digital-artwork"
+                                ? "∞"
+                                : "SM"}
+                        </span>
+                      </span>
+                    )}
+                    <span className="editorial-image-shade" aria-hidden="true"></span>
+                    <span className="editorial-number">COLLECTION {item.number}</span>
+                    <span className="editorial-image-caption">{item.eyebrow}</span>
+                    <span className="editorial-arrow" aria-hidden="true">
+                      <ArrowUpRight size={20} />
+                    </span>
+                  </div>
+                  <div className="editorial-collection-copy">
+                    <div>
+                      <span className="eyebrow">{item.eyebrow}</span>
+                      <h3>{item.title}<br /><em>{item.accent}</em></h3>
+                      <p>{item.description}</p>
+                    </div>
+                    <span className="editorial-cta">
+                      {item.action} <ArrowUpRight size={15} />
+                    </span>
+                  </div>
+                </Link>
+              </StaggerItem>
+            ))}
+          </StaggerReveal>
+        </div>
       </section>
 
-      <section className="manifesto section-wrap">
-        <ScrollReveal className="manifesto-stamp" aria-label="THE SM STUDIOS">
-          <span className="manifesto-stamp-kicker">THE</span>
-          <strong>SM</strong>
-<span className="manifesto-stamp-symbol" aria-hidden="true"></span>          <span className="manifesto-stamp-footer">STUDIOS</span>
-        </ScrollReveal>
-        <ScrollReveal className="manifesto-content">
-          <span className="eyebrow">OUR CREATIVE PHILOSOPHY</span>
-          <h2>From activism to art —<br /><em>designs that speak.</em></h2>
-          <p>
-            Every design begins with an idea. Every artwork carries a story. At
-            THE SM STUDIOS, creativity is more than decoration. It is a way to
-            express identity, preserve culture, communicate emotion, and
-            connect people through art.
-          </p>
-          <Link href="/about" className="text-link">
-            GET TO KNOW THE STUDIO <ArrowUpRight size={15} />
-          </Link>
-        </ScrollReveal>
+      <section className="editorial-manifesto">
+        <div className="editorial-manifesto-inner">
+          <ScrollReveal className="manifesto-artwork" variant="slideInLeft">
+            {philosophyArtwork?.image ? (
+              <Image
+                src={philosophyArtwork.image}
+                alt={philosophyArtwork.title}
+                fill
+                sizes="(max-width: 700px) 100vw, 48vw"
+                className="manifesto-image"
+              />
+            ) : (
+              <div className="manifesto-artwork-fallback" aria-hidden="true">
+                <span>THE SM</span>
+                <strong>STUDIOS</strong>
+              </div>
+            )}
+            <span className="manifesto-artwork-label">ART · CULTURE · IDENTITY</span>
+            <span className="manifesto-artwork-index">EST. IN IDEAS / 001</span>
+          </ScrollReveal>
+
+          <ScrollReveal className="editorial-manifesto-copy" variant="slideInRight">
+            <span className="eyebrow light">OUR CREATIVE PHILOSOPHY</span>
+            <h2>From activism<br />to art —<br /><em>designs that speak.</em></h2>
+            <span className="manifesto-rule" aria-hidden="true"></span>
+            <p>
+              Every design begins with an idea. Every artwork carries a story.
+              At THE SM STUDIOS, creativity is more than decoration. It is a
+              way to express identity, preserve culture, communicate emotion,
+              and connect people through art.
+            </p>
+            <p className="manifesto-signature">
+              A creative platform for ideas with meaning.
+            </p>
+            <Link href="/about" className="manifesto-link">
+              GET TO KNOW THE STUDIO <ArrowUpRight size={17} />
+            </Link>
+          </ScrollReveal>
+        </div>
       </section>
 
       <section className="newsletter">
