@@ -1,12 +1,11 @@
 "use client";
 import { FormEvent,useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { m,useReducedMotion } from "framer-motion";
 import { ArrowUpRight,UserPlus } from "lucide-react";
 import { MotionButton } from "@/components/motion-button";
 export default function AdminRegisterPage(){
- const router=useRouter(), reduceMotion=useReducedMotion();
+ const reduceMotion=useReducedMotion();
  const [fullName,setFullName]=useState(""),[email,setEmail]=useState(""),[username,setUsername]=useState(""),[password,setPassword]=useState(""),[confirm,setConfirm]=useState("");
  const [error,setError]=useState(""),[message,setMessage]=useState(""),[busy,setBusy]=useState(false);
  async function submit(event:FormEvent<HTMLFormElement>){event.preventDefault();setError("");setMessage("");
