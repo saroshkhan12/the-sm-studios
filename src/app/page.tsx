@@ -33,8 +33,19 @@ const editorialCollectionContent = [
     className: "editorial-islamic",
   },
   {
-    slug: "digital-artwork",
+    slug: "arabic-calligraphy",
     number: "03",
+    eyebrow: "LANGUAGE · FORM · MEANING",
+    title: "Words made",
+    accent: "beautiful.",
+    description: "Language transformed into art through expressive Arabic lettering, rhythm and timeless visual form.",
+    action: "EXPLORE ARABIC CALLIGRAPHY",
+    imageAlt: "Artwork from the Arabic Calligraphy collection",
+    className: "editorial-arabic",
+  },
+  {
+    slug: "digital-artwork",
+    number: "04",
     eyebrow: "THE DIGITAL ART STUDIO",
     title: "Ideas without",
     accent: "edges.",
@@ -44,8 +55,19 @@ const editorialCollectionContent = [
     className: "editorial-digital",
   },
   {
+    slug: "posters-prints",
+    number: "05",
+    eyebrow: "ART FOR YOUR SPACE",
+    title: "Art for walls",
+    accent: "and everyday spaces.",
+    description: "Thoughtfully selected posters and prints that bring character, colour and creative expression into the spaces around you.",
+    action: "EXPLORE POSTERS & PRINTS",
+    imageAlt: "Artwork from the Posters and Prints collection",
+    className: "editorial-posters",
+  },
+  {
     slug: "apparel",
-    number: "04",
+    number: "06",
     eyebrow: "ART TO LIVE IN",
     title: "Wear what",
     accent: "you believe.",
@@ -187,7 +209,7 @@ export default async function Home() {
         <div className="editorial-worlds-inner">
           <ScrollReveal className="editorial-intro">
             <div>
-              <span className="eyebrow">A WORLD OF IDEAS · FOUR COLLECTIONS</span>
+              <span className="eyebrow">A WORLD OF IDEAS · SIX COLLECTIONS</span>
               <h2 id="editorial-worlds-title">Find the art<br />that <em>moves you.</em></h2>
             </div>
             <p>
