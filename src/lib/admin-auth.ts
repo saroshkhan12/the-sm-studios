@@ -317,6 +317,25 @@ export async function listAdminAccounts(token: string) {
     accountCreatedAt: a.createdAt, lastLoginAt: a.lastLoginAt,
   })).sort((a,b) => (a.status === "Pending" ? -1 : 1) - (b.status === "Pending" ? -1 : 1));
 }
+export async function removeAdminAccount(token: string, username: string) {
+  return serializeWrites(async () => {
+    const owner = await findSessionAccount(token);
+    if (!owner || owner.account.role !== "Owner") throw new AdminAuthorizationError("Owner access is required.");
+    const accounts = await readAccounts();
+    const target = accounts.find((a) => a.username.toLowerCase() === username.trim().toLowerCase());
+    if (!target) throw new AdminInputError("Administrator account not found.");
+    if (target.role === "Owner") throw new AdminInputError("The Owner account cannot be removed.");
+    const remaining = accounts.filter((a) => a.id !== target.id);
+    await writeAccounts(remaining);
+    await revokeAccountSessions(target.id);
+    if (target.avatarMime && target.avatarKey) {
+      await fs.rm(avatarFile(target.avatarMime, target.avatarKey), { force: true });
+    }
+    await recordActivity(owner.account.id, "approval", `Removed administrator account ${target.username}`);
+    return { username: target.username, status: "Removed" as const };
+  });
+}
+
 export async function reviewAdminAccount(token: string, username: string, decision: "approve" | "reject") {
   return serializeWrites(async () => {
     const owner = await findSessionAccount(token);
