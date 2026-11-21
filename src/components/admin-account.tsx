@@ -341,7 +341,7 @@ export function AdminAccount({
               )}
             </div>
             <div>
-              <span className="eyebrow">ADMINISTRATOR</span>
+              <span className="eyebrow">{profile.role.toUpperCase()}</span>
               <h3>{profile.fullName || "Name not provided"}</h3>
               <p>{profile.email || "Email not provided"}</p>
             </div>
