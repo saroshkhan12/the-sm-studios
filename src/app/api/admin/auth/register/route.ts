@@ -15,11 +15,11 @@ export async function POST(request: NextRequest) {
   const address=request.ip || request.headers.get("x-real-ip") || "unknown";
   const key=createHash("sha256").update(address).digest("hex"), now=Date.now();
   let bucket=attempts.get(key);
-  if(!bucket || bucket.resetAt<=now){bucket={count:0,resetAt:now+15*60*1000};attempts.set(key,bucket);}
+  if(!bucket || bucket.resetAt<=now){\n    if(attempts.size>=5000){for(const [stored,entry] of attempts){if(entry.resetAt<=now)attempts.delete(stored);}}\n    if(attempts.size>=5000){const oldest=attempts.keys().next().value;if(oldest)attempts.delete(oldest);}\n    bucket={count:0,resetAt:now+15*60*1000};attempts.set(key,bucket);\n  }
   if(bucket.count>=5) return adminJson({error:"Too many registration attempts. Try again in 15 minutes."},429);
   bucket.count++;
   try {
-    const result=await registerAdmin({username:v.username,fullName:v.fullName,email:v.email,password:v.password});
+    await registerAdmin({username:v.username,fullName:v.fullName,email:v.email,password:v.password});
     return adminJson({ok:true,message:"Registration received. An Owner must approve your account before you can sign in."},201);
   } catch(error){return adminErrorResponse(error,"registration");}
 }
