@@ -159,3 +159,68 @@
   .editorial-collection-card:hover{transform:none;box-shadow:none}
   .editorial-collection-card:hover .editorial-image,.manifesto-artwork:hover .manifesto-image{transform:none}
 }
+
+
+/* Compact editorial imagery and phone-first sizing */
+@media (min-width: 761px) {
+  .editorial-worlds { padding-top: 76px; padding-bottom: 88px; }
+  .editorial-intro { margin-bottom: 42px; }
+  .editorial-collection-image,
+  .editorial-palestine .editorial-collection-image,
+  .editorial-islamic .editorial-collection-image { min-height: clamp(300px, 29vw, 390px); }
+  .editorial-digital .editorial-collection-image,
+  .editorial-apparel .editorial-collection-image { min-height: clamp(270px, 25vw, 340px); }
+  .editorial-collection-copy { padding: 25px 28px 28px; }
+  .editorial-manifesto { padding-top: 82px; padding-bottom: 90px; }
+  .manifesto-artwork { min-height: clamp(360px, 38vw, 490px); }
+}
+@media (min-width: 521px) and (max-width: 760px) {
+  .editorial-worlds { padding: 60px 0 68px; }
+  .editorial-collection-grid { gap: 20px 14px; }
+  .editorial-palestine .editorial-collection-image,
+  .editorial-islamic .editorial-collection-image,
+  .editorial-digital .editorial-collection-image,
+  .editorial-apparel .editorial-collection-image { min-height: clamp(220px, 34vw, 280px); }
+  .editorial-collection-copy { padding: 17px; gap: 13px; }
+  .editorial-collection-copy h3 { font-size: clamp(30px, 4.5vw, 39px); }
+  .editorial-collection-copy p { font-size: 10px; line-height: 1.7; }
+  .editorial-manifesto { padding: 62px 5% 70px; }
+  .editorial-manifesto-inner { gap: 32px; }
+  .manifesto-artwork { min-height: clamp(280px, 48vw, 360px); }
+}
+@media (max-width: 520px) {
+  .editorial-worlds { padding: 54px 0 62px; }
+  .editorial-worlds-inner { padding-inline: 18px; }
+  .editorial-intro { margin-bottom: 25px; gap: 15px; }
+  .editorial-intro h2 { font-size: clamp(43px, 10.5vw, 54px); }
+  .editorial-intro > p { font-size: 12px; line-height: 1.75; }
+  .editorial-collection-grid { gap: 18px; }
+  .editorial-palestine .editorial-collection-image,
+  .editorial-islamic .editorial-collection-image,
+  .editorial-digital .editorial-collection-image,
+  .editorial-apparel .editorial-collection-image { min-height: clamp(210px, 65vw, 270px); }
+  .editorial-collection-copy { padding: 18px 19px 20px; gap: 12px; }
+  .editorial-collection-copy h3 { margin: 9px 0; font-size: clamp(36px, 9vw, 44px); }
+  .editorial-collection-copy p { font-size: 11px; line-height: 1.7; }
+  .editorial-cta { margin-top: 2px; font-size: 8px; }
+  .editorial-number { top: 14px; left: 15px; }
+  .editorial-image-caption { bottom: 15px; left: 15px; }
+  .editorial-arrow { right: 13px; bottom: 12px; width: 35px; height: 35px; }
+  .editorial-manifesto { padding: 54px 18px 64px; }
+  .editorial-manifesto-inner { gap: 28px; }
+  .manifesto-artwork { min-height: clamp(245px, 72vw, 315px); width: 100%; box-shadow: 10px 10px 0 -1px rgba(201,164,91,.12); }
+  .manifesto-artwork:before { inset: 9px; }
+  .manifesto-artwork-label,.manifesto-artwork-index { bottom: 17px; font-size: 6px; }
+  .manifesto-artwork-label { left: 16px; }
+  .manifesto-artwork-index { right: 16px; }
+  .editorial-manifesto-copy h2 { margin: 18px 0 22px; font-size: clamp(44px, 10.5vw, 55px); }
+  .editorial-manifesto-copy > p { font-size: 12px; line-height: 1.8; }
+  .editorial-manifesto-copy .manifesto-signature { margin-top: 18px; font-size: 20px; }
+  .manifesto-link { margin-top: 16px; font-size: 9px; }
+}
+@media (max-width: 360px) {
+  .editorial-worlds-inner { padding-inline: 15px; }
+  .editorial-collection-copy { padding: 16px; }
+  .editorial-collection-copy h3 { font-size: 35px; }
+  .manifesto-artwork { min-height: 225px; }
+}
