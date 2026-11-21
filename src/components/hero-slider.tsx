@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight, MoveUpRight } from "lucide-react";
 import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useSwipeNavigation } from "@/hooks/use-swipe-navigation";
 import { InteractiveHeroImage } from "@/components/interactive-hero-image";
 import { MagneticLink } from "@/components/magnetic-link";
 
@@ -62,11 +63,17 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
     setActiveIndex((index + slideCount) % slideCount);
   }
 
+  const swipeHandlers = useSwipeNavigation((direction) => {
+    showSlide(activeIndex + (direction === "next" ? 1 : -1));
+  });
+
   return (
     <section
       className="hero"
       aria-label="Featured artwork"
       aria-roledescription="carousel"
+      tabIndex={0}
+      {...swipeHandlers}
       onPointerEnter={() => setAutoplayPaused(true)}
       onFocusCapture={() => setAutoplayPaused(true)}
     >

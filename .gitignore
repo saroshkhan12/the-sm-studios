@@ -9,3 +9,5 @@ node_modules
 !.env.example
 .data/
 .DS_Store
+# Local environment downloads must never be committed
+env.download

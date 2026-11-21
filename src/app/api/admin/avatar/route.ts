@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
     return adminJson({ error: "Authentication required." }, 401);
   }
   try {
-    const avatar = await readAdminAvatar();
+    const avatar = await readAdminAvatar(request.cookies.get("sm_admin_session")?.value || "");
     if (!avatar) return new NextResponse(null, { status: 404 });
     return new NextResponse(new Uint8Array(avatar.buffer), {
       headers: {
@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const profile = await saveAdminAvatar(Buffer.from(await file.arrayBuffer()));
+    const profile = await saveAdminAvatar(request.cookies.get("sm_admin_session")?.value || "", Buffer.from(await file.arrayBuffer()));
     return adminJson({ profile });
   } catch (error) {
     return adminErrorResponse(error, "avatar upload");
@@ -116,7 +116,7 @@ export async function DELETE(request: NextRequest) {
     return adminJson({ error: "Authentication required." }, 401);
   }
   try {
-    return adminJson({ profile: await removeAdminAvatar() });
+    return adminJson({ profile: await removeAdminAvatar(request.cookies.get("sm_admin_session")?.value || "") });
   } catch (error) {
     return adminErrorResponse(error, "avatar removal");
   }

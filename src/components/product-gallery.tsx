@@ -2,8 +2,21 @@
 
 import Image from "next/image";
 import { AnimatePresence, m, useReducedMotion } from "framer-motion";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useSwipeNavigation } from "@/hooks/use-swipe-navigation";
 import { MotionButton } from "@/components/motion-button";
+
+const galleryImageVariants = {
+  enter: (swipeDirection: number) => ({
+    opacity: 0,
+    x: swipeDirection * 24,
+  }),
+  center: { opacity: 1, x: 0 },
+  exit: (swipeDirection: number) => ({
+    opacity: 0,
+    x: swipeDirection * -24,
+  }),
+};
 
 export function ProductGallery({
   title,
@@ -13,10 +26,27 @@ export function ProductGallery({
   images: string[];
 }) {
   const [selected, setSelected] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [failedImages, setFailedImages] = useState<string[]>([]);
   const reduceMotion = useReducedMotion();
   const availableImages = images.filter((src) => !failedImages.includes(src));
   const currentImage = availableImages[selected] || availableImages[0];
+
+  const handleSwipe = useCallback(
+    (swipeDirection: "next" | "previous") => {
+      if (availableImages.length < 2) return;
+      const step = swipeDirection === "next" ? 1 : -1;
+      setDirection(step);
+      setSelected((current) => (current + step + availableImages.length) % availableImages.length);
+    },
+    [availableImages.length],
+  );
+  const swipeHandlers = useSwipeNavigation(handleSwipe);
+
+  function selectImage(index: number) {
+    setDirection(index >= selected ? 1 : -1);
+    setSelected(index);
+  }
 
   function markFailed(src: string) {
     setFailedImages((failed) =>
@@ -27,16 +57,28 @@ export function ProductGallery({
 
   return (
     <div className="product-gallery">
-      <div className="gallery-main glass-inset">
+      <div
+        className="gallery-main glass-inset"
+        role="group"
+        aria-label={`${title} image gallery`}
+        aria-roledescription="carousel"
+        tabIndex={availableImages.length > 1 ? 0 : undefined}
+        {...swipeHandlers}
+      >
         {currentImage ? (
-          <AnimatePresence mode="wait" initial={false}>
+          <AnimatePresence mode="wait" initial={false} custom={direction}>
             <m.div
               key={currentImage}
               className="gallery-image"
-              initial={reduceMotion ? false : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={reduceMotion ? undefined : { opacity: 0 }}
-              transition={{ duration: reduceMotion ? 0 : 0.22 }}
+              custom={direction}
+              variants={galleryImageVariants}
+              initial={reduceMotion ? false : "enter"}
+              animate="center"
+              exit={reduceMotion ? undefined : "exit"}
+              transition={{
+                duration: reduceMotion ? 0 : 0.34,
+                ease: [0.22, 1, 0.36, 1],
+              }}
             >
               <Image
                 src={currentImage}
@@ -63,7 +105,7 @@ export function ProductGallery({
               key={src}
               type="button"
               className={`gallery-thumbnail glass-inset${src === currentImage ? " selected" : ""}`}
-              onClick={() => setSelected(index)}
+              onClick={() => selectImage(index)}
               aria-label={`View image ${index + 1} of ${availableImages.length}`}
               aria-pressed={src === currentImage}
             >

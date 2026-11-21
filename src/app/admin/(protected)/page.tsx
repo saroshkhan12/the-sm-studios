@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   ShoppingBag,
   UserRound,
+  Users,
 } from "lucide-react";
 import {
   AnimatePresence,
@@ -34,7 +35,8 @@ type AdminSection =
   | "profile"
   | "security"
   | "settings"
-  | "activity";
+  | "activity"
+  | "accounts";
 
 type ProductRow = {
   title: string;
@@ -73,6 +75,7 @@ const navigation: {
   { id: "security", label: "Security", icon: ShieldCheck },
   { id: "settings", label: "Settings", icon: Settings2 },
   { id: "activity", label: "Activity", icon: Activity },
+  { id: "accounts", label: "Admin accounts", icon: Users },
 ];
 
 async function readJson(response: Response) {
@@ -266,7 +269,7 @@ export default function Admin() {
           <span>ADMINISTRATION</span>
         </div>
         <nav className="admin-side-nav" aria-label="Admin sections">
-          {navigation.map((item) => {
+          {navigation.filter((item) => item.id !== "accounts" || profile?.role === "Owner").map((item) => {
             const Icon = item.icon;
             return (
               <button
@@ -290,7 +293,7 @@ export default function Admin() {
               </span>
               <span>
                 <strong>{profile.fullName || profile.username}</strong>
-                <small>Administrator</small>
+                <small>{profile.role}</small>
               </span>
             </div>
           )}
@@ -357,7 +360,8 @@ export default function Admin() {
                   onExport={exportCsv}
                 />
               )}
-              {activeSection !== "overview" && activeSection !== "etsy" && (
+              {activeSection === "accounts" && profile.role === "Owner" && <AdminAccountsSection />}
+              {activeSection !== "overview" && activeSection !== "etsy" && activeSection !== "accounts" && (
                 <AdminAccount
                   section={activeSection}
                   profile={profile}
@@ -370,6 +374,125 @@ export default function Admin() {
       </m.section>
       </div>
     </MotionConfig>
+  );
+}
+
+function AdminAccountsSection() {
+  const [accounts, setAccounts] = useState<Array<{ username: string; fullName: string; email: string; role: string; status: string; accountCreatedAt: string; lastLoginAt: string | null }>>([]);
+  const [loading, setLoading] = useState(true);
+  const [busy, setBusy] = useState("");
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("/api/admin/accounts", { cache: "no-store" });
+      const data = await readJson(response);
+      setAccounts(data.accounts || []);
+      setError("");
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "Accounts could not be loaded.");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => { void load(); }, [load]);
+
+  async function review(username: string, decision: "approve" | "reject") {
+    setBusy(username);
+    setError("");
+    setMessage("");
+    try {
+      const response = await fetch("/api/admin/accounts", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, decision }),
+      });
+      await readJson(response);
+      setMessage(`${username} was ${decision === "approve" ? "approved" : "rejected"}.`);
+      await load();
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "The account could not be reviewed.");
+    } finally {
+      setBusy("");
+    }
+  }
+
+  async function remove(username: string) {
+    const confirmed = window.confirm(`Permanently remove the administrator account “${username}”? Their active sessions will be revoked and they will no longer be able to sign in.`);
+    if (!confirmed) return;
+    setBusy(username);
+    setError("");
+    setMessage("");
+    try {
+      const response = await fetch("/api/admin/accounts", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username }),
+      });
+      await readJson(response);
+      setMessage(`${username} was removed and their active sessions were revoked.`);
+      await load();
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "The account could not be removed.");
+    } finally {
+      setBusy("");
+    }
+  }
+
+  return (
+    <div className="admin-account-view">
+      <div className="admin-intro">
+        <span className="eyebrow">OWNER CONTROLS</span>
+        <h1>Admin <em>accounts.</em></h1>
+        <p>Review registration requests and manage access to the studio dashboard.</p>
+      </div>
+      {error && <p className="admin-form-message is-error" role="alert">{error}</p>}
+      {message && <p className="admin-form-message is-success" role="status">{message}</p>}
+      <section className="admin-card glass-surface">
+        <div className="admin-card-heading-row">
+          <div>
+            <span className="eyebrow">ACCESS REQUESTS</span>
+            <h3>Administrator registrations</h3>
+          </div>
+          <MotionButton className="btn btn-outline-light" type="button" onClick={() => void load()} disabled={loading || !!busy}>REFRESH</MotionButton>
+        </div>
+        {loading ? (
+          <p className="admin-list-status">Loading accounts…</p>
+        ) : accounts.length === 0 ? (
+          <p className="admin-list-status">No administrator accounts found.</p>
+        ) : (
+          <div className="admin-table">
+            {accounts.map((account) => (
+              <article key={account.username} className="admin-account-review-row">
+                <div>
+                  <strong>{account.fullName || account.username}</strong>
+                  <span>{account.email} · @{account.username}</span>
+                  <small>{account.role} · {account.status} · Registered {new Date(account.accountCreatedAt).toLocaleDateString()}</small>
+                </div>
+                {account.role === "Owner" ? (
+                  <strong className="admin-status-active">OWNER · PROTECTED</strong>
+                ) : (
+                  <div className="admin-form-actions">
+                    {account.status === "Pending" && (
+                      <>
+                        <MotionButton className="btn btn-light" type="button" disabled={!!busy} onClick={() => void review(account.username, "approve")}>{busy === account.username ? "SAVING…" : "APPROVE"}</MotionButton>
+                        <MotionButton className="btn btn-outline-light" type="button" disabled={!!busy} onClick={() => void review(account.username, "reject")}>REJECT</MotionButton>
+                      </>
+                    )}
+                    <strong className={account.status === "Active" ? "admin-status-active" : ""}>{account.status}</strong>
+                    <MotionButton className="btn btn-outline-light" type="button" disabled={!!busy} onClick={() => void remove(account.username)}>{busy === account.username ? "REMOVING…" : "REMOVE"}</MotionButton>
+                  </div>
+                )}
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+      <p className="admin-form-help">Only the Owner can approve, reject, or remove administrator accounts. The Owner account is protected. Removing an administrator immediately revokes their active sessions.</p>
+    </div>
   );
 }
 

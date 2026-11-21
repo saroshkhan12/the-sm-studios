@@ -6215,3 +6215,49 @@ select:focus-visible {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Keep vertical page scrolling native while image carousels handle horizontal swipes. */
+.hero,
+.gallery-main {
+  touch-action: pan-y;
+  overscroll-behavior-x: contain;
+}
+
+.gallery-main {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+
+
+/* Contact page: premium spacing and layout, using the site's existing theme colors. */
+.contact-page { padding-bottom: 110px; }
+.contact-page .page-hero p { max-width: 500px; }
+.contact-page .contact-form-premium {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 52px 0;
+  gap: 32px;
+}
+.contact-page .contact-form-premium label {
+  display: block;
+  line-height: 1.7;
+}
+.contact-page .contact-form-premium input,
+.contact-page .contact-form-premium textarea {
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+.contact-page .contact-form-premium input:focus,
+.contact-page .contact-form-premium textarea:focus {
+  border-color: var(--clay);
+  box-shadow: 0 1px 0 var(--clay);
+}
+.contact-page .contact-form-premium .btn {
+  margin-top: 8px;
+  letter-spacing: 1.4px;
+}
+@media (max-width: 700px) {
+  .contact-page .page-hero { padding-top: 75px; padding-bottom: 48px; }
+  .contact-page .contact-form-premium { padding: 38px 0; gap: 27px; }
+}
