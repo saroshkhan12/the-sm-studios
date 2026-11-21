@@ -6227,3 +6227,38 @@ select:focus-visible {
   -webkit-user-select: none;
   user-select: none;
 }
+
+
+/* Contact page: retain the light editorial palette with restrained gold details. */
+.contact-page { background: #F7F4EE; color: #252421; padding-bottom: 110px; }
+.contact-page .page-hero { border-bottom-color: rgba(145, 112, 66, 0.28); }
+.contact-page .page-hero .eyebrow { color: #9A7848; }
+.contact-page .page-hero h1 { color: #252421; }
+.contact-page .page-hero h1 em { color: #A7834F; }
+.contact-page .page-hero p { color: #68635B; max-width: 520px; }
+.contact-page .contact-form-premium {
+  max-width: 720px; margin: 0 auto; padding: 52px clamp(22px, 5vw, 58px);
+  gap: 27px; border: 1px solid rgba(167, 131, 79, 0.28);
+  background: rgba(255, 255, 255, 0.42); box-shadow: 0 18px 55px rgba(45, 37, 26, 0.045);
+}
+.contact-page .contact-form-premium label { color: #3A3731; font-size: 9px; letter-spacing: 1.6px; }
+.contact-page .contact-form-premium input,
+.contact-page .contact-form-premium textarea {
+  color: #252421; border-bottom: 1px solid rgba(37, 36, 33, 0.2);
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+.contact-page .contact-form-premium input::placeholder,
+.contact-page .contact-form-premium textarea::placeholder { color: #999187; }
+.contact-page .contact-form-premium input:focus,
+.contact-page .contact-form-premium textarea:focus {
+  border-color: #A7834F; box-shadow: 0 1px 0 #A7834F;
+}
+.contact-page .contact-form-premium .btn-dark {
+  background: #252421; color: #F7F4EE; border: 1px solid #A7834F;
+}
+.contact-page .contact-form-premium .btn-dark:hover { background: #A7834F; color: #171512; }
+.contact-page .contact-form-premium .form-note { color: #76513A; }
+@media (max-width: 700px) {
+  .contact-page .page-hero { padding-top: 70px; padding-bottom: 45px; }
+  .contact-page .contact-form-premium { padding: 34px 20px; gap: 23px; }
+}
