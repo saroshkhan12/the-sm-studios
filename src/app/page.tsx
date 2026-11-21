@@ -3,89 +3,24 @@ import Link from "next/link";
 import { ArrowUpRight, Diamond, Globe2, Heart, ShieldCheck } from "lucide-react";
 import { collections } from "@/data/catalog";
 import { readEtsyProducts } from "@/lib/etsy";
+import { CollectionCard } from "@/components/collection-card";
 import { ProductCard } from "@/components/product-card";
 import { HeroSlider } from "@/components/hero-slider";
 import { ScrollReveal, StaggerItem, StaggerReveal } from "@/components/scroll-reveal";
 
 export const dynamic = "force-dynamic";
 
-const editorialCollectionContent = [
-  {
-    slug: "palestine-identity",
-    number: "01",
-    eyebrow: "CULTURE & IDENTITY",
-    title: "Art with a voice.",
-    accent: "Culture without borders.",
-    description: "Artwork celebrating Palestinian culture, heritage and expression. Original pieces that give identity, history and culture a visual voice.",
-    action: "EXPLORE THE COLLECTION",
-    imageAlt: "Artwork from the Palestine and Identity collection",
-    className: "editorial-palestine",
-  },
-  {
-    slug: "islamic-art",
-    number: "02",
-    eyebrow: "FORM & SPIRIT",
-    title: "Form, light",
-    accent: "and devotion.",
-    description: "A considered visual world inspired by Islamic architecture, geometry, calligraphy and spiritual expression.",
-    action: "DISCOVER ISLAMIC ART",
-    imageAlt: "Artwork from the Islamic Art collection",
-    className: "editorial-islamic",
-  },
-  {
-    slug: "arabic-calligraphy",
-    number: "03",
-    eyebrow: "LANGUAGE · FORM · MEANING",
-    title: "Words made",
-    accent: "beautiful.",
-    description: "Language transformed into art through expressive Arabic lettering, rhythm and timeless visual form.",
-    action: "EXPLORE ARABIC CALLIGRAPHY",
-    imageAlt: "Artwork from the Arabic Calligraphy collection",
-    className: "editorial-arabic",
-  },
-  {
-    slug: "digital-artwork",
-    number: "04",
-    eyebrow: "THE DIGITAL ART STUDIO",
-    title: "Ideas without",
-    accent: "edges.",
-    description: "Experimental compositions and original digital worlds made to challenge the familiar.",
-    action: "EXPLORE DIGITAL ART",
-    imageAlt: "Digital artwork from THE SM STUDIOS",
-    className: "editorial-digital",
-  },
-  {
-    slug: "posters-prints",
-    number: "05",
-    eyebrow: "ART FOR YOUR SPACE",
-    title: "Art for walls",
-    accent: "and everyday spaces.",
-    description: "Thoughtfully selected posters and prints that bring character, colour and creative expression into the spaces around you.",
-    action: "EXPLORE POSTERS & PRINTS",
-    imageAlt: "Artwork from the Posters and Prints collection",
-    className: "editorial-posters",
-  },
-  {
-    slug: "apparel",
-    number: "06",
-    eyebrow: "ART TO LIVE IN",
-    title: "Wear what",
-    accent: "you believe.",
-    description: "Wearable expression for people who see personal style as another way to tell a story.",
-    action: "EXPLORE APPAREL",
-    imageAlt: "Apparel from THE SM STUDIOS",
-    className: "editorial-apparel",
-  },
-] as const;
-
 export default async function Home() {
   const products = await readEtsyProducts();
   const featuredProducts = products.slice(0, 4);
 
-  const editorialCollections = editorialCollectionContent.map((item) => ({
-    ...item,
-    product: products.find((product) => product.collection === item.slug && product.image),
-  }));
+  const featuredCollections = collections
+    .filter((item) =>
+      products.some(
+        (product) => product.collection === item.slug && product.image,
+      ),
+    )
+    .slice(0, 4);
 
   const philosophyArtwork =
     products.find(
@@ -205,73 +140,28 @@ export default async function Home() {
         </div>
       </section>
 
-<section className="editorial-worlds" aria-labelledby="editorial-worlds-title">
-        <div className="editorial-worlds-inner">
-          <ScrollReveal className="editorial-intro">
-            <div>
-              <span className="eyebrow">A WORLD OF IDEAS · SIX COLLECTIONS</span>
-              <h2 id="editorial-worlds-title">Find the art<br />that <em>moves you.</em></h2>
-            </div>
-            <p>
-              From cultural identity to contemporary expression, each
-              collection opens a different window into the creative world of
-              THE SM STUDIOS.
-            </p>
-          </ScrollReveal>
-
-          <StaggerReveal className="editorial-collection-grid">
-            {editorialCollections.map((item) => (
-              <StaggerItem className={"editorial-collection-item " + item.className} key={item.slug}>
-                <Link
-                  href={"/collections/" + item.slug}
-                  className="editorial-collection-card"
-                  aria-label={item.action + ": " + item.slug.replaceAll("-", " ")}
-                >
-                  <div className="editorial-collection-image">
-                    {item.product?.image ? (
-                      <Image
-                        src={item.product.image}
-                        alt={item.imageAlt}
-                        fill
-                        sizes="(max-width: 700px) 100vw, (max-width: 1050px) 50vw, 58vw"
-                        className="editorial-image"
-                      />
-                    ) : (
-                      <span className="editorial-art-fallback" aria-hidden="true">
-                        <span className="editorial-fallback-orbit"></span>
-                        <span className="editorial-fallback-mark">
-                          {item.slug === "palestine-identity"
-                            ? "فلسطين"
-                            : item.slug === "islamic-art"
-                              ? "۞"
-                              : item.slug === "digital-artwork"
-                                ? "∞"
-                                : "SM"}
-                        </span>
-                      </span>
-                    )}
-                    <span className="editorial-image-shade" aria-hidden="true"></span>
-                    <span className="editorial-number">COLLECTION {item.number}</span>
-                    <span className="editorial-image-caption">{item.eyebrow}</span>
-                    <span className="editorial-arrow" aria-hidden="true">
-                      <ArrowUpRight size={20} />
-                    </span>
-                  </div>
-                  <div className="editorial-collection-copy">
-                    <div>
-                      <span className="eyebrow">{item.eyebrow}</span>
-                      <h3>{item.title}<br /><em>{item.accent}</em></h3>
-                      <p>{item.description}</p>
-                    </div>
-                    <span className="editorial-cta">
-                      {item.action} <ArrowUpRight size={15} />
-                    </span>
-                  </div>
-                </Link>
-              </StaggerItem>
-            ))}
-          </StaggerReveal>
-        </div>
+<section className="collections-section home-collections-section section-wrap">
+        <ScrollReveal className="section-heading">
+          <div>
+            <span className="eyebrow">OUR COLLECTIONS</span>
+            <h2>Explore Our <em>Collections</em></h2>
+          </div>
+          <Link className="text-link" href="/collections">
+            VIEW ALL COLLECTIONS <ArrowUpRight size={15} />
+          </Link>
+        </ScrollReveal>
+        <StaggerReveal className="collection-grid home-collection-grid">
+          {featuredCollections.map((item, index) => (
+            <StaggerItem className="collection-reveal" key={item.slug}>
+              <CollectionCard
+                item={item}
+                index={index}
+                image={products.find((product) => product.collection === item.slug)?.image}
+                sizes="(max-width: 650px) 44vw, (max-width: 1000px) 44vw, 23vw"
+              />
+            </StaggerItem>
+          ))}
+        </StaggerReveal>
       </section>
 
 <section className="featured-section">
