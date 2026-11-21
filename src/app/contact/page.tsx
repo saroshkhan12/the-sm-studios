@@ -7,8 +7,46 @@ import { MotionButton } from "@/components/motion-button";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
 export default function Contact() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const reduceMotion = useReducedMotion();
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (status === "sending") return;
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const payload = {
+      name: String(formData.get("name") || ""),
+      email: String(formData.get("email") || ""),
+      subject: String(formData.get("subject") || ""),
+      message: String(formData.get("message") || ""),
+      website: String(formData.get("website") || ""),
+    };
+
+    setStatus("sending");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) throw new Error("Message could not be sent");
+      form.reset();
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  const notice =
+    status === "sent"
+      ? "Thank you for reaching out. Your message has been sent to the studio."
+      : status === "error"
+        ? "We couldn't send your message right now. Please try again shortly."
+        : status === "sending"
+          ? "Sending your message…"
+          : "";
 
   return (
     <div className="page-shell contact-page">
@@ -20,10 +58,7 @@ export default function Contact() {
 
       <m.form
         className="contact-form contact-form-premium"
-        onSubmit={(event) => {
-          event.preventDefault();
-          setSent(true);
-        }}
+        onSubmit={handleSubmit}
         initial={reduceMotion ? false : "hidden"}
         whileInView={reduceMotion ? undefined : "visible"}
         viewport={{ once: true, amount: 0.15 }}
@@ -31,34 +66,40 @@ export default function Contact() {
       >
         <m.label variants={reduceMotion ? undefined : staggerItem}>
           YOUR NAME
-          <input name="name" autoComplete="name" required placeholder="Your name" />
+          <input name="name" autoComplete="name" required maxLength={100} placeholder="Your name" />
         </m.label>
         <m.label variants={reduceMotion ? undefined : staggerItem}>
           EMAIL ADDRESS
-          <input name="email" type="email" autoComplete="email" required placeholder="you@example.com" />
+          <input name="email" type="email" autoComplete="email" required maxLength={254} placeholder="you@example.com" />
         </m.label>
         <m.label variants={reduceMotion ? undefined : staggerItem}>
           SUBJECT
-          <input name="subject" required placeholder="How can we help?" />
+          <input name="subject" required maxLength={150} placeholder="How can we help?" />
         </m.label>
         <m.label variants={reduceMotion ? undefined : staggerItem}>
           YOUR MESSAGE
-          <textarea name="message" required rows={5} placeholder="Write your message..." />
+          <textarea name="message" required maxLength={5000} rows={5} placeholder="Write your message..." />
         </m.label>
+        <div aria-hidden="true" style={{ position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0, 0, 0, 0)" }}>
+          <label>Leave this field empty<input name="website" tabIndex={-1} autoComplete="off" /></label>
+        </div>
         <m.div variants={reduceMotion ? undefined : staggerItem}>
-          <MotionButton type="submit" className="btn btn-dark">SEND YOUR MESSAGE</MotionButton>
+          <MotionButton type="submit" className="btn btn-dark" disabled={status === "sending"}>
+            {status === "sending" ? "SENDING..." : "SEND YOUR MESSAGE"}
+          </MotionButton>
         </m.div>
         <AnimatePresence initial={false}>
-          {sent && (
+          {notice && (
             <m.p
-              key="contact-response"
+              key={status}
               className="form-note"
               role="status"
+              aria-live="polite"
               initial={reduceMotion ? false : { opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={reduceMotion ? undefined : { opacity: 0, y: -4 }}
             >
-              Thanks for reaching out. This demo form is not connected to email yet; connect a mail service before launch.
+              {notice}
             </m.p>
           )}
         </AnimatePresence>
