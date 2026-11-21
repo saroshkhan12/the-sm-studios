@@ -270,26 +270,3 @@
   .editorial-manifesto-inner { gap: 28px; }
   .editorial-manifesto-copy h2 { font-size: clamp(42px, 10vw, 53px); }
 }
-
-
-/* Six-collection homepage layout */
-.editorial-collection-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.editorial-collection-item,
-.editorial-palestine,
-.editorial-islamic,
-.editorial-arabic,
-.editorial-digital,
-.editorial-posters,
-.editorial-apparel { grid-column: span 1; }
-.editorial-arabic .editorial-collection-image,
-.editorial-posters .editorial-collection-image { min-height: clamp(320px, 34vw, 455px); }
-.editorial-arabic .editorial-collection-image,
-.editorial-arabic .editorial-art-fallback { background: radial-gradient(circle at 52% 35%, #b99b70 0, transparent 32%), linear-gradient(145deg, #292b30, #66584a 58%, #252522); }
-.editorial-posters .editorial-collection-image,
-.editorial-posters .editorial-art-fallback { background: radial-gradient(circle at 70% 25%, #b98c70 0, transparent 30%), linear-gradient(135deg, #4c4038, #a28b72 55%, #38332f); }
-@media (max-width: 900px) {
-  .editorial-collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 700px) {
-  .editorial-collection-grid { grid-template-columns: 1fr; }
-}
