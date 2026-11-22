@@ -414,6 +414,10 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <m.div variants={staggerItem}>
             <h4>CUSTOMER CARE</h4>
             <Link href="/contact">Contact the studio</Link>
+            <Link href="/faq">Frequently asked questions</Link>
+            <Link href="/shipping">Shipping &amp; delivery</Link>
+            <Link href="/returns">Returns &amp; exchanges</Link>
+            <Link href="/cancellations">Cancellations</Link>
             <a href="https://thesmstudios.etsy.com" target="_blank" rel="noopener noreferrer">
               Visit our Etsy shop
             </a>
