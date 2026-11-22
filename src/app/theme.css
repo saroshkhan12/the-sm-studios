@@ -6261,3 +6261,59 @@ select:focus-visible {
   .contact-page .page-hero { padding-top: 75px; padding-bottom: 48px; }
   .contact-page .contact-form-premium { padding: 38px 0; gap: 27px; }
 }
+
+
+/* Phase 2: keyboard-first access and touch-friendly storefront controls */
+.skip-link {
+  position: fixed;
+  z-index: 200;
+  top: 12px;
+  left: 12px;
+  padding: 12px 18px;
+  transform: translateY(-160%);
+  border: 1px solid var(--accent-gold);
+  border-radius: 6px;
+  background: #171412;
+  color: var(--ivory);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  transition: transform 160ms ease;
+}
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 3px;
+}
+#main-content:focus { outline: none; }
+@media (hover: none), (pointer: coarse) {
+  .product-card .image-open {
+    opacity: 1;
+    transform: none;
+  }
+  .product-card .image-open:focus-visible {
+    outline: 2px solid var(--accent-gold);
+    outline-offset: 3px;
+  }
+}
+@media (max-width: 650px) {
+  .announcement {
+    font-size: 7px;
+    letter-spacing: .7px;
+  }
+  .hero-buttons .btn {
+    min-height: 48px;
+    padding-inline: 17px;
+  }
+  .brand-values > div {
+    min-width: 0;
+    gap: 10px;
+  }
+  .brand-values .benefit-copy strong {
+    font-size: 8px;
+    letter-spacing: .7px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skip-link { transition: none; }
+}
