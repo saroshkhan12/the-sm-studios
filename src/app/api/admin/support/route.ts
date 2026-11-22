@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { listSupportMessages, updateSupportMessage, type SupportStatus } from "@/lib/support-inbox";
-import { adminErrorResponse, adminJson, requestAdminSession, requestAdminToken } from "@/lib/admin-http";
+import { adminErrorResponse, adminJson, requestAdminSession } from "@/lib/admin-http";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
