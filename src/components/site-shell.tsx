@@ -10,7 +10,9 @@ import {
   ArrowUpRight,
   Heart,
   Menu,
+  Moon,
   Search,
+  Sun,
   ShoppingBag,
   X,
 } from "lucide-react";
@@ -53,6 +55,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const [favoritesCount, setFavoritesCount] = useState(0);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const themeButtonRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
   const menuOverlayRef = useRef<HTMLDivElement>(null);
@@ -63,6 +67,53 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     setSearchOpen(true);
   }, []);
   const closeSearch = useCallback(() => setSearchOpen(false), []);
+
+  useEffect(() => {
+    const savedTheme = window.localStorage.getItem("sm-studios-theme");
+    const initialTheme = savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark";
+    document.documentElement.dataset.theme = initialTheme;
+    setTheme(initialTheme);
+  }, []);
+
+  const toggleTheme = useCallback(() => {
+    const root = document.documentElement;
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    const updateTheme = () => {
+      root.dataset.theme = nextTheme;
+      window.localStorage.setItem("sm-studios-theme", nextTheme);
+      setTheme(nextTheme);
+    };
+
+    if (reduceMotion) {
+      updateTheme();
+      return;
+    }
+
+    const buttonRect = themeButtonRef.current?.getBoundingClientRect();
+    const viewTransitionDocument = document as Document & {
+      startViewTransition?: (callback: () => void) => { ready: Promise<void> };
+    };
+
+    if (!buttonRect || !viewTransitionDocument.startViewTransition) {
+      updateTheme();
+      return;
+    }
+
+    const x = buttonRect.left + buttonRect.width / 2;
+    const y = buttonRect.top + buttonRect.height / 2;
+    const radius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y),
+    );
+    root.style.setProperty("--theme-origin-x", `${x}px`);
+    root.style.setProperty("--theme-origin-y", `${y}px`);
+    root.style.setProperty("--theme-reveal-radius", `${radius}px`);
+
+    const transition = viewTransitionDocument.startViewTransition(updateTheme);
+    transition.ready.catch(() => {
+      // The theme has already changed; the browser can fall back to the normal repaint.
+    });
+  }, [reduceMotion, theme]);
 
   useEffect(() => {
     const sync = () => {
@@ -241,6 +292,24 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           >
             <m.span whileHover={reduceMotion ? undefined : { rotate: 8, scale: 1.08 }}>
               <Search />
+            </m.span>
+          </MotionButton>
+          <MotionButton
+            ref={themeButtonRef}
+            type="button"
+            className="icon-btn theme-toggle"
+            data-cursor="THEME"
+            aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+            aria-pressed={theme === "light"}
+            onClick={toggleTheme}
+          >
+            <m.span
+              key={theme}
+              initial={reduceMotion ? false : { opacity: 0, rotate: -35, scale: 0.7 }}
+              animate={{ opacity: 1, rotate: 0, scale: 1 }}
+              transition={{ duration: reduceMotion ? 0 : 0.24 }}
+            >
+              {theme === "dark" ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
             </m.span>
           </MotionButton>
           <Link
