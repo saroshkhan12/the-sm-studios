@@ -45,22 +45,51 @@ export function toggleFavorite(id: string): string[] {
   }
 }
 
+function isSafeEtsyUrl(value: unknown): value is string {
+  if (typeof value !== "string") return false;
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" &&
+      (url.hostname === "etsy.com" || url.hostname.endsWith(".etsy.com"));
+  } catch {
+    return false;
+  }
+}
+
+function isSafeEtsyImageUrl(value: unknown): value is string {
+  if (typeof value !== "string") return false;
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && url.hostname === "i.etsystatic.com";
+  } catch {
+    return false;
+  }
+}
+
+function isCartItem(value: unknown): value is CartItem {
+  if (!value || typeof value !== "object") return false;
+  const item = value as Record<string, unknown>;
+  return (
+    typeof item.id === "string" && item.id.length > 0 &&
+    typeof item.slug === "string" && item.slug.length > 0 &&
+    typeof item.title === "string" && item.title.length > 0 &&
+    typeof item.price === "number" && Number.isFinite(item.price) && item.price >= 0 &&
+    typeof item.currency === "string" && /^[A-Z]{3}$/i.test(item.currency) &&
+    Number.isInteger(item.qty) && Number(item.qty) >= 1 && Number(item.qty) <= 99 &&
+    isSafeEtsyUrl(item.url)
+  );
+}
+
 export function readCart(): CartItem[] {
   if (typeof window === "undefined") return [];
 
   try {
     const parsed: unknown = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
     if (!Array.isArray(parsed)) return [];
-    return parsed.filter(
-      (item): item is CartItem =>
-        Boolean(item) &&
-        typeof item.id === "string" &&
-        typeof item.title === "string" &&
-        typeof item.price === "number" &&
-        typeof item.qty === "number" &&
-        typeof item.slug === "string" &&
-        typeof item.url === "string",
-    );
+    return parsed.filter(isCartItem).map((item) => ({
+      ...item,
+      image: isSafeEtsyImageUrl(item.image) ? item.image : undefined,
+    }));
   } catch {
     return [];
   }
@@ -77,19 +106,46 @@ function saveCart(items: CartItem[]): CartItem[] {
 }
 
 export function addToCart(product: Omit<CartItem, "qty">): CartItem[] {
+  if (
+    !product.id.trim() ||
+    !product.slug.trim() ||
+    !product.title.trim() ||
+    !Number.isFinite(product.price) ||
+    product.price < 0 ||
+    !/^[A-Z]{3}$/i.test(product.currency) ||
+    !isSafeEtsyUrl(product.url)
+  ) {
+    throw new Error("This listing cannot be saved because its details are invalid.");
+  }
+
   const items = readCart();
   const existing = items.find((item) => item.id === product.id);
+  if (existing && existing.qty >= 99) {
+    throw new Error("You can save up to 99 of the same item.");
+  }
+
+  const safeProduct = {
+    ...product,
+    image: isSafeEtsyImageUrl(product.image) ? product.image : undefined,
+  };
+
   return saveCart(
     existing
       ? items.map((item) =>
           item.id === product.id ? { ...item, qty: item.qty + 1 } : item,
         )
-      : [...items, { ...product, qty: 1 }],
+      : [...items, { ...safeProduct, qty: 1 }],
   );
 }
 
 export function updateCartQuantity(id: string, qty: number): CartItem[] {
+  if (!Number.isInteger(qty)) {
+    throw new Error("Choose a whole-number quantity.");
+  }
   if (qty < 1) return removeFromCart(id);
+  if (qty > 99) {
+    throw new Error("You can save up to 99 of the same item.");
+  }
   return saveCart(
     readCart().map((item) => (item.id === id ? { ...item, qty } : item)),
   );
