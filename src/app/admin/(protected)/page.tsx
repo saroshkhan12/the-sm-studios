@@ -285,6 +285,7 @@ export default function Admin() {
             );
           })}
         </nav>
+        <a className="admin-side-nav-link" href="/admin/support"> <span>Customer support inbox</span> </a>
         <div className="admin-side-bottom">
           {profile && (
             <div className="admin-side-user">
