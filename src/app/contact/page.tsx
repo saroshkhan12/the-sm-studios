@@ -41,7 +41,7 @@ export default function Contact() {
 
   const notice =
     status === "sent"
-      ? "Thank you for reaching out. Your message has been sent to the studio."
+      ? "Thank you for reaching out. Your message has been received by the studio."
       : status === "error"
         ? "We couldn't send your message right now. Please try again shortly."
         : status === "sending"

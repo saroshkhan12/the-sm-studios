@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { createSupportMessage } from "@/lib/support-inbox";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -52,6 +53,13 @@ export async function POST(request: NextRequest) {
   const lastSent = recentSubmissions.get(ip) || 0;
   if (now - lastSent < 60_000) return json("Please wait a minute before sending another message.", 429);
 
+  try {
+    await createSupportMessage({ name, email, subject, message });
+  } catch (error) {
+    console.error("Contact enquiry could not be stored:", error instanceof Error ? error.message : "Unknown error");
+    return json("We could not receive your message right now. Please try again later.", 503);
+  }
+
   const host = process.env.SMTP_HOST;
   const port = Number(process.env.SMTP_PORT || 465);
   const user = process.env.SMTP_USER;
@@ -62,8 +70,9 @@ export async function POST(request: NextRequest) {
     .filter(Boolean);
 
   if (!host || !user || !pass || !recipients.length || !Number.isFinite(port)) {
-    console.error("Contact email is not configured: missing SMTP environment variables.");
-    return json("The contact form is temporarily unavailable. Please try again later.", 503);
+    console.warn("Contact email notification is not configured; enquiry was saved to the private support inbox.");
+    recentSubmissions.set(ip, now);
+    return json("Your message has been received by the studio.", 200);
   }
 
   try {
@@ -89,9 +98,10 @@ export async function POST(request: NextRequest) {
     for (const [key, timestamp] of recentSubmissions) {
       if (now - timestamp > 10 * 60_000) recentSubmissions.delete(key);
     }
-    return json("Your message has been sent.", 200);
+    return json("Your message has been received by the studio.", 200);
   } catch (error) {
-    console.error("Contact email delivery failed:", error instanceof Error ? error.message : "Unknown error");
-    return json("We couldn't send your message right now. Please try again later.", 502);
+    console.error("Contact email notification failed; enquiry remains in the private support inbox:", error instanceof Error ? error.message : "Unknown error");
+    recentSubmissions.set(ip, now);
+    return json("Your message has been received by the studio. Email notification may be delayed.", 200);
   }
 }

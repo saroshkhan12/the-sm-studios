@@ -63,20 +63,22 @@ export function ProductPurchaseActions({
   return (
     <>
       <div className="product-purchase-actions">
-        <m.a
-          className="btn btn-dark product-etsy-purchase"
-          href={product.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-disabled={!available}
-          whileHover={available && !reduceMotion ? { y: -2 } : undefined}
-          whileTap={available && !reduceMotion ? { scale: 0.98 } : undefined}
-          onClick={(event) => {
-            if (!available) event.preventDefault();
-          }}
-        >
-          {available ? "BUY ON ETSY " : "UNAVAILABLE ON ETSY"}
-        </m.a>
+        {available ? (
+          <m.a
+            className="btn btn-dark product-etsy-purchase"
+            href={product.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={!reduceMotion ? { y: -2 } : undefined}
+            whileTap={!reduceMotion ? { scale: 0.98 } : undefined}
+          >
+            BUY ON ETSY
+          </m.a>
+        ) : (
+          <span className="btn btn-dark product-etsy-purchase is-unavailable" aria-disabled="true">
+            UNAVAILABLE ON ETSY
+          </span>
+        )}
         <MotionButton type="button" className="btn btn-outline-dark" onClick={addSelection} disabled={!available}>
           SAVE TO YOUR SELECTION
         </MotionButton>

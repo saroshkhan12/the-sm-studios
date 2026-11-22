@@ -6,9 +6,13 @@ on:
     branches:
       - main
       - admin-registration-approval
+      - website-improvements-phase-2
+      - website-complete-transformation
   pull_request:
     branches:
       - main
+      - website-improvements-phase-2
+      - website-complete-transformation
 
 jobs:
   build:

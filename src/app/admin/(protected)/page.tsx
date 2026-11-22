@@ -285,6 +285,7 @@ export default function Admin() {
             );
           })}
         </nav>
+        <button type="button" onClick={() => window.location.assign("/admin/support")}><span>Customer support inbox</span></button>
         <div className="admin-side-bottom">
           {profile && (
             <div className="admin-side-user">

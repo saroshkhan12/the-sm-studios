@@ -53,6 +53,7 @@ export default function ShopPage() {
   const [products, setProducts] = useState<EtsyProduct[]>([]);
   const [query, setQuery] = useState("");
   const [type, setType] = useState<ProductType>("all");
+  const [category, setCategory] = useState("all");
   const [sort, setSort] = useState<SortOrder>("relevance");
   const [loading, setLoading] = useState(true);
   const [configured, setConfigured] = useState(false);
@@ -86,6 +87,8 @@ export default function ShopPage() {
       active = false;
     };
   }, []);
+
+  const categories = useMemo(() => Array.from(new Set(products.map((product) => product.category).filter(Boolean))).sort((a, b) => a.localeCompare(b)), [products]);
 
   const filtered = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase();
@@ -129,7 +132,7 @@ export default function ShopPage() {
       default:
         return matches;
     }
-  }, [products, query, sort, type]);
+  }, [products, query, sort, type, category]);
 
   return (
     <div className="page-shell">
@@ -180,6 +183,14 @@ export default function ShopPage() {
             </MotionButton>
           ))}
         </div>
+
+        <label className="search-field shop-sort glass-control">
+          <span className="sr-only">Filter by category</span>
+          <select aria-label="Filter by category" value={category} onChange={(event) => setCategory(event.target.value)}>
+            <option value="all">All categories</option>
+            {categories.map((item) => <option key={item} value={item}>{item}</option>)}
+          </select>
+        </label>
 
         <label className="search-field shop-sort glass-control">
           <ArrowUpDown size={16} aria-hidden="true" />
@@ -245,7 +256,7 @@ export default function ShopPage() {
           <span aria-hidden="true"></span>
           <h2>No pieces<br /><em>found this time.</em></h2>
           <p>Try another search or clear the current filters to explore the full collection.</p>
-          <MotionButton type="button" className="btn btn-outline-dark" onClick={() => { setQuery(""); setType("all"); }}>
+          <MotionButton type="button" className="btn btn-outline-dark" onClick={() => { setQuery(""); setType("all"); setCategory("all"); }}>
             CLEAR SEARCH & FILTERS
           </MotionButton>
         </ScrollReveal>
