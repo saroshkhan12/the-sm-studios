@@ -6479,3 +6479,204 @@ html[data-theme="light"] .announcement { background: #702F39; color: #F7F4EE; }
   ::view-transition-old(root),
   ::view-transition-new(root) { animation: none !important; }
 }
+
+
+/* Site-wide light theme coverage: storefront, editorial pages, account and admin UI. */
+html[data-theme="light"] {
+  --light-theme-page: #F7F4EE;
+  --light-theme-section: #EEE9DF;
+  --light-theme-card: #FFFEFB;
+  --light-theme-raised: #E8E0D4;
+  --light-theme-text: #252421;
+  --light-theme-muted: #6D675F;
+  --light-theme-border: rgba(37, 36, 33, .14);
+  --light-theme-shadow: 0 14px 36px rgba(37, 36, 33, .07);
+}
+html[data-theme="light"] body,
+html[data-theme="light"] main,
+html[data-theme="light"] #main-content {
+  background: var(--light-theme-page);
+  color: var(--light-theme-text);
+}
+html[data-theme="light"] main :is(section, article, aside, header, footer, nav, form, fieldset) {
+  border-color: var(--light-theme-border);
+}
+html[data-theme="light"] :is(.mobile-nav, .brand-values, .featured-section,
+  .world-digital, .world-apparel, .about-chapter, .story-themes-section,
+  .story-values-section, .story-closing, .editorial-worlds,
+  .editorial-manifesto, .story-navigation, .story-nav-wrap) {
+  background: var(--light-theme-section);
+  color: var(--light-theme-text);
+}
+html[data-theme="light"] :is(.header, .header.glass-header, .story-nav-wrap, .story-navigation) {
+  background: rgba(247, 244, 238, .94);
+  color: var(--light-theme-text);
+  border-color: var(--light-theme-border);
+}
+html[data-theme="light"] :is(.footer, .footer.glass-footer) {
+  background: #EAE3D8;
+  color: var(--light-theme-text);
+  border-color: var(--light-theme-border);
+}
+html[data-theme="light"] :is(.collection-card.glass-surface, .product-card.glass-surface,
+  .admin-card, .admin-table, .admin-alert, .cart-panel, .contact-form,
+  .selection-line, .selection-footer, .search-overlay, .editorial-collection-card,
+  .glass-surface, .glass-inset) {
+  background-color: var(--light-theme-card);
+  color: var(--light-theme-text);
+  border-color: var(--light-theme-border);
+  box-shadow: var(--light-theme-shadow);
+}
+html[data-theme="light"] :is(.collection-card .art-placeholder, .product-card .product-image,
+  .gallery-main, .gallery-thumbnail, .selection-image, .search-result-image,
+  .hero-art-inner) {
+  background-color: var(--light-theme-raised);
+  color: var(--light-theme-text);
+  border-color: var(--light-theme-border);
+}
+html[data-theme="light"] :is(.tone-rose .art-placeholder, .tone-sand .art-placeholder,
+  .tone-ink .art-placeholder, .tone-lavender .art-placeholder,
+  .tone-cream .art-placeholder, .tone-olive .art-placeholder) {
+  background: var(--light-theme-raised);
+  color: var(--light-theme-text);
+}
+html[data-theme="light"] :is(.product-info, .product-info h2, .product-info h3,
+  .product-info p, .collection-meta, .collection-meta h2, .collection-meta h3,
+  .collection-meta p, .about-chapter, .about-chapter p, .about-chapter h2,
+  .about-chapter h3, .story-themes-section, .story-values-section,
+  .editorial-worlds, .editorial-manifesto, .editorial-collection-card,
+  .admin-shell, .admin-side, .admin-card, .admin-table, .admin-alert,
+  .cart-panel, .selection-line, .contact-form, .page-hero, .page-hero h1,
+  .page-hero p, .policy-page, .faq-page, .empty-state, .empty-catalog) {
+  color: var(--light-theme-text);
+}
+html[data-theme="light"] :is(p, small, .muted, .text-muted, .product-description,
+  .product-info p, .collection-meta p, .footer-top p, .footer-bottom,
+  .admin-muted, .admin-card small, .admin-table small, .page-hero p) {
+  color: var(--light-theme-muted);
+}
+html[data-theme="light"] :is(input, textarea, select, option,
+  .search-overlay-input, .shop-toolbar .search-field, .shop-toolbar .search-field input,
+  .admin-card input, .admin-card textarea, .admin-card select,
+  .contact-form input, .contact-form textarea, .contact-form select) {
+  background-color: #FFFEFB;
+  color: var(--light-theme-text);
+  border-color: var(--light-theme-border);
+}
+html[data-theme="light"] :is(input, textarea, select)::placeholder {
+  color: #8B8379;
+  opacity: 1;
+}
+html[data-theme="light"] :is(.admin-side, .admin-shell) {
+  background-color: var(--light-theme-section);
+  color: var(--light-theme-text);
+}
+html[data-theme="light"] .admin-side a.admin-active {
+  background: #DED4C5;
+  color: #252421;
+  border-color: var(--accent-gold);
+}
+html[data-theme="light"] :is(.admin-alert, .admin-card, .admin-table) {
+  background: var(--light-theme-card);
+  border-color: var(--light-theme-border);
+}
+html[data-theme="light"] .admin-table :is(th, td) {
+  color: var(--light-theme-text);
+  border-color: var(--light-theme-border);
+}
+html[data-theme="light"] :is(.btn-dark, .btn-outline-dark) {
+  color: #252421;
+  border-color: #252421;
+}
+html[data-theme="light"] .btn-dark {
+  background: #252421;
+  color: #F7F4EE;
+}
+html[data-theme="light"] :is(.hero, .editorial-worlds, .editorial-manifesto,
+  .story-closing, .featured-section, .story-themes-section, .story-values-section) {
+  color: var(--light-theme-text);
+}
+html[data-theme="light"] .hero {
+  background:
+    radial-gradient(ellipse at 75% 40%, rgba(166, 95, 73, .12), transparent 44%),
+    #EEE9DF;
+}
+html[data-theme="light"] :is(.hero-copy > p, .hero-bottom, .editorial-intro > p,
+  .editorial-manifesto-copy p, .story-closing p) {
+  color: var(--light-theme-muted);
+}
+html[data-theme="light"] :is(.editorial-intro h2, .editorial-manifesto-copy h2,
+  .featured-section h2, .story-themes-section h2, .story-values-section h2,
+  .story-closing h2) {
+  color: var(--light-theme-text);
+}
+html[data-theme="light"] .editorial-collection-card {
+  background: var(--light-theme-card);
+  color: var(--light-theme-text);
+}
+html[data-theme="light"] .editorial-arrow {
+  background: rgba(255, 255, 255, .8);
+  color: var(--light-theme-text);
+  border-color: var(--light-theme-border);
+}
+html[data-theme="light"] :is(.mobile-nav a, .story-navigation a, .story-nav-wrap a,
+  .admin-side a, .footer a, .footer h4, .footer strong) {
+  color: var(--light-theme-text);
+}
+html[data-theme="light"] :is(.shop-toolbar, .filter-row.glass-filter-group,
+  .results-count, .glass-chip) {
+  border-color: var(--light-theme-border);
+}
+html[data-theme="light"] .glass-chip {
+  background: rgba(255, 255, 255, .72);
+  color: var(--light-theme-muted);
+}
+html[data-theme="light"] .glass-chip.filter-active {
+  background: rgba(154, 116, 64, .12);
+  color: var(--light-theme-text);
+}
+html[data-theme="light"] .search-overlay-backdrop {
+  background: rgba(37, 36, 33, .38);
+}
+html[data-theme="light"] :is(.newsletter, .newsletter h2, .newsletter p) {
+  background-color: #702F39;
+  color: #F7F4EE;
+}
+html[data-theme="light"] .hero-side-note,
+html[data-theme="light"] .hero-art-foot {
+  background: rgba(37, 36, 33, .88);
+  color: #FFFDF9;
+}
+html[data-theme="light"] .skip-link {
+  background: #FFFEFB;
+  color: #252421;
+}
+html[data-theme="light"] :is(.product-card .wishlist-btn, .product-card .type-pill) {
+  background: rgba(255, 254, 251, .94);
+  color: #252421;
+  border-color: var(--light-theme-border);
+}
+html[data-theme="light"] :is(.selection-quantity button, .clear-search:hover) {
+  background: var(--light-theme-raised);
+  color: var(--light-theme-text);
+}
+html[data-theme="light"] :is(.story-theme-open, .hero-controls button) {
+  background: rgba(255, 255, 255, .8);
+  color: var(--light-theme-text);
+}
+html[data-theme="light"] :is(.admin-form-message.is-error, .admin-sidebar-error) {
+  color: #A13F32;
+}
+html[data-theme="light"] .footer.glass-footer {
+  background: rgba(234, 227, 216, .96);
+}
+html[data-theme="light"] :is(.footer-logo-copy, .footer-logo-copy strong) {
+  color: var(--light-theme-text);
+}
+html[data-theme="light"] .featured-section .catalog-note {
+  background: rgba(255, 255, 255, .6);
+  color: var(--light-theme-text);
+}
+html[data-theme="light"] :is(.product-card .product-info strong, .results-count) {
+  color: #252421;
+}
