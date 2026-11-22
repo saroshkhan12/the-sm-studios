@@ -150,10 +150,11 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <div className="announcement">
-        <span>FREE SHIPPING ON ORDERS OVER $50</span>
+      <a className="skip-link" href="#main-content">Skip to content</a>
+      <div className="announcement" aria-label="Studio announcement">
+        <span>ART THAT SPEAKS · DESIGN THAT CONNECTS</span>
         <span className="announcement-separator" aria-hidden="true">✦</span>
-        <span>ART FOR A MORE INSPIRED LIFE</span>
+        <span>DISCOVER THE STUDIO SHOP</span>
       </div>
 
       <header className="header glass-header" id="site-top">
@@ -371,7 +372,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
       <SearchOverlay open={searchOpen} onClose={closeSearch} />
 
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <PageTransition>{children}</PageTransition>
       </main>
 
