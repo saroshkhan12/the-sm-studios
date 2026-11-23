@@ -56,5 +56,6 @@ export function CollectionCard({
         </div>
       </div>
     </Link>
+    </SpotlightCard>
   );
 }
