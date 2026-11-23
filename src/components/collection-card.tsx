@@ -22,7 +22,8 @@ export function CollectionCard({
   sizes?: string;
 }) {
   return (
-    <Link
+    <SpotlightCard>
+      <Link
       href={`/collections/${item.slug}`}
       className={`collection-card glass-surface glass-surface--interactive tone-${item.tone} card-${index}`}
     >
