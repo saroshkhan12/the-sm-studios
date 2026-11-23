@@ -494,3 +494,20 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
  .faq-contact{padding:24px 20px}
 }
 @media(prefers-reduced-motion:reduce){.faq-item summary span{transition:none}}
+
+
+/* Selected library integrations: Magic UI-inspired marquee, Aceternity-style spotlight, and Motion text reveal. */
+.studio-marquee{overflow:hidden;border-top:1px solid rgba(37,36,33,.12);border-bottom:1px solid rgba(37,36,33,.12);background:#eee8dd;padding:17px 0}
+.studio-marquee-track{display:flex;width:max-content;animation:studio-marquee-scroll 34s linear infinite}
+.studio-marquee-group{display:flex;flex-shrink:0;align-items:center}
+.studio-marquee-item{display:inline-flex;align-items:center;gap:34px;padding:0 27px;color:#51483e;font-size:9px;font-weight:700;letter-spacing:2px;white-space:nowrap}
+.studio-marquee-item i{font-size:13px;font-style:normal;color:#a77b46}
+.studio-marquee:hover .studio-marquee-track{animation-play-state:paused}
+@keyframes studio-marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.spotlight-card{position:relative;isolation:isolate;display:block;min-width:0}
+.spotlight-card-glow{position:absolute;z-index:0;inset:0;pointer-events:none;opacity:0;border-radius:inherit;background:radial-gradient(340px circle at var(--spotlight-x,50%) var(--spotlight-y,50%),rgba(183,137,78,.2),transparent 68%);transition:opacity .35s ease}
+.spotlight-card:hover .spotlight-card-glow{opacity:1}
+.spotlight-card-content{position:relative;z-index:1;height:100%}
+.word-reveal-visual{display:inline}
+.word-reveal-word{display:inline-block;will-change:transform,opacity,filter}
+@media(prefers-reduced-motion:reduce){.studio-marquee-track{animation:none}.studio-marquee{overflow-x:auto}.spotlight-card-glow{transition:none}}
