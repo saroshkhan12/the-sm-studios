@@ -5,6 +5,7 @@ export function TaglineReveal({ text, className = "" }: { text: string; classNam
   const root = useRef<HTMLParagraphElement>(null);
   const [active, setActive] = useState(false);
   const words = useMemo(() => text.trim().split(/\s+/).filter(Boolean), [text]);
+  const midpoint = Math.ceil(words.length / 2);
 
   useEffect(() => {
     const node = root.current;
