@@ -18,6 +18,6 @@ export function TaglineReveal({ text, className = "" }: { text: string; classNam
   }, []);
 
   return <p ref={root} className={`lp-tagline ${className}`} aria-label={text}>
-    <span aria-hidden="true">{words.map((word, index) => <span key={`${word}-${index}`} className={`lp-tagline-word ${active ? "is-lit" : ""}`} style={{ transitionDelay: active ? `${index * 55}ms` : "0ms" }}>{word}</span>)}</span>
+    <span aria-hidden="true">{[words.slice(0, midpoint), words.slice(midpoint)].map((line, lineIndex) => <span className="lp-tagline-line" key={lineIndex}>{line.map((word, index) => { const wordIndex = lineIndex === 0 ? index : midpoint + index; return <span key={`${word}-${wordIndex}`} className={`lp-tagline-word ${active ? "is-lit" : ""}`} style={{ transitionDelay: active ? `${wordIndex * 55}ms` : "0ms" }}>{word}</span>; })}</span>)}</span>
   </p>;
 }
