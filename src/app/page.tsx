@@ -9,6 +9,7 @@ import { HeroSlider } from "@/components/hero-slider";
 import { ScrollReveal, StaggerItem, StaggerReveal } from "@/components/scroll-reveal";
 import { StudioMarquee } from "@/components/studio-marquee";
 import { WordReveal } from "@/components/word-reveal";
+import { ShimmerCta } from "@/components/shimmer-cta";
 
 export const dynamic = "force-dynamic";
 
@@ -218,9 +219,7 @@ export default async function Home() {
         <ScrollReveal className="newsletter-action" variant="slideInRight">
           <span className="eyebrow light">NEWSLETTER SIGN-UP IS NOT LIVE YET</span>
           <p>Until then, get in touch with the studio directly.</p>
-          <Link className="btn btn-light" href="/contact">
-            CONTACT THE STUDIO <ArrowUpRight size={15} />
-          </Link>
+          <ShimmerCta href="/contact">CONTACT THE STUDIO</ShimmerCta>
         </ScrollReveal>
       </section>
     </>
