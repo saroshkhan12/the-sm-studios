@@ -21,7 +21,7 @@ html[data-theme="light"] .lp-system{--lp-bg:#fff;--lp-surface:#f5f5f5;--lp-surfa
 .lp-faq-item{border-bottom:1px solid var(--lp-border);padding:18px 0}
 .lp-faq-item summary{cursor:pointer;font-weight:650}.lp-faq-item p{color:var(--lp-muted);max-width:72ch}
 .lp-tagline{font-size:clamp(30px,5.2vw,68px);font-weight:600;line-height:1.16;letter-spacing:-.04em;max-width:1000px}
-.lp-tagline-word{display:inline-block;color:var(--lp-text);opacity:.3;transition:color 500ms cubic-bezier(.22,1,.36,1),opacity 500ms cubic-bezier(.22,1,.36,1);margin-right:.24em}
+.lp-tagline-line{display:block}.lp-tagline-word{display:inline-block;color:var(--lp-text);opacity:.3;transition:color 500ms cubic-bezier(.22,1,.36,1),opacity 500ms cubic-bezier(.22,1,.36,1);margin-right:.24em}
 .lp-tagline-word.is-lit{opacity:1}
 .lp-nav{position:relative;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 20px;border:1px solid var(--lp-border);border-radius:999px;background:color-mix(in srgb,var(--lp-surface) 82%,transparent);backdrop-filter:blur(16px)}
 .lp-nav-links{display:flex;align-items:center;gap:24px}.lp-nav-links a{color:inherit;text-decoration:none}
