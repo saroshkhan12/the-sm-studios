@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 export type LandingNavItem = { label: string; href: string };
-export function LandingPageNavigation({ brand, items, cta }: { brand: React.ReactNode; items: LandingNavItem[]; cta?: { label: string; href: string } }) {
+export function LandingPageNavigation({ brand, items, cta }: { brand: ReactNode; items: LandingNavItem[]; cta?: { label: string; href: string } }) {
   const [open, setOpen] = useState(false);
   return <nav className="lp-nav" aria-label="Landing page">
     <div>{brand}</div>
