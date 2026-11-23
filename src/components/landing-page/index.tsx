@@ -4,6 +4,8 @@ export { LandingPageNavigation } from "./LandingPageNavigation";
 export { ProblemSolutionSection } from "./ProblemSolutionSection";
 export { LeadCaptureForm } from "./LeadCaptureForm";
 export type { LandingNavItem } from "./LandingPageNavigation";
+export { createLandingPageMetadata, createFaqJsonLd } from "./seo";
+export { landingPageTokens, landingPageTextStyles } from "./tokens";
 
 type Action = { label: string; href: string };
 type SectionProps = { eyebrow?: string; title: string; description?: string; className?: string };
