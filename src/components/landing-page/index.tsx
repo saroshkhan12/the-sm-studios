@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 export { TaglineReveal } from "./TaglineReveal";
 export { LandingPageNavigation } from "./LandingPageNavigation";
+export { ProblemSolutionSection } from "./ProblemSolutionSection";
+export { LeadCaptureForm } from "./LeadCaptureForm";
 export type { LandingNavItem } from "./LandingPageNavigation";
 
 type Action = { label: string; href: string };
