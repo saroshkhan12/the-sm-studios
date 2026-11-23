@@ -7,6 +7,8 @@ import { CollectionCard } from "@/components/collection-card";
 import { ProductCard } from "@/components/product-card";
 import { HeroSlider } from "@/components/hero-slider";
 import { ScrollReveal, StaggerItem, StaggerReveal } from "@/components/scroll-reveal";
+import { StudioMarquee } from "@/components/studio-marquee";
+import { WordReveal } from "@/components/word-reveal";
 
 export const dynamic = "force-dynamic";
 
@@ -99,6 +101,8 @@ export default async function Home() {
         </div>
       </section>
 
+      <StudioMarquee />
+
 <section className="editorial-manifesto">
         <div className="editorial-manifesto-inner">
           <ScrollReveal className="manifesto-artwork" variant="slideInLeft">
@@ -121,7 +125,7 @@ export default async function Home() {
           </ScrollReveal>
 
           <ScrollReveal className="editorial-manifesto-copy" variant="slideInRight">
-            <span className="eyebrow light">OUR CREATIVE PHILOSOPHY</span>
+            <span className="eyebrow light"><WordReveal text="OUR CREATIVE PHILOSOPHY" /></span>
             <h2>From activism<br />to art —<br /><em>designs that speak.</em></h2>
             <span className="manifesto-rule" aria-hidden="true"></span>
             <p>
