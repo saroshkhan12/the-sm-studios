@@ -15,7 +15,7 @@ export function StudioMarquee() {
             key={copy}
             aria-hidden={copy === 1 ? true : undefined}
           >
-            {phrases.map((phrase, index) => (
+            {phrases.map((phrase) => (
               <span className="studio-marquee-item" key={phrase}>
                 {phrase}
                 <i aria-hidden="true">✳</i>
