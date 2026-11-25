@@ -12,6 +12,8 @@ import {
   Menu,
   Search,
   ShoppingBag,
+  Moon,
+  Sun,
   X,
 } from "lucide-react";
 import {
@@ -31,6 +33,7 @@ import { MotionButton } from "@/components/motion-button";
 import { PageTransition } from "@/components/page-transition";
 import { SearchOverlay } from "@/components/search-overlay";
 import { CustomCursor } from "@/components/custom-cursor";
+import { useTheme } from "@/components/theme-provider";
 
 const navigation = [
   { label: "Shop", href: "/shop" },
@@ -53,6 +56,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const [favoritesCount, setFavoritesCount] = useState(0);
+  const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
   const menuOverlayRef = useRef<HTMLDivElement>(null);
@@ -229,6 +233,20 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           animate="visible"
           variants={fadeDown}
         >
+          <MotionButton
+            type="button"
+            className="icon-btn theme-toggle"
+            data-cursor="THEME"
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            aria-pressed={theme === "light"}
+            title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            onClick={(event) => {
+              const bounds = event.currentTarget.getBoundingClientRect();
+              toggleTheme({ x: bounds.left + bounds.width / 2, y: bounds.top + bounds.height / 2 });
+            }}
+          >
+            {theme === "dark" ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}
+          </MotionButton>
           <MotionButton
             type="button"
             className="icon-btn"
