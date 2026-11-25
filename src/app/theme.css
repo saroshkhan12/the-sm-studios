@@ -7520,3 +7520,64 @@ html[data-theme="light"] .admin-shell .admin-side {
     border-bottom: 1px solid var(--admin-border);
   }
 }
+
+
+/* Homepage editorial sections — explicit light-theme text contrast.
+   These image-led panels intentionally stay dark in both themes; every text
+   layer is therefore kept on a readable ivory / warm-muted / gold palette. */
+html[data-theme="light"] .editorial-worlds,
+html[data-theme="light"] .editorial-manifesto {
+  color: #F5F0E8;
+  --ivory: #F5F0E8;
+  --ink: #F5F0E8;
+  --text-muted: #D0C9BF;
+  --stone: #D0C9BF;
+  --accent-gold: #D7B46C;
+  --line: rgba(245, 240, 232, 0.22);
+}
+
+html[data-theme="light"] .editorial-worlds .editorial-intro,
+html[data-theme="light"] .editorial-worlds .editorial-intro :is(h1,h2,h3,p,span,strong,em),
+html[data-theme="light"] .editorial-worlds .editorial-collection-copy,
+html[data-theme="light"] .editorial-worlds .editorial-collection-copy :is(h1,h2,h3,h4,p,span,strong,em,a),
+html[data-theme="light"] .editorial-manifesto .editorial-manifesto-copy,
+html[data-theme="light"] .editorial-manifesto .editorial-manifesto-copy :is(h1,h2,h3,h4,p,span,strong,a) {
+  color: #F5F0E8;
+}
+
+html[data-theme="light"] .editorial-worlds .editorial-intro > p,
+html[data-theme="light"] .editorial-worlds .editorial-collection-copy > p,
+html[data-theme="light"] .editorial-manifesto .editorial-manifesto-copy > p {
+  color: #D0C9BF;
+}
+
+html[data-theme="light"] .editorial-worlds .editorial-intro :is(em,.eyebrow),
+html[data-theme="light"] .editorial-worlds .editorial-collection-copy :is(em,.eyebrow),
+html[data-theme="light"] .editorial-manifesto .editorial-manifesto-copy :is(em,.eyebrow),
+html[data-theme="light"] .editorial-manifesto .manifesto-link {
+  color: #D7B46C;
+}
+
+html[data-theme="light"] .editorial-worlds .editorial-collection-copy .editorial-cta {
+  color: #F5F0E8;
+  border-color: rgba(215, 180, 108, 0.72);
+}
+
+html[data-theme="light"] .editorial-worlds .editorial-collection-card:focus-visible,
+html[data-theme="light"] .editorial-manifesto :is(a,button):focus-visible {
+  outline-color: #F0CC7A;
+}
+
+/* Keep text-bearing storefront sections tied to the active semantic palette.
+   This does not override intentionally cinematic dark artwork panels. */
+html[data-theme="light"] :is(.intro, .collections-section, .worlds-section, .page-shell, .page-hero, .about-content, .contact-page, .shop-page, .wishlist-page, .cart-page, .product-detail-shell) :is(h1,h2,h3,h4) {
+  color: #252421;
+}
+
+html[data-theme="light"] :is(.intro, .collections-section, .worlds-section, .page-shell, .page-hero, .about-content, .contact-page, .shop-page, .wishlist-page, .cart-page, .product-detail-shell) :is(p,li,small,.description,.muted) {
+  color: #625C55;
+}
+
+html[data-theme="light"] :is(.intro, .collections-section, .worlds-section, .page-shell, .page-hero, .about-content, .contact-page, .shop-page, .wishlist-page, .cart-page, .product-detail-shell) :is(h1,h2,h3,h4) em {
+  color: #80591F;
+}
