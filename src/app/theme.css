@@ -8375,3 +8375,18 @@ html[data-theme="light"] .admin-main :is(button, a, input, textarea, select):foc
     background: #FFFCF6;
   }
 }
+
+
+/* Light-theme support for the updated homepage collections introduction. */
+html[data-theme="light"] .home-collections-title h2 { color: #252421; }
+html[data-theme="light"] .home-collections-title h2 em { color: #704B20; }
+html[data-theme="light"] .home-collections-title .eyebrow { color: #704B20; }
+html[data-theme="light"] .home-collections-description p { color: #625C55; }
+html[data-theme="light"] .home-collections-description .text-link {
+  color: #704B20;
+  border-color: rgba(112, 75, 32, .62);
+}
+html[data-theme="light"] .home-collections-description .text-link:hover {
+  color: #523515;
+  border-color: #523515;
+}
