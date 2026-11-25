@@ -6263,8 +6263,11 @@ select:focus-visible {
 }
 
 
-/* Accessible theme system: component surfaces use semantic tokens rather than inversion. */
+/* Semantic theme tokens are the single source of truth.
+   Legacy brand variables below alias these tokens so existing components keep
+   their established styling while both themes stay in sync. */
 :root {
+  color-scheme: dark;
   --theme-bg: #111111;
   --theme-surface: #171717;
   --theme-surface-raised: #202020;
@@ -6273,30 +6276,48 @@ select:focus-visible {
   --theme-border: rgba(184, 179, 173, 0.2);
   --theme-accent: #C6A477;
   --theme-focus: #D7B46C;
+  --theme-beige: #202020;
+  --theme-clay: #C6A477;
+  --theme-wine: #762F3C;
+  --page-bg: var(--theme-bg);
+  --surface: var(--theme-surface);
+  --surface-raised: var(--theme-surface-raised);
+  --ivory: var(--theme-text);
+  --ink: var(--theme-text);
+  --text-muted: var(--theme-muted);
+  --stone: var(--theme-muted);
+  --line: var(--theme-border);
+  --accent-gold: var(--theme-accent);
+  --beige: var(--theme-beige);
+  --clay: var(--theme-clay);
+  --wine: var(--theme-wine);
 }
 
 html[data-theme="light"] {
   color-scheme: light;
-  --ivory: #252421;
-  --beige: #EEE7DC;
-  --ink: #252421;
-  --clay: #96533F;
-  --wine: #702F39;
-  --stone: #686159;
-  --line: rgba(37, 36, 33, 0.16);
-  --page-bg: #F7F4EE;
-  --surface: #FFFDFA;
-  --surface-raised: #EEE7DC;
-  --text-muted: #625C55;
-  --accent-gold: #89622C;
   --theme-bg: #F7F4EE;
   --theme-surface: #FFFDFA;
   --theme-surface-raised: #EEE7DC;
   --theme-text: #252421;
   --theme-muted: #625C55;
   --theme-border: rgba(37, 36, 33, 0.17);
-  --theme-accent: #89622C;
+  --theme-accent: #80591F;
   --theme-focus: #704B20;
+  --theme-beige: #EEE7DC;
+  --theme-clay: #96533F;
+  --theme-wine: #702F39;
+  --page-bg: var(--theme-bg);
+  --surface: var(--theme-surface);
+  --surface-raised: var(--theme-surface-raised);
+  --ivory: var(--theme-text);
+  --ink: var(--theme-text);
+  --text-muted: var(--theme-muted);
+  --stone: var(--theme-muted);
+  --line: var(--theme-border);
+  --accent-gold: var(--theme-accent);
+  --beige: var(--theme-beige);
+  --clay: var(--theme-clay);
+  --wine: var(--theme-wine);
 }
 
 html[data-theme="light"],
@@ -6306,13 +6327,12 @@ html[data-theme="light"] main {
   color: var(--theme-text);
 }
 
-/* Preserve the original cinematic dark panels in both themes. */
+/* Keep intentionally cinematic panels dark; editorial sections use their
+   dedicated warm-light surfaces and readable text rules below. */
 html[data-theme="light"] .hero,
 html[data-theme="light"] .featured-section,
 html[data-theme="light"] .newsletter,
 html[data-theme="light"] .footer,
-html[data-theme="light"] .editorial-worlds,
-html[data-theme="light"] .editorial-manifesto,
 html[data-theme="light"] .navigation-overlay,
 html[data-theme="light"] .mobile-nav {
   color: #F5F0E8;
@@ -6781,23 +6801,6 @@ html[data-theme="light"] .announcement span {
   color: #E7C99B;
 }
 
-
-/* Complete light palette coverage for every major site surface. The dark theme
-   remains the default; these rules only activate after an explicit light theme. */
-html[data-theme="light"] {
-  --ivory: #252421;
-  --beige: #EEE7DC;
-  --ink: #252421;
-  --clay: #96533F;
-  --wine: #702F39;
-  --stone: #625C55;
-  --line: rgba(37, 36, 33, 0.16);
-  --page-bg: #F7F4EE;
-  --surface: #FFFDFA;
-  --surface-raised: #EEE7DC;
-  --text-muted: #625C55;
-  --accent-gold: #80591F;
-}
 
 html[data-theme="light"] body,
 html[data-theme="light"] main,
