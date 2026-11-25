@@ -20,29 +20,36 @@ type ThemeContextValue = {
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 const STORAGE_KEY = "sm-studios-theme";
 
+function readSavedTheme(): Theme | null {
+  try {
+    const saved = window.localStorage.getItem(STORAGE_KEY);
+    return saved === "light" || saved === "dark" ? saved : null;
+  } catch {
+    return null;
+  }
+}
+
+function applyTheme(theme: Theme) {
+  const root = document.documentElement;
+  root.dataset.theme = theme;
+  root.style.colorScheme = theme;
+}
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
-    const root = document.documentElement;
     const media = window.matchMedia("(prefers-color-scheme: light)");
     const resolveTheme = () => {
-      const saved = window.localStorage.getItem(STORAGE_KEY);
-      const resolved: Theme =
-        saved === "light" || saved === "dark"
-          ? saved
-          : media.matches
-            ? "light"
-            : "dark";
-      root.dataset.theme = resolved;
-      root.style.colorScheme = resolved;
+      const resolved = readSavedTheme() ?? (media.matches ? "light" : "dark");
+      applyTheme(resolved);
       setTheme(resolved);
     };
 
     resolveTheme();
 
     const handleSystemChange = () => {
-      if (!window.localStorage.getItem(STORAGE_KEY)) resolveTheme();
+      if (!readSavedTheme()) resolveTheme();
     };
     const handleStorage = (event: StorageEvent) => {
       if (event.key === STORAGE_KEY || event.key === null) resolveTheme();
@@ -57,18 +64,24 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const toggleTheme = useCallback((origin?: { x: number; y: number }) => {
-    const current = document.documentElement.dataset.theme === "light" ? "light" : "dark";
+    const current: Theme =
+      document.documentElement.dataset.theme === "light" ? "light" : "dark";
     const next: Theme = current === "dark" ? "light" : "dark";
     const root = document.documentElement;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const apply = () => {
-      root.dataset.theme = next;
-      root.style.colorScheme = next;
-      window.localStorage.setItem(STORAGE_KEY, next);
+      applyTheme(next);
+      try {
+        window.localStorage.setItem(STORAGE_KEY, next);
+      } catch {
+        // Theme remains usable for this page even when storage is unavailable.
+      }
       setTheme(next);
     };
 
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const transitionDocument = document as Document & {
       startViewTransition?: (callback: () => void) => unknown;
     };
@@ -80,7 +93,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       const point = origin ?? { x: window.innerWidth - 32, y: 32 };
       root.style.setProperty("--theme-origin-x", `${point.x}px`);
       root.style.setProperty("--theme-origin-y", `${point.y}px`);
-      transitionDocument.startViewTransition(apply);
+      try {
+        transitionDocument.startViewTransition(apply);
+      } catch {
+        apply();
+      }
     } else {
       apply();
     }
