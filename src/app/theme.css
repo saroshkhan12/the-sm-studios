@@ -7705,3 +7705,139 @@ html[data-theme="light"] .page-shell > .page-hero a,
 html[data-theme="light"] .page-shell > .page-hero button {
   color: #704B20;
 }
+
+
+/* Complete the light palette across homepage sections that were still
+   hard-coded to charcoal/burgundy in home.css and globals.css. Artwork
+   photography and its white overlay captions remain untouched. */
+html[data-theme="light"] .home-collections-section {
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(128, 89, 31, 0.055), transparent 38%),
+    linear-gradient(135deg, #F7F4EE 0%, #EEE7DC 58%, #F4EFE7 100%);
+  color: #252421;
+}
+
+html[data-theme="light"] .home-collections-section .section-heading h2,
+html[data-theme="light"] .home-collections-section .collection-meta h3 {
+  color: #252421;
+}
+
+html[data-theme="light"] .home-collections-section .section-heading h2 em,
+html[data-theme="light"] .home-collections-section .section-heading .eyebrow,
+html[data-theme="light"] .home-collections-section .collection-meta .eyebrow {
+  color: #704B20;
+}
+
+html[data-theme="light"] .home-collections-section .section-heading .text-link {
+  color: #704B20;
+  border-color: rgba(112, 75, 32, 0.62);
+}
+
+html[data-theme="light"] .home-collections-section .section-heading .text-link:hover {
+  color: #523515;
+  border-color: #523515;
+}
+
+html[data-theme="light"] .home-collections-section .collection-card {
+  background: #FFFDFA;
+  color: #252421;
+  border-color: rgba(37, 36, 33, 0.18);
+  box-shadow: 0 8px 26px rgba(37, 36, 33, 0.055);
+}
+
+html[data-theme="light"] .home-collections-section .collection-card:hover {
+  background: #FFFFFF;
+  border-color: rgba(112, 75, 32, 0.48);
+  box-shadow: 0 14px 32px rgba(37, 36, 33, 0.09);
+}
+
+html[data-theme="light"] .home-collections-section .collection-meta h3 {
+  color: #252421;
+}
+
+html[data-theme="light"] .home-collections-section .collection-meta p {
+  color: #625C55;
+}
+
+html[data-theme="light"] .home-collections-section .art-caption {
+  color: #FFFFFF;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+}
+
+/* The newsletter is a content section, not an artwork overlay; it becomes
+   a warm light surface along with the rest of the page. */
+html[data-theme="light"] .newsletter {
+  background:
+    radial-gradient(ellipse at 88% 18%, rgba(128, 89, 31, 0.09), transparent 42%),
+    linear-gradient(125deg, #F7F4EE 0%, #EEE7DC 100%);
+  color: #252421;
+  border-top: 1px solid rgba(37, 36, 33, 0.12);
+  border-bottom: 1px solid rgba(37, 36, 33, 0.12);
+}
+
+html[data-theme="light"] .newsletter :is(h1, h2, h3, h4, strong, label) {
+  color: #252421;
+}
+
+html[data-theme="light"] .newsletter :is(h2 em, .eyebrow, .newsletter-form button) {
+  color: #704B20;
+}
+
+html[data-theme="light"] .newsletter :is(p, small) {
+  color: #625C55;
+}
+
+html[data-theme="light"] .newsletter-form > div {
+  border-bottom-color: rgba(37, 36, 33, 0.34);
+}
+
+html[data-theme="light"] .newsletter-form input,
+html[data-theme="light"] .newsletter input,
+html[data-theme="light"] .newsletter textarea {
+  color: #252421;
+  background: transparent;
+}
+
+html[data-theme="light"] .newsletter-form input::placeholder,
+html[data-theme="light"] .newsletter input::placeholder {
+  color: #625C55;
+  opacity: 1;
+}
+
+html[data-theme="light"] .newsletter-form small {
+  color: #625C55;
+}
+
+/* Footer links and secondary copy now follow the same readable light palette. */
+html[data-theme="light"] .footer,
+html[data-theme="light"] .footer.glass-footer {
+  background: #EEE7DC;
+  color: #252421;
+  border-top: 1px solid rgba(37, 36, 33, 0.16);
+}
+
+html[data-theme="light"] .footer :is(.footer-logo, .footer-top h4, strong) {
+  color: #252421;
+}
+
+html[data-theme="light"] .footer .footer-logo span {
+  color: #704B20;
+}
+
+html[data-theme="light"] .footer .footer-top p,
+html[data-theme="light"] .footer .footer-bottom {
+  color: #625C55;
+}
+
+html[data-theme="light"] .footer .footer-top > div > a:not(.footer-logo),
+html[data-theme="light"] .footer a:not(.footer-logo) {
+  color: #4D4942;
+}
+
+html[data-theme="light"] .footer a:hover {
+  color: #704B20;
+}
+
+html[data-theme="light"] .footer .footer-bottom {
+  border-top-color: rgba(37, 36, 33, 0.18);
+}
