@@ -6,6 +6,7 @@ on:
     branches:
       - main
       - admin-registration-approval
+      - feature/accessible-theme-switch
   pull_request:
     branches:
       - main

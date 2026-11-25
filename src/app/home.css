@@ -270,3 +270,110 @@
   .editorial-manifesto-inner { gap: 28px; }
   .editorial-manifesto-copy h2 { font-size: clamp(42px, 10vw, 53px); }
 }
+
+
+/* Homepage collections — scoped layout aligned with Wishlist page-shell/product-grid */
+.home-collections-section {
+  padding: 58px 0 76px;
+  background: transparent;
+  color: var(--ink);
+}
+.home-collections-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, .62fr);
+  align-items: end;
+  gap: clamp(24px, 4vw, 56px);
+  margin: 0 0 28px;
+}
+.home-collections-title { min-width: 0; }
+.home-collections-title .eyebrow { margin-bottom: 10px; }
+.home-collections-title h2 {
+  margin: 0;
+  font: 400 clamp(42px, 5vw, 66px)/.96 "Cormorant Garamond", Georgia, serif;
+  letter-spacing: -.025em;
+}
+.home-collections-title h2 em { font-weight: 400; }
+.home-collections-description {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: 390px;
+  padding-bottom: 4px;
+}
+.home-collections-description p {
+  max-width: 390px;
+  margin: 0;
+  color: var(--muted, #716b63);
+  font-size: 11px;
+  line-height: 1.8;
+}
+.home-collections-description .text-link { display: inline-flex; align-items: center; gap: 9px; margin: 0; }
+.home-collection-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  gap: 20px;
+}
+.home-collection-grid > .collection-reveal,
+.home-collection-grid .collection-card { width: 100%; min-width: 0; }
+.home-collections-section .collection-card,
+.home-collections-section .collection-card.card-1,
+.home-collections-section .collection-card.card-4 {
+  display: flex;
+  height: 100%;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  transform: none;
+  text-decoration: none;
+}
+.home-collections-section .collection-card:hover { transform: translateY(-3px); }
+.home-collection-grid .art-placeholder {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  transform: none;
+}
+.home-collections-section .collection-card:hover .art-placeholder { transform: none; }
+.home-collection-grid .collection-art-image { object-fit: cover; transition: transform .65s cubic-bezier(.2,.7,.2,1); }
+.home-collection-grid .collection-card:hover .collection-art-image { transform: scale(1.045); }
+.home-collection-grid .art-caption { left: 14px; bottom: 14px; font-size: 7px; letter-spacing: 1.35px; }
+.home-collection-grid .collection-meta { flex: 1; align-items: flex-start; padding: 14px 0 0; }
+.home-collection-grid .collection-meta .eyebrow { font-size: 7px; letter-spacing: 1.4px; }
+.home-collection-grid .collection-meta h3 { margin: 6px 0 4px; font-size: clamp(22px, 2.2vw, 29px); line-height: 1.02; }
+.home-collection-grid .collection-meta p { margin: 0; font-size: 10px; line-height: 1.6; }
+.home-collections-section .collection-card:focus-visible { outline: 2px solid var(--clay); outline-offset: 4px; }
+@media (max-width: 900px) {
+  .home-collections-section { padding: 52px 0 68px; }
+  .home-collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px 16px; }
+  .home-collection-grid .collection-meta h3 { font-size: clamp(25px, 3.2vw, 34px); }
+}
+@media (max-width: 650px) {
+  .home-collections-section { padding: 43px 0 56px; }
+  .home-collections-intro { grid-template-columns: minmax(0, 1fr); gap: 12px; margin-bottom: 22px; }
+  .home-collections-title .eyebrow { margin-bottom: 8px; }
+  .home-collections-title h2 { font-size: clamp(39px, 9vw, 49px); line-height: .98; }
+  .home-collections-description { max-width: 100%; gap: 10px; }
+  .home-collections-description p { font-size: 10px; line-height: 1.7; }
+  .home-collections-description .text-link { font-size: 8px; }
+  .home-collection-grid { gap: 22px 12px; }
+  .home-collection-grid .collection-meta { padding-top: 11px; }
+  .home-collection-grid .collection-meta .eyebrow { font-size: 6px; letter-spacing: 1.1px; }
+  .home-collection-grid .collection-meta h3 { margin: 6px 0 4px; font-size: clamp(20px, 5.2vw, 25px); }
+  .home-collection-grid .collection-meta p { font-size: 9px; line-height: 1.5; }
+  .home-collection-grid .art-caption { left: 10px; bottom: 10px; font-size: 6px; }
+}
+@media (max-width: 360px) {
+  .home-collection-grid { gap: 18px 9px; }
+  .home-collection-grid .collection-meta h3 { font-size: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-collections-section .collection-card,
+  .home-collection-grid .collection-art-image { transition: none !important; }
+  .home-collections-section .collection-card:hover,
+  .home-collection-grid .collection-card:hover .collection-art-image { transform: none; }
+}
