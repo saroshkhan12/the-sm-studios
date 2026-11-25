@@ -6648,3 +6648,135 @@ html[data-theme="light"] .theme-toggle:hover {
     min-width: 36px;
   }
 }
+
+
+/* Light-theme admin workspace and shared interactive surfaces. */
+html[data-theme="light"] .admin-shell,
+html[data-theme="light"] .admin-main,
+html[data-theme="light"] .admin-section-content,
+html[data-theme="light"] .admin-account-view,
+html[data-theme="light"] .admin-overview-view,
+html[data-theme="light"] .admin-etsy-view {
+  background: #F7F4EE;
+  color: #252421;
+}
+
+html[data-theme="light"] .admin-side {
+  background: #EEE7DC;
+  color: #252421;
+  border-color: rgba(37, 36, 33, 0.16);
+}
+
+html[data-theme="light"] .admin-side-brand,
+html[data-theme="light"] .admin-side-brand strong,
+html[data-theme="light"] .admin-side-user strong,
+html[data-theme="light"] .admin-side-nav button,
+html[data-theme="light"] .admin-logout-button,
+html[data-theme="light"] .admin-main h1,
+html[data-theme="light"] .admin-main h2,
+html[data-theme="light"] .admin-main h3,
+html[data-theme="light"] .admin-current-section,
+html[data-theme="light"] .admin-intro h1,
+html[data-theme="light"] .admin-section-heading h2,
+html[data-theme="light"] .admin-profile-identity h3,
+html[data-theme="light"] .admin-profile-facts strong,
+html[data-theme="light"] .admin-card-heading-row h3 {
+  color: #252421;
+}
+
+html[data-theme="light"] .admin-side > span,
+html[data-theme="light"] .admin-side a,
+html[data-theme="light"] .admin-side-brand > span,
+html[data-theme="light"] .admin-side-user small,
+html[data-theme="light"] .admin-main-topline .eyebrow,
+html[data-theme="light"] .admin-intro > p:not(.admin-alert),
+html[data-theme="light"] .admin-section-heading p,
+html[data-theme="light"] .admin-profile-identity p,
+html[data-theme="light"] .admin-profile-facts span,
+html[data-theme="light"] .admin-form-help,
+html[data-theme="light"] .admin-quick-actions p,
+html[data-theme="light"] .admin-avatar-card p,
+html[data-theme="light"] .admin-password-card p {
+  color: #625C55;
+}
+
+html[data-theme="light"] .admin-side-nav button:hover,
+html[data-theme="light"] .admin-side-nav button.admin-active,
+html[data-theme="light"] .admin-side a.admin-active {
+  background: rgba(148, 109, 53, 0.12);
+  color: #704B20;
+}
+
+html[data-theme="light"] .admin-profile-card,
+html[data-theme="light"] .admin-settings-list,
+html[data-theme="light"] .admin-activity-list,
+html[data-theme="light"] .admin-avatar-card,
+html[data-theme="light"] .admin-password-card,
+html[data-theme="light"] .admin-sessions-card,
+html[data-theme="light"] .admin-stat-card,
+html[data-theme="light"] .admin-quick-actions .admin-card {
+  background: #FFFDFA;
+  color: #252421;
+  border-color: rgba(37, 36, 33, 0.16);
+}
+
+html[data-theme="light"] .admin-profile-form input,
+html[data-theme="light"] .admin-password-field input,
+html[data-theme="light"] .sync-secret-label input,
+html[data-theme="light"] .admin-card input[type="password"] {
+  background: #FFFFFF;
+  color: #252421;
+  border-color: rgba(37, 36, 33, 0.24);
+}
+
+html[data-theme="light"] .admin-table > div > div,
+html[data-theme="light"] .admin-profile-facts > div,
+html[data-theme="light"] .admin-session-list > div,
+html[data-theme="light"] .admin-activity-list > div {
+  border-color: rgba(37, 36, 33, 0.14);
+}
+
+html[data-theme="light"] .admin-alert,
+html[data-theme="light"] .admin-sidebar-error,
+html[data-theme="light"] .admin-warning,
+html[data-theme="light"] .form-note,
+html[data-theme="light"] .storage-error {
+  color: #702F39;
+}
+
+html[data-theme="light"] .newsletter-form input {
+  background: transparent;
+  color: #F5F0E8;
+}
+
+html[data-theme="light"] .newsletter-form input::placeholder {
+  color: #E4D9D1;
+}
+
+html[data-theme="light"] .glass-surface,
+html[data-theme="light"] .glass-modal,
+html[data-theme="light"] .glass-dropdown,
+html[data-theme="light"] .glass-popover {
+  background-color: rgba(255, 253, 250, 0.97);
+  color: #252421;
+  border-color: rgba(37, 36, 33, 0.16);
+}
+
+html[data-theme="light"] .glass-surface :is(h1, h2, h3, h4, p, label, a, button, span) {
+  color: inherit;
+}
+
+html[data-theme="light"] .glass-surface :is(input, textarea, select) {
+  background: #FFFFFF;
+  color: #252421;
+  border-color: rgba(37, 36, 33, 0.24);
+}
+
+html[data-theme="light"] .announcement {
+  background: #702F39;
+  color: #F5F0E8;
+}
+
+html[data-theme="light"] .announcement span {
+  color: #E7C99B;
+}
