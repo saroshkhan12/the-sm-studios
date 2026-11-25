@@ -6261,3 +6261,390 @@ select:focus-visible {
   .contact-page .page-hero { padding-top: 75px; padding-bottom: 48px; }
   .contact-page .contact-form-premium { padding: 38px 0; gap: 27px; }
 }
+
+
+/* Accessible theme system: component surfaces use semantic tokens rather than inversion. */
+:root {
+  --theme-bg: #111111;
+  --theme-surface: #171717;
+  --theme-surface-raised: #202020;
+  --theme-text: #F5F0E8;
+  --theme-muted: #B8B3AD;
+  --theme-border: rgba(184, 179, 173, 0.2);
+  --theme-accent: #C6A477;
+  --theme-focus: #D7B46C;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+  --ivory: #252421;
+  --beige: #EEE7DC;
+  --ink: #252421;
+  --clay: #96533F;
+  --wine: #702F39;
+  --stone: #686159;
+  --line: rgba(37, 36, 33, 0.16);
+  --page-bg: #F7F4EE;
+  --surface: #FFFDFA;
+  --surface-raised: #EEE7DC;
+  --text-muted: #625C55;
+  --accent-gold: #946D35;
+  --theme-bg: #F7F4EE;
+  --theme-surface: #FFFDFA;
+  --theme-surface-raised: #EEE7DC;
+  --theme-text: #252421;
+  --theme-muted: #625C55;
+  --theme-border: rgba(37, 36, 33, 0.17);
+  --theme-accent: #946D35;
+  --theme-focus: #704B20;
+}
+
+html[data-theme="light"],
+html[data-theme="light"] body,
+html[data-theme="light"] main {
+  background: var(--theme-bg);
+  color: var(--theme-text);
+}
+
+/* Preserve the original cinematic dark panels in both themes. */
+html[data-theme="light"] .hero,
+html[data-theme="light"] .featured-section,
+html[data-theme="light"] .newsletter,
+html[data-theme="light"] .footer,
+html[data-theme="light"] .editorial-worlds,
+html[data-theme="light"] .editorial-manifesto,
+html[data-theme="light"] .navigation-overlay,
+html[data-theme="light"] .mobile-nav {
+  color: #F5F0E8;
+  --ivory: #F5F0E8;
+  --text-muted: #B8B3AD;
+  --accent-gold: #C6A477;
+  --line: rgba(184, 179, 173, 0.2);
+}
+
+html[data-theme="light"] .header {
+  color: var(--theme-text);
+  background: rgba(247, 244, 238, 0.94);
+  border-bottom-color: var(--theme-border);
+}
+
+html[data-theme="light"] .wordmark-type,
+html[data-theme="light"] .header .icon-btn,
+html[data-theme="light"] .nav a,
+html[data-theme="light"] .header-actions a {
+  color: var(--theme-text);
+}
+
+html[data-theme="light"] .wordmark-type small,
+html[data-theme="light"] .nav a:not(.active),
+html[data-theme="light"] .header-actions a {
+  color: var(--theme-muted);
+}
+
+html[data-theme="light"] .mobile-nav,
+html[data-theme="light"] .mobile-navigation,
+html[data-theme="light"] .navigation-overlay {
+  background: #FFFDFA;
+  color: #252421;
+  border-color: var(--theme-border);
+}
+
+html[data-theme="light"] .intro,
+html[data-theme="light"] .collections-section,
+html[data-theme="light"] .worlds-section,
+html[data-theme="light"] .page-shell,
+html[data-theme="light"] .page-hero,
+html[data-theme="light"] .about-content,
+html[data-theme="light"] .contact-page,
+html[data-theme="light"] .shop-page,
+html[data-theme="light"] .wishlist-page,
+html[data-theme="light"] .cart-page,
+html[data-theme="light"] .product-detail-shell {
+  background: var(--theme-bg);
+  color: var(--theme-text);
+}
+
+html[data-theme="light"] .intro p,
+html[data-theme="light"] .world-copy p,
+html[data-theme="light"] .page-hero p,
+html[data-theme="light"] .empty-catalog p,
+html[data-theme="light"] .collection-meta p,
+html[data-theme="light"] .product-info p,
+html[data-theme="light"] .product-description p,
+html[data-theme="light"] .product-attributes p,
+html[data-theme="light"] .product-availability,
+html[data-theme="light"] .product-facts span,
+html[data-theme="light"] .cart-line p,
+html[data-theme="light"] .selection-footer p,
+html[data-theme="light"] .about-content p,
+html[data-theme="light"] .admin-card p,
+html[data-theme="light"] .admin-table span,
+html[data-theme="light"] .catalog-note p {
+  color: var(--theme-muted);
+}
+
+html[data-theme="light"] .intro h2,
+html[data-theme="light"] .section-heading h2,
+html[data-theme="light"] .manifesto h2,
+html[data-theme="light"] .about-content h2,
+html[data-theme="light"] .page-hero h1,
+html[data-theme="light"] .collection-meta h3,
+html[data-theme="light"] .product-info h3,
+html[data-theme="light"] .product-info strong,
+html[data-theme="light"] .product-detail-copy h1,
+html[data-theme="light"] .product-detail-price,
+html[data-theme="light"] .product-description h2,
+html[data-theme="light"] .product-attributes h2,
+html[data-theme="light"] .product-facts strong,
+html[data-theme="light"] .shop-toolbar,
+html[data-theme="light"] .empty-catalog h2 {
+  color: var(--theme-text);
+}
+
+html[data-theme="light"] .collection-meta h3 em,
+html[data-theme="light"] .intro h2 em,
+html[data-theme="light"] .section-heading h2 em,
+html[data-theme="light"] .page-hero h1 em,
+html[data-theme="light"] .about-content h2 em,
+html[data-theme="light"] .empty-catalog h2 em,
+html[data-theme="light"] .empty-catalog > span {
+  color: var(--theme-accent);
+}
+
+html[data-theme="light"] .collection-card .art-placeholder,
+html[data-theme="light"] .product-card .product-image,
+html[data-theme="light"] .gallery-main,
+html[data-theme="light"] .gallery-thumbnail,
+html[data-theme="light"] .selection-image,
+html[data-theme="light"] .product-image {
+  background: #EEE7DC;
+  color: #704B35;
+}
+
+html[data-theme="light"] .product-card {
+  color: var(--theme-text);
+}
+
+html[data-theme="light"] .product-card .wishlist-btn,
+html[data-theme="light"] .product-card .type-pill {
+  background: rgba(255, 253, 250, 0.96);
+  color: #252421;
+  border: 1px solid var(--theme-border);
+}
+
+html[data-theme="light"] .product-card .image-open {
+  background: rgba(255, 253, 250, 0.96) !important;
+  color: #252421 !important;
+}
+
+html[data-theme="light"] .shop-toolbar,
+html[data-theme="light"] .filter-row button,
+html[data-theme="light"] .clear-search,
+html[data-theme="light"] .search-field,
+html[data-theme="light"] .search-field input,
+html[data-theme="light"] .search-field select,
+html[data-theme="light"] .shop-sort select {
+  color: var(--theme-text);
+}
+
+html[data-theme="light"] .search-field,
+html[data-theme="light"] .page-hero,
+html[data-theme="light"] .catalog-note,
+html[data-theme="light"] .product-detail-copy,
+html[data-theme="light"] .cart-line,
+html[data-theme="light"] .selection-line {
+  border-color: var(--theme-border);
+}
+
+html[data-theme="light"] .filter-row button.filter-active {
+  color: #702F39;
+  border-bottom-color: #702F39;
+}
+
+html[data-theme="light"] input,
+html[data-theme="light"] textarea,
+html[data-theme="light"] select,
+html[data-theme="light"] .contact-form input,
+html[data-theme="light"] .contact-form textarea,
+html[data-theme="light"] .newsletter-form input {
+  color: #252421;
+}
+
+html[data-theme="light"] input,
+html[data-theme="light"] textarea,
+html[data-theme="light"] select {
+  background-color: #FFFDFA;
+  border-color: rgba(37, 36, 33, 0.24);
+}
+
+html[data-theme="light"] input::placeholder,
+html[data-theme="light"] textarea::placeholder {
+  color: #6B655D;
+  opacity: 1;
+}
+
+html[data-theme="light"] .newsletter input,
+html[data-theme="light"] .newsletter textarea {
+  color: #F5F0E8;
+}
+
+html[data-theme="light"] .newsletter input::placeholder {
+  color: #E4D9D1;
+}
+
+html[data-theme="light"] .shop-sort select option {
+  background: #FFFDFA;
+  color: #252421;
+}
+
+html[data-theme="light"] .admin-card,
+html[data-theme="light"] .admin-panel,
+html[data-theme="light"] .admin-stat,
+html[data-theme="light"] .admin-table,
+html[data-theme="light"] .admin-login,
+html[data-theme="light"] .admin-content,
+html[data-theme="light"] .admin-dashboard,
+html[data-theme="light"] .admin-toolbar,
+html[data-theme="light"] .admin-modal,
+html[data-theme="light"] .admin-card.glass-surface,
+html[data-theme="light"] .admin-panel.glass-surface {
+  background: #FFFDFA;
+  color: #252421;
+  border-color: var(--theme-border);
+}
+
+html[data-theme="light"] .admin-card h1,
+html[data-theme="light"] .admin-card h2,
+html[data-theme="light"] .admin-card h3,
+html[data-theme="light"] .admin-panel h2,
+html[data-theme="light"] .admin-table,
+html[data-theme="light"] .admin-dashboard label {
+  color: #252421;
+}
+
+html[data-theme="light"] .admin-card p,
+html[data-theme="light"] .admin-table span {
+  color: #625C55;
+}
+
+html[data-theme="light"] .search-overlay,
+html[data-theme="light"] .search-overlay.glass-surface,
+html[data-theme="light"] .modal,
+html[data-theme="light"] .dialog,
+html[data-theme="light"] .toast,
+html[data-theme="light"] .notification,
+html[data-theme="light"] .dropdown-menu,
+html[data-theme="light"] .filter-menu {
+  background: #FFFDFA;
+  color: #252421;
+  border-color: var(--theme-border);
+}
+
+html[data-theme="light"] .search-overlay input,
+html[data-theme="light"] .search-overlay button,
+html[data-theme="light"] .search-overlay a,
+html[data-theme="light"] .dropdown-menu a,
+html[data-theme="light"] .dropdown-menu button {
+  color: #252421;
+}
+
+html[data-theme="light"] .btn-light {
+  background: #C6A477;
+  color: #171412;
+}
+
+html[data-theme="light"] .btn-dark {
+  background: #702F39;
+  color: #FFFFFF;
+}
+
+html[data-theme="light"] .btn-outline-dark {
+  border-color: #702F39;
+  color: #702F39;
+}
+
+html[data-theme="light"] .icon-btn,
+html[data-theme="light"] .theme-toggle {
+  color: var(--theme-text);
+}
+
+.theme-toggle {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ivory);
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.theme-toggle:hover {
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+  background: rgba(198, 164, 119, 0.09);
+}
+
+.theme-toggle:active {
+  transform: scale(0.94);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--theme-focus);
+  outline-offset: 3px;
+}
+
+html[data-theme="light"] .theme-toggle {
+  color: #252421;
+  border-color: rgba(37, 36, 33, 0.22);
+}
+
+html[data-theme="light"] .theme-toggle:hover {
+  color: #704B20;
+  background: rgba(148, 109, 53, 0.1);
+  border-color: #946D35;
+}
+
+/* Circular reveal is progressive enhancement; theme changes still work without View Transitions. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+  clip-path: circle(0 at var(--theme-origin-x, 50%) var(--theme-origin-y, 50%));
+  animation: theme-circle-reveal 520ms ease-out forwards;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+@keyframes theme-circle-reveal {
+  to {
+    clip-path: circle(150vmax at var(--theme-origin-x, 50%) var(--theme-origin-y, 50%));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(root) {
+    animation-duration: 1ms;
+  }
+  .theme-toggle {
+    transition: none;
+  }
+}
+
+@media (max-width: 650px) {
+  .theme-toggle {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+  }
+}
