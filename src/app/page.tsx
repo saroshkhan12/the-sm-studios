@@ -140,15 +140,18 @@ export default async function Home() {
         </div>
       </section>
 
-<section className="collections-section home-collections-section section-wrap">
-        <ScrollReveal className="section-heading">
-          <div>
-            <span className="eyebrow">OUR COLLECTIONS</span>
-            <h2>Explore Our <em>Collections</em></h2>
+<section className="collections-section home-collections-section section-wrap" aria-labelledby="home-collections-title">
+        <ScrollReveal className="home-collections-intro">
+          <div className="home-collections-title">
+            <span className="eyebrow">THE WORLD OF THE STUDIO</span>
+            <h2 id="home-collections-title">Explore our <em>collections.</em></h2>
           </div>
-          <Link className="text-link" href="/collections">
-            VIEW ALL COLLECTIONS <ArrowUpRight size={15} />
-          </Link>
+          <div className="home-collections-description">
+            <p>Six distinct creative worlds, brought together by art with meaning. Discover pieces shaped by culture, identity and imagination.</p>
+            <Link className="text-link" href="/collections">
+              VIEW ALL COLLECTIONS <ArrowUpRight size={15} />
+            </Link>
+          </div>
         </ScrollReveal>
         <StaggerReveal className="collection-grid home-collection-grid">
           {featuredCollections.map((item, index) => (
