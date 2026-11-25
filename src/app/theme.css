@@ -7664,3 +7664,44 @@ html[data-theme="light"] .editorial-worlds .editorial-collection-card:focus-visi
 html[data-theme="light"] .editorial-manifesto :is(a, button):focus-visible {
   outline-color: #704B20;
 }
+
+
+/* Collections and interior-page hero: the actual SIX WORLDS heading lives
+   inside .page-shell > .page-hero (not the editorial-worlds home component).
+   Keep every text layer explicitly readable on the warm light surface. */
+html[data-theme="light"] .page-shell > .page-hero {
+  background: #EEE7DC;
+  color: #252421;
+  border-color: rgba(37, 36, 33, 0.18);
+}
+
+html[data-theme="light"] .page-shell > .page-hero > .eyebrow,
+html[data-theme="light"] .page-shell > .page-hero .eyebrow {
+  color: #704B20;
+  opacity: 1;
+}
+
+html[data-theme="light"] .page-shell > .page-hero h1,
+html[data-theme="light"] .page-shell > .page-hero h1 :not(em) {
+  color: #252421;
+  opacity: 1;
+}
+
+html[data-theme="light"] .page-shell > .page-hero h1 em {
+  color: #704B20;
+  opacity: 1;
+}
+
+html[data-theme="light"] .page-shell > .page-hero > p {
+  color: #625C55;
+  opacity: 1;
+}
+
+html[data-theme="light"] .page-shell > .page-hero :is(h1, p, .eyebrow) {
+  text-shadow: none;
+}
+
+html[data-theme="light"] .page-shell > .page-hero a,
+html[data-theme="light"] .page-shell > .page-hero button {
+  color: #704B20;
+}
