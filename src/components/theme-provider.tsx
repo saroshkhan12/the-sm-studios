@@ -47,14 +47,18 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       setTheme(next);
     };
 
+    const transitionDocument = document as Document & {
+      startViewTransition?: (callback: () => void) => unknown;
+    };
+
     if (
       !reducedMotion &&
-      typeof document.startViewTransition === "function"
+      typeof transitionDocument.startViewTransition === "function"
     ) {
       const point = origin ?? { x: window.innerWidth - 32, y: 32 };
       root.style.setProperty("--theme-origin-x", `${point.x}px`);
       root.style.setProperty("--theme-origin-y", `${point.y}px`);
-      document.startViewTransition(apply);
+      transitionDocument.startViewTransition(apply);
     } else {
       apply();
     }
