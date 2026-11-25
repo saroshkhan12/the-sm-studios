@@ -7574,15 +7574,15 @@ html[data-theme="light"] .editorial-manifesto :is(a,button):focus-visible {
 /* Keep text-bearing storefront sections tied to the active semantic palette.
    This does not override intentionally cinematic dark artwork panels. */
 html[data-theme="light"] :is(.intro, .collections-section, .worlds-section, .page-shell, .page-hero, .about-content, .contact-page, .shop-page, .wishlist-page, .cart-page, .product-detail-shell) :is(h1,h2,h3,h4) {
-  color: #252421;
+  color: var(--theme-text);
 }
 
 html[data-theme="light"] :is(.intro, .collections-section, .worlds-section, .page-shell, .page-hero, .about-content, .contact-page, .shop-page, .wishlist-page, .cart-page, .product-detail-shell) :is(p,li,small,.description,.muted) {
-  color: #625C55;
+  color: var(--theme-muted);
 }
 
 html[data-theme="light"] :is(.intro, .collections-section, .worlds-section, .page-shell, .page-hero, .about-content, .contact-page, .shop-page, .wishlist-page, .cart-page, .product-detail-shell) :is(h1,h2,h3,h4) em {
-  color: #80591F;
+  color: var(--theme-accent);
 }
 
 
@@ -7843,4 +7843,12 @@ html[data-theme="light"] .footer a:hover {
 
 html[data-theme="light"] .footer .footer-bottom {
   border-top-color: rgba(37, 36, 33, 0.18);
+}
+
+
+/* Consistent keyboard visibility across both themes. Component-specific focus
+   treatments may add emphasis, but every interactive control keeps a clear ring. */
+:where(a, button, input, textarea, select, summary, [role="button"], [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid var(--theme-focus);
+  outline-offset: 3px;
 }
