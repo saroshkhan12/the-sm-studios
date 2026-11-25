@@ -24,14 +24,36 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
-    const current = document.documentElement.dataset.theme;
-    const resolved: Theme =
-      current === "light" || current === "dark"
-        ? current
-        : window.matchMedia("(prefers-color-scheme: light)").matches
-          ? "light"
-          : "dark";
-    setTheme(resolved);
+    const root = document.documentElement;
+    const media = window.matchMedia("(prefers-color-scheme: light)");
+    const resolveTheme = () => {
+      const saved = window.localStorage.getItem(STORAGE_KEY);
+      const resolved: Theme =
+        saved === "light" || saved === "dark"
+          ? saved
+          : media.matches
+            ? "light"
+            : "dark";
+      root.dataset.theme = resolved;
+      root.style.colorScheme = resolved;
+      setTheme(resolved);
+    };
+
+    resolveTheme();
+
+    const handleSystemChange = () => {
+      if (!window.localStorage.getItem(STORAGE_KEY)) resolveTheme();
+    };
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === STORAGE_KEY || event.key === null) resolveTheme();
+    };
+
+    media.addEventListener("change", handleSystemChange);
+    window.addEventListener("storage", handleStorage);
+    return () => {
+      media.removeEventListener("change", handleSystemChange);
+      window.removeEventListener("storage", handleStorage);
+    };
   }, []);
 
   const toggleTheme = useCallback((origin?: { x: number; y: number }) => {
