@@ -7159,3 +7159,293 @@ html[data-theme="light"] .results-count {
   background: rgba(128,89,31,.09);
   color: #252421;
 }
+
+
+/* Our Story page — complete semantic light-theme treatment.
+   The cinematic artwork panels intentionally remain dark for image contrast. */
+html[data-theme="light"] .our-story-page {
+  --ivory: #252421;
+  --text-muted: #625C55;
+  --accent-gold: #80591F;
+  --line: rgba(37, 36, 33, 0.16);
+  --page-bg: #F7F4EE;
+  background: #F7F4EE;
+  color: #252421;
+}
+
+html[data-theme="light"] .our-story-page .story-hero {
+  border-bottom-color: rgba(37, 36, 33, 0.12);
+  background:
+    radial-gradient(ellipse at 82% 48%, rgba(112, 47, 57, 0.09), transparent 46%),
+    linear-gradient(135deg, #F7F4EE 0%, #F1EBE1 100%);
+}
+
+html[data-theme="light"] .our-story-page .story-hero::before {
+  border-color: rgba(128, 89, 31, 0.13);
+}
+
+html[data-theme="light"] .our-story-page .story-hero-copy h1,
+html[data-theme="light"] .our-story-page .story-philosophy-copy h2,
+html[data-theme="light"] .our-story-page .story-section-heading h2,
+html[data-theme="light"] .our-story-page .story-approach-copy h2,
+html[data-theme="light"] .our-story-page .story-values-heading h2 {
+  color: #252421;
+}
+
+html[data-theme="light"] .our-story-page .story-hero-copy > p,
+html[data-theme="light"] .our-story-page .story-philosophy-copy > p:not(.story-philosophy-lead),
+html[data-theme="light"] .our-story-page .story-section-heading > p,
+html[data-theme="light"] .our-story-page .story-approach-copy p,
+html[data-theme="light"] .our-story-page .story-theme-meta p,
+html[data-theme="light"] .our-story-page .story-value p {
+  color: #625C55;
+}
+
+html[data-theme="light"] .our-story-page .story-hero-copy h1 em,
+html[data-theme="light"] .our-story-page .story-philosophy-copy h2 em,
+html[data-theme="light"] .our-story-page .story-section-heading h2 em,
+html[data-theme="light"] .our-story-page .story-approach-copy h2 em,
+html[data-theme="light"] .our-story-page .story-values-heading h2 em,
+html[data-theme="light"] .our-story-page .story-theme-meta h3 em {
+  color: #80591F;
+}
+
+html[data-theme="light"] .our-story-page .story-hero-copy > .eyebrow,
+html[data-theme="light"] .our-story-page .story-philosophy-copy > .eyebrow,
+html[data-theme="light"] .our-story-page .story-section-heading .eyebrow,
+html[data-theme="light"] .our-story-page .story-approach-copy > .eyebrow,
+html[data-theme="light"] .our-story-page .story-values-heading > .eyebrow,
+html[data-theme="light"] .our-story-page .story-theme-number,
+html[data-theme="light"] .our-story-page .story-principles span,
+html[data-theme="light"] .our-story-page .story-principles i,
+html[data-theme="light"] .our-story-page .story-theme-meta h3 em {
+  color: #80591F;
+}
+
+html[data-theme="light"] .our-story-page .story-primary-link {
+  border-color: #80591F;
+  background: #80591F;
+  color: #FFFFFF;
+}
+
+html[data-theme="light"] .our-story-page .story-primary-link:hover {
+  background: transparent;
+  color: #704B20;
+}
+
+html[data-theme="light"] .our-story-page .story-hero-index,
+html[data-theme="light"] .our-story-page .story-hero-side-note,
+html[data-theme="light"] .our-story-page .story-scroll-cue {
+  color: #625C55;
+}
+
+html[data-theme="light"] .our-story-page .story-nav-wrap {
+  border-bottom-color: rgba(37, 36, 33, 0.14);
+  background: rgba(247, 244, 238, 0.94);
+}
+
+html[data-theme="light"] .our-story-page .story-navigation a,
+html[data-theme="light"] .our-story-page .story-navigation a.active,
+html[data-theme="light"] .our-story-page .story-navigation a:hover {
+  color: #625C55;
+}
+
+html[data-theme="light"] .our-story-page .story-navigation a.active {
+  border-bottom-color: #80591F;
+  color: #252421;
+}
+
+html[data-theme="light"] .our-story-page .story-navigation a.active span {
+  color: #80591F;
+}
+
+html[data-theme="light"] .our-story-page .story-philosophy-lead,
+html[data-theme="light"] .our-story-page .story-principles strong,
+html[data-theme="light"] .our-story-page .story-theme-meta h3,
+html[data-theme="light"] .our-story-page .story-value h3 {
+  color: #252421;
+}
+
+html[data-theme="light"] .our-story-page .story-principles {
+  border-top-color: rgba(37, 36, 33, 0.17);
+}
+
+html[data-theme="light"] .our-story-page .story-principles > div {
+  border-bottom-color: rgba(37, 36, 33, 0.17);
+}
+
+html[data-theme="light"] .our-story-page .story-philosophy-image,
+html[data-theme="light"] .our-story-page .story-approach-image,
+html[data-theme="light"] .our-story-page .story-theme-art {
+  border-color: rgba(37, 36, 33, 0.16);
+  background:
+    radial-gradient(circle at 50% 42%, rgba(128, 89, 31, 0.09), transparent 58%),
+    #EEE7DC;
+}
+
+html[data-theme="light"] .our-story-page .story-artwork-caption {
+  color: #625C55;
+}
+
+html[data-theme="light"] .our-story-page .story-artwork-caption span,
+html[data-theme="light"] .our-story-page .story-theme-meta .eyebrow {
+  color: #80591F;
+}
+
+html[data-theme="light"] .our-story-page .story-themes-section,
+html[data-theme="light"] .our-story-page .story-values-section {
+  border-color: rgba(37, 36, 33, 0.12);
+  background: #EEE7DC;
+}
+
+html[data-theme="light"] .our-story-page .story-theme-open {
+  border-color: rgba(128, 89, 31, 0.6);
+  background: rgba(255, 253, 250, 0.94);
+  color: #704B20;
+}
+
+html[data-theme="light"] .our-story-page .story-theme-open:hover {
+  background: #80591F;
+  color: #FFFFFF;
+}
+
+html[data-theme="light"] .our-story-page .story-theme-product {
+  color: #625C55;
+}
+
+html[data-theme="light"] .our-story-page .story-approach-visual::after {
+  border-color: rgba(128, 89, 31, 0.48);
+}
+
+html[data-theme="light"] .our-story-page .story-approach-mark {
+  color: #80591F;
+}
+
+html[data-theme="light"] .our-story-page .story-text-link {
+  border-bottom-color: rgba(128, 89, 31, 0.65);
+  color: #252421;
+}
+
+html[data-theme="light"] .our-story-page .story-text-link:hover {
+  border-bottom-color: #704B20;
+  color: #704B20;
+}
+
+html[data-theme="light"] .our-story-page .story-values-list {
+  border-color: rgba(37, 36, 33, 0.18);
+}
+
+html[data-theme="light"] .our-story-page .story-value {
+  border-right-color: rgba(37, 36, 33, 0.14);
+}
+
+html[data-theme="light"] .our-story-page .story-value:nth-child(n + 3) {
+  border-top-color: rgba(37, 36, 33, 0.14);
+}
+
+html[data-theme="light"] .our-story-page .story-value-number,
+html[data-theme="light"] .our-story-page .story-value-icon {
+  color: #80591F;
+}
+
+html[data-theme="light"] .our-story-page .story-artwork-empty {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(198, 164, 119, 0.16), transparent 52%),
+    linear-gradient(135deg, #EEE7DC, #E4DCCE);
+}
+
+/* The closing artwork remains deliberately cinematic in both themes. */
+html[data-theme="light"] .story-closing {
+  --ivory: #F5F0E8;
+  --text-muted: #D0C9BF;
+  --accent-gold: #C6A477;
+  background: #191716;
+  color: #F5F0E8;
+}
+
+html[data-theme="light"] .story-closing-copy h2 {
+  color: #F5F0E8;
+}
+
+html[data-theme="light"] .story-closing-copy h2 em,
+html[data-theme="light"] .story-closing-copy > .eyebrow {
+  color: #D7B46C;
+}
+
+html[data-theme="light"] .story-closing-copy p {
+  color: #E0D9CF;
+}
+
+html[data-theme="light"] .story-closing .story-primary-link {
+  border-color: #C6A477;
+  background: #C6A477;
+  color: #171411;
+}
+
+html[data-theme="light"] .story-closing .story-primary-link:hover {
+  background: transparent;
+  color: #F5F0E8;
+}
+
+/* Keep the story navigation comfortable and usable at intermediate widths. */
+@media (min-width: 651px) and (max-width: 1100px) {
+  .our-story-page .story-navigation-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+
+  .our-story-page .story-navigation-inner > .eyebrow {
+    display: none;
+  }
+
+  .our-story-page .story-navigation-links {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .our-story-page .story-navigation a,
+  .our-story-page .story-navigation a.active,
+  .our-story-page .story-navigation a:hover {
+    min-height: 52px;
+  }
+}
+
+.our-story-page :is(a, button):focus-visible,
+.story-closing :is(a, button):focus-visible {
+  outline: 2px solid var(--theme-focus);
+  outline-offset: 4px;
+}
+
+@media (max-width: 650px) {
+  .our-story-page .story-nav-wrap {
+    padding-inline: 10px;
+  }
+
+  .our-story-page .story-navigation-links {
+    scroll-padding-inline: 10px;
+    overscroll-behavior-x: contain;
+  }
+
+  .our-story-page .story-navigation a,
+  .our-story-page .story-navigation a.active,
+  .our-story-page .story-navigation a:hover {
+    min-height: 48px;
+  }
+
+  .our-story-page .story-theme-meta {
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .our-story-page .story-value,
+  .our-story-page .story-value:first-child,
+  .our-story-page .story-value:nth-child(3) {
+    border-right: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .our-story-page *,
+  .story-closing * {
+    scroll-behavior: auto !important;
+  }
+}
