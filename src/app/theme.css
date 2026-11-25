@@ -6327,14 +6327,9 @@ html[data-theme="light"] main {
   color: var(--theme-text);
 }
 
-/* Keep intentionally cinematic panels dark; editorial sections use their
-   dedicated warm-light surfaces and readable text rules below. */
-html[data-theme="light"] .hero,
-html[data-theme="light"] .featured-section,
-html[data-theme="light"] .newsletter,
-html[data-theme="light"] .footer,
-html[data-theme="light"] .navigation-overlay,
-html[data-theme="light"] .mobile-nav {
+/* The featured artwork panel intentionally remains cinematic in light mode.
+   All other page sections, including overlays and forms, use light-surface tokens. */
+html[data-theme="light"] .featured-section {
   color: #F5F0E8;
   --ivory: #F5F0E8;
   --text-muted: #B8B3AD;
