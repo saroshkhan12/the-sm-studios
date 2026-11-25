@@ -2,7 +2,6 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Eye, EyeOff, LockKeyhole, ShieldCheck, Sparkles } from "lucide-react";
 import styles from "./admin-auth-experience.module.css";
@@ -97,7 +96,7 @@ export function AdminAuthExperience({ initialView = "signin" }: Props) {
                 {view === "signup" && <>
                   <label htmlFor="auth-confirm">CONFIRM PASSWORD</label>
                   <input id="auth-confirm" type="password" autoComplete="new-password" maxLength={1024} required value={confirm} onChange={e => setConfirm(e.target.value)} placeholder="Enter your password again" />
-                  <label className={styles.agreement}><input type="checkbox" checked={accepted} onChange={e => setAccepted(e.target.checked)} /> <span>I agree to the <Link href="/policies">studio terms and policies</Link>.</span></label>
+                  <label className={styles.agreement}><input type="checkbox" checked={accepted} onChange={e => setAccepted(e.target.checked)} /> <span>I agree to the studio access terms and security policies.</span></label>
                 </>}
                 {error && <p className={styles.error} role="alert">{error}</p>}
                 {message && <p className={styles.success} role="status">{message}</p>}
