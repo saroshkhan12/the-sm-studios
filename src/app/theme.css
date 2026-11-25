@@ -8082,3 +8082,296 @@ html[data-theme="light"] :is(.btn-outline-dark, .btn-outline-light):hover {
 html[data-theme="light"] :is(a, button, input, textarea, select, summary, [role="button"]):focus-visible {
   outline-color: #76501D;
 }
+
+
+/* Page-specific light-theme finishing: contact, collections, story and admin.
+   These overrides are intentionally scoped so artwork treatments and dark mode
+   remain unchanged. */
+html[data-theme="light"] .contact-page {
+  background: var(--background);
+  color: var(--foreground);
+}
+html[data-theme="light"] .contact-page .page-hero {
+  border-bottom-color: rgba(55, 46, 35, .14);
+}
+html[data-theme="light"] .contact-page .page-hero h1,
+html[data-theme="light"] .contact-page .page-hero h1 em {
+  color: var(--foreground);
+}
+html[data-theme="light"] .contact-page .page-hero h1 em {
+  color: #76501D;
+}
+html[data-theme="light"] .contact-page .page-hero p {
+  color: #62594E;
+}
+html[data-theme="light"] .contact-page .contact-form-premium {
+  padding: clamp(28px, 5vw, 52px);
+  border: 1px solid rgba(55, 46, 35, .15);
+  border-radius: 3px;
+  background: #FFFCF6;
+  box-shadow: 0 18px 48px rgba(55, 46, 35, .065);
+}
+html[data-theme="light"] .contact-page .contact-form-premium label {
+  color: #51483D;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.25px;
+}
+html[data-theme="light"] .contact-page .contact-form-premium input,
+html[data-theme="light"] .contact-page .contact-form-premium textarea {
+  width: 100%;
+  margin-top: 9px;
+  padding: 14px 15px;
+  border: 1px solid rgba(55, 46, 35, .22);
+  border-radius: 2px;
+  background: #FFFFFF;
+  color: #29251F;
+  font: 14px/1.6 "DM Sans", Arial, sans-serif;
+}
+html[data-theme="light"] .contact-page .contact-form-premium input::placeholder,
+html[data-theme="light"] .contact-page .contact-form-premium textarea::placeholder {
+  color: #81776A;
+  opacity: 1;
+}
+html[data-theme="light"] .contact-page .contact-form-premium input:focus,
+html[data-theme="light"] .contact-page .contact-form-premium textarea:focus {
+  border-color: #76501D;
+  outline: 2px solid rgba(118, 80, 29, .16);
+  outline-offset: 1px;
+  box-shadow: none;
+}
+html[data-theme="light"] .contact-page .contact-form-premium .btn {
+  background: #71333D;
+  color: #FFF9F0;
+}
+html[data-theme="light"] .contact-page .contact-form-premium .btn:hover {
+  background: #5D2932;
+}
+html[data-theme="light"] .contact-page .contact-form-premium .form-note {
+  color: #51483D;
+}
+
+/* Collections page: readable editorial introduction and calm card surfaces. */
+html[data-theme="light"] .page-shell:has(.collection-grid-page) {
+  background: #F6F2EA;
+  color: #29251F;
+}
+html[data-theme="light"] .page-shell:has(.collection-grid-page) .page-hero h1 {
+  color: #29251F;
+}
+html[data-theme="light"] .page-shell:has(.collection-grid-page) .page-hero h1 em {
+  color: #76501D;
+}
+html[data-theme="light"] .page-shell:has(.collection-grid-page) .page-hero p {
+  color: #62594E;
+}
+html[data-theme="light"] .collection-grid-page .collection-card {
+  background: #FFFCF6;
+  border: 1px solid rgba(55, 46, 35, .16);
+  box-shadow: 0 10px 30px rgba(55, 46, 35, .055);
+}
+html[data-theme="light"] .collection-grid-page .collection-meta,
+html[data-theme="light"] .collection-grid-page .collection-meta h3 {
+  color: #29251F;
+}
+html[data-theme="light"] .collection-grid-page .collection-meta p {
+  color: #62594E;
+}
+html[data-theme="light"] .collection-grid-page .collection-meta .eyebrow {
+  color: #76501D;
+}
+html[data-theme="light"] .collection-grid-page .round-arrow {
+  border-color: rgba(118, 80, 29, .42);
+  color: #76501D;
+}
+html[data-theme="light"] .collection-grid-page .collection-card:hover .round-arrow {
+  background: #71333D;
+  color: #FFF9F0;
+}
+
+/* Our Story: preserve editorial artwork while converting every text surface. */
+html[data-theme="light"] .our-story-page {
+  background: #F6F2EA;
+  color: #29251F;
+}
+html[data-theme="light"] .our-story-page :is(.story-hero, .story-themes-section, .story-values-section, .story-approach-section, .story-closing-section) {
+  background-color: #F6F2EA;
+  color: #29251F;
+}
+html[data-theme="light"] .our-story-page .story-hero {
+  background:
+    radial-gradient(ellipse at 82% 50%, rgba(113, 51, 61, .075), transparent 44%),
+    #F6F2EA;
+  border-bottom-color: rgba(55, 46, 35, .14);
+}
+html[data-theme="light"] .our-story-page :is(.story-hero-copy h1, .story-philosophy-copy h2, .story-section-heading h2, .story-approach-copy h2, .story-values-heading h2, .story-closing-copy h2) {
+  color: #29251F;
+}
+html[data-theme="light"] .our-story-page :is(.story-hero-copy h1 em, .story-philosophy-copy h2 em, .story-section-heading h2 em, .story-approach-copy h2 em, .story-values-heading h2 em, .story-closing-copy h2 em) {
+  color: #76501D;
+}
+html[data-theme="light"] .our-story-page :is(.story-hero-copy p, .story-philosophy-copy p, .story-section-heading > p, .story-approach-copy p, .story-values-card p, .story-closing-copy p) {
+  color: #62594E;
+}
+html[data-theme="light"] .our-story-page .eyebrow {
+  color: #76501D;
+}
+html[data-theme="light"] .our-story-page .story-navigation-inner {
+  border-color: rgba(55, 46, 35, .16);
+  background: #FFFCF6;
+  box-shadow: 0 12px 32px rgba(55, 46, 35, .06);
+}
+html[data-theme="light"] .our-story-page .story-navigation-inner > .eyebrow {
+  border-bottom-color: rgba(55, 46, 35, .12);
+  color: #76501D;
+}
+html[data-theme="light"] .our-story-page .story-navigation a {
+  border-bottom-color: rgba(55, 46, 35, .1);
+  color: #62594E;
+}
+html[data-theme="light"] .our-story-page .story-navigation a.active,
+html[data-theme="light"] .our-story-page .story-navigation a:hover {
+  background: #F0E8DC;
+  color: #71333D;
+}
+html[data-theme="light"] .our-story-page .story-navigation a span {
+  color: #76501D;
+}
+html[data-theme="light"] .our-story-page :is(.story-principles > div, .story-theme-card, .story-values-card, .story-approach-card) {
+  border-color: rgba(55, 46, 35, .16);
+  background-color: #FFFCF6;
+  color: #29251F;
+}
+html[data-theme="light"] .our-story-page :is(.story-principles strong, .story-theme-card h3, .story-values-card h3, .story-approach-card h3) {
+  color: #29251F;
+}
+html[data-theme="light"] .our-story-page :is(.story-principles span, .story-artwork-caption span, .story-image-caption span, .story-hero-index, .story-hero-side-note, .story-scroll-cue) {
+  color: #76501D;
+}
+html[data-theme="light"] .our-story-page :is(.story-artwork-caption strong, .story-image-caption span:last-child) {
+  color: #FFF9F0;
+}
+html[data-theme="light"] .our-story-page .story-primary-link {
+  background: #71333D;
+  color: #FFF9F0;
+}
+html[data-theme="light"] .our-story-page .story-primary-link:hover {
+  background: #5D2932;
+}
+html[data-theme="light"] .our-story-page .story-scroll-cue:hover {
+  color: #71333D;
+}
+
+/* Admin dashboard: retain its dedicated dashboard structure with light,
+   high-contrast panels, navigation, data tables, controls and status states. */
+html[data-theme="light"] .admin-shell {
+  background: #F1ECE3;
+  color: #29251F;
+}
+html[data-theme="light"] .admin-side {
+  background: #29251F;
+  border-right: 1px solid rgba(55, 46, 35, .18);
+  color: #F6F2EA;
+}
+html[data-theme="light"] .admin-side-brand strong,
+html[data-theme="light"] .admin-side-user strong {
+  color: #F6F2EA;
+}
+html[data-theme="light"] .admin-side-brand i,
+html[data-theme="light"] .admin-side-brand span,
+html[data-theme="light"] .admin-side-user small {
+  color: #D9B77F;
+}
+html[data-theme="light"] .admin-side-nav button {
+  color: #D6CFC3;
+}
+html[data-theme="light"] .admin-side-nav button:hover,
+html[data-theme="light"] .admin-side-nav button.admin-active {
+  background: rgba(240, 216, 168, .12);
+  color: #F0D8A8;
+}
+html[data-theme="light"] .admin-side-nav button.admin-active {
+  box-shadow: inset 3px 0 #C6A477;
+}
+html[data-theme="light"] .admin-side-user {
+  border-top-color: rgba(246, 242, 234, .16);
+}
+html[data-theme="light"] .admin-logout-button {
+  border-color: rgba(240, 216, 168, .38);
+  color: #F6F2EA;
+}
+html[data-theme="light"] .admin-main {
+  background: #F1ECE3;
+  color: #29251F;
+}
+html[data-theme="light"] .admin-main :is(h1, h2, h3, h4, label, th) {
+  color: #29251F;
+}
+html[data-theme="light"] .admin-main :is(p, small, .admin-current-section, td, .admin-table span, .admin-card p, .admin-profile-loading) {
+  color: #62594E;
+}
+html[data-theme="light"] .admin-main .eyebrow {
+  color: #76501D;
+}
+html[data-theme="light"] .admin-main :is(.admin-card, .admin-table, .admin-profile-card, .admin-settings-list, .admin-activity-list, .admin-panel, .admin-stat, .admin-content, .admin-dashboard, .admin-toolbar, .admin-modal) {
+  border-color: rgba(55, 46, 35, .16);
+  background: #FFFCF6;
+  color: #29251F;
+  box-shadow: 0 8px 24px rgba(55, 46, 35, .045);
+}
+html[data-theme="light"] .admin-main :is(.admin-card, .admin-table) h2,
+html[data-theme="light"] .admin-main :is(.admin-card, .admin-table) h3 {
+  color: #29251F;
+}
+html[data-theme="light"] .admin-main :is(input, textarea, select) {
+  border-color: rgba(55, 46, 35, .24);
+  background: #FFFFFF;
+  color: #29251F;
+}
+html[data-theme="light"] .admin-main :is(input, textarea, select)::placeholder {
+  color: #81776A;
+  opacity: 1;
+}
+html[data-theme="light"] .admin-main :is(th, td) {
+  border-color: rgba(55, 46, 35, .12);
+}
+html[data-theme="light"] .admin-main :is(.admin-alert, .admin-notice, .admin-warning) {
+  border-color: rgba(118, 80, 29, .24);
+  background: #F5EBDD;
+  color: #51402A;
+}
+html[data-theme="light"] .admin-main .admin-form-message.is-error {
+  color: #9A3441;
+}
+html[data-theme="light"] .admin-main .admin-form-message.is-success {
+  color: #356B4B;
+}
+html[data-theme="light"] .admin-main :is(.btn-outline-light, .btn-outline-dark) {
+  border-color: #76501D;
+  color: #76501D;
+}
+html[data-theme="light"] .admin-main :is(.btn-dark, .admin-primary-action) {
+  background: #71333D;
+  color: #FFF9F0;
+}
+html[data-theme="light"] .admin-main :is(button, a, input, textarea, select):focus-visible {
+  outline-color: #76501D;
+}
+@media (max-width: 900px) {
+  html[data-theme="light"] .admin-shell {
+    grid-template-columns: 1fr;
+  }
+  html[data-theme="light"] .admin-side {
+    border-right: 0;
+    border-bottom: 1px solid rgba(55, 46, 35, .18);
+  }
+}
+@media (max-width: 700px) {
+  html[data-theme="light"] .contact-page .contact-form-premium {
+    padding: 24px 18px;
+    gap: 24px;
+  }
+  html[data-theme="light"] .our-story-page .story-navigation-inner {
+    background: #FFFCF6;
+  }
+}
