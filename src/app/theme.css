@@ -7890,3 +7890,195 @@ html[data-theme="light"] .footer .footer-bottom {
   outline: 2px solid var(--theme-focus);
   outline-offset: 3px;
 }
+
+
+/* Refined light palette — one coordinated set of surfaces and accents.
+   Keep artwork photography/overlays intact; these rules target interface chrome
+   and text-bearing surfaces only. */
+html[data-theme="light"] {
+  --background: #F6F2EA;
+  --foreground: #29251F;
+  --card: #FFFCF6;
+  --card-foreground: #29251F;
+  --popover: #FFFCF6;
+  --popover-foreground: #29251F;
+  --primary: #76501D;
+  --primary-foreground: #FFFFFF;
+  --secondary: #EDE5D8;
+  --secondary-foreground: #29251F;
+  --muted: #EDE5D8;
+  --muted-foreground: #62594E;
+  --accent: #E8DDCB;
+  --accent-foreground: #29251F;
+  --border: rgba(55, 46, 35, 0.17);
+  --input: rgba(55, 46, 35, 0.28);
+  --ring: #76501D;
+  --theme-bg: var(--background);
+  --theme-surface: var(--card);
+  --theme-surface-raised: var(--secondary);
+  --theme-text: var(--foreground);
+  --theme-muted: var(--muted-foreground);
+  --theme-border: var(--border);
+  --theme-accent: var(--primary);
+  --theme-focus: var(--ring);
+  --page-bg: var(--background);
+  --surface: var(--card);
+  --surface-raised: var(--secondary);
+  --ivory: var(--foreground);
+  --ink: var(--foreground);
+  --text-muted: var(--muted-foreground);
+  --stone: var(--muted-foreground);
+  --line: var(--border);
+  --accent-gold: var(--primary);
+  --beige: var(--secondary);
+  --clay: #87523D;
+  --wine: #71333D;
+}
+
+/* Site header and navigation */
+html[data-theme="light"] .header.glass-header {
+  background: rgba(246, 242, 234, 0.94);
+  border-bottom: 1px solid rgba(55, 46, 35, 0.16);
+  box-shadow: 0 8px 26px rgba(55, 46, 35, 0.055);
+  color: #29251F;
+}
+html[data-theme="light"] .header .glass-wordmark {
+  background: rgba(255, 252, 246, 0.72);
+  border-color: rgba(118, 80, 29, 0.25);
+}
+html[data-theme="light"] .header .wordmark-type,
+html[data-theme="light"] .header .icon-btn,
+html[data-theme="light"] .header .glass-nav-link,
+html[data-theme="light"] .header .glass-nav-link .nav-label-primary {
+  color: #29251F;
+}
+html[data-theme="light"] .header .wordmark-type i,
+html[data-theme="light"] .header .glass-nav-link.active,
+html[data-theme="light"] .header .glass-nav-link:hover,
+html[data-theme="light"] .header .glass-nav-link.active .nav-label-primary,
+html[data-theme="light"] .header .glass-nav-link:hover .nav-label-primary {
+  color: #76501D;
+}
+html[data-theme="light"] .header .wordmark-type small,
+html[data-theme="light"] .header .glass-nav-link:not(.active) {
+  color: #62594E;
+}
+html[data-theme="light"] .header .theme-toggle {
+  background: rgba(255, 252, 246, 0.82);
+  border-color: rgba(55, 46, 35, 0.24);
+  color: #76501D;
+}
+html[data-theme="light"] .header .theme-toggle:hover {
+  background: #E8DDCB;
+  border-color: #76501D;
+}
+html[data-theme="light"] .navigation-overlay.glass-navigation {
+  background: #F6F2EA;
+  color: #29251F;
+  border-color: rgba(55, 46, 35, 0.18);
+}
+html[data-theme="light"] .navigation-overlay :is(.navigation-overlay-brand, .navigation-overlay-links a, .navigation-overlay-aside p) {
+  color: #29251F;
+}
+html[data-theme="light"] .navigation-overlay .eyebrow,
+html[data-theme="light"] .navigation-overlay .navigation-overlay-number,
+html[data-theme="light"] .navigation-overlay-aside > a {
+  color: #76501D;
+}
+html[data-theme="light"] .navigation-overlay-links a.active {
+  color: #71333D;
+}
+
+/* Warm, restrained announcement and footer contrast */
+html[data-theme="light"] .announcement {
+  background: #71333D;
+  color: #FFF9F0;
+}
+html[data-theme="light"] .announcement span {
+  color: #F0D8A8;
+}
+html[data-theme="light"] .footer.glass-footer,
+html[data-theme="light"] .footer {
+  background: #29251F;
+  color: #F6F2EA;
+  border-top: 1px solid rgba(240, 216, 168, 0.24);
+}
+html[data-theme="light"] .footer :is(.footer-logo, .footer-logo-copy strong, .footer-top h4, strong) {
+  color: #F6F2EA;
+}
+html[data-theme="light"] .footer .footer-logo-copy small {
+  color: #E0BE7C;
+}
+html[data-theme="light"] .footer .footer-top p,
+html[data-theme="light"] .footer .footer-bottom,
+html[data-theme="light"] .footer .footer-top > div > a:not(.footer-logo),
+html[data-theme="light"] .footer a:not(.footer-logo) {
+  color: #D6CFC3;
+}
+html[data-theme="light"] .footer a:hover,
+html[data-theme="light"] .footer .back-to-top:hover {
+  color: #F0D8A8;
+}
+html[data-theme="light"] .footer .footer-bottom {
+  border-top-color: rgba(246, 242, 234, 0.2);
+}
+
+/* Unified light surfaces for content sections and cards */
+html[data-theme="light"] :is(.intro, .collections-section, .worlds-section, .home-collections-section, .page-shell, .about-content, .contact-page, .shop-page, .wishlist-page, .cart-page, .product-detail-shell) {
+  color: #29251F;
+}
+html[data-theme="light"] :is(.intro, .collections-section, .worlds-section, .home-collections-section) {
+  background-color: #F6F2EA;
+}
+html[data-theme="light"] :is(.collection-card, .editorial-collection-card, .product-card, .product-detail-copy, .cart-panel, .contact-form, .about-chapter, .catalog-note) {
+  color: #29251F;
+  border-color: rgba(55, 46, 35, 0.16);
+}
+html[data-theme="light"] :is(.collection-meta h3, .product-info h3, .product-info strong, .product-detail-copy h1, .product-detail-price, .selection-details h2, .cart-line, .cart-total) {
+  color: #29251F;
+}
+html[data-theme="light"] :is(.collection-meta p, .product-info p, .product-description p, .product-attributes p, .product-availability, .about-chapter p, .catalog-note p) {
+  color: #62594E;
+}
+html[data-theme="light"] :is(.collection-meta .eyebrow, .section-heading .eyebrow, .page-hero .eyebrow, .about-content .eyebrow) {
+  color: #76501D;
+}
+html[data-theme="light"] :is(.collection-card, .product-card) {
+  background: #FFFCF6;
+  box-shadow: 0 8px 26px rgba(55, 46, 35, 0.055);
+}
+html[data-theme="light"] :is(.collection-card, .product-card):hover {
+  border-color: rgba(118, 80, 29, 0.42);
+  box-shadow: 0 14px 32px rgba(55, 46, 35, 0.09);
+}
+
+/* Forms, filters, selects and modal surfaces */
+html[data-theme="light"] :is(input, textarea, select, .search-overlay, .modal, .dialog, .dropdown-menu, .filter-menu) {
+  color: #29251F;
+}
+html[data-theme="light"] :is(.contact-form input, .contact-form textarea, .search-field input, .shop-sort select, .admin-shell input, .admin-shell textarea, .admin-shell select) {
+  background-color: #FFFCF6;
+  color: #29251F;
+  border-color: rgba(55, 46, 35, 0.25);
+}
+html[data-theme="light"] :is(input, textarea, select)::placeholder {
+  color: #71685C;
+  opacity: 1;
+}
+html[data-theme="light"] :is(.filter-row button, .clear-search) {
+  color: #62594E;
+}
+html[data-theme="light"] .filter-row button.filter-active {
+  color: #71333D;
+  border-bottom-color: #71333D;
+}
+html[data-theme="light"] :is(.btn-outline-dark, .btn-outline-light) {
+  border-color: #76501D;
+  color: #76501D;
+}
+html[data-theme="light"] :is(.btn-outline-dark, .btn-outline-light):hover {
+  background: rgba(118, 80, 29, 0.08);
+}
+html[data-theme="light"] :is(a, button, input, textarea, select, summary, [role="button"]):focus-visible {
+  outline-color: #76501D;
+}
