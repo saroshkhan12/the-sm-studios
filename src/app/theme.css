@@ -6780,3 +6780,382 @@ html[data-theme="light"] .announcement {
 html[data-theme="light"] .announcement span {
   color: #E7C99B;
 }
+
+
+/* Complete light palette coverage for every major site surface. The dark theme
+   remains the default; these rules only activate after an explicit light theme. */
+html[data-theme="light"] {
+  --ivory: #252421;
+  --beige: #EEE7DC;
+  --ink: #252421;
+  --clay: #96533F;
+  --wine: #702F39;
+  --stone: #625C55;
+  --line: rgba(37, 36, 33, 0.16);
+  --page-bg: #F7F4EE;
+  --surface: #FFFDFA;
+  --surface-raised: #EEE7DC;
+  --text-muted: #625C55;
+  --accent-gold: #80591F;
+}
+
+html[data-theme="light"] body,
+html[data-theme="light"] main,
+html[data-theme="light"] .page-shell,
+html[data-theme="light"] .shop-page,
+html[data-theme="light"] .collections-page,
+html[data-theme="light"] .collection-page,
+html[data-theme="light"] .product-page,
+html[data-theme="light"] .product-detail-shell,
+html[data-theme="light"] .cart-page,
+html[data-theme="light"] .wishlist-page,
+html[data-theme="light"] .contact-page,
+html[data-theme="light"] .about-page,
+html[data-theme="light"] .story-page,
+html[data-theme="light"] .intro,
+html[data-theme="light"] .collections-section,
+html[data-theme="light"] .worlds-section,
+html[data-theme="light"] .collection-products,
+html[data-theme="light"] .product-detail,
+html[data-theme="light"] .product-detail-content,
+html[data-theme="light"] .about-content,
+html[data-theme="light"] .contact-content,
+html[data-theme="light"] .cart-content,
+html[data-theme="light"] .wishlist-content {
+  background-color: #F7F4EE;
+  color: #252421;
+}
+
+html[data-theme="light"] .hero {
+  background:
+    radial-gradient(ellipse at 82% 50%, rgba(112, 47, 57, 0.09), transparent 44%),
+    linear-gradient(135deg, #F7F4EE 0%, #EEE7DC 100%);
+  color: #252421;
+}
+
+html[data-theme="light"] .hero h1,
+html[data-theme="light"] .hero-copy > p,
+html[data-theme="light"] .hero-bottom,
+html[data-theme="light"] .hero-index {
+  color: #252421;
+}
+
+html[data-theme="light"] .hero .eyebrow,
+html[data-theme="light"] .hero h1 em {
+  color: #80591F;
+}
+
+html[data-theme="light"] .hero-art-inner,
+html[data-theme="light"] .hero-art-fallback {
+  background-color: #E7DED0;
+}
+
+html[data-theme="light"] .hero-art-shade {
+  background: linear-gradient(180deg, rgba(17,17,17,.08), transparent 38%, rgba(8,8,8,.72));
+}
+
+html[data-theme="light"] .brand-values,
+html[data-theme="light"] .featured-section,
+html[data-theme="light"] .editorial-worlds,
+html[data-theme="light"] .editorial-manifesto {
+  background: #EEE7DC;
+  color: #252421;
+  border-color: rgba(37,36,33,.14);
+}
+
+html[data-theme="light"] .brand-values > div,
+html[data-theme="light"] .editorial-intro h2,
+html[data-theme="light"] .editorial-intro > p,
+html[data-theme="light"] .editorial-manifesto-copy h2,
+html[data-theme="light"] .editorial-manifesto-copy > p,
+html[data-theme="light"] .editorial-manifesto-copy .manifesto-signature {
+  color: #252421;
+}
+
+html[data-theme="light"] .brand-values svg,
+html[data-theme="light"] .editorial-worlds .eyebrow,
+html[data-theme="light"] .editorial-manifesto .eyebrow,
+html[data-theme="light"] .editorial-manifesto-copy h2 em {
+  color: #80591F;
+}
+
+html[data-theme="light"] .editorial-collection-card,
+html[data-theme="light"] .editorial-collection-copy,
+html[data-theme="light"] .about-chapter,
+html[data-theme="light"] .collection-card,
+html[data-theme="light"] .product-card,
+html[data-theme="light"] .catalog-note,
+html[data-theme="light"] .product-detail-copy,
+html[data-theme="light"] .cart-panel,
+html[data-theme="light"] .selection-line,
+html[data-theme="light"] .selection-footer,
+html[data-theme="light"] .contact-form,
+html[data-theme="light"] .about-visual {
+  background: #FFFDFA;
+  color: #252421;
+  border-color: rgba(37,36,33,.16);
+}
+
+html[data-theme="light"] .editorial-collection-card {
+  box-shadow: 0 12px 34px rgba(37,36,33,.07);
+}
+
+html[data-theme="light"] .editorial-collection-copy h3,
+html[data-theme="light"] .editorial-collection-copy p,
+html[data-theme="light"] .editorial-collection-copy .eyebrow,
+html[data-theme="light"] .editorial-cta,
+html[data-theme="light"] .manifesto-link {
+  color: #252421;
+}
+
+html[data-theme="light"] .editorial-collection-copy h3 em,
+html[data-theme="light"] .editorial-collection-copy .eyebrow {
+  color: #80591F;
+}
+
+html[data-theme="light"] .editorial-collection-copy p {
+  color: #625C55;
+}
+
+html[data-theme="light"] .manifesto-artwork {
+  border-color: rgba(37,36,33,.18);
+}
+
+html[data-theme="light"] .manifesto-artwork-label,
+html[data-theme="light"] .manifesto-artwork-index {
+  color: #FFFFFF;
+}
+
+html[data-theme="light"] .newsletter {
+  background:
+    radial-gradient(ellipse at 100% 20%, rgba(198,164,119,.18), transparent 45%),
+    #702F39;
+  color: #F5F0E8;
+}
+
+html[data-theme="light"] .footer.glass-footer,
+html[data-theme="light"] .footer {
+  background: #252421;
+  color: #F5F0E8;
+  border-top-color: rgba(245,240,232,.14);
+}
+
+html[data-theme="light"] .footer p,
+html[data-theme="light"] .footer-bottom,
+html[data-theme="light"] .footer-top > div > a:not(.footer-logo) {
+  color: #D0C9BF;
+}
+
+html[data-theme="light"] .page-hero {
+  background: #EEE7DC;
+  color: #252421;
+  border-color: rgba(37,36,33,.14);
+}
+
+html[data-theme="light"] .page-hero h1,
+html[data-theme="light"] .page-hero p,
+html[data-theme="light"] .about-content h2,
+html[data-theme="light"] .about-content p,
+html[data-theme="light"] .section-heading h2,
+html[data-theme="light"] .intro h2,
+html[data-theme="light"] .world-copy h2,
+html[data-theme="light"] .world-copy p,
+html[data-theme="light"] .product-detail-copy h1,
+html[data-theme="light"] .product-description h2,
+html[data-theme="light"] .product-attributes h2 {
+  color: #252421;
+}
+
+html[data-theme="light"] .page-hero h1 em,
+html[data-theme="light"] .section-heading h2 em,
+html[data-theme="light"] .intro h2 em,
+html[data-theme="light"] .about-content h2 em {
+  color: #80591F;
+}
+
+html[data-theme="light"] .collection-meta,
+html[data-theme="light"] .collection-meta h3,
+html[data-theme="light"] .product-info h3,
+html[data-theme="light"] .product-info strong,
+html[data-theme="light"] .product-detail-price,
+html[data-theme="light"] .product-facts strong,
+html[data-theme="light"] .selection-details h2,
+html[data-theme="light"] .cart-line,
+html[data-theme="light"] .cart-total {
+  color: #252421;
+}
+
+html[data-theme="light"] .collection-meta p,
+html[data-theme="light"] .product-info p,
+html[data-theme="light"] .product-description p,
+html[data-theme="light"] .product-attributes p,
+html[data-theme="light"] .product-availability,
+html[data-theme="light"] .product-facts span,
+html[data-theme="light"] .cart-line p,
+html[data-theme="light"] .selection-footer p,
+html[data-theme="light"] .about-chapter p {
+  color: #625C55;
+}
+
+html[data-theme="light"] .search-field,
+html[data-theme="light"] .search-field input,
+html[data-theme="light"] .search-field select,
+html[data-theme="light"] .shop-sort select,
+html[data-theme="light"] .contact-form label,
+html[data-theme="light"] .contact-form input,
+html[data-theme="light"] .contact-form textarea,
+html[data-theme="light"] .selection-quantity,
+html[data-theme="light"] .remove-selection {
+  color: #252421;
+}
+
+html[data-theme="light"] .selection-quantity button {
+  background: #EEE7DC;
+  color: #252421;
+  border-color: rgba(37,36,33,.18);
+}
+
+html[data-theme="light"] .product-skeleton > div {
+  background: linear-gradient(100deg, #EEE7DC 25%, #E4DCCE 42%, #EEE7DC 60%);
+}
+
+html[data-theme="light"] .product-skeleton > span {
+  background: #E4DCCE;
+}
+
+html[data-theme="light"] .search-overlay-backdrop {
+  background: rgba(37,36,33,.42);
+}
+
+html[data-theme="light"] .search-overlay.glass-surface,
+html[data-theme="light"] .search-overlay {
+  background: #FFFDFA;
+  color: #252421;
+  border-color: rgba(37,36,33,.18);
+}
+
+html[data-theme="light"] .search-overlay :is(h1,h2,h3,p,label,span,a,button) {
+  color: inherit;
+}
+
+html[data-theme="light"] .search-overlay .eyebrow,
+html[data-theme="light"] .search-overlay .search-result-category {
+  color: #80591F;
+}
+
+html[data-theme="light"] .mobile-nav,
+html[data-theme="light"] .navigation-overlay,
+html[data-theme="light"] .navigation-overlay.glass-navigation {
+  background: #FFFDFA;
+  color: #252421;
+}
+
+html[data-theme="light"] .navigation-overlay :is(a,span,p),
+html[data-theme="light"] .navigation-overlay-brand {
+  color: #252421;
+}
+
+html[data-theme="light"] .navigation-overlay .eyebrow,
+html[data-theme="light"] .navigation-overlay-number,
+html[data-theme="light"] .navigation-overlay-links a:hover {
+  color: #80591F;
+}
+
+html[data-theme="light"] .admin-shell,
+html[data-theme="light"] .admin-main,
+html[data-theme="light"] .admin-side,
+html[data-theme="light"] .admin-card,
+html[data-theme="light"] .admin-table,
+html[data-theme="light"] .admin-login-page,
+html[data-theme="light"] .admin-login-card,
+html[data-theme="light"] .admin-modal,
+html[data-theme="light"] .admin-profile-card,
+html[data-theme="light"] .admin-settings-list,
+html[data-theme="light"] .admin-activity-list,
+html[data-theme="light"] .admin-stat-card,
+html[data-theme="light"] .admin-quick-actions .admin-card {
+  background: #FFFDFA;
+  color: #252421;
+  border-color: rgba(37,36,33,.16);
+}
+
+html[data-theme="light"] .admin-side {
+  background: #EEE7DC;
+}
+
+html[data-theme="light"] .admin-shell :is(h1,h2,h3,h4,strong,label,button) {
+  color: #252421;
+}
+
+html[data-theme="light"] .admin-shell :is(p,small,span,.admin-form-help,.admin-side-brand > span) {
+  color: #625C55;
+}
+
+html[data-theme="light"] .admin-shell input,
+html[data-theme="light"] .admin-shell textarea,
+html[data-theme="light"] .admin-shell select {
+  background: #FFFFFF;
+  color: #252421;
+  border-color: rgba(37,36,33,.24);
+}
+
+html[data-theme="light"] .admin-side-nav button.admin-active,
+html[data-theme="light"] .admin-side-nav button:hover {
+  background: rgba(128,89,31,.12);
+  color: #704B20;
+}
+
+html[data-theme="light"] .admin-alert,
+html[data-theme="light"] .admin-warning,
+html[data-theme="light"] .admin-sidebar-error,
+html[data-theme="light"] .form-note,
+html[data-theme="light"] .storage-error {
+  background: #F4E8E4;
+  color: #702F39;
+  border-color: rgba(112,47,57,.2);
+}
+
+html[data-theme="light"] .glass-surface,
+html[data-theme="light"] .glass-surface--subtle,
+html[data-theme="light"] .glass-control,
+html[data-theme="light"] .glass-chip,
+html[data-theme="light"] .glass-modal,
+html[data-theme="light"] .glass-dropdown,
+html[data-theme="light"] .glass-popover {
+  background-color: #FFFDFA;
+  color: #252421;
+  border-color: rgba(37,36,33,.16);
+}
+
+html[data-theme="light"] .glass-control,
+html[data-theme="light"] .glass-surface :is(input,textarea,select) {
+  background: #FFFFFF;
+  color: #252421;
+  border-color: rgba(37,36,33,.24);
+}
+
+html[data-theme="light"] .glass-surface :is(h1,h2,h3,h4,p,label,a,button,span) {
+  color: inherit;
+}
+
+html[data-theme="light"] .glass-surface .eyebrow,
+html[data-theme="light"] .glass-surface .accent,
+html[data-theme="light"] .glass-surface em {
+  color: #80591F;
+}
+
+html[data-theme="light"] .btn-outline-dark,
+html[data-theme="light"] .btn-outline-light {
+  border-color: #702F39;
+  color: #702F39;
+}
+
+html[data-theme="light"] .btn-outline-dark:hover,
+html[data-theme="light"] .btn-outline-light:hover {
+  background: rgba(112,47,57,.08);
+}
+
+html[data-theme="light"] .results-count {
+  background: rgba(128,89,31,.09);
+  color: #252421;
+}
