@@ -6288,14 +6288,14 @@ html[data-theme="light"] {
   --surface: #FFFDFA;
   --surface-raised: #EEE7DC;
   --text-muted: #625C55;
-  --accent-gold: #946D35;
+  --accent-gold: #89622C;
   --theme-bg: #F7F4EE;
   --theme-surface: #FFFDFA;
   --theme-surface-raised: #EEE7DC;
   --theme-text: #252421;
   --theme-muted: #625C55;
   --theme-border: rgba(37, 36, 33, 0.17);
-  --theme-accent: #946D35;
+  --theme-accent: #89622C;
   --theme-focus: #704B20;
 }
 
@@ -6606,7 +6606,7 @@ html[data-theme="light"] .theme-toggle {
 html[data-theme="light"] .theme-toggle:hover {
   color: #704B20;
   background: rgba(148, 109, 53, 0.1);
-  border-color: #946D35;
+  border-color: #89622C;
 }
 
 /* Circular reveal is progressive enhancement; theme changes still work without View Transitions. */
