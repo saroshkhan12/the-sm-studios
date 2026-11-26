@@ -64,3 +64,11 @@ jobs:
       - name: Test the integrated Next.js experience route
         working-directory: experiences/kage-original
         run: npx playwright test -c playwright.native.config.js tests/native-route.spec.js
+      - name: Upload unified website browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sm-studios-unified-experience-qa-${{ github.run_number }}
+          path: experiences/kage-original/native-playwright-report/
+          if-no-files-found: ignore
+          retention-days: 14
