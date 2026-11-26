@@ -42,6 +42,39 @@ function makeGroundTexture() {
   return texture;
 }
 
+function makeBarkTexture() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 128;
+  canvas.height = 256;
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = "#594632";
+  ctx.fillRect(0, 0, 128, 256);
+  for (let i = 0; i < 180; i++) {
+    const x = rand(0, 128);
+    const width = rand(.4, 2.2);
+    const shade = Math.random() > .5 ? "rgba(190,151,103,.18)" : "rgba(20,14,9,.24)";
+    ctx.strokeStyle = shade;
+    ctx.lineWidth = width;
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.bezierCurveTo(x + rand(-8, 8), 72, x + rand(-10, 10), 180, x + rand(-6, 6), 256);
+    ctx.stroke();
+  }
+  for (let i = 0; i < 12; i++) {
+    const x = rand(0, 128), y = rand(0, 256);
+    ctx.strokeStyle = "rgba(22,16,11,.2)";
+    ctx.lineWidth = rand(.6, 1.4);
+    ctx.beginPath();
+    ctx.ellipse(x, y, rand(2, 5), rand(5, 12), rand(-.2, .2), 0, Math.PI * 2);
+    ctx.stroke();
+  }
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(1, 1.5);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return texture;
+}
+
 function createTree(parent, x, z, scale, leafMaterials, trunkMat) {
   const group = new THREE.Group();
   group.position.set(x, 0, z);
@@ -123,12 +156,22 @@ function createArchitecture(parent) {
 
 function createLantern(parent, x, z, lights) {
   const bronze = material("#51483a", .5, .42);
-  const warm = new THREE.MeshBasicMaterial({ color: "#ffd89a" });
+  const warm = new THREE.MeshStandardMaterial({
+    color: "#a8753c",
+    emissive: "#ffbd6b",
+    emissiveIntensity: 1.35,
+    roughness: .38,
+    metalness: .12
+  });
   const base = add(parent, new THREE.CylinderGeometry(.28, .36, .16, 8), bronze, [x, .12, z]);
   add(parent, new THREE.BoxGeometry(.48, .52, .48), bronze, [x, .48, z]);
   add(parent, new THREE.BoxGeometry(.3, .42, .3), warm, [x, .5, z]);
   add(parent, new THREE.CylinderGeometry(.34, .25, .14, 8), bronze, [x, .82, z]);
   add(parent, new THREE.ConeGeometry(.38, .3, 8), bronze, [x, 1.02, z]);
+  const glow = add(parent, new THREE.SphereGeometry(.19, 10, 8),
+    new THREE.MeshBasicMaterial({ color: "#ffd69a", transparent: true, opacity: .22, depthWrite: false }),
+    [x, .52, z]);
+  glow.scale.set(1, 1.35, 1);
   const light = new THREE.PointLight("#ffc77e", 11, 12, 1.7);
   light.position.set(x, .72, z);
   parent.add(light);
@@ -271,6 +314,8 @@ function createScene() {
   moon.position.set(-7, 12, 8);
   moon.castShadow = innerWidth > 700;
   moon.shadow.mapSize.set(innerWidth < 1100 ? 768 : 1536, innerWidth < 1100 ? 768 : 1536);
+  moon.shadow.camera.near = .5;
+  moon.shadow.camera.far = 48;
   moon.shadow.bias = -0.00018;
   moon.shadow.normalBias = 0.035;
   moon.shadow.radius = 4;
@@ -310,7 +355,11 @@ function createScene() {
   createPathDetail(garden);
   createGardenAccents(garden);
   const leafMaterials = [material("#203b2d"), material("#294733"), material("#36513a"), material("#1b3027")];
-  const trunkMat = material("#42372b");
+  const trunkMat = new THREE.MeshStandardMaterial({
+    color: "#9a805f",
+    map: makeBarkTexture(),
+    roughness: .98
+  });
   createChapterLandmarks(garden, leafMaterials, trunkMat);
 
   // Layered woodland canopy: foreground, mid-ground and distant silhouettes.
@@ -352,8 +401,25 @@ function createScene() {
   const waterMaterial = new THREE.ShaderMaterial({
     transparent: true,
     uniforms: { uTime: { value: 0 }, uColor: { value: new THREE.Color("#547b79") } },
-    vertexShader: `varying vec2 vUv; varying vec3 vWorld; void main(){ vUv=uv; vec4 world=modelMatrix*vec4(position,1.0); vWorld=world.xyz; gl_Position=projectionMatrix*viewMatrix*world; }`,
-    fragmentShader: `uniform float uTime; uniform vec3 uColor; varying vec2 vUv; varying vec3 vWorld; void main(){ vec2 p=vWorld.xz; float r=length(p)*5.0-uTime*1.4; float ripple=sin(r)*0.5+sin(r*1.7+1.2)*0.18; float rings=smoothstep(0.86,1.0,abs(ripple)); float sheen=0.5+0.5*sin(p.x*3.0+p.y*2.0+uTime*.35); vec3 col=mix(uColor,uColor*1.65,sheen*.22+rings*.16); gl_FragColor=vec4(col,0.88); }`
+    vertexShader: `varying vec3 vWorld; varying vec3 vView; void main(){ vec4 world=modelMatrix*vec4(position,1.0); vec4 view=viewMatrix*world; vWorld=world.xyz; vView=-view.xyz; gl_Position=projectionMatrix*view; }`,
+    fragmentShader: `uniform float uTime; uniform vec3 uColor; varying vec3 vWorld; varying vec3 vView; void main(){
+      vec2 p=vWorld.xz;
+      float radius=length(p);
+      float broad=sin(radius*5.2-uTime*1.35);
+      float fine=sin(p.x*13.0+p.y*8.0-uTime*1.9)*0.12;
+      float crossWave=sin(p.x*4.2-p.y*3.6+uTime*.42)*0.16;
+      float wave=broad*.5+fine+crossWave;
+      float slope=cos(radius*5.2-uTime*1.35)*.18;
+      vec3 normal=normalize(vec3(-slope*(p.x/max(radius,.001)),1.0,-slope*(p.y/max(radius,.001))));
+      vec3 viewDir=normalize(vView);
+      float fresnel=pow(1.0-max(dot(normal,viewDir),0.0),2.0);
+      float glint=pow(max(dot(reflect(normalize(vec3(-.35,-.8,-.25)),normal),viewDir),0.0),20.0);
+      float rippleLine=smoothstep(.78,.98,abs(broad));
+      vec3 deep=uColor*mix(.78,1.12,.5+.5*wave);
+      vec3 highlight=vec3(.72,.82,.76)*(fresnel*.32+glint*.28+rippleLine*.09);
+      vec3 col=deep+highlight;
+      gl_FragColor=vec4(col,.9);
+    }`
   });
   const water = add(garden, new THREE.CircleGeometry(2.23, 96), waterMaterial, [0, .405, -10.6], [-Math.PI / 2, 0, 0]);
   for (let i = 0; i < 3; i++) {
