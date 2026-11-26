@@ -160,45 +160,44 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         <span>ART FOR A MORE INSPIRED LIFE</span>
       </div>
 
-      <header className="header glass-header" id="site-top">
-        <MotionButton
-          type="button"
-          className="icon-btn mobile-menu"
-          data-cursor="MENU"
-          onClick={() => setMenuOpen((open) => !open)}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          aria-controls={menuOpen ? "site-navigation-overlay" : undefined}
-        >
-          <m.span
-            key={menuOpen ? "close" : "menu"}
-            initial={false}
-            animate={{ opacity: 1, rotate: 0, scale: 1 }}
-            transition={easeOutTransition}
+      <header className="header glass-header site-header" id="site-top">
+        <div className="site-header-inner">
+          <MotionButton
+            type="button"
+            className="icon-btn mobile-menu site-header-menu"
+            data-cursor="MENU"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls={menuOpen ? "site-navigation-overlay" : undefined}
           >
-            {menuOpen ? <X /> : <Menu />}
-          </m.span>
-        </MotionButton>
+            <m.span
+              key={menuOpen ? "close" : "menu"}
+              initial={false}
+              animate={{ opacity: 1, rotate: 0, scale: 1 }}
+              transition={easeOutTransition}
+            >
+              {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+            </m.span>
+          </MotionButton>
 
-        <m.div
-          className="wordmark-wrap"
-          initial="hidden"
-          animate="visible"
-          variants={fadeDown}
-        >
-          <Link href="/" className="wordmark glass-wordmark" aria-label="THE SM STUDIOS home">
-            <span className="wordmark-type">
-              THE SM <i>STUDIOS</i>
-              <small>ART · CULTURE · EXPRESSION</small>
-            </span>
-          </Link>
-        </m.div>
+          <m.div
+            className="wordmark-wrap site-header-brand"
+            initial="hidden"
+            animate="visible"
+            variants={fadeDown}
+          >
+            <Link href="/" className="wordmark glass-wordmark" aria-label="THE SM STUDIOS home">
+              <span className="wordmark-type">
+                <span className="wordmark-main">THE SM <i>STUDIOS</i></span>
+                <small>ART · CULTURE · EXPRESSION</small>
+              </span>
+            </Link>
+          </m.div>
 
-        <nav className="nav desktop-nav" aria-label="Main navigation">
-          {navigation.map((item) => (
-            (() => {
-              const active =
-                pathname === item.href || pathname.startsWith(`${item.href}/`);
+          <nav className="nav desktop-nav site-header-nav" aria-label="Main navigation">
+            {navigation.map((item) => {
+              const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
               const homeShopHighlight = pathname === "/" && item.href === "/shop";
               return (
                 <Link
@@ -209,80 +208,70 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   data-cursor="OPEN"
                 >
                   <NavigationLabel label={item.label} />
-                  <AnimatePresence initial={false}>
-                    {active && (
-                      <m.span
-                        key={item.href}
-                        className="nav-indicator"
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: 1 }}
-                        exit={{ scaleX: 0 }}
-                        transition={easeOutTransition}
-                      />
-                    )}
-                  </AnimatePresence>
+                  {active && (
+                    <m.span
+                      className="nav-indicator"
+                      layoutId="site-nav-indicator"
+                      transition={easeOutTransition}
+                      aria-hidden="true"
+                    />
+                  )}
                 </Link>
               );
-            })()
-          ))}
-        </nav>
+            })}
+          </nav>
 
-        <m.div
-          className="header-actions"
-          initial="hidden"
-          animate="visible"
-          variants={fadeDown}
-        >
-          <MotionButton
-            type="button"
-            className="icon-btn theme-toggle"
-            data-cursor="THEME"
-            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            aria-pressed={theme === "light"}
-            title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            onClick={(event) => {
-              const bounds = event.currentTarget.getBoundingClientRect();
-              toggleTheme({ x: bounds.left + bounds.width / 2, y: bounds.top + bounds.height / 2 });
-            }}
+          <m.div
+            className="header-actions site-header-actions"
+            initial="hidden"
+            animate="visible"
+            variants={fadeDown}
           >
-            {theme === "dark" ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}
-          </MotionButton>
-          <MotionButton
-            type="button"
-            className="icon-btn"
-            data-cursor="SEARCH"
-            aria-label="Search products"
-            aria-haspopup="dialog"
-            aria-expanded={searchOpen}
-            onClick={openSearch}
-          >
-            <m.span whileHover={reduceMotion ? undefined : { rotate: 8, scale: 1.08 }}>
-              <Search />
-            </m.span>
-          </MotionButton>
-          <Link
-            href="/wishlist"
-            className="icon-btn counted-icon"
-            aria-label={`Wishlist, ${favoritesCount} saved ${favoritesCount === 1 ? "item" : "items"}`}
-            data-cursor="SAVE"
-          >
-            <m.span whileHover={reduceMotion ? undefined : { scale: 1.12 }}>
-              <Heart />
-            </m.span>
-            <span className="header-count">{favoritesCount}</span>
-          </Link>
-          <Link
-            href="/cart"
-            className="icon-btn bag counted-icon"
-            aria-label={`Shopping bag, ${cartCount} ${cartCount === 1 ? "item" : "items"}`}
-            data-cursor="OPEN BAG"
-          >
-            <m.span whileHover={reduceMotion ? undefined : { y: -2, scale: 1.08 }}>
-              <ShoppingBag />
-            </m.span>
-            <span className="header-count">{cartCount}</span>
-          </Link>
-        </m.div>
+            <MotionButton
+              type="button"
+              className="icon-btn theme-toggle"
+              data-cursor="THEME"
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              aria-pressed={theme === "light"}
+              title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              onClick={(event) => {
+                const bounds = event.currentTarget.getBoundingClientRect();
+                toggleTheme({ x: bounds.left + bounds.width / 2, y: bounds.top + bounds.height / 2 });
+              }}
+            >
+              {theme === "dark" ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}
+            </MotionButton>
+            <MotionButton
+              type="button"
+              className="icon-btn"
+              data-cursor="SEARCH"
+              aria-label="Search products"
+              aria-haspopup="dialog"
+              aria-expanded={searchOpen}
+              onClick={openSearch}
+            >
+              <Search aria-hidden="true" />
+            </MotionButton>
+            <Link
+              href="/wishlist"
+              className="icon-btn counted-icon"
+              aria-label={`Wishlist, ${favoritesCount} saved ${favoritesCount === 1 ? "item" : "items"}`}
+              data-cursor="SAVE"
+            >
+              <Heart aria-hidden="true" />
+              <span className="header-count" aria-hidden="true">{favoritesCount}</span>
+            </Link>
+            <Link
+              href="/cart"
+              className="icon-btn counted-icon"
+              aria-label={`Shopping bag, ${cartCount} ${cartCount === 1 ? "item" : "items"}`}
+              data-cursor="OPEN BAG"
+            >
+              <ShoppingBag aria-hidden="true" />
+              <span className="header-count" aria-hidden="true">{cartCount}</span>
+            </Link>
+          </m.div>
+        </div>
       </header>
 
       <AnimatePresence initial={false}>
