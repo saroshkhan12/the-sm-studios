@@ -358,7 +358,12 @@ function createScene() {
   camera = new THREE.PerspectiveCamera(42, viewportWidth() / viewportHeight(), .1, 130);
   camera.position.set(0, 3.6, 13);
 
-  renderer = new THREE.WebGLRenderer({ antialias: viewportWidth() > 700, powerPreference: "high-performance" });
+  const captureWebGLForTests = new URLSearchParams(window.location.search).get("sm-studios-webgl-test") === "1";
+  renderer = new THREE.WebGLRenderer({
+    antialias: viewportWidth() > 700,
+    powerPreference: "high-performance",
+    preserveDrawingBuffer: captureWebGLForTests
+  });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, viewportWidth() < 700 ? 1 : 1.25));
   renderer.setSize(viewportWidth(), viewportHeight());
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -687,30 +692,7 @@ function publishRenderDiagnostics() {
   const gl = renderer.getContext();
   root.dataset.webglContext = gl.isContextLost() ? "lost" : "ready";
 
-  // Pixel readback is deliberately on-demand: synchronous GPU reads every few
-  // frames would add needless work to the live experience on slower mobile devices.
-  const sampleRequest = root.dataset.experiencePixelSampleRequest;
-  if (!sampleRequest || sampleRequest === root.dataset.experiencePixelSampledRequest) return;
-  const width = gl.drawingBufferWidth;
-  const height = gl.drawingBufferHeight;
-  if (!width || !height || gl.isContextLost()) return;
-  let luminanceTotal = 0;
-  let litSamples = 0;
-  for (const yRatio of [0.2, 0.5, 0.8]) {
-    for (const xRatio of [0.2, 0.5, 0.8]) {
-      const pixel = new Uint8Array(4);
-      const x = Math.min(width - 1, Math.floor(width * xRatio));
-      const y = Math.min(height - 1, Math.floor(height * yRatio));
-      gl.readPixels(x, y, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixel);
-      const luminance = pixel[0] * 0.2126 + pixel[1] * 0.7152 + pixel[2] * 0.0722;
-      luminanceTotal += luminance;
-      if (luminance > 8) litSamples += 1;
-    }
-  }
-  root.dataset.experiencePixelAverage = (luminanceTotal / 9).toFixed(2);
-  root.dataset.experienceLitSamples = String(litSamples);
-  root.dataset.experiencePixelFrame = String(renderFrameCount);
-  root.dataset.experiencePixelSampledRequest = sampleRequest;
+
 }
 
 function animate() {
