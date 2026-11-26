@@ -168,3 +168,283 @@
     transition-duration: .01ms !important;
   }
 }
+
+
+/* Shared public-route art direction: editorial, cinematic and restrained. */
+:root {
+  --kage-public-ink: #0b0b0a;
+  --kage-public-paper: #f1ede5;
+  --kage-public-muted: #aaa398;
+  --kage-public-gold: #c8a979;
+  --kage-public-line: rgba(200, 169, 121, .24);
+}
+html[data-theme="light"] {
+  --kage-public-ink: #f2eee6;
+  --kage-public-paper: #171612;
+  --kage-public-muted: #625d54;
+  --kage-public-gold: #967342;
+  --kage-public-line: rgba(112, 85, 48, .24);
+}
+
+/* The shared page canvas deliberately excludes the admin area. */
+main > .page-shell,
+main > .our-story-page {
+  position: relative;
+  isolation: isolate;
+  color: var(--kage-public-paper);
+  background:
+    radial-gradient(ellipse at 82% 4%, rgba(200, 169, 121, .075), transparent 34rem),
+    var(--kage-public-ink);
+}
+main > .page-shell::before,
+main > .our-story-page::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  opacity: .12;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+}
+.page-shell {
+  min-height: 68vh;
+  padding-bottom: clamp(4rem, 9vw, 8rem);
+}
+.page-shell > .page-hero {
+  position: relative;
+  width: min(100% - 3rem, 1320px);
+  margin-inline: auto;
+  padding: clamp(5rem, 10vw, 9rem) 0 clamp(3rem, 6vw, 5.5rem);
+  border-bottom: 1px solid var(--kage-public-line);
+}
+.page-shell .page-hero .eyebrow,
+.page-shell .eyebrow,
+.our-story-page .eyebrow {
+  color: var(--kage-public-gold);
+  letter-spacing: .2em;
+}
+.page-shell .page-hero h1 {
+  max-width: 1000px;
+  margin: 1.15rem 0 1rem;
+  color: var(--kage-public-paper);
+  font-family: var(--font-display, "Cormorant Garamond", Georgia, serif);
+  font-size: clamp(3rem, 8vw, 7.2rem);
+  font-weight: 500;
+  letter-spacing: -.055em;
+  line-height: .96;
+  text-wrap: balance;
+}
+.page-shell .page-hero h1 em,
+.page-shell h2 em,
+.our-story-page h1 em,
+.our-story-page h2 em {
+  color: var(--kage-public-gold);
+}
+.page-shell .page-hero p,
+.page-shell :where(.product-description, .form-note),
+.our-story-page :where(p) {
+  color: var(--kage-public-muted);
+}
+.page-shell > :not(.page-hero) {
+  width: min(100% - 3rem, 1320px);
+  margin-inline: auto;
+}
+.page-shell .shop-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .85rem;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 2.25rem;
+  padding: 1rem;
+  border: 1px solid var(--kage-public-line);
+  background: color-mix(in srgb, var(--kage-public-paper) 3%, transparent);
+  backdrop-filter: blur(14px);
+}
+.page-shell :where(.glass-control, .glass-filter-group, .glass-surface) {
+  border-color: var(--kage-public-line);
+}
+.page-shell .shop-search,
+.page-shell .shop-sort {
+  min-height: 48px;
+}
+.page-shell .shop-search input,
+.page-shell .shop-sort select {
+  color: var(--kage-public-paper);
+}
+.page-shell .shop-search input::placeholder {
+  color: var(--kage-public-muted);
+}
+.page-shell .glass-chip {
+  border: 1px solid var(--kage-public-line);
+  color: var(--kage-public-muted);
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+.page-shell .glass-chip.filter-active {
+  color: var(--kage-public-paper);
+  border-color: var(--kage-public-gold);
+  background: rgba(200, 169, 121, .12);
+}
+.page-shell .product-grid,
+.page-shell .collection-grid {
+  gap: clamp(1rem, 2.2vw, 2rem);
+}
+.page-shell .product-card,
+.page-shell .collection-reveal,
+.page-shell .cart-panel,
+.page-shell .selection-line {
+  border-color: var(--kage-public-line);
+}
+.page-shell .product-card {
+  background: transparent;
+  box-shadow: none;
+  transition: border-color .25s ease, transform .35s cubic-bezier(.2,.7,.2,1);
+}
+.page-shell .product-card:hover {
+  border-color: var(--kage-public-gold);
+  transform: translateY(-4px);
+}
+.page-shell .product-image {
+  background: color-mix(in srgb, var(--kage-public-paper) 5%, transparent);
+}
+.page-shell .product-info,
+.page-shell .product-info-link,
+.page-shell .product-card :where(h2,h3,p,span) {
+  color: var(--kage-public-paper);
+}
+.page-shell .product-card :where(.eyebrow,.product-category,.product-description) {
+  color: var(--kage-public-muted);
+}
+.page-shell :where(.btn-dark, .btn-outline-dark) {
+  border-color: var(--kage-public-gold);
+}
+.page-shell .btn-dark {
+  color: #100f0d;
+  background: var(--kage-public-gold);
+}
+.page-shell .btn-outline-dark {
+  color: var(--kage-public-paper);
+}
+.page-shell :where(input, textarea, select) {
+  color: var(--kage-public-paper);
+  border-color: var(--kage-public-line);
+  background-color: color-mix(in srgb, var(--kage-public-paper) 4%, transparent);
+}
+.page-shell :where(input, textarea, select)::placeholder {
+  color: var(--kage-public-muted);
+}
+.page-shell .product-detail {
+  align-items: start;
+  gap: clamp(2rem, 6vw, 6rem);
+}
+.page-shell .product-detail-copy {
+  border: 1px solid var(--kage-public-line);
+  background: color-mix(in srgb, var(--kage-public-paper) 3%, transparent);
+}
+.page-shell .product-detail-copy :where(h1,h2,h3) {
+  color: var(--kage-public-paper);
+}
+.page-shell .product-detail-price {
+  color: var(--kage-public-gold);
+}
+.page-shell .product-details-accordion,
+.page-shell .product-facts,
+.page-shell .product-attributes {
+  border-color: var(--kage-public-line);
+}
+.page-shell .empty-catalog {
+  border-color: var(--kage-public-line);
+  background: color-mix(in srgb, var(--kage-public-paper) 3%, transparent);
+}
+.page-shell .text-link {
+  color: var(--kage-public-gold);
+}
+
+/* Story route becomes a continuous editorial journey without changing its content. */
+.our-story-page {
+  overflow: clip;
+}
+.our-story-page .story-hero {
+  min-height: min(850px, 92svh);
+  background: radial-gradient(ellipse at 70% 42%, rgba(200,169,121,.13), transparent 45%), #0b0b0a;
+  border-bottom: 1px solid var(--kage-public-line);
+}
+html[data-theme="light"] .our-story-page .story-hero {
+  background: radial-gradient(ellipse at 70% 42%, rgba(150,115,66,.12), transparent 45%), #e9e2d6;
+}
+.our-story-page .story-hero-copy h1 {
+  letter-spacing: -.06em;
+  line-height: .92;
+}
+.our-story-page :where(.story-philosophy-section,.story-themes-section,.story-approach-section,.story-values-section) {
+  background: var(--kage-public-ink);
+}
+.our-story-page .story-section-heading h2,
+.our-story-page .story-philosophy-copy h2,
+.our-story-page .story-approach-copy h2,
+.our-story-page .story-closing-copy h2 {
+  color: var(--kage-public-paper);
+  letter-spacing: -.045em;
+  text-wrap: balance;
+}
+.our-story-page :where(.story-theme-item,.story-value) {
+  border-color: var(--kage-public-line);
+}
+.our-story-page :where(.story-theme-number,.story-value-number,.story-text-link,.story-primary-link) {
+  color: var(--kage-public-gold);
+}
+.our-story-page .story-closing {
+  background: #0b0b0a;
+}
+.our-story-page .story-hero-frame,
+.our-story-page .story-editorial-image,
+.our-story-page .story-theme-art {
+  border-color: var(--kage-public-line);
+}
+
+@media (max-width: 760px) {
+  .page-shell > .page-hero,
+  .page-shell > :not(.page-hero) {
+    width: min(100% - 2rem, 1320px);
+  }
+  .page-shell > .page-hero {
+    padding-top: clamp(4rem, 18vw, 6rem);
+  }
+  .page-shell .shop-toolbar {
+    align-items: stretch;
+    padding: .75rem;
+  }
+  .page-shell .shop-search {
+    flex: 1 1 100%;
+  }
+  .page-shell .shop-sort {
+    flex: 1 1 100%;
+  }
+  .page-shell .filter-row {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: thin;
+  }
+  .page-shell .glass-chip {
+    flex: 0 0 auto;
+    min-height: 42px;
+  }
+  .our-story-page .story-hero {
+    min-height: 76svh;
+  }
+}
+@media (max-width: 420px) {
+  .page-shell .page-hero h1 {
+    font-size: clamp(2.65rem, 13vw, 3.6rem);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  main > .page-shell *,
+  main > .our-story-page * {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
