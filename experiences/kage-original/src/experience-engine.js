@@ -358,11 +358,9 @@ function createScene() {
   camera = new THREE.PerspectiveCamera(42, viewportWidth() / viewportHeight(), .1, 130);
   camera.position.set(0, 3.6, 13);
 
-  const captureWebGLForTests = new URLSearchParams(window.location.search).get("sm-studios-webgl-test") === "1";
   renderer = new THREE.WebGLRenderer({
     antialias: viewportWidth() > 700,
-    powerPreference: "high-performance",
-    preserveDrawingBuffer: captureWebGLForTests
+    powerPreference: "high-performance"
   });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, viewportWidth() < 700 ? 1 : 1.25));
   renderer.setSize(viewportWidth(), viewportHeight());
@@ -689,6 +687,7 @@ function startAnimation() {
 function publishRenderDiagnostics() {
   root.dataset.experienceFrames = String(renderFrameCount);
   root.dataset.experienceDrawCalls = String(renderer.info.render.calls);
+  root.dataset.experienceTriangles = String(renderer.info.render.triangles);
   const gl = renderer.getContext();
   root.dataset.webglContext = gl.isContextLost() ? "lost" : "ready";
 }
