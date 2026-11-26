@@ -149,7 +149,7 @@ test("document scrolling advances the experience on small mobile screens without
   expect(metrics.sceneOverflow).not.toBe("auto");
   await page.evaluate(() => window.scrollTo(0, document.querySelector(".sm-experience").offsetTop + document.querySelector(".sm-experience").offsetHeight * .88));
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(initial + 100);
-  await expect(page.locator('.sm-experience .chapter-nav a[aria-label="Return"]')).toHaveAttribute("aria-current", "location");
+  await expect(page.locator('.sm-experience .chapter-nav a[aria-label="The return"]')).toHaveAttribute("aria-current", "location");
 });
 
 test("the WebGL scene stays visible and renders through all five chapters on every target viewport", async ({ page }, testInfo) => {
