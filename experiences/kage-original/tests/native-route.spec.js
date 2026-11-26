@@ -80,6 +80,22 @@ async function centerChapter(page, chapter) {
   });
 }
 
+async function sampleLiveWebGLPixels(root) {
+  const request = await root.evaluate((element) => {
+    const next = String((Number(element.dataset.experiencePixelSampleRequest) || 0) + 1);
+    element.dataset.experiencePixelSampleRequest = next;
+    return next;
+  });
+  await expect.poll(
+    () => root.getAttribute("data-experience-pixel-sampled-request"),
+    { timeout: 5000 }
+  ).toBe(request);
+  return {
+    average: Number(await root.getAttribute("data-experience-pixel-average")),
+    litSamples: Number(await root.getAttribute("data-experience-lit-samples"))
+  };
+}
+
 test("native experience shares the storefront shell and renders all five chapters", async ({ page }, testInfo) => {
   const errors = [];
   page.on("pageerror", error => errors.push(error.message));
@@ -222,10 +238,7 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
       // Verify real GPU framebuffer pixels. The prior page.screenshot() call timed
       // out inside Chromium's SwiftShader compositor even after frame counters,
       // draw calls and the WebGL context proved the scene was rendering.
-      const brightness = {
-        average: Number(await root.getAttribute("data-experience-pixel-average")),
-        litSamples: Number(await root.getAttribute("data-experience-lit-samples"))
-      };
+      const brightness = await sampleLiveWebGLPixels(root);
       expect(Number.isFinite(brightness.average), "Expected live WebGL pixel diagnostics").toBe(true);
       expect(brightness.average, `Expected a visible rendered scene in chapter ${chapterIds[index]} at ${viewport.width}x${viewport.height}`).toBeGreaterThan(8);
       expect(brightness.litSamples).toBeGreaterThanOrEqual(7);
@@ -250,11 +263,10 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
         const value = Number(await root.getAttribute("data-experience-frames"));
         return value - reverseFrameBefore;
       }, { timeout: 5000 }).toBeGreaterThan(5);
-      await expect.poll(async () => {
-        const value = Number(await root.getAttribute("data-experience-pixel-average"));
-        return Number.isFinite(value) && value > 8;
-      }, { timeout: 5000 }).toBe(true);
-      expect(Number(await root.getAttribute("data-experience-lit-samples"))).toBeGreaterThanOrEqual(7);
+      const reverseBrightness = await sampleLiveWebGLPixels(root);
+      expect(Number.isFinite(reverseBrightness.average)).toBe(true);
+      expect(reverseBrightness.average).toBeGreaterThan(8);
+      expect(reverseBrightness.litSamples).toBeGreaterThanOrEqual(7);
       expect(await root.getAttribute("data-experience-draw-calls")).not.toBe("0");
       expect(await root.getAttribute("data-webgl-context")).toBe("ready");
     }
