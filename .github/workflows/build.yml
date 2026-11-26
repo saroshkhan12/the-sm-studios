@@ -20,6 +20,9 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
+      - name: Check patch whitespace
+        run: git diff --check HEAD~1 HEAD
+
       - name: Set up Node.js 20
         uses: actions/setup-node@v4
         with:
