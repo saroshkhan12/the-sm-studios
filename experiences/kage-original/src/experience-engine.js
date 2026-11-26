@@ -11,8 +11,8 @@ const scrollTarget = window;
 const viewportWidth = () => window.innerWidth;
 const viewportHeight = () => window.innerHeight;
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-let paused = reduceMotion, scrollProgress = 0, targetProgress = 0, frame = 0;
-let renderer, scene, camera, clock, resizeObserver, observer;
+let paused = reduceMotion, scrollProgress = 0, targetProgress = 0, frame = 0, renderFrameCount = 0;
+let renderer, scene, camera, clock, resizeObserver, observer, sceneObserver;
 
 motionButton.setAttribute("aria-pressed", String(paused));
 motionButton.textContent = paused ? "RESUME MOTION" : "PAUSE MOTION";
@@ -550,12 +550,41 @@ try {
 }
 
 function updateScroll() {
-  // Normalize progress to this experience section, not the whole site and not a nested scroller.
-  const rootTop = root.getBoundingClientRect().top + window.scrollY;
-  const maxScroll = Math.max(1, root.offsetHeight - viewportHeight());
-  const currentScroll = window.scrollY - rootTop;
-  targetProgress = Math.min(1, Math.max(0, currentScroll / maxScroll));
-  const activeIndex = Math.min(4, Math.round(targetProgress * 4));
+  // Drive the camera from the actual chapter positions. This stays correct when
+  // chapter heights differ across breakpoints or the route is preceded by a site header.
+  const viewportCenter = viewportHeight() / 2;
+  const centers = chapters.map((chapter) => {
+    const rect = chapter.getBoundingClientRect();
+    return rect.top + rect.height / 2;
+  });
+
+  if (centers.length > 1) {
+    if (viewportCenter <= centers[0]) {
+      targetProgress = 0;
+    } else if (viewportCenter >= centers[centers.length - 1]) {
+      targetProgress = 1;
+    } else {
+      let segment = 0;
+      while (segment < centers.length - 2 && viewportCenter > centers[segment + 1]) {
+        segment += 1;
+      }
+      const start = centers[segment];
+      const end = centers[segment + 1];
+      const localProgress = THREE.MathUtils.clamp(
+        (viewportCenter - start) / Math.max(1, end - start),
+        0,
+        1
+      );
+      targetProgress = (segment + localProgress) / (centers.length - 1);
+    }
+  } else {
+    const rootTop = root.getBoundingClientRect().top + window.scrollY;
+    const maxScroll = Math.max(1, root.offsetHeight - viewportHeight());
+    targetProgress = THREE.MathUtils.clamp((window.scrollY - rootTop) / maxScroll, 0, 1);
+  }
+
+  root.dataset.experienceTargetProgress = targetProgress.toFixed(3);
+  const activeIndex = Math.min(chapters.length - 1, Math.round(targetProgress * (chapters.length - 1)));
   navLinks.forEach((link, index) => {
     const active = index === activeIndex;
     link.classList.toggle("is-active", active);
@@ -566,6 +595,14 @@ function updateScroll() {
 scrollTarget.addEventListener("scroll", updateScroll, { passive: true });
 window.addEventListener("resize", resize);
 updateScroll();
+
+// Keep the WebGL layer pinned to the viewport for the full route. A fixed scene
+// avoids sticky-positioning differences between desktop browsers and mobile Safari.
+sceneObserver = new IntersectionObserver((entries) => {
+  const visible = entries.some((entry) => entry.isIntersecting);
+  root.classList.toggle("is-scene-active", visible);
+}, { root: null, threshold: 0 });
+sceneObserver.observe(root);
 
 observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
@@ -692,6 +729,12 @@ function animate() {
     });
   }
   renderer.render(scene, camera);
+  renderFrameCount += 1;
+  root.dataset.experienceProgress = p.toFixed(3);
+  root.dataset.experienceCameraZ = camera.position.z.toFixed(2);
+  root.dataset.experienceFrames = String(renderFrameCount);
+  root.dataset.experienceDrawCalls = String(renderer.info.render.calls);
+  root.dataset.webglContext = renderer.getContext().isContextLost() ? "lost" : "ready";
 }
 if (world) animate();
 
@@ -708,6 +751,8 @@ return () => {
   motionButton?.removeEventListener("click", handleMotionToggle);
   document.removeEventListener("visibilitychange", handleVisibility);
   observer?.disconnect();
+  sceneObserver?.disconnect();
+  root.classList.remove("is-scene-active");
   resizeObserver?.disconnect();
   if (scene) scene.traverse((object) => {
     if (!object.isMesh && !object.isPoints) return;
