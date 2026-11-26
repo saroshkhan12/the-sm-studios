@@ -743,3 +743,84 @@ html[data-theme="light"] .search-overlay .search-result.is-active {
     font-size: .75rem;
   }
 }
+
+
+/* The immersive homepage also responds fully to the paper/light theme. */
+html[data-theme="light"] .kage-home {
+  --kage-ink: #f2eee6;
+  --kage-paper: #171612;
+  --kage-muted: #625d54;
+  --kage-gold: #967342;
+  --kage-line: rgba(112,85,48,.24);
+  color: var(--kage-paper);
+  background: var(--kage-ink);
+}
+html[data-theme="light"] .kage-home .hero {
+  background:
+    radial-gradient(ellipse at 72% 45%, rgba(150,115,66,.13), transparent 42%),
+    linear-gradient(115deg, #f2eee6 0%, #eee8dc 58%, #e8dfd1 100%);
+}
+html[data-theme="light"] .kage-home .hero::after {
+  opacity: .07;
+}
+html[data-theme="light"] .kage-home .brand-values,
+html[data-theme="light"] .kage-home .home-collections-section,
+html[data-theme="light"] .kage-home .newsletter {
+  color: #171612;
+  background: #e9e2d6;
+  border-color: rgba(112,85,48,.2);
+}
+html[data-theme="light"] .kage-home .editorial-manifesto {
+  background: radial-gradient(ellipse at 10% 50%, rgba(150,115,66,.08), transparent 45%), #f2eee6;
+}
+html[data-theme="light"] .kage-home .manifesto-artwork {
+  border-color: rgba(112,85,48,.24);
+  background: #e4dccf;
+}
+html[data-theme="light"] .kage-home .manifesto-artwork::after {
+  border-color: rgba(23,22,18,.16);
+}
+html[data-theme="light"] .kage-home .featured-section {
+  color: #171612;
+  background: radial-gradient(ellipse at 85% 0%, rgba(150,115,66,.09), transparent 42%), #eee8dc;
+  border-color: rgba(112,85,48,.24);
+}
+html[data-theme="light"] .kage-home :where(.hero-copy h1,.editorial-manifesto-copy h2,.home-collections-title h2,.section-heading h2,.newsletter h2,.product-card .product-info h3) {
+  color: #171612;
+}
+html[data-theme="light"] .kage-home :where(.hero-copy > p,.editorial-manifesto-copy > p,.home-collections-description > p,.newsletter p,.product-card .product-info p) {
+  color: #625d54;
+}
+html[data-theme="light"] .kage-home .brand-values :where(strong,small) {
+  color: #171612;
+}
+html[data-theme="light"] .kage-home .product-card {
+  color: #171612;
+  border-color: rgba(112,85,48,.22);
+  background: rgba(255,255,255,.24);
+}
+html[data-theme="light"] .kage-home .product-card .product-image {
+  background: #e5ded2;
+}
+html[data-theme="light"] .kage-home .product-card .product-info strong {
+  color: #70552f;
+}
+html[data-theme="light"] .kage-home .collection-card .collection-meta :where(h3,p) {
+  color: #171612;
+}
+html[data-theme="light"] .kage-home .collection-card .art-placeholder {
+  background: #e5ded2;
+}
+html[data-theme="light"] .kage-home .newsletter .btn-light {
+  color: #f1ede5;
+  background: #171612;
+  border-color: #171612;
+}
+@media (prefers-contrast: more) {
+  html[data-theme="light"] .kage-home {
+    --kage-muted: #454138;
+  }
+  html[data-theme="light"] .page-shell {
+    --kage-public-muted: #454138;
+  }
+}
