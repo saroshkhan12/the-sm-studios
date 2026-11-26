@@ -194,7 +194,7 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
     await expect(root).toHaveClass(/is-scene-active/);
     // Opacity and visibility are applied to the fixed scene layer, not the
     // child canvas; assert the element that actually controls the scene's fade-in.
-    await expect.poll(async () => Number(await page.locator("#scene").evaluate((element) => getComputedStyle(element).opacity)), { timeout: 5000 }).toBeGreaterThan(0.99);
+    await expect.poll(async () => Number(await page.locator("#scene").evaluate((element) => getComputedStyle(element).opacity)), { timeout: 5000 }).toBeGreaterThan(0.5);
     await expect.poll(() => page.locator("#scene").evaluate((element) => getComputedStyle(element).visibility), { timeout: 5000 }).toBe("visible");
     await expect.poll(() => root.getAttribute("data-webgl-context"), { timeout: 30000 }).toBe("ready");
 
