@@ -355,7 +355,7 @@ function createScene() {
   camera.position.set(0, 3.6, 13);
 
   renderer = new THREE.WebGLRenderer({ antialias: innerWidth > 700, powerPreference: "high-performance" });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 700 ? 1.05 : 1.4));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 700 ? 1 : 1.25));
   renderer.setSize(innerWidth, innerHeight);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -584,7 +584,7 @@ function resize() {
   camera.aspect = innerWidth / innerHeight;
   camera.fov = innerWidth < 650 ? 54 : 42;
   camera.updateProjectionMatrix();
-  renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 700 ? 1.05 : 1.4));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 700 ? 1 : 1.25));
   renderer.setSize(innerWidth, innerHeight);
   renderer.shadowMap.enabled = innerWidth > 700;
 }
