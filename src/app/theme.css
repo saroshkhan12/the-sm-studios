@@ -9249,3 +9249,44 @@ html[data-theme="light"] .header.site-header .wordmark-type i {
     letter-spacing: .75px;
   }
 }
+
+/* Light-theme wordmark refinement: richer brand contrast and a cleaner
+   editorial signature, while leaving the header layout untouched. */
+html[data-theme="light"] .header.site-header .wordmark {
+  position: relative;
+  padding: 5px 0 7px;
+}
+html[data-theme="light"] .header.site-header .wordmark-type {
+  color: #211D19;
+  text-shadow: 0 1px 0 rgba(255,255,255,.55);
+  letter-spacing: 1.3px;
+}
+html[data-theme="light"] .header.site-header .wordmark-type i {
+  color: #71313D;
+  font-weight: 600;
+}
+html[data-theme="light"] .header.site-header .wordmark-type small {
+  color: #62564B;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+html[data-theme="light"] .header.site-header .wordmark::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 42px;
+  height: 2px;
+  background: linear-gradient(90deg, #9A7448, rgba(154,116,72,0));
+}
+@media (max-width: 520px) {
+  html[data-theme="light"] .header.site-header .wordmark-type {
+    letter-spacing: .65px;
+  }
+  html[data-theme="light"] .header.site-header .wordmark-type small {
+    font-size: 6px;
+    letter-spacing: 1.05px;
+  }
+}
