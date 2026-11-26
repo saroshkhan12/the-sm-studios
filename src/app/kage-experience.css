@@ -521,3 +521,225 @@ html[data-theme="light"] .footer.glass-footer :where(a:hover,.footer-logo strong
     gap: 2rem;
   }
 }
+
+
+/* Refined collection and product modules: original card markup and actions stay intact. */
+.page-shell .collection-card {
+  display: flex;
+  height: 100%;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--kage-public-line);
+  border-radius: 2px;
+  background: transparent;
+  box-shadow: none;
+  text-decoration: none;
+  transition: border-color .28s ease, transform .35s cubic-bezier(.2,.7,.2,1);
+}
+.page-shell .collection-card:hover {
+  border-color: var(--kage-public-gold);
+  transform: translateY(-4px);
+}
+.page-shell .collection-card .art-placeholder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  min-height: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: color-mix(in srgb, var(--kage-public-paper) 5%, transparent);
+}
+.page-shell .collection-card .collection-art-image {
+  transition: transform .8s cubic-bezier(.2,.7,.2,1), filter .5s ease;
+}
+.page-shell .collection-card:hover .collection-art-image {
+  transform: scale(1.045);
+  filter: saturate(1.05);
+}
+.page-shell .collection-card .art-caption {
+  color: #f1ede5;
+  letter-spacing: .17em;
+}
+.page-shell .collection-card .collection-meta {
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+  padding: 1.15rem 1.1rem 1.35rem;
+}
+.page-shell .collection-card .collection-meta h3 {
+  margin: .45rem 0 .35rem;
+  color: var(--kage-public-paper);
+  font-family: var(--font-display, "Cormorant Garamond", Georgia, serif);
+  font-size: clamp(1.55rem, 2.6vw, 2.25rem);
+  font-weight: 500;
+  letter-spacing: -.035em;
+  line-height: 1;
+}
+.page-shell .collection-card .collection-meta p {
+  margin: 0;
+  color: var(--kage-public-muted);
+  font-size: .82rem;
+  line-height: 1.65;
+}
+.page-shell .collection-card .collection-meta .eyebrow {
+  font-size: .58rem;
+}
+.page-shell .product-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--kage-public-line);
+  border-radius: 2px;
+  background: transparent;
+  box-shadow: none;
+  transform-style: preserve-3d;
+  transition: border-color .25s ease, background .25s ease;
+}
+.page-shell .product-card:hover {
+  border-color: var(--kage-public-gold);
+  background: color-mix(in srgb, var(--kage-public-paper) 2.5%, transparent);
+}
+.page-shell .product-card .product-image {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: color-mix(in srgb, var(--kage-public-paper) 5%, transparent);
+}
+.page-shell .product-card .product-image img {
+  padding: clamp(.65rem, 1.4vw, 1.2rem);
+  transition: transform .65s cubic-bezier(.2,.7,.2,1);
+}
+.page-shell .product-card:hover .product-image img {
+  transform: scale(1.035);
+}
+.page-shell .product-card .product-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.05rem 1.15rem;
+}
+.page-shell .product-card .product-info h3 {
+  color: var(--kage-public-paper);
+  font-family: var(--font-display, "Cormorant Garamond", Georgia, serif);
+  font-size: clamp(1.12rem, 1.6vw, 1.45rem);
+  font-weight: 500;
+  line-height: 1.1;
+}
+.page-shell .product-card .product-info p {
+  color: var(--kage-public-muted);
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.page-shell .product-card .product-info strong {
+  flex: 0 0 auto;
+  color: var(--kage-public-gold);
+  font-size: .83rem;
+  font-weight: 500;
+}
+.page-shell .product-card .wishlist-btn {
+  top: .8rem;
+  right: .8rem;
+  border: 1px solid rgba(200,169,121,.42);
+  background: rgba(11,11,10,.82);
+  color: #f1ede5;
+  backdrop-filter: blur(12px);
+}
+.page-shell .product-card .image-open {
+  right: .8rem;
+  bottom: .8rem;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+.page-shell .product-card:hover .image-open,
+.page-shell .product-card:focus-within .image-open {
+  opacity: 1;
+  transform: translateY(0);
+}
+.page-shell .product-card .storage-error {
+  padding-inline: 1rem;
+  color: #b45b61;
+}
+html[data-theme="light"] .page-shell .collection-card .art-caption {
+  color: #fff;
+}
+html[data-theme="light"] .page-shell .product-card .wishlist-btn {
+  background: rgba(23,22,18,.86);
+  color: #f1ede5;
+}
+html[data-theme="light"] .page-shell .product-card .product-info h3,
+html[data-theme="light"] .page-shell .collection-card .collection-meta h3 {
+  color: #171612;
+}
+html[data-theme="light"] .page-shell .product-card .product-info p,
+html[data-theme="light"] .page-shell .collection-card .collection-meta p {
+  color: #625d54;
+}
+
+/* Overlays retain legible contrast when the site is switched to its paper theme. */
+html[data-theme="light"] .navigation-overlay.glass-navigation {
+  color: #171612;
+  border-color: rgba(112,85,48,.22);
+  background: radial-gradient(ellipse at 82% 45%, rgba(150,115,66,.12), transparent 40%), rgba(242,238,230,.98);
+}
+html[data-theme="light"] .navigation-overlay :where(.navigation-overlay-brand,.navigation-overlay-links a,.navigation-overlay-aside p,.navigation-overlay-close) {
+  color: #171612;
+}
+html[data-theme="light"] .navigation-overlay :where(.navigation-overlay-links a:hover,.navigation-overlay-links a.active,.navigation-overlay-brand i) {
+  color: #967342;
+}
+html[data-theme="light"] .search-overlay-backdrop {
+  background: rgba(22,20,16,.48);
+}
+html[data-theme="light"] .search-overlay {
+  color: #171612;
+  border-color: rgba(112,85,48,.3);
+  background: radial-gradient(ellipse at 84% 0%, rgba(150,115,66,.1), transparent 44%), #f2eee6;
+}
+html[data-theme="light"] .search-overlay :where(h2,strong,.search-result-copy,.search-result-price,.search-overlay-footer) {
+  color: #171612;
+}
+html[data-theme="light"] .search-overlay :where(p,small,.eyebrow) {
+  color: #625d54;
+}
+html[data-theme="light"] .search-overlay .search-overlay-input {
+  color: #171612;
+  border-color: rgba(112,85,48,.28);
+  background: rgba(23,22,18,.04);
+}
+html[data-theme="light"] .search-overlay .search-overlay-input input {
+  color: #171612;
+}
+html[data-theme="light"] .search-overlay .search-overlay-input input::placeholder {
+  color: #777064;
+}
+html[data-theme="light"] .search-overlay .search-result {
+  border-color: rgba(112,85,48,.2);
+}
+html[data-theme="light"] .search-overlay .search-result:hover,
+html[data-theme="light"] .search-overlay .search-result.is-active {
+  background: rgba(150,115,66,.08);
+}
+@media (hover: none) {
+  .page-shell .product-card .image-open {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 760px) {
+  .page-shell .collection-card .collection-meta {
+    padding: .85rem .8rem 1rem;
+  }
+  .page-shell .product-card .product-info {
+    gap: .5rem;
+    padding: .8rem;
+  }
+  .page-shell .product-card .product-info strong {
+    font-size: .75rem;
+  }
+}
