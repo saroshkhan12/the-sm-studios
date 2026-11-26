@@ -42,6 +42,35 @@ function makeGroundTexture() {
   return texture;
 }
 
+
+function makeStoneBumpTexture() {
+  const canvas = document.createElement("canvas");
+  canvas.width = canvas.height = 128;
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = "#858585";
+  ctx.fillRect(0, 0, 128, 128);
+  for (let i = 0; i < 3200; i++) {
+    const shade = Math.random() > .5 ? 1 : 0;
+    const value = shade ? rand(145, 220) : rand(35, 105);
+    ctx.fillStyle = `rgba(${value},${value},${value},.16)`;
+    const size = rand(.35, 2.2);
+    ctx.fillRect(rand(0, 128), rand(0, 128), size, size);
+  }
+  for (let i = 0; i < 34; i++) {
+    ctx.strokeStyle = "rgba(30,30,30,.12)";
+    ctx.lineWidth = rand(.3, .8);
+    ctx.beginPath();
+    const x = rand(0, 128), y = rand(0, 128);
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + rand(-8, 8), y + rand(-3, 3));
+    ctx.stroke();
+  }
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(1.5, 1.5);
+  return texture;
+}
+
 function makeBarkTexture() {
   const canvas = document.createElement("canvas");
   canvas.width = 128;
@@ -340,7 +369,12 @@ function createScene() {
   ground.receiveShadow = true;
   ground.castShadow = false;
 
+  const stoneBump = makeStoneBumpTexture();
   const pathMats = [material("#858477"), material("#696e64"), material("#a09a84"), material("#5d665e")];
+  pathMats.forEach((mat) => {
+    mat.bumpMap = stoneBump;
+    mat.bumpScale = .035;
+  });
   for (let i = 0; i < 15; i++) createStone(garden, rand(-.22, .22), 5 - i * 1.12, rand(1.55, 2.25), rand(.72, 1.08), pathMats[i % pathMats.length]);
 
   const walls = material("#34443a");
