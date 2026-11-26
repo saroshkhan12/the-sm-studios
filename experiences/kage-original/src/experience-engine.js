@@ -6,10 +6,10 @@ const fallback = root.querySelector("#fallback");
 const chapters = [...root.querySelectorAll(".chapter")];
 const navLinks = [...root.querySelectorAll(".chapter-nav a")];
 const motionButton = root.querySelector("#motion-toggle");
-const isDocumentRoot = root === document.body;
-const scrollTarget = isDocumentRoot ? window : root;
-const viewportWidth = () => isDocumentRoot ? window.innerWidth : (root.clientWidth || window.innerWidth);
-const viewportHeight = () => isDocumentRoot ? window.innerHeight : (root.clientHeight || window.innerHeight);
+// The experience is part of the normal page flow: all scroll input comes from the document.
+const scrollTarget = window;
+const viewportWidth = () => window.innerWidth;
+const viewportHeight = () => window.innerHeight;
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let paused = reduceMotion, scrollProgress = 0, targetProgress = 0, frame = 0;
 let renderer, scene, camera, clock, resizeObserver, observer;
@@ -550,9 +550,11 @@ try {
 }
 
 function updateScroll() {
-  const maxScroll = (isDocumentRoot ? document.documentElement.scrollHeight : root.scrollHeight) - viewportHeight();
-  const currentScroll = isDocumentRoot ? window.scrollY : root.scrollTop;
-  targetProgress = maxScroll > 0 ? Math.min(1, Math.max(0, currentScroll / maxScroll)) : 0;
+  // Normalize progress to this experience section, not the whole site and not a nested scroller.
+  const rootTop = root.getBoundingClientRect().top + window.scrollY;
+  const maxScroll = Math.max(1, root.offsetHeight - viewportHeight());
+  const currentScroll = window.scrollY - rootTop;
+  targetProgress = Math.min(1, Math.max(0, currentScroll / maxScroll));
   const activeIndex = Math.min(4, Math.round(targetProgress * 4));
   navLinks.forEach((link, index) => {
     const active = index === activeIndex;
@@ -576,7 +578,7 @@ observer = new IntersectionObserver((entries) => {
       });
     }
   });
-}, { root: isDocumentRoot ? null : root, threshold: .48 });
+}, { root: null, threshold: .48 });
 chapters.forEach((chapter) => observer.observe(chapter));
 
 function handleMotionToggle() {
