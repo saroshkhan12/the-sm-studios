@@ -265,7 +265,8 @@ function createScene() {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   mount.appendChild(renderer.domElement);
 
-  scene.add(new THREE.HemisphereLight("#c6d4c9", "#111a14", 1.25));
+  const hemisphere = new THREE.HemisphereLight("#c6d4c9", "#111a14", 1.25);
+  scene.add(hemisphere);
   const moon = new THREE.DirectionalLight("#c3d2df", 2.6);
   moon.position.set(-7, 12, 8);
   moon.castShadow = innerWidth > 700;
@@ -396,7 +397,7 @@ function createScene() {
     scene.add(fog);
     fogCards.push(fog);
   }
-  return { garden, lights, motes, stars, water, fogCards, treeGroups };
+  return { garden, lights, motes, stars, water, fogCards, treeGroups, hemisphere, moon, fill };
 }
 
 let world;
@@ -454,29 +455,79 @@ function resize() {
 resizeObserver = new ResizeObserver(resize);
 resizeObserver.observe(document.documentElement);
 
+const chapterCamera = [
+  { x: 0, y: 3.55, z: 12.5, tx: 0, ty: 1.35, tz: 1.2 },
+  { x: -.65, y: 3.8, z: 6.2, tx: 0, ty: 2.05, tz: -4.4 },
+  { x: .35, y: 3.25, z: -.2, tx: 0, ty: .45, tz: -10.6 },
+  { x: -.45, y: 3.55, z: -6.6, tx: 0, ty: 1.65, tz: -16.8 },
+  { x: 0, y: 4.05, z: -14.7, tx: 0, ty: 1.85, tz: -24.2 }
+];
+const chapterAtmosphere = [
+  { sky: "#c6d4c9", ground: "#111a14", fog: "#1a2821", fill: "#d3a875", fillPower: .42, hemi: 1.18 },
+  { sky: "#b8c8c4", ground: "#111a16", fog: "#1b2924", fill: "#c6ad89", fillPower: .48, hemi: 1.2 },
+  { sky: "#a9c2c7", ground: "#10191a", fog: "#1b292b", fill: "#9dbfc1", fillPower: .38, hemi: 1.28 },
+  { sky: "#d5b995", ground: "#171711", fog: "#30271d", fill: "#e4a65f", fillPower: .82, hemi: 1.12 },
+  { sky: "#c5cfc4", ground: "#101711", fog: "#1a251e", fill: "#c8b18a", fillPower: .5, hemi: 1.16 }
+];
+const atmosphereColors = chapterAtmosphere.map((item) => ({
+  sky: new THREE.Color(item.sky),
+  ground: new THREE.Color(item.ground),
+  fog: new THREE.Color(item.fog),
+  fill: new THREE.Color(item.fill)
+}));
+const atmosphereScratch = {
+  sky: new THREE.Color(),
+  ground: new THREE.Color(),
+  fog: new THREE.Color(),
+  fill: new THREE.Color()
+};
+
 function animate() {
   frame = requestAnimationFrame(animate);
   if (!renderer || !world) return;
   if (!clock) clock = new THREE.Clock();
-  const elapsed = clock.getElapsedTime();
-  scrollProgress += (targetProgress - scrollProgress) * (paused ? .035 : .045);
-  const p = scrollProgress, mobile = innerWidth < 650;
-  const cameraZ = 12.5 - p * 29;
-  const cameraX = Math.sin(p * Math.PI * 1.3) * (mobile ? .3 : 1.1);
-  const cameraY = 3.35 + Math.sin(p * Math.PI) * .9;
-  camera.position.x += (cameraX - camera.position.x) * .025;
-  camera.position.y += (cameraY - camera.position.y) * .025;
-  camera.position.z += (cameraZ - camera.position.z) * .025;
-  const chapterTargets = [1.2, -4.4, -10.6, -16.8, -24.2];
-  const chapterPosition = p * 4;
-  const chapterIndex = Math.min(3, Math.floor(chapterPosition));
-  const chapterBlend = chapterPosition - chapterIndex;
-  const targetZ = THREE.MathUtils.lerp(chapterTargets[chapterIndex], chapterTargets[chapterIndex + 1], chapterBlend);
-  const targetY = p < .18 ? 1.45 : p > .78 ? 1.7 : 1.3;
-  camera.lookAt(0, targetY, targetZ);
+  const delta = Math.min(clock.getDelta(), .05);
+  const elapsed = clock.elapsedTime;
+  scrollProgress += (targetProgress - scrollProgress) * (1 - Math.exp(-delta * 3.4));
+  const p = scrollProgress;
+  const scaled = p * 4;
+  const index = Math.min(3, Math.floor(scaled));
+  const blend = THREE.MathUtils.smoothstep(scaled - index, 0, 1);
+  const a = chapterCamera[index];
+  const b = chapterCamera[index + 1];
+  const mix = (key) => THREE.MathUtils.lerp(a[key], b[key], blend);
+  const mobile = innerWidth < 650;
+  const desiredX = mix("x") * (mobile ? .62 : 1);
+  camera.position.x = THREE.MathUtils.damp(camera.position.x, desiredX, 3.1, delta);
+  camera.position.y = THREE.MathUtils.damp(camera.position.y, mix("y"), 3.1, delta);
+  camera.position.z = THREE.MathUtils.damp(camera.position.z, mix("z"), 3.1, delta);
+  camera.lookAt(mix("tx"), mix("ty"), mix("tz"));
+
+  const atmosphereA = chapterAtmosphere[index];
+  const atmosphereB = chapterAtmosphere[index + 1];
+  const colorsA = atmosphereColors[index];
+  const colorsB = atmosphereColors[index + 1];
+  const colorMix = (key) => atmosphereScratch[key].lerpColors(colorsA[key], colorsB[key], blend);
+  scene.background.copy(colorMix("fog"));
+  scene.fog.color.copy(atmosphereScratch.fog);
+  world.hemisphere.color.copy(colorMix("sky"));
+  world.hemisphere.groundColor.copy(colorMix("ground"));
+  world.hemisphere.intensity = THREE.MathUtils.lerp(atmosphereA.hemi, atmosphereB.hemi, blend);
+  world.fill.color.copy(colorMix("fill"));
+  world.fill.intensity = THREE.MathUtils.lerp(atmosphereA.fillPower, atmosphereB.fillPower, blend);
+
   if (!paused) {
     world.garden.rotation.y = Math.sin(elapsed * .08) * .006;
-    world.lights.forEach((light, i) => { light.intensity = 9.5 + Math.sin(elapsed * 1.3 + i * 1.7) * 1.2; });
+    world.treeGroups.forEach((tree, i) => {
+      tree.rotation.z = Math.sin(elapsed * .32 + i * 1.7) * .006;
+    });
+    const lanternChapter = THREE.MathUtils.smoothstep(p, .56, .82);
+    world.lights.forEach((light, i) => {
+      const pulse = Math.sin(elapsed * 1.3 + i * 1.7) * .55;
+      const lanternFocus = i >= 3 ? lanternChapter : .35 + lanternChapter * .35;
+      light.intensity = 7.6 + lanternFocus * 4.8 + pulse;
+      light.distance = 10 + lanternFocus * 3;
+    });
     world.water.material.uniforms.uTime.value = elapsed;
     const positions = world.motes.geometry.attributes.position;
     for (let i = 0; i < positions.count; i++) {
@@ -484,7 +535,10 @@ function animate() {
       if (positions.array[i * 3 + 1] > 5.5) positions.array[i * 3 + 1] = .08;
     }
     positions.needsUpdate = true;
-    world.fogCards.forEach((fog, i) => { fog.position.x = Math.sin(elapsed * .12 + i) * 2.4; });
+    world.fogCards.forEach((fog, i) => {
+      fog.position.x = Math.sin(elapsed * .12 + i) * 2.4;
+      fog.material.opacity = .025 + lanternChapter * .012;
+    });
   }
   renderer.render(scene, camera);
 }
