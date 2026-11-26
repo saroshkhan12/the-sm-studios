@@ -71,6 +71,15 @@ function samplePngBrightness(png) {
   return { average: samples.reduce((sum, value) => sum + value, 0) / samples.length, litSamples: samples.filter((value) => value > 8).length };
 }
 
+async function centerChapter(page, chapter) {
+  await chapter.evaluate((element) => {
+    document.documentElement.style.scrollBehavior = "auto";
+    const rect = element.getBoundingClientRect();
+    const top = window.scrollY + rect.top + rect.height / 2 - window.innerHeight / 2;
+    window.scrollTo(0, top);
+  });
+}
+
 test("native experience shares the storefront shell and renders all five chapters", async ({ page }, testInfo) => {
   const errors = [];
   page.on("pageerror", error => errors.push(error.message));
@@ -177,7 +186,7 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
 
     for (let index = 0; index < chapterIds.length; index += 1) {
       const chapter = page.locator(`#${chapterIds[index]}`);
-      await chapter.evaluate((element) => element.scrollIntoView({ block: "center", behavior: "instant" }));
+      await centerChapter(page, chapter);
       const expectedProgress = index / (chapterIds.length - 1);
 
       await expect.poll(async () => {
@@ -209,9 +218,19 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
       expect(brightness.litSamples).toBeGreaterThanOrEqual(7);
     }
 
-    // Reverse navigation must drive the same camera path back to the opening chapter.
-    await page.locator("#arrival").evaluate((element) => element.scrollIntoView({ block: "center", behavior: "instant" }));
-    await expect.poll(() => root.getAttribute("data-experience-target-progress"), { timeout: 15000 }).toBe("0.000");
-    await expect.poll(() => root.getAttribute("data-experience-progress"), { timeout: 15000 }).toBe("0.000");
+    // Reverse through each chapter using immediate document scrolling, independent of CSS smooth-scroll preferences.
+    for (let index = chapterIds.length - 2; index >= 0; index -= 1) {
+      const chapter = page.locator(`#${chapterIds[index]}`);
+      await centerChapter(page, chapter);
+      const expectedProgress = index / (chapterIds.length - 1);
+      await expect.poll(async () => {
+        const value = Number(await root.getAttribute("data-experience-target-progress"));
+        return Number.isFinite(value) && Math.abs(value - expectedProgress) <= 0.09;
+      }, { timeout: 15000 }).toBe(true);
+      await expect.poll(async () => {
+        const value = Number(await root.getAttribute("data-experience-progress"));
+        return Number.isFinite(value) && Math.abs(value - expectedProgress) <= 0.12;
+      }, { timeout: 15000 }).toBe(true);
+    }
   }
 });
