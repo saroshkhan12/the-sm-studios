@@ -6,6 +6,10 @@ const fallback = root.querySelector("#fallback");
 const chapters = [...root.querySelectorAll(".chapter")];
 const navLinks = [...root.querySelectorAll(".chapter-nav a")];
 const motionButton = root.querySelector("#motion-toggle");
+const isDocumentRoot = root === document.body;
+const scrollTarget = isDocumentRoot ? window : root;
+const viewportWidth = () => isDocumentRoot ? window.innerWidth : viewportWidth();
+const viewportHeight = () => isDocumentRoot ? window.innerHeight : viewportHeight();
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let paused = reduceMotion, scrollProgress = 0, targetProgress = 0, frame = 0;
 let renderer, scene, camera, clock, resizeObserver, observer;
@@ -351,16 +355,16 @@ function createScene() {
   scene = new THREE.Scene();
   scene.background = new THREE.Color("#111713");
   scene.fog = new THREE.FogExp2("#1a2821", .026);
-  camera = new THREE.PerspectiveCamera(42, (root.clientWidth || window.innerWidth) / (root.clientHeight || window.innerHeight), .1, 130);
+  camera = new THREE.PerspectiveCamera(42, viewportWidth() / viewportHeight(), .1, 130);
   camera.position.set(0, 3.6, 13);
 
-  renderer = new THREE.WebGLRenderer({ antialias: (root.clientWidth || window.innerWidth) > 700, powerPreference: "high-performance" });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, (root.clientWidth || window.innerWidth) < 700 ? 1 : 1.25));
-  renderer.setSize((root.clientWidth || window.innerWidth), (root.clientHeight || window.innerHeight));
+  renderer = new THREE.WebGLRenderer({ antialias: viewportWidth() > 700, powerPreference: "high-performance" });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, viewportWidth() < 700 ? 1 : 1.25));
+  renderer.setSize(viewportWidth(), viewportHeight());
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.28;
-  renderer.shadowMap.enabled = (root.clientWidth || window.innerWidth) > 700;
+  renderer.shadowMap.enabled = viewportWidth() > 700;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   mount.appendChild(renderer.domElement);
 
@@ -368,8 +372,8 @@ function createScene() {
   scene.add(hemisphere);
   const moon = new THREE.DirectionalLight("#c3d2df", 2.6);
   moon.position.set(-7, 12, 8);
-  moon.castShadow = (root.clientWidth || window.innerWidth) > 700;
-  moon.shadow.mapSize.set((root.clientWidth || window.innerWidth) < 1100 ? 768 : 1536, (root.clientWidth || window.innerWidth) < 1100 ? 768 : 1536);
+  moon.castShadow = viewportWidth() > 700;
+  moon.shadow.mapSize.set(viewportWidth() < 1100 ? 768 : 1536, viewportWidth() < 1100 ? 768 : 1536);
   moon.shadow.camera.near = .5;
   moon.shadow.camera.far = 48;
   moon.shadow.bias = -0.00018;
@@ -426,7 +430,7 @@ function createScene() {
   // Layered woodland canopy: foreground, mid-ground and distant silhouettes.
 
   const treeGroups = [];
-  for (let i = 0; i < ((root.clientWidth || window.innerWidth) < 700 ? 9 : 14); i++) {
+  for (let i = 0; i < (viewportWidth() < 700 ? 9 : 14); i++) {
     const side = i % 2 ? 1 : -1;
     const z = 4 - Math.floor(i / 2) * 2.15 + rand(-.8, .8);
     const x = side * rand(4.2, 8.5);
@@ -434,7 +438,7 @@ function createScene() {
   }
   // Low shrubs and fern-like foliage along the walk.
   const shrubMats = [material("#38523a"), material("#4a6241"), material("#273d30")];
-  for (let i = 0; i < ((root.clientWidth || window.innerWidth) < 700 ? 34 : 54); i++) {
+  for (let i = 0; i < (viewportWidth() < 700 ? 34 : 54); i++) {
     const side = Math.random() > .5 ? 1 : -1;
     const x = side * rand(2.4, 5.3), z = rand(-19, 7);
     const shrub = add(garden, sharedShrubGeometry,
@@ -450,7 +454,7 @@ function createScene() {
   }
   // Mossy stones and roots give the ground a readable foreground scale.
   const rockMats = [material("#656957"), material("#515d4b")];
-  for (let i = 0; i < ((root.clientWidth || window.innerWidth) < 700 ? 14 : 22); i++) {
+  for (let i = 0; i < (viewportWidth() < 700 ? 14 : 22); i++) {
     const x = (Math.random() > .5 ? 1 : -1) * rand(2.5, 6.5), z = rand(-21, 8);
     const rock = add(garden, sharedRockGeometry,
       rockMats[i % rockMats.length], [x, rand(.08, .3), z]);
@@ -504,14 +508,14 @@ function createScene() {
   farArch.scale.setScalar(.52);
 
   const starPositions = [];
-  const starCount = (root.clientWidth || window.innerWidth) < 700 ? 420 : 900;
+  const starCount = viewportWidth() < 700 ? 420 : 900;
   for (let i = 0; i < starCount; i++) starPositions.push(rand(-42, 42), rand(5, 28), rand(-42, 15));
   const starsGeo = new THREE.BufferGeometry();
   starsGeo.setAttribute("position", new THREE.Float32BufferAttribute(starPositions, 3));
   const stars = new THREE.Points(starsGeo, new THREE.PointsMaterial({ color: "#c3d4c4", size: .045, transparent: true, opacity: .52 }));
   scene.add(stars);
 
-  const moteCount = (root.clientWidth || window.innerWidth) < 700 ? 90 : 180;
+  const moteCount = viewportWidth() < 700 ? 90 : 180;
   const motePositions = new Float32Array(moteCount * 3);
   for (let i = 0; i < moteCount; i++) {
     motePositions[i * 3] = rand(-8, 8);
@@ -524,7 +528,7 @@ function createScene() {
   scene.add(motes);
 
   const fogCards = [];
-  const fogCardCount = (root.clientWidth || window.innerWidth) < 700 ? 4 : 7;
+  const fogCardCount = viewportWidth() < 700 ? 4 : 7;
   for (let i = 0; i < fogCardCount; i++) {
     const fog = new THREE.Mesh(new THREE.PlaneGeometry(12, 2.8),
       new THREE.MeshBasicMaterial({ color: "#a6b7a6", transparent: true, opacity: .035, depthWrite: false, side: THREE.DoubleSide }));
@@ -546,8 +550,9 @@ try {
 }
 
 function updateScroll() {
-  const maxScroll = root.scrollHeight - root.clientHeight;
-  targetProgress = maxScroll > 0 ? Math.min(1, Math.max(0, root.scrollTop / maxScroll)) : 0;
+  const maxScroll = (isDocumentRoot ? document.documentElement.scrollHeight : root.scrollHeight) - viewportHeight();
+  const currentScroll = isDocumentRoot ? window.scrollY : root.scrollTop;
+  targetProgress = maxScroll > 0 ? Math.min(1, Math.max(0, currentScroll / maxScroll)) : 0;
   const activeIndex = Math.min(4, Math.round(targetProgress * 4));
   navLinks.forEach((link, index) => {
     const active = index === activeIndex;
@@ -556,7 +561,8 @@ function updateScroll() {
     else link.removeAttribute("aria-current");
   });
 }
-root.addEventListener("scroll", updateScroll, { passive: true });
+scrollTarget.addEventListener("scroll", updateScroll, { passive: true });
+window.addEventListener("resize", resize);
 updateScroll();
 
 observer = new IntersectionObserver((entries) => {
@@ -570,7 +576,7 @@ observer = new IntersectionObserver((entries) => {
       });
     }
   });
-}, { root, threshold: .48 });
+}, { root: isDocumentRoot ? null : root, threshold: .48 });
 chapters.forEach((chapter) => observer.observe(chapter));
 
 function handleMotionToggle() {
@@ -582,12 +588,12 @@ motionButton.addEventListener("click", handleMotionToggle);
 
 function resize() {
   if (!renderer || !camera) return;
-  camera.aspect = (root.clientWidth || window.innerWidth) / (root.clientHeight || window.innerHeight);
-  camera.fov = (root.clientWidth || window.innerWidth) < 650 ? 54 : 42;
+  camera.aspect = viewportWidth() / viewportHeight();
+  camera.fov = viewportWidth() < 650 ? 54 : 42;
   camera.updateProjectionMatrix();
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, (root.clientWidth || window.innerWidth) < 700 ? 1 : 1.25));
-  renderer.setSize((root.clientWidth || window.innerWidth), (root.clientHeight || window.innerHeight));
-  renderer.shadowMap.enabled = (root.clientWidth || window.innerWidth) > 700;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, viewportWidth() < 700 ? 1 : 1.25));
+  renderer.setSize(viewportWidth(), viewportHeight());
+  renderer.shadowMap.enabled = viewportWidth() > 700;
 }
 resizeObserver = new ResizeObserver(resize);
 resizeObserver.observe(root);
@@ -633,7 +639,7 @@ function animate() {
   const a = chapterCamera[index];
   const b = chapterCamera[index + 1];
   const mix = (key) => THREE.MathUtils.lerp(a[key], b[key], blend);
-  const mobile = (root.clientWidth || window.innerWidth) < 650;
+  const mobile = viewportWidth() < 650;
   const desiredX = mix("x") * (mobile ? .62 : 1);
   camera.position.x = THREE.MathUtils.damp(camera.position.x, desiredX, 3.1, delta);
   camera.position.y = THREE.MathUtils.damp(camera.position.y, mix("y"), 3.1, delta);
@@ -695,7 +701,8 @@ document.addEventListener("visibilitychange", handleVisibility);
 
 return () => {
   cancelAnimationFrame(frame);
-  root.removeEventListener("scroll", updateScroll);
+  scrollTarget.removeEventListener("scroll", updateScroll);
+  window.removeEventListener("resize", resize);
   motionButton?.removeEventListener("click", handleMotionToggle);
   document.removeEventListener("visibilitychange", handleVisibility);
   observer?.disconnect();
