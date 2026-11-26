@@ -17,7 +17,7 @@ test("renders all five story chapters and navigation", async ({ page }, testInfo
 
   await page.screenshot({
     path: testInfo.outputPath(`kage-${testInfo.project.name}.png`),
-    fullPage: true,
+    fullPage: false,
     animations: "disabled"
   });
   expect(pageErrors).toEqual([]);
