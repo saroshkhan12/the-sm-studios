@@ -1,4 +1,84 @@
 import { test, expect } from "@playwright/test";
+import { inflateSync } from "node:zlib";
+
+function samplePngBrightness(png) {
+  let offset = 8;
+  let width = 0;
+  let height = 0;
+  let bitDepth = 0;
+  let colorType = 0;
+  const compressed = [];
+
+  while (offset < png.length) {
+    const length = png.readUInt32BE(offset);
+    const type = png.toString("ascii", offset + 4, offset + 8);
+    const data = png.subarray(offset + 8, offset + 8 + length);
+    if (type === "IHDR") {
+      width = data.readUInt32BE(0);
+      height = data.readUInt32BE(4);
+      bitDepth = data[8];
+      colorType = data[9];
+    } else if (type === "IDAT") {
+      compressed.push(data);
+    } else if (type === "IEND") {
+      break;
+    }
+    offset += length + 12;
+  }
+
+  const channels = colorType === 6 ? 4 : colorType === 2 ? 3 : 0;
+  if (!width || !height || bitDepth !== 8 || !channels) {
+    throw new Error(`Unsupported screenshot PNG format: ${width}x${height}, depth ${bitDepth}, type ${colorType}`);
+  }
+
+  const raw = inflateSync(Buffer.concat(compressed));
+  const stride = width * channels;
+  const pixels = Buffer.alloc(height * stride);
+  let source = 0;
+  const paeth = (a, b, c) => {
+    const p = a + b - c;
+    const pa = Math.abs(p - a), pb = Math.abs(p - b), pc = Math.abs(p - c);
+    return pa <= pb && pa <= pc ? a : pb <= pc ? b : c;
+  };
+
+  for (let y = 0; y < height; y += 1) {
+    const filter = raw[source++];
+    const row = y * stride;
+    for (let x = 0; x < stride; x += 1) {
+      const value = raw[source++];
+      const left = x >= channels ? pixels[row + x - channels] : 0;
+      const above = y > 0 ? pixels[row - stride + x] : 0;
+      const upperLeft = y > 0 && x >= channels ? pixels[row - stride + x - channels] : 0;
+      let predictor = 0;
+      if (filter === 1) predictor = left;
+      else if (filter === 2) predictor = above;
+      else if (filter === 3) predictor = Math.floor((left + above) / 2);
+      else if (filter === 4) predictor = paeth(left, above, upperLeft);
+      else if (filter !== 0) throw new Error(`Unsupported PNG filter: ${filter}`);
+      pixels[row + x] = (value + predictor) & 255;
+    }
+  }
+
+  const samples = [];
+  for (const yRatio of [0.2, 0.5, 0.8]) {
+    for (const xRatio of [0.2, 0.5, 0.8]) {
+      const x = Math.min(width - 1, Math.floor(width * xRatio));
+      const y = Math.min(height - 1, Math.floor(height * yRatio));
+      const index = y * stride + x * channels;
+      samples.push((pixels[index] * 0.2126) + (pixels[index + 1] * 0.7152) + (pixels[index + 2] * 0.0722));
+    }
+  }
+  return { average: samples.reduce((sum, value) => sum + value, 0) / samples.length, litSamples: samples.filter((value) => value > 8).length };
+}
+
+async function centerChapter(page, chapter) {
+  await chapter.evaluate((element) => {
+    document.documentElement.style.scrollBehavior = "auto";
+    const rect = element.getBoundingClientRect();
+    const top = window.scrollY + rect.top + rect.height / 2 - window.innerHeight / 2;
+    window.scrollTo(0, top);
+  });
+}
 
 test("native experience shares the storefront shell and renders all five chapters", async ({ page }, testInfo) => {
   const errors = [];
@@ -78,5 +158,93 @@ test("document scrolling advances the experience on small mobile screens without
   expect(metrics.sceneOverflow).not.toBe("auto");
   await page.evaluate(() => window.scrollTo(0, document.querySelector(".sm-experience").offsetTop + document.querySelector(".sm-experience").offsetHeight * .88));
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(initial + 100);
-  await expect(page.locator('.sm-experience .chapter-nav a[aria-label="Return"]')).toHaveAttribute("aria-current", "location");
+  await expect(page.locator('.sm-experience .chapter-nav a[aria-label="The return"]')).toHaveAttribute("aria-current", "location");
+});
+
+test("the WebGL scene stays visible and renders through all five chapters on every target viewport", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "native-mobile", "Run the full six-size viewport matrix once to avoid duplicate GPU-heavy runs.");
+  test.setTimeout(180000);
+  const viewports = [
+    { width: 320, height: 640 },
+    { width: 375, height: 812 },
+    { width: 390, height: 844 },
+    { width: 430, height: 932 },
+    { width: 768, height: 1024 },
+    { width: 1440, height: 900 }
+  ];
+  const chapterIds = ["arrival", "threshold", "water", "lantern", "return"];
+
+  for (const viewport of viewports) {
+    await page.setViewportSize(viewport);
+    await page.goto("/experience");
+    const root = page.locator(".sm-experience");
+    const canvas = page.locator("#scene canvas");
+    await expect(canvas).toBeVisible({ timeout: 30000 });
+    await expect(root).toHaveClass(/is-scene-active/);
+    await expect.poll(async () => Number(await canvas.evaluate((element) => getComputedStyle(element).opacity)), { timeout: 5000 }).toBeGreaterThan(0.99);
+    await expect.poll(() => root.getAttribute("data-webgl-context"), { timeout: 30000 }).toBe("ready");
+
+    for (let index = 0; index < chapterIds.length; index += 1) {
+      const chapter = page.locator(`#${chapterIds[index]}`);
+      await centerChapter(page, chapter);
+      const expectedProgress = index / (chapterIds.length - 1);
+
+      await expect.poll(async () => {
+        const value = Number(await root.getAttribute("data-experience-target-progress"));
+        return Number.isFinite(value) && Math.abs(value - expectedProgress) <= 0.09;
+      }, { timeout: 15000 }).toBe(true);
+
+      await expect.poll(async () => {
+        const value = Number(await root.getAttribute("data-experience-progress"));
+        return Number.isFinite(value) && Math.abs(value - expectedProgress) <= 0.12;
+      }, { timeout: 15000 }).toBe(true);
+
+      const frameBefore = Number(await root.getAttribute("data-experience-frames"));
+      await expect.poll(async () => {
+        const frameAfter = Number(await root.getAttribute("data-experience-frames"));
+        return frameAfter - frameBefore;
+      }, { timeout: 5000 }).toBeGreaterThan(5);
+
+      const box = await canvas.boundingBox();
+      expect(box).not.toBeNull();
+      expect(box.width).toBeGreaterThanOrEqual(viewport.width - 1);
+      expect(box.height).toBeGreaterThanOrEqual(viewport.height - 1);
+      expect(box.y).toBeLessThanOrEqual(1);
+      expect(await root.getAttribute("data-experience-draw-calls")).not.toBe("0");
+      expect(await root.getAttribute("data-webgl-context")).toBe("ready");
+      // Capture the live canvas through the page compositor. Locator screenshots wait
+      // for a continuously animated canvas to become "stable", which never happens.
+      await page.addStyleTag({
+        content: `body * { visibility: hidden !important; }
+          .sm-experience, .sm-experience #scene, .sm-experience #scene canvas {
+            visibility: visible !important;
+            opacity: 1 !important;
+          }
+          .sm-experience::before { visibility: hidden !important; }`
+      });
+      const renderedCanvas = await page.screenshot({
+        clip: { x: box.x, y: box.y, width: box.width, height: box.height },
+        animations: "disabled",
+        timeout: 15000
+      });
+      const brightness = samplePngBrightness(renderedCanvas);
+      expect(brightness.average, `Expected a visible rendered scene in chapter ${chapterIds[index]} at ${viewport.width}x${viewport.height}`).toBeGreaterThan(8);
+      expect(brightness.litSamples).toBeGreaterThanOrEqual(7);
+    }
+
+    // Reverse through each chapter using immediate document scrolling, independent of CSS smooth-scroll preferences.
+    for (let index = chapterIds.length - 2; index >= 0; index -= 1) {
+      const chapter = page.locator(`#${chapterIds[index]}`);
+      await centerChapter(page, chapter);
+      const expectedProgress = index / (chapterIds.length - 1);
+      await expect.poll(async () => {
+        const value = Number(await root.getAttribute("data-experience-target-progress"));
+        return Number.isFinite(value) && Math.abs(value - expectedProgress) <= 0.09;
+      }, { timeout: 15000 }).toBe(true);
+      await expect.poll(async () => {
+        const value = Number(await root.getAttribute("data-experience-progress"));
+        return Number.isFinite(value) && Math.abs(value - expectedProgress) <= 0.12;
+      }, { timeout: 15000 }).toBe(true);
+    }
+  }
 });
