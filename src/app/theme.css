@@ -9017,3 +9017,175 @@ html[data-theme="light"] .site-header :is(a, button):focus-visible { outline-col
   .site-header .icon-btn,
   .site-header-nav a { transition: none; }
 }
+
+
+/* Final header visual balance: coordinated surfaces, restrained borders, and matched theme palettes. */
+.header.site-header {
+  --header-ink: #F3EEE5;
+  --header-muted: #C4BBAE;
+  --header-accent: #D0AD78;
+  --header-border: rgba(208, 173, 120, .19);
+  --header-control: rgba(255, 255, 255, .035);
+  --header-control-hover: rgba(208, 173, 120, .11);
+  min-height: 82px;
+  border: 0;
+  border-bottom: 1px solid var(--header-border);
+  background: linear-gradient(180deg, rgba(28, 27, 25, .985), rgba(22, 22, 21, .975));
+  color: var(--header-ink);
+  box-shadow: 0 7px 22px rgba(0, 0, 0, .13);
+}
+.header.site-header .site-header-inner { min-height: 82px; }
+.header.site-header .wordmark {
+  min-height: 48px;
+  padding: 4px 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.header.site-header .wordmark-type {
+  color: var(--header-ink);
+  font-size: clamp(16px, 1.35vw, 20px);
+  letter-spacing: .85px;
+}
+.header.site-header .wordmark-type i { color: var(--header-accent); }
+.header.site-header .wordmark-type small {
+  color: var(--header-muted);
+  font-size: 7.5px;
+  letter-spacing: 1.65px;
+}
+.header.site-header .site-header-nav a {
+  color: var(--header-muted);
+  font-size: 9px;
+  letter-spacing: 1.35px;
+}
+.header.site-header .site-header-nav a:hover,
+.header.site-header .site-header-nav a.active { color: var(--header-accent); }
+.header.site-header .site-header-nav .nav-indicator {
+  bottom: 5px;
+  height: 1px;
+  background: var(--header-accent);
+}
+.header.site-header .site-header-actions { gap: 7px; }
+.header.site-header .header-actions .icon-btn,
+.header.site-header .mobile-menu {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  flex-basis: 40px;
+  border: 1px solid var(--header-border);
+  border-radius: 50%;
+  background: var(--header-control);
+  color: var(--header-ink);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+}
+.header.site-header .header-actions .icon-btn svg,
+.header.site-header .mobile-menu svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.65;
+}
+.header.site-header .header-actions .icon-btn:hover,
+.header.site-header .mobile-menu:hover {
+  border-color: rgba(208,173,120,.58);
+  background: var(--header-control-hover);
+  color: #E6C99B;
+  box-shadow: 0 3px 12px rgba(0,0,0,.14);
+}
+.header.site-header .header-actions .theme-toggle {
+  border-color: rgba(208,173,120,.4);
+  background: rgba(208,173,120,.085);
+  color: #E2C18D;
+}
+.header.site-header .header-actions .theme-toggle:hover {
+  border-color: rgba(208,173,120,.7);
+  background: rgba(208,173,120,.16);
+  color: #F0D9B1;
+}
+.header.site-header .header-count {
+  top: -3px;
+  right: -3px;
+  min-width: 16px;
+  height: 16px;
+  border: 2px solid #191817;
+  background: #793B45;
+  color: #FFF9F0;
+  box-shadow: 0 1px 4px rgba(0,0,0,.22);
+}
+.header.site-header :is(a, button):focus-visible {
+  outline: 2px solid var(--header-accent);
+  outline-offset: 3px;
+}
+
+html[data-theme="light"] .header.site-header {
+  --header-ink: #302A24;
+  --header-muted: #6D6257;
+  --header-accent: #895A43;
+  --header-border: rgba(105, 79, 55, .19);
+  --header-control: rgba(255, 255, 255, .62);
+  --header-control-hover: rgba(137, 90, 67, .09);
+  background: linear-gradient(180deg, #FBF8F2, #F5F0E7);
+  color: var(--header-ink);
+  border-bottom: 1px solid rgba(105,79,55,.2);
+  box-shadow: 0 6px 20px rgba(67,52,37,.065);
+}
+html[data-theme="light"] .header.site-header .wordmark-type { color: var(--header-ink); }
+html[data-theme="light"] .header.site-header .wordmark-type i { color: var(--header-accent); }
+html[data-theme="light"] .header.site-header .wordmark-type small { color: var(--header-muted); }
+html[data-theme="light"] .header.site-header .site-header-nav a { color: var(--header-muted); }
+html[data-theme="light"] .header.site-header .site-header-nav a:hover,
+html[data-theme="light"] .header.site-header .site-header-nav a.active { color: var(--header-accent); }
+html[data-theme="light"] .header.site-header .header-actions .icon-btn,
+html[data-theme="light"] .header.site-header .mobile-menu {
+  border-color: var(--header-border);
+  background: var(--header-control);
+  color: var(--header-ink);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+}
+html[data-theme="light"] .header.site-header .header-actions .icon-btn:hover,
+html[data-theme="light"] .header.site-header .mobile-menu:hover {
+  border-color: rgba(137,90,67,.42);
+  background: var(--header-control-hover);
+  color: #794B39;
+}
+html[data-theme="light"] .header.site-header .header-actions .theme-toggle {
+  border-color: rgba(137,90,67,.34);
+  background: rgba(137,90,67,.075);
+  color: #895A43;
+}
+html[data-theme="light"] .header.site-header .header-actions .theme-toggle:hover {
+  border-color: rgba(137,90,67,.58);
+  background: rgba(137,90,67,.13);
+  color: #704432;
+}
+html[data-theme="light"] .header.site-header .header-count {
+  border-color: #F7F2E9;
+  background: #793B45;
+  color: #FFF9F0;
+}
+html[data-theme="light"] .header.site-header :is(a, button):focus-visible {
+  outline-color: #895A43;
+}
+
+@media (max-width: 1020px) {
+  .header.site-header .site-header-inner { min-height: 76px; }
+  .header.site-header .site-header-actions { gap: 5px; }
+}
+@media (max-width: 520px) {
+  .header.site-header .site-header-inner { min-height: 70px; }
+  .header.site-header .header-actions .icon-btn,
+  .header.site-header .mobile-menu {
+    width: 34px;
+    min-width: 34px;
+    height: 36px;
+    flex-basis: 34px;
+    border-radius: 11px;
+  }
+  .header.site-header .header-actions .icon-btn svg,
+  .header.site-header .mobile-menu svg { width: 17px; height: 17px; }
+  .header.site-header .site-header-actions { gap: 3px; }
+  .header.site-header .wordmark-type { font-size: clamp(13px, 3.8vw, 16px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .header.site-header .header-actions .icon-btn,
+  .header.site-header .mobile-menu { transition: none; }
+}
