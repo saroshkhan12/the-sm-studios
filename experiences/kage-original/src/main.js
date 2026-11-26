@@ -456,11 +456,13 @@ function createScene() {
     }`
   });
   const water = add(garden, new THREE.CircleGeometry(2.23, 96), waterMaterial, [0, .405, -10.6], [-Math.PI / 2, 0, 0]);
+  const rippleRings = [];
   for (let i = 0; i < 3; i++) {
     const ring = add(garden, new THREE.TorusGeometry(.25 + i * .48, .012, 5, 72),
-      new THREE.MeshBasicMaterial({ color: "#b1c9b4", transparent: true, opacity: .23, depthWrite: false }),
+      new THREE.MeshBasicMaterial({ color: "#b1c9b4", transparent: true, opacity: .2, depthWrite: false }),
       [rand(-.45, .45), .425 + i * .001, -10.6 + rand(-.45, .45)], [Math.PI / 2, 0, 0]);
     ring.userData.ripple = i;
+    rippleRings.push(ring);
   }
 
   // A distant, softly lit second threshold gives the later chapters a new focal point.
@@ -497,7 +499,7 @@ function createScene() {
     scene.add(fog);
     fogCards.push(fog);
   }
-  return { garden, lights, motes, stars, water, fogCards, treeGroups, hemisphere, moon, fill };
+  return { garden, lights, motes, stars, water, rippleRings, fogCards, treeGroups, hemisphere, moon, fill };
 }
 
 let world;
@@ -629,6 +631,12 @@ function animate() {
       light.distance = 10 + lanternFocus * 3;
     });
     world.water.material.uniforms.uTime.value = elapsed;
+    world.rippleRings.forEach((ring, i) => {
+      const phase = (elapsed * .22 + i / 3) % 1;
+      const expansion = .82 + phase * .62;
+      ring.scale.setScalar(expansion);
+      ring.material.opacity = .2 * (1 - phase) * (1 - phase);
+    });
     const positions = world.motes.geometry.attributes.position;
     for (let i = 0; i < positions.count; i++) {
       positions.array[i * 3 + 1] += .003;
