@@ -12,7 +12,7 @@ export function ExperienceClient() {
     let active = true;
     let cleanup: (() => void) | undefined;
 
-    void import("./experience-engine").then(({ mountExperience }) => {
+    void import("../../../experiences/kage-original/src/experience-engine").then(({ mountExperience }) => {
       if (active) cleanup = mountExperience(root);
     }).catch((error) => {
       console.error("The immersive experience could not be initialized.", error);
