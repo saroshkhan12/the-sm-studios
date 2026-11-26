@@ -223,11 +223,8 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
       expect(box.y).toBeLessThanOrEqual(1);
       expect(await root.getAttribute("data-experience-draw-calls")).not.toBe("0");
       expect(await root.getAttribute("data-webgl-context")).toBe("ready");
-      // Verify real GPU framebuffer pixels. The prior page.screenshot() call timed
-      // out inside Chromium's SwiftShader compositor even after frame counters,
-      // draw calls and the WebGL context proved the scene was rendering.
-      // The test-only query flag preserves the WebGL drawing buffer so we can
-      // inspect the actual rendered canvas without a page screenshot or GL readPixels.
+      // Inspect the actual WebGL canvas from its preserved test-only drawing buffer.
+      // This avoids the flaky page screenshot compositor and synchronous GL readPixels.
       const renderedDataUrl = await canvas.evaluate((element) => element.toDataURL("image/png"));
       const renderedPng = Buffer.from(renderedDataUrl.split(",")[1], "base64");
       const brightness = samplePngBrightness(renderedPng);
