@@ -171,6 +171,7 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
     const canvas = page.locator("#scene canvas");
     await expect(canvas).toBeVisible({ timeout: 30000 });
     await expect(root).toHaveClass(/is-scene-active/);
+    await expect.poll(async () => Number(await canvas.evaluate((element) => getComputedStyle(element).opacity)), { timeout: 5000 }).toBeGreaterThan(0.99);
     await expect.poll(() => root.getAttribute("data-webgl-context"), { timeout: 30000 }).toBe("ready");
 
     for (let index = 0; index < chapterIds.length; index += 1) {
