@@ -24,6 +24,18 @@ const add = (parent, geometry, mat, position, rotation) => {
   return mesh;
 };
 
+// Shared static geometry/materials reduce GPU resource duplication across repeated foliage.
+const sharedTreeTrunkGeometry = new THREE.CylinderGeometry(.12, .28, 3.7, 9);
+const sharedTreeCrownGeometry = new THREE.IcosahedronGeometry(.62, 1);
+const sharedTreeBranchMaterial = material("#40382d");
+const sharedShrubGeometry = new THREE.IcosahedronGeometry(.29, 1);
+const sharedFernGeometry = new THREE.ConeGeometry(.12, .85, 5);
+const sharedRockGeometry = new THREE.DodecahedronGeometry(.4, 0);
+const sharedEdgeGeometry = new THREE.DodecahedronGeometry(.175, 0);
+const sharedMossGeometry = new THREE.IcosahedronGeometry(.17, 0);
+const sharedGrassGeometry = new THREE.ConeGeometry(.035, .4, 4);
+sharedGrassGeometry.translate(0, .12, 0);
+
 function makeGroundTexture() {
   const canvas = document.createElement("canvas");
   canvas.width = canvas.height = 256;
@@ -109,8 +121,8 @@ function createTree(parent, x, z, scale, leafMaterials, trunkMat) {
   group.position.set(x, 0, z);
   group.scale.setScalar(scale);
   parent.add(group);
-  add(group, new THREE.CylinderGeometry(.12, .28, 3.7, 9), trunkMat, [0, 1.85, 0]);
-  const branchMat = material("#40382d");
+  add(group, sharedTreeTrunkGeometry, trunkMat, [0, 1.85, 0]);
+  const branchMat = sharedTreeBranchMaterial;
   for (let b = 0; b < 5; b++) {
     const angle = b * 2.399;
     const start = new THREE.Vector3(0, rand(1.4, 2.8), 0);
@@ -122,18 +134,20 @@ function createTree(parent, x, z, scale, leafMaterials, trunkMat) {
     for (let l = 0; l < 2; l++) {
       const t = .45 + l * .12;
       const p = curve.getPoint(Math.min(t, .95));
-      const crown = add(group, new THREE.IcosahedronGeometry(rand(.38, .72), 1),
+      const crown = add(group, sharedTreeCrownGeometry,
         leafMaterials[Math.floor(Math.random() * leafMaterials.length)],
         [p.x + rand(-.35, .35), p.y + rand(-.1, .48), p.z + rand(-.35, .35)]);
-      crown.scale.set(rand(1, 1.45), rand(.65, 1.05), rand(.8, 1.3));
+      const size = rand(.38, .72) / .62;
+      crown.scale.set(size * rand(1, 1.45), size * rand(.65, 1.05), size * rand(.8, 1.3));
       crown.rotation.set(rand(-.28, .28), rand(0, Math.PI), rand(-.24, .24));
     }
   }
   for (let i = 0; i < 6; i++) {
-    const crown = add(group, new THREE.IcosahedronGeometry(rand(.45, .85), 1),
+    const crown = add(group, sharedTreeCrownGeometry,
       leafMaterials[i % leafMaterials.length],
       [rand(-1.2, 1.2), rand(2.7, 4.5), rand(-1.1, 1.1)]);
-    crown.scale.set(rand(.9, 1.35), rand(.62, .92), rand(.82, 1.24));
+    const size = rand(.45, .85) / .62;
+    crown.scale.set(size * rand(.9, 1.35), size * rand(.62, .92), size * rand(.82, 1.24));
     crown.rotation.set(rand(-.22, .22), rand(0, Math.PI), rand(-.2, .2));
   }
   return group;
@@ -219,13 +233,15 @@ function createPathDetail(parent) {
     for (let i = 0; i < 34; i++) {
       const z = 5.3 - i * .78 + rand(-.12, .12);
       const x = side * rand(1.08, 1.52);
-      const edge = add(parent, new THREE.DodecahedronGeometry(rand(.12, .23), 0),
+      const edge = add(parent, sharedEdgeGeometry,
         pebble[i % pebble.length], [x, rand(.025, .09), z], [rand(-.2,.2), rand(0,Math.PI), rand(-.12,.12)]);
-      edge.scale.set(rand(1.1,1.7), .48, rand(.75,1.2));
+      const edgeSize = rand(.12, .23) / .175;
+      edge.scale.set(edgeSize * rand(1.1,1.7), edgeSize * .48, edgeSize * rand(.75,1.2));
       if (i % 3 === 0) {
-        const mossPatch = add(parent, new THREE.IcosahedronGeometry(rand(.12,.22), 0),
+        const mossPatch = add(parent, sharedMossGeometry,
           moss[i % moss.length], [x + side * .22, .045, z + .16]);
-        mossPatch.scale.set(1.7,.22,1);
+        const mossSize = rand(.12, .22) / .17;
+        mossPatch.scale.set(mossSize * 1.7, mossSize * .22, mossSize);
       }
     }
   }
@@ -236,10 +252,10 @@ function createPathDetail(parent) {
     tuft.position.set(x,0,z);
     parent.add(tuft);
     for (let blade = 0; blade < 3; blade++) {
-      const stem = add(tuft, new THREE.ConeGeometry(.035, rand(.28,.52), 4),
+      const stem = add(tuft, sharedGrassGeometry,
         moss[(i + blade) % moss.length],
         [rand(-.12,.12), .16, rand(-.12,.12)], [rand(-.22,.22), rand(0,Math.PI), rand(-.3,.3)]);
-      stem.geometry.translate(0,.12,0);
+      stem.scale.y = rand(.7, 1.3);
     }
   }
 }
@@ -412,21 +428,25 @@ function createScene() {
   for (let i = 0; i < (innerWidth < 700 ? 34 : 54); i++) {
     const side = Math.random() > .5 ? 1 : -1;
     const x = side * rand(2.4, 5.3), z = rand(-19, 7);
-    const shrub = add(garden, new THREE.IcosahedronGeometry(rand(.16, .42), 1),
+    const shrub = add(garden, sharedShrubGeometry,
       shrubMats[i % shrubMats.length], [x, rand(.12, .35), z]);
-    shrub.scale.set(1.6, .65, 1);
+    const shrubSize = rand(.16, .42) / .29;
+    shrub.scale.set(shrubSize * 1.6, shrubSize * .65, shrubSize);
     if (i % 4 === 0) {
-      const fern = add(garden, new THREE.ConeGeometry(.12, rand(.6, 1.1), 5),
+      const fern = add(garden, sharedFernGeometry,
         shrubMats[(i + 1) % shrubMats.length], [x + rand(-.25, .25), .5, z]);
+      fern.scale.y = rand(.6, 1.1) / .85;
       fern.rotation.z = rand(-.5, .5);
     }
   }
   // Mossy stones and roots give the ground a readable foreground scale.
+  const rockMats = [material("#656957"), material("#515d4b")];
   for (let i = 0; i < (innerWidth < 700 ? 14 : 22); i++) {
     const x = (Math.random() > .5 ? 1 : -1) * rand(2.5, 6.5), z = rand(-21, 8);
-    const rock = add(garden, new THREE.DodecahedronGeometry(rand(.18, .62), 0),
-      material(i % 2 ? "#515d4b" : "#656957"), [x, rand(.08, .3), z]);
-    rock.scale.y = .55;
+    const rock = add(garden, sharedRockGeometry,
+      rockMats[i % rockMats.length], [x, rand(.08, .3), z]);
+    const rockSize = rand(.18, .62) / .4;
+    rock.scale.set(rockSize, rockSize * .55, rockSize);
   }
 
   const lights = [];
