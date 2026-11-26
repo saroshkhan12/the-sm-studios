@@ -684,7 +684,29 @@ function startAnimation() {
 function publishRenderDiagnostics() {
   root.dataset.experienceFrames = String(renderFrameCount);
   root.dataset.experienceDrawCalls = String(renderer.info.render.calls);
-  root.dataset.webglContext = renderer.getContext().isContextLost() ? "lost" : "ready";
+  const gl = renderer.getContext();
+  root.dataset.webglContext = gl.isContextLost() ? "lost" : "ready";
+
+  // Read nine pixels from the live default framebuffer immediately after render().
+  // This verifies actual GPU output without invoking the browser screenshot compositor.
+  const width = gl.drawingBufferWidth;
+  const height = gl.drawingBufferHeight;
+  if (!width || !height || gl.isContextLost()) return;
+  let luminanceTotal = 0;
+  let litSamples = 0;
+  for (const yRatio of [0.2, 0.5, 0.8]) {
+    for (const xRatio of [0.2, 0.5, 0.8]) {
+      const pixel = new Uint8Array(4);
+      const x = Math.min(width - 1, Math.floor(width * xRatio));
+      const y = Math.min(height - 1, Math.floor(height * yRatio));
+      gl.readPixels(x, y, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixel);
+      const luminance = pixel[0] * 0.2126 + pixel[1] * 0.7152 + pixel[2] * 0.0722;
+      luminanceTotal += luminance;
+      if (luminance > 8) litSamples += 1;
+    }
+  }
+  root.dataset.experiencePixelAverage = (luminanceTotal / 9).toFixed(2);
+  root.dataset.experienceLitSamples = String(litSamples);
 }
 
 function animate() {
