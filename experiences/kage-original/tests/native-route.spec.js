@@ -177,8 +177,6 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
   for (const viewport of viewports) {
     await page.setViewportSize(viewport);
     await page.goto("/experience");
-    const cdp = await page.context().newCDPSession(page);
-    await cdp.send("Page.enable");
     const root = page.locator(".sm-experience");
     const canvas = page.locator("#scene canvas");
     await expect(canvas).toBeVisible({ timeout: 30000 });
@@ -224,12 +222,12 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
           }
           .sm-experience::before { visibility: hidden !important; }`
       });
-      const screenshot = await cdp.send("Page.captureScreenshot", {
-        format: "png",
-        clip: { x: box.x, y: box.y, width: box.width, height: box.height, scale: 1 },
-        captureBeyondViewport: false
+      const renderedCanvas = await page.screenshot({
+        clip: { x: box.x, y: box.y, width: box.width, height: box.height },
+        animations: "disabled",
+        timeout: 15000
       });
-      const brightness = samplePngBrightness(Buffer.from(screenshot.data, "base64"));
+      const brightness = samplePngBrightness(renderedCanvas);
       expect(brightness.average, `Expected a visible rendered scene in chapter ${chapterIds[index]} at ${viewport.width}x${viewport.height}`).toBeGreaterThan(8);
       expect(brightness.litSamples).toBeGreaterThanOrEqual(7);
     }
@@ -248,6 +246,5 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
         return Number.isFinite(value) && Math.abs(value - expectedProgress) <= 0.12;
       }, { timeout: 15000 }).toBe(true);
     }
-    await cdp.detach();
   }
 });
