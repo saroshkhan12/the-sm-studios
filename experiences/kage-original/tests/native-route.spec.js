@@ -154,6 +154,7 @@ test("document scrolling advances the experience on small mobile screens without
 
 test("the WebGL scene stays visible and renders through all five chapters on every target viewport", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "native-mobile", "Run the full six-size viewport matrix once to avoid duplicate GPU-heavy runs.");
+  test.setTimeout(180000);
   const viewports = [
     { width: 320, height: 640 },
     { width: 375, height: 812 },
