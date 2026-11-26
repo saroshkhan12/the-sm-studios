@@ -136,6 +136,58 @@ function createLantern(parent, x, z, lights) {
   return base;
 }
 
+
+function createPathDetail(parent) {
+  const moss = [material("#40513b"), material("#566348"), material("#303f32")];
+  const pebble = [material("#65695e"), material("#777568"), material("#4b574e")];
+  // Broken, offset edging gives the walkway a deliberate, hand-laid silhouette.
+  for (let side of [-1, 1]) {
+    for (let i = 0; i < 34; i++) {
+      const z = 5.3 - i * .78 + rand(-.12, .12);
+      const x = side * rand(1.08, 1.52);
+      const edge = add(parent, new THREE.DodecahedronGeometry(rand(.12, .23), 0),
+        pebble[i % pebble.length], [x, rand(.025, .09), z], [rand(-.2,.2), rand(0,Math.PI), rand(-.12,.12)]);
+      edge.scale.set(rand(1.1,1.7), .48, rand(.75,1.2));
+      if (i % 3 === 0) {
+        const mossPatch = add(parent, new THREE.IcosahedronGeometry(rand(.12,.22), 0),
+          moss[i % moss.length], [x + side * .22, .045, z + .16]);
+        mossPatch.scale.set(1.7,.22,1);
+      }
+    }
+  }
+  // Small grass blades are grouped into tufts to add scale without excessive draw calls.
+  for (let i = 0; i < 42; i++) {
+    const x = (Math.random() > .5 ? 1 : -1) * rand(1.8,4.8), z = rand(-21,7);
+    const tuft = new THREE.Group();
+    tuft.position.set(x,0,z);
+    parent.add(tuft);
+    for (let blade = 0; blade < 3; blade++) {
+      const stem = add(tuft, new THREE.ConeGeometry(.035, rand(.28,.52), 4),
+        moss[(i + blade) % moss.length],
+        [rand(-.12,.12), .16, rand(-.12,.12)], [rand(-.22,.22), rand(0,Math.PI), rand(-.3,.3)]);
+      stem.geometry.translate(0,.12,0);
+    }
+  }
+}
+
+function createGardenAccents(parent) {
+  const paleStone = material("#8b8978", .88);
+  const bronze = material("#756044", .48, .38);
+  // Low carved markers make the approach feel designed rather than randomly populated.
+  for (const side of [-1,1]) {
+    for (let i = 0; i < 3; i++) {
+      const z = -2.4 - i * 6.1;
+      add(parent, new THREE.CylinderGeometry(.19,.24,.62,8), paleStone, [side * 3.15,.31,z]);
+      add(parent, new THREE.CylinderGeometry(.28,.28,.09,8), bronze, [side * 3.15,.64,z]);
+      add(parent, new THREE.SphereGeometry(.075,8,6), material("#c9a36d",.42,.35), [side * 3.15,.73,z]);
+    }
+  }
+  // A restrained circular stone inlay anchors the final approach.
+  const inlay = add(parent, new THREE.TorusGeometry(1.25,.045,8,64),
+    paleStone, [0,.035,-19.2], [Math.PI/2,0,0]);
+  inlay.scale.set(1.15,1,1);
+}
+
 function createScene() {
   scene = new THREE.Scene();
   scene.background = new THREE.Color("#111713");
@@ -144,7 +196,7 @@ function createScene() {
   camera.position.set(0, 3.6, 13);
 
   renderer = new THREE.WebGLRenderer({ antialias: innerWidth > 700, powerPreference: "high-performance" });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 700 ? 1.2 : 1.65));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 700 ? 1.05 : 1.4));
   renderer.setSize(innerWidth, innerHeight);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -190,12 +242,14 @@ function createScene() {
     }
   }
   createArchitecture(garden);
+  createPathDetail(garden);
+  createGardenAccents(garden);
 
   // Layered woodland canopy: foreground, mid-ground and distant silhouettes.
   const leafMaterials = [material("#203b2d"), material("#294733"), material("#36513a"), material("#1b3027")];
   const trunkMat = material("#42372b");
   const treeGroups = [];
-  for (let i = 0; i < (innerWidth < 700 ? 10 : 18); i++) {
+  for (let i = 0; i < (innerWidth < 700 ? 9 : 14); i++) {
     const side = i % 2 ? 1 : -1;
     const z = 4 - Math.floor(i / 2) * 2.15 + rand(-.8, .8);
     const x = side * rand(4.2, 8.5);
@@ -203,7 +257,7 @@ function createScene() {
   }
   // Low shrubs and fern-like foliage along the walk.
   const shrubMats = [material("#38523a"), material("#4a6241"), material("#273d30")];
-  for (let i = 0; i < (innerWidth < 700 ? 48 : 82); i++) {
+  for (let i = 0; i < (innerWidth < 700 ? 34 : 54); i++) {
     const side = Math.random() > .5 ? 1 : -1;
     const x = side * rand(2.4, 5.3), z = rand(-19, 7);
     const shrub = add(garden, new THREE.IcosahedronGeometry(rand(.16, .42), 1),
@@ -216,7 +270,7 @@ function createScene() {
     }
   }
   // Mossy stones and roots give the ground a readable foreground scale.
-  for (let i = 0; i < (innerWidth < 700 ? 18 : 30); i++) {
+  for (let i = 0; i < (innerWidth < 700 ? 14 : 22); i++) {
     const x = (Math.random() > .5 ? 1 : -1) * rand(2.5, 6.5), z = rand(-21, 8);
     const rock = add(garden, new THREE.DodecahedronGeometry(rand(.18, .62), 0),
       material(i % 2 ? "#515d4b" : "#656957"), [x, rand(.08, .3), z]);
@@ -327,7 +381,7 @@ function resize() {
   camera.aspect = innerWidth / innerHeight;
   camera.fov = innerWidth < 650 ? 54 : 42;
   camera.updateProjectionMatrix();
-  renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 700 ? 1.1 : 1.65));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 700 ? 1.05 : 1.4));
   renderer.setSize(innerWidth, innerHeight);
   renderer.shadowMap.enabled = innerWidth > 700;
 }
@@ -347,7 +401,7 @@ function animate() {
   camera.position.x += (cameraX - camera.position.x) * .025;
   camera.position.y += (cameraY - camera.position.y) * .025;
   camera.position.z += (cameraZ - camera.position.z) * .025;
-  camera.lookAt(0, 1.25, -5 - p * 18);
+  camera.lookAt(0, 1.35 + Math.sin(p * Math.PI) * .18, -4.5 - p * 17.5);
   if (!paused) {
     world.garden.rotation.y = Math.sin(elapsed * .08) * .006;
     world.lights.forEach((light, i) => { light.intensity = 9.5 + Math.sin(elapsed * 1.3 + i * 1.7) * 1.2; });
