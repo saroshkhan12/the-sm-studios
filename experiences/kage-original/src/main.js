@@ -199,23 +199,32 @@ function createArchitecture(parent) {
   }
 }
 
-function createLantern(parent, x, z, lights) {
-  const bronze = material("#51483a", .5, .42);
-  const warm = new THREE.MeshStandardMaterial({
+const lanternResources = {
+  bronze: material("#51483a", .5, .42),
+  warm: new THREE.MeshStandardMaterial({
     color: "#a8753c",
     emissive: "#ffbd6b",
     emissiveIntensity: 1.35,
     roughness: .38,
     metalness: .12
-  });
-  const base = add(parent, new THREE.CylinderGeometry(.28, .36, .16, 8), bronze, [x, .12, z]);
-  add(parent, new THREE.BoxGeometry(.48, .52, .48), bronze, [x, .48, z]);
-  add(parent, new THREE.BoxGeometry(.3, .42, .3), warm, [x, .5, z]);
-  add(parent, new THREE.CylinderGeometry(.34, .25, .14, 8), bronze, [x, .82, z]);
-  add(parent, new THREE.ConeGeometry(.38, .3, 8), bronze, [x, 1.02, z]);
-  const glow = add(parent, new THREE.SphereGeometry(.19, 10, 8),
-    new THREE.MeshBasicMaterial({ color: "#ffd69a", transparent: true, opacity: .22, depthWrite: false }),
-    [x, .52, z]);
+  }),
+  glow: new THREE.MeshBasicMaterial({ color: "#ffd69a", transparent: true, opacity: .22, depthWrite: false }),
+  baseGeometry: new THREE.CylinderGeometry(.28, .36, .16, 8),
+  bodyGeometry: new THREE.BoxGeometry(.48, .52, .48),
+  coreGeometry: new THREE.BoxGeometry(.3, .42, .3),
+  capGeometry: new THREE.CylinderGeometry(.34, .25, .14, 8),
+  roofGeometry: new THREE.ConeGeometry(.38, .3, 8),
+  glowGeometry: new THREE.SphereGeometry(.19, 10, 8)
+};
+
+function createLantern(parent, x, z, lights) {
+  const { bronze, warm, glow: glowMaterial } = lanternResources;
+  const base = add(parent, lanternResources.baseGeometry, bronze, [x, .12, z]);
+  add(parent, lanternResources.bodyGeometry, bronze, [x, .48, z]);
+  add(parent, lanternResources.coreGeometry, warm, [x, .5, z]);
+  add(parent, lanternResources.capGeometry, bronze, [x, .82, z]);
+  add(parent, lanternResources.roofGeometry, bronze, [x, 1.02, z]);
+  const glow = add(parent, lanternResources.glowGeometry, glowMaterial, [x, .52, z]);
   glow.scale.set(1, 1.35, 1);
   const light = new THREE.PointLight("#ffc77e", 11, 12, 1.7);
   light.position.set(x, .72, z);
