@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prebuild": "npm --prefix experiences/kage-original install --no-audit --no-fund && npm --prefix experiences/kage-original run build"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
