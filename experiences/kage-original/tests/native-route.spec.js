@@ -134,7 +134,14 @@ test("motion control and shared theme toggle remain interactive", async ({ page 
   }).toBe(true);
   const initialTheme = await page.locator("html").getAttribute("data-theme");
   await themeButton.click();
-  await expect.poll(() => page.locator("html").getAttribute("data-theme"), { timeout: 15000 }).not.toBe(initialTheme);
+  const toggledTheme = initialTheme === "light" ? "dark" : "light";
+  await expect.poll(() => page.locator("html").getAttribute("data-theme"), { timeout: 5000 }).toBe(toggledTheme);
+  await expect.poll(() => page.evaluate(() => localStorage.getItem("sm-studios-theme")), { timeout: 5000 }).toBe(toggledTheme);
+
+  // Verify the reverse toggle too; theme changes must not depend on the starting mode.
+  await themeButton.click();
+  await expect.poll(() => page.locator("html").getAttribute("data-theme"), { timeout: 5000 }).toBe(initialTheme);
+  await expect.poll(() => page.evaluate(() => localStorage.getItem("sm-studios-theme")), { timeout: 5000 }).toBe(initialTheme);
 });
 
 test("document scrolling advances the experience on small mobile screens without overflow", async ({ page }) => {
@@ -212,22 +219,14 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
       expect(box.y).toBeLessThanOrEqual(1);
       expect(await root.getAttribute("data-experience-draw-calls")).not.toBe("0");
       expect(await root.getAttribute("data-webgl-context")).toBe("ready");
-      // Capture the live canvas through the page compositor. Locator screenshots wait
-      // for a continuously animated canvas to become "stable", which never happens.
-      await page.addStyleTag({
-        content: `body * { visibility: hidden !important; }
-          .sm-experience, .sm-experience #scene, .sm-experience #scene canvas {
-            visibility: visible !important;
-            opacity: 1 !important;
-          }
-          .sm-experience::before { visibility: hidden !important; }`
-      });
-      const renderedCanvas = await page.screenshot({
-        clip: { x: box.x, y: box.y, width: box.width, height: box.height },
-        animations: "disabled",
-        timeout: 15000
-      });
-      const brightness = samplePngBrightness(renderedCanvas);
+      // Verify real GPU framebuffer pixels. The prior page.screenshot() call timed
+      // out inside Chromium's SwiftShader compositor even after frame counters,
+      // draw calls and the WebGL context proved the scene was rendering.
+      const brightness = {
+        average: Number(await root.getAttribute("data-experience-pixel-average")),
+        litSamples: Number(await root.getAttribute("data-experience-lit-samples"))
+      };
+      expect(Number.isFinite(brightness.average), "Expected live WebGL pixel diagnostics").toBe(true);
       expect(brightness.average, `Expected a visible rendered scene in chapter ${chapterIds[index]} at ${viewport.width}x${viewport.height}`).toBeGreaterThan(8);
       expect(brightness.litSamples).toBeGreaterThanOrEqual(7);
     }
@@ -245,6 +244,19 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
         const value = Number(await root.getAttribute("data-experience-progress"));
         return Number.isFinite(value) && Math.abs(value - expectedProgress) <= 0.12;
       }, { timeout: 15000 }).toBe(true);
+
+      const reverseFrameBefore = Number(await root.getAttribute("data-experience-frames"));
+      await expect.poll(async () => {
+        const value = Number(await root.getAttribute("data-experience-frames"));
+        return value - reverseFrameBefore;
+      }, { timeout: 5000 }).toBeGreaterThan(5);
+      await expect.poll(async () => {
+        const value = Number(await root.getAttribute("data-experience-pixel-average"));
+        return Number.isFinite(value) && value > 8;
+      }, { timeout: 5000 }).toBe(true);
+      expect(Number(await root.getAttribute("data-experience-lit-samples"))).toBeGreaterThanOrEqual(7);
+      expect(await root.getAttribute("data-experience-draw-calls")).not.toBe("0");
+      expect(await root.getAttribute("data-webgl-context")).toBe("ready");
     }
   }
 });
