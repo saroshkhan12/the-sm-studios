@@ -188,6 +188,66 @@ function createGardenAccents(parent) {
   inlay.scale.set(1.15,1,1);
 }
 
+
+function createChapterLandmarks(parent, leafMaterials, trunkMat) {
+  // Five deliberately composed landmarks align with the five narrative beats.
+  // Each remains part of the same continuous garden rather than a set of disconnected rooms.
+  const stone = material("#77796d", .94);
+  const pale = material("#9b967f", .88);
+  const bronze = material("#766044", .48, .36);
+
+  // Arrival: a low, weathered threshold in the foreground frames the first view.
+  const arrivalRing = add(parent, new THREE.TorusGeometry(2.05, .075, 10, 72),
+    pale, [0, .055, 1.5], [Math.PI / 2, 0, 0]);
+  arrivalRing.scale.set(1.25, 1, 1);
+  for (let i = 0; i < 7; i++) {
+    const a = (i / 7) * Math.PI * 2;
+    add(parent, new THREE.BoxGeometry(.42, .22, .32), stone,
+      [Math.cos(a) * 2.35, .08, 1.5 + Math.sin(a) * 1.55],
+      [0, -a, rand(-.08, .08)]);
+  }
+
+  // Still Water: a broken outer coping and stepping stones make the basin a focal court.
+  for (let i = 0; i < 12; i++) {
+    const a = (i / 12) * Math.PI * 2;
+    const coping = add(parent, new THREE.BoxGeometry(.72, .18, .28), pale,
+      [Math.cos(a) * 2.85, .12, -10.6 + Math.sin(a) * 2.85], [0, -a, 0]);
+    coping.rotation.y = -a;
+  }
+  for (let i = 0; i < 5; i++) {
+    createStone(parent, (i % 2 ? 1 : -1) * (.9 + i * .18), -7.4 - i * .65,
+      .85, .55, i % 2 ? pale : stone);
+  }
+
+  // Last Light: a small grove gives the lanterns a distinct enclosing silhouette.
+  for (const [x, z, scale] of [[-5.4, -14.2, 1.18], [5.3, -15.8, 1.12], [-4.8, -19.1, .9], [4.9, -20.1, .92]]) {
+    createTree(parent, x, z, scale, leafMaterials, trunkMat);
+  }
+  for (const [x, z] of [[-2.2, -14.1], [2.25, -17.4]]) {
+    add(parent, new THREE.CylinderGeometry(.12, .2, 1.15, 8), stone, [x, .56, z]);
+    add(parent, new THREE.CylinderGeometry(.24, .24, .12, 8), bronze, [x, 1.18, z]);
+  }
+
+  // Return: a quiet, open court and a smaller freestanding portal resolve the journey.
+  const court = add(parent, new THREE.CylinderGeometry(3.1, 3.25, .16, 48),
+    material("#4a554b", .96), [0, -.015, -23.4]);
+  court.receiveShadow = true;
+  for (let i = 0; i < 9; i++) {
+    createStone(parent, rand(-1.8, 1.8), -19.7 - i * .58, rand(.8, 1.25), .48, i % 2 ? pale : stone);
+  }
+  const portal = new THREE.Group();
+  portal.position.set(0, 0, -25.2);
+  parent.add(portal);
+  for (const x of [-1.65, 1.65]) {
+    add(portal, new THREE.BoxGeometry(.34, 3.15, .38), pale, [x, 1.57, 0]);
+    add(portal, new THREE.BoxGeometry(.58, .18, .56), bronze, [x, 3.2, 0]);
+  }
+  add(portal, new THREE.TorusGeometry(1.65, .16, 12, 48, Math.PI),
+    pale, [0, 3.1, 0]);
+  add(portal, new THREE.BoxGeometry(3.55, .2, .48), stone, [0, 3.12, 0]);
+  portal.scale.setScalar(.82);
+}
+
 function createScene() {
   scene = new THREE.Scene();
   scene.background = new THREE.Color("#111713");
@@ -209,7 +269,10 @@ function createScene() {
   const moon = new THREE.DirectionalLight("#c3d2df", 2.6);
   moon.position.set(-7, 12, 8);
   moon.castShadow = innerWidth > 700;
-  moon.shadow.mapSize.set(1024, 1024);
+  moon.shadow.mapSize.set(innerWidth < 1100 ? 768 : 1536, innerWidth < 1100 ? 768 : 1536);
+  moon.shadow.bias = -0.00018;
+  moon.shadow.normalBias = 0.035;
+  moon.shadow.radius = 4;
   moon.shadow.camera.left = moon.shadow.camera.bottom = -18;
   moon.shadow.camera.right = moon.shadow.camera.top = 18;
   scene.add(moon);
@@ -229,6 +292,7 @@ function createScene() {
   groundGeo.computeVertexNormals();
   const ground = add(garden, groundGeo, groundMat, [0, -.12, 0], [-Math.PI / 2, 0, 0]);
   ground.receiveShadow = true;
+  ground.castShadow = false;
 
   const pathMats = [material("#858477"), material("#696e64"), material("#a09a84"), material("#5d665e")];
   for (let i = 0; i < 15; i++) createStone(garden, rand(-.22, .22), 5 - i * 1.12, rand(1.55, 2.25), rand(.72, 1.08), pathMats[i % pathMats.length]);
@@ -244,10 +308,12 @@ function createScene() {
   createArchitecture(garden);
   createPathDetail(garden);
   createGardenAccents(garden);
-
-  // Layered woodland canopy: foreground, mid-ground and distant silhouettes.
   const leafMaterials = [material("#203b2d"), material("#294733"), material("#36513a"), material("#1b3027")];
   const trunkMat = material("#42372b");
+  createChapterLandmarks(garden, leafMaterials, trunkMat);
+
+  // Layered woodland canopy: foreground, mid-ground and distant silhouettes.
+
   const treeGroups = [];
   for (let i = 0; i < (innerWidth < 700 ? 9 : 14); i++) {
     const side = i % 2 ? 1 : -1;
@@ -401,7 +467,13 @@ function animate() {
   camera.position.x += (cameraX - camera.position.x) * .025;
   camera.position.y += (cameraY - camera.position.y) * .025;
   camera.position.z += (cameraZ - camera.position.z) * .025;
-  camera.lookAt(0, 1.35 + Math.sin(p * Math.PI) * .18, -4.5 - p * 17.5);
+  const chapterTargets = [1.2, -4.4, -10.6, -16.8, -24.2];
+  const chapterPosition = p * 4;
+  const chapterIndex = Math.min(3, Math.floor(chapterPosition));
+  const chapterBlend = chapterPosition - chapterIndex;
+  const targetZ = THREE.MathUtils.lerp(chapterTargets[chapterIndex], chapterTargets[chapterIndex + 1], chapterBlend);
+  const targetY = p < .18 ? 1.45 : p > .78 ? 1.7 : 1.3;
+  camera.lookAt(0, targetY, targetZ);
   if (!paused) {
     world.garden.rotation.y = Math.sin(elapsed * .08) * .006;
     world.lights.forEach((light, i) => { light.intensity = 9.5 + Math.sin(elapsed * 1.3 + i * 1.7) * 1.2; });
