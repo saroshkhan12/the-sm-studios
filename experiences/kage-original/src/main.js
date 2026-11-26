@@ -49,7 +49,7 @@ function createTree(parent, x, z, scale, leafMaterials, trunkMat) {
   parent.add(group);
   add(group, new THREE.CylinderGeometry(.12, .28, 3.7, 9), trunkMat, [0, 1.85, 0]);
   const branchMat = material("#40382d");
-  for (let b = 0; b < 7; b++) {
+  for (let b = 0; b < 5; b++) {
     const angle = b * 2.399;
     const start = new THREE.Vector3(0, rand(1.4, 2.8), 0);
     const end = new THREE.Vector3(Math.cos(angle) * rand(1.1, 1.8), start.y + rand(.45, 1.3), Math.sin(angle) * rand(1.1, 1.8));
@@ -57,7 +57,7 @@ function createTree(parent, x, z, scale, leafMaterials, trunkMat) {
     mid.y += .25;
     const curve = new THREE.CatmullRomCurve3([start, mid, end]);
     add(group, new THREE.TubeGeometry(curve, 8, .055, 5, false), branchMat);
-    for (let l = 0; l < 5; l++) {
+    for (let l = 0; l < 2; l++) {
       const t = .45 + l * .12;
       const p = curve.getPoint(Math.min(t, .95));
       const crown = add(group, new THREE.IcosahedronGeometry(rand(.38, .72), 1),
@@ -66,7 +66,7 @@ function createTree(parent, x, z, scale, leafMaterials, trunkMat) {
       crown.scale.set(rand(1, 1.45), rand(.65, 1.05), rand(.8, 1.3));
     }
   }
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 6; i++) {
     const crown = add(group, new THREE.IcosahedronGeometry(rand(.45, .85), 1),
       leafMaterials[i % leafMaterials.length],
       [rand(-1.2, 1.2), rand(2.7, 4.5), rand(-1.1, 1.1)]);
@@ -195,7 +195,7 @@ function createScene() {
   const leafMaterials = [material("#203b2d"), material("#294733"), material("#36513a"), material("#1b3027")];
   const trunkMat = material("#42372b");
   const treeGroups = [];
-  for (let i = 0; i < 22; i++) {
+  for (let i = 0; i < (innerWidth < 700 ? 10 : 18); i++) {
     const side = i % 2 ? 1 : -1;
     const z = 4 - Math.floor(i / 2) * 2.15 + rand(-.8, .8);
     const x = side * rand(4.2, 8.5);
@@ -203,7 +203,7 @@ function createScene() {
   }
   // Low shrubs and fern-like foliage along the walk.
   const shrubMats = [material("#38523a"), material("#4a6241"), material("#273d30")];
-  for (let i = 0; i < 110; i++) {
+  for (let i = 0; i < (innerWidth < 700 ? 48 : 82); i++) {
     const side = Math.random() > .5 ? 1 : -1;
     const x = side * rand(2.4, 5.3), z = rand(-19, 7);
     const shrub = add(garden, new THREE.IcosahedronGeometry(rand(.16, .42), 1),
@@ -216,7 +216,7 @@ function createScene() {
     }
   }
   // Mossy stones and roots give the ground a readable foreground scale.
-  for (let i = 0; i < 38; i++) {
+  for (let i = 0; i < (innerWidth < 700 ? 18 : 30); i++) {
     const x = (Math.random() > .5 ? 1 : -1) * rand(2.5, 6.5), z = rand(-21, 8);
     const rock = add(garden, new THREE.DodecahedronGeometry(rand(.18, .62), 0),
       material(i % 2 ? "#515d4b" : "#656957"), [x, rand(.08, .3), z]);
