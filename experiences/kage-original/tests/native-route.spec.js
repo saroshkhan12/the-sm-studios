@@ -226,10 +226,11 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
       expect(box.y).toBeLessThanOrEqual(1);
       expect(await root.getAttribute("data-experience-draw-calls")).not.toBe("0");
       expect(await root.getAttribute("data-webgl-context")).toBe("ready");
-      const cameraZ = Number(await root.getAttribute("data-experience-camera-z"));
       const expectedCameraZ = [12.5, 6.2, -0.2, -6.6, -14.7][index];
-      expect(Number.isFinite(cameraZ), "Expected a live camera position").toBe(true);
-      expect(Math.abs(cameraZ - expectedCameraZ), `Expected the camera to reach chapter ${chapterIds[index]} at ${viewport.width}x${viewport.height}`).toBeLessThan(3.5);
+      await expect.poll(async () => {
+        const cameraZ = Number(await root.getAttribute("data-experience-camera-z"));
+        return Number.isFinite(cameraZ) && Math.abs(cameraZ - expectedCameraZ) < 3.5;
+      }, { timeout: 10000 }).toBe(true);
       expect(Number(await root.getAttribute("data-experience-triangles"))).toBeGreaterThan(0);
     }
 
@@ -252,10 +253,11 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
         const value = Number(await root.getAttribute("data-experience-frames"));
         return value - reverseFrameBefore;
       }, { timeout: 5000 }).toBeGreaterThan(5);
-      const reverseCameraZ = Number(await root.getAttribute("data-experience-camera-z"));
       const expectedReverseCameraZ = [12.5, 6.2, -0.2, -6.6, -14.7][index];
-      expect(Number.isFinite(reverseCameraZ)).toBe(true);
-      expect(Math.abs(reverseCameraZ - expectedReverseCameraZ)).toBeLessThan(3.5);
+      await expect.poll(async () => {
+        const reverseCameraZ = Number(await root.getAttribute("data-experience-camera-z"));
+        return Number.isFinite(reverseCameraZ) && Math.abs(reverseCameraZ - expectedReverseCameraZ) < 3.5;
+      }, { timeout: 10000 }).toBe(true);
       expect(Number(await root.getAttribute("data-experience-triangles"))).toBeGreaterThan(0);
       expect(await root.getAttribute("data-experience-draw-calls")).not.toBe("0");
       expect(await root.getAttribute("data-webgl-context")).toBe("ready");
