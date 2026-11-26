@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./home.css";
 import "./theme.css";
+import "./kage-experience.css";
 import { SiteShell } from "@/components/site-shell";
 import { AnimationProvider } from "@/components/animation-provider";
 import { ThemeProvider } from "@/components/theme-provider";
