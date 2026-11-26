@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test("native experience shares the storefront shell and renders all five chapters", async ({ page }) => {
+test("native experience shares the storefront shell and renders all five chapters", async ({ page }, testInfo) => {
   const errors = [];
   page.on("pageerror", error => errors.push(error.message));
   await page.goto("/experience");
@@ -16,6 +16,8 @@ test("native experience shares the storefront shell and renders all five chapter
     scrollWidth: document.documentElement.scrollWidth
   }));
   expect(overflow.scrollWidth).toBeLessThanOrEqual(overflow.width + 1);
+  const immersiveScreenshot = await page.screenshot({ animations: "disabled" });
+  await testInfo.attach("immersive-experience", { body: immersiveScreenshot, contentType: "image/png" });
   expect(errors).toEqual([]);
 });
 
@@ -26,13 +28,15 @@ test("chapter navigation scrolls within the immersive route", async ({ page }) =
   await expect(page.locator("#water")).toBeVisible();
 });
 
-test("the shared site navigation remains available and the final chapter returns to the store", async ({ page }) => {
+test("the shared site navigation remains available and the final chapter returns to the store", async ({ page }, testInfo) => {
   await page.goto("/experience");
   await expect(page.locator(".header")).toBeVisible();
   await page.locator("#return").scrollIntoViewIfNeeded();
   await page.getByRole("link", { name: /RETURN TO THE STUDIO/i }).click();
   await expect(page).toHaveURL("/");
   await expect(page.locator(".hero")).toBeVisible();
+  const storefrontScreenshot = await page.screenshot({ animations: "disabled" });
+  await testInfo.attach("storefront-home", { body: storefrontScreenshot, contentType: "image/png" });
 });
 
 test("motion control and shared theme toggle remain interactive", async ({ page }) => {
