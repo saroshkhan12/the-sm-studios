@@ -126,13 +126,15 @@ function createTree(parent, x, z, scale, leafMaterials, trunkMat) {
         leafMaterials[Math.floor(Math.random() * leafMaterials.length)],
         [p.x + rand(-.35, .35), p.y + rand(-.1, .48), p.z + rand(-.35, .35)]);
       crown.scale.set(rand(1, 1.45), rand(.65, 1.05), rand(.8, 1.3));
+      crown.rotation.set(rand(-.28, .28), rand(0, Math.PI), rand(-.24, .24));
     }
   }
   for (let i = 0; i < 6; i++) {
     const crown = add(group, new THREE.IcosahedronGeometry(rand(.45, .85), 1),
       leafMaterials[i % leafMaterials.length],
       [rand(-1.2, 1.2), rand(2.7, 4.5), rand(-1.1, 1.1)]);
-    crown.scale.set(1.15, .75, 1);
+    crown.scale.set(rand(.9, 1.35), rand(.62, .92), rand(.82, 1.24));
+    crown.rotation.set(rand(-.22, .22), rand(0, Math.PI), rand(-.2, .2));
   }
   return group;
 }
