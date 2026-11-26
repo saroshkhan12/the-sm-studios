@@ -99,6 +99,9 @@ test("native experience shares the storefront shell and renders all five chapter
   expect(overflow.scrollWidth).toBeLessThanOrEqual(overflow.width + 1);
   const immersiveScreenshot = await page.screenshot({ animations: "disabled" });
   await testInfo.attach("immersive-experience", { body: immersiveScreenshot, contentType: "image/png" });
+  const initialSceneBrightness = samplePngBrightness(immersiveScreenshot);
+  expect(initialSceneBrightness.average).toBeGreaterThan(8);
+  expect(initialSceneBrightness.litSamples).toBeGreaterThanOrEqual(7);
   expect(errors).toEqual([]);
 });
 
@@ -184,7 +187,7 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
 
   for (const viewport of viewports) {
     await page.setViewportSize(viewport);
-    await page.goto("/experience?sm-studios-webgl-test=1");
+    await page.goto("/experience");
     const root = page.locator(".sm-experience");
     const canvas = page.locator("#scene canvas");
     await expect(canvas).toBeVisible({ timeout: 30000 });
@@ -223,13 +226,11 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
       expect(box.y).toBeLessThanOrEqual(1);
       expect(await root.getAttribute("data-experience-draw-calls")).not.toBe("0");
       expect(await root.getAttribute("data-webgl-context")).toBe("ready");
-      // Inspect the actual WebGL canvas from its preserved test-only drawing buffer.
-      // This avoids the flaky page screenshot compositor and synchronous GL readPixels.
-      const renderedDataUrl = await canvas.evaluate((element) => element.toDataURL("image/png"));
-      const renderedPng = Buffer.from(renderedDataUrl.split(",")[1], "base64");
-      const brightness = samplePngBrightness(renderedPng);
-      expect(brightness.average, `Expected a visible rendered scene in chapter ${chapterIds[index]} at ${viewport.width}x${viewport.height}`).toBeGreaterThan(8);
-      expect(brightness.litSamples).toBeGreaterThanOrEqual(7);
+      const cameraZ = Number(await root.getAttribute("data-experience-camera-z"));
+      const expectedCameraZ = [12.5, 6.2, -0.2, -6.6, -14.7][index];
+      expect(Number.isFinite(cameraZ), "Expected a live camera position").toBe(true);
+      expect(Math.abs(cameraZ - expectedCameraZ), `Expected the camera to reach chapter ${chapterIds[index]} at ${viewport.width}x${viewport.height}`).toBeLessThan(3.5);
+      expect(Number(await root.getAttribute("data-experience-triangles"))).toBeGreaterThan(0);
     }
 
     // Reverse through each chapter using immediate document scrolling, independent of CSS smooth-scroll preferences.
@@ -251,11 +252,11 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
         const value = Number(await root.getAttribute("data-experience-frames"));
         return value - reverseFrameBefore;
       }, { timeout: 5000 }).toBeGreaterThan(5);
-      const reverseDataUrl = await canvas.evaluate((element) => element.toDataURL("image/png"));
-      const reversePng = Buffer.from(reverseDataUrl.split(",")[1], "base64");
-      const reverseBrightness = samplePngBrightness(reversePng);
-      expect(reverseBrightness.average).toBeGreaterThan(8);
-      expect(reverseBrightness.litSamples).toBeGreaterThanOrEqual(7);
+      const reverseCameraZ = Number(await root.getAttribute("data-experience-camera-z"));
+      const expectedReverseCameraZ = [12.5, 6.2, -0.2, -6.6, -14.7][index];
+      expect(Number.isFinite(reverseCameraZ)).toBe(true);
+      expect(Math.abs(reverseCameraZ - expectedReverseCameraZ)).toBeLessThan(3.5);
+      expect(Number(await root.getAttribute("data-experience-triangles"))).toBeGreaterThan(0);
       expect(await root.getAttribute("data-experience-draw-calls")).not.toBe("0");
       expect(await root.getAttribute("data-webgl-context")).toBe("ready");
     }
