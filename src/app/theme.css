@@ -9189,3 +9189,63 @@ html[data-theme="light"] .header.site-header :is(a, button):focus-visible {
   .header.site-header .header-actions .icon-btn,
   .header.site-header .mobile-menu { transition: none; }
 }
+
+/* Brand emphasis: give the studio wordmark stronger visual presence without
+   changing the header grid, navigation, or utility-button placement. */
+.header.site-header .site-header-brand {
+  min-width: 0;
+}
+.header.site-header .wordmark {
+  min-height: 56px;
+}
+.header.site-header .wordmark-type {
+  font-size: clamp(20px, 1.65vw, 25px);
+  font-weight: 600;
+  letter-spacing: 1.15px;
+  line-height: .98;
+}
+.header.site-header .wordmark-type i {
+  font-weight: 500;
+}
+.header.site-header .wordmark-type small {
+  margin-top: 7px;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 1.9px;
+}
+html[data-theme="light"] .header.site-header .wordmark-type {
+  color: #29241F;
+}
+html[data-theme="light"] .header.site-header .wordmark-type i {
+  color: #895A43;
+}
+@media (max-width: 1020px) {
+  .header.site-header .wordmark-type {
+    font-size: clamp(18px, 2.2vw, 22px);
+  }
+  .header.site-header .wordmark-type small {
+    font-size: 7.5px;
+    letter-spacing: 1.65px;
+  }
+}
+@media (max-width: 520px) {
+  .header.site-header .wordmark-type {
+    font-size: clamp(14px, 4.1vw, 17px);
+    letter-spacing: .65px;
+  }
+  .header.site-header .wordmark-type small {
+    margin-top: 6px;
+    font-size: 6px;
+    letter-spacing: 1px;
+  }
+}
+@media (max-width: 360px) {
+  .header.site-header .wordmark-type {
+    font-size: 13px;
+    letter-spacing: .4px;
+  }
+  .header.site-header .wordmark-type small {
+    font-size: 5.5px;
+    letter-spacing: .75px;
+  }
+}
