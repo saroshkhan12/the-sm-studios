@@ -77,7 +77,7 @@ export default async function Home() {
   });
 
   return (
-    <>
+    <div className="kage-home">
       <HeroSlider slides={heroSlides} />
 
 <section className="brand-values" aria-label="Studio values">
@@ -222,6 +222,6 @@ export default async function Home() {
           </Link>
         </ScrollReveal>
       </section>
-    </>
+    </div>
   );
 }
