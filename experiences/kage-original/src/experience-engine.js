@@ -691,8 +691,6 @@ function publishRenderDiagnostics() {
   root.dataset.experienceDrawCalls = String(renderer.info.render.calls);
   const gl = renderer.getContext();
   root.dataset.webglContext = gl.isContextLost() ? "lost" : "ready";
-
-
 }
 
 function animate() {
