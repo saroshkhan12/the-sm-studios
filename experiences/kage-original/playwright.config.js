@@ -2,6 +2,7 @@ import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
   testDir: "./tests",
+  testMatch: "**/experience.spec.js",
   // WebGL/SwiftShader is resource-intensive in CI; serialize viewport tests to avoid GPU contention.
   fullyParallel: false,
   workers: 1,
