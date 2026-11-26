@@ -730,11 +730,14 @@ function animate() {
   }
   renderer.render(scene, camera);
   renderFrameCount += 1;
-  root.dataset.experienceProgress = p.toFixed(3);
-  root.dataset.experienceCameraZ = camera.position.z.toFixed(2);
-  root.dataset.experienceFrames = String(renderFrameCount);
-  root.dataset.experienceDrawCalls = String(renderer.info.render.calls);
-  root.dataset.webglContext = renderer.getContext().isContextLost() ? "lost" : "ready";
+  // Publish lightweight diagnostics at 10Hz rather than mutating the DOM every frame.
+  if (renderFrameCount % 6 === 0) {
+    root.dataset.experienceProgress = p.toFixed(3);
+    root.dataset.experienceCameraZ = camera.position.z.toFixed(2);
+    root.dataset.experienceFrames = String(renderFrameCount);
+    root.dataset.experienceDrawCalls = String(renderer.info.render.calls);
+    root.dataset.webglContext = renderer.getContext().isContextLost() ? "lost" : "ready";
+  }
 }
 if (world) animate();
 
