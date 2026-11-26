@@ -1,4 +1,75 @@
 import { test, expect } from "@playwright/test";
+import { inflateSync } from "node:zlib";
+
+function samplePngBrightness(png) {
+  let offset = 8;
+  let width = 0;
+  let height = 0;
+  let bitDepth = 0;
+  let colorType = 0;
+  const compressed = [];
+
+  while (offset < png.length) {
+    const length = png.readUInt32BE(offset);
+    const type = png.toString("ascii", offset + 4, offset + 8);
+    const data = png.subarray(offset + 8, offset + 8 + length);
+    if (type === "IHDR") {
+      width = data.readUInt32BE(0);
+      height = data.readUInt32BE(4);
+      bitDepth = data[8];
+      colorType = data[9];
+    } else if (type === "IDAT") {
+      compressed.push(data);
+    } else if (type === "IEND") {
+      break;
+    }
+    offset += length + 12;
+  }
+
+  const channels = colorType === 6 ? 4 : colorType === 2 ? 3 : 0;
+  if (!width || !height || bitDepth !== 8 || !channels) {
+    throw new Error(`Unsupported screenshot PNG format: ${width}x${height}, depth ${bitDepth}, type ${colorType}`);
+  }
+
+  const raw = inflateSync(Buffer.concat(compressed));
+  const stride = width * channels;
+  const pixels = Buffer.alloc(height * stride);
+  let source = 0;
+  const paeth = (a, b, c) => {
+    const p = a + b - c;
+    const pa = Math.abs(p - a), pb = Math.abs(p - b), pc = Math.abs(p - c);
+    return pa <= pb && pa <= pc ? a : pb <= pc ? b : c;
+  };
+
+  for (let y = 0; y < height; y += 1) {
+    const filter = raw[source++];
+    const row = y * stride;
+    for (let x = 0; x < stride; x += 1) {
+      const value = raw[source++];
+      const left = x >= channels ? pixels[row + x - channels] : 0;
+      const above = y > 0 ? pixels[row - stride + x] : 0;
+      const upperLeft = y > 0 && x >= channels ? pixels[row - stride + x - channels] : 0;
+      let predictor = 0;
+      if (filter === 1) predictor = left;
+      else if (filter === 2) predictor = above;
+      else if (filter === 3) predictor = Math.floor((left + above) / 2);
+      else if (filter === 4) predictor = paeth(left, above, upperLeft);
+      else if (filter !== 0) throw new Error(`Unsupported PNG filter: ${filter}`);
+      pixels[row + x] = (value + predictor) & 255;
+    }
+  }
+
+  const samples = [];
+  for (const yRatio of [0.2, 0.5, 0.8]) {
+    for (const xRatio of [0.2, 0.5, 0.8]) {
+      const x = Math.min(width - 1, Math.floor(width * xRatio));
+      const y = Math.min(height - 1, Math.floor(height * yRatio));
+      const index = y * stride + x * channels;
+      samples.push((pixels[index] * 0.2126) + (pixels[index + 1] * 0.7152) + (pixels[index + 2] * 0.0722));
+    }
+  }
+  return { average: samples.reduce((sum, value) => sum + value, 0) / samples.length, litSamples: samples.filter((value) => value > 8).length };
+}
 
 test("native experience shares the storefront shell and renders all five chapters", async ({ page }, testInfo) => {
   const errors = [];
@@ -130,6 +201,10 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
       expect(box.y).toBeLessThanOrEqual(1);
       expect(await root.getAttribute("data-experience-draw-calls")).not.toBe("0");
       expect(await root.getAttribute("data-webgl-context")).toBe("ready");
+      const renderedCanvas = await canvas.screenshot();
+      const brightness = samplePngBrightness(renderedCanvas);
+      expect(brightness.average, `Expected a visible rendered scene in chapter ${chapterIds[index]} at ${viewport.width}x${viewport.height}`).toBeGreaterThan(8);
+      expect(brightness.litSamples).toBeGreaterThanOrEqual(7);
     }
 
     // Reverse navigation must drive the same camera path back to the opening chapter.
