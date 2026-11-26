@@ -56,3 +56,27 @@ test("motion control and shared theme toggle remain interactive", async ({ page 
   await themeButton.click();
   await expect.poll(() => page.locator("html").getAttribute("data-theme"), { timeout: 15000 }).not.toBe(initialTheme);
 });
+
+test("document scrolling advances the experience on small mobile screens without overflow", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 640 });
+  await page.goto("/experience");
+  const root = page.locator(".sm-experience");
+  const scene = page.locator("#scene");
+  await expect(scene).toBeVisible();
+  const initial = await page.evaluate(() => window.scrollY);
+  const metrics = await page.evaluate(() => ({
+    pageWidth: document.documentElement.clientWidth,
+    pageScrollWidth: document.documentElement.scrollWidth,
+    rootHeight: document.querySelector(".sm-experience").offsetHeight,
+    viewportHeight: window.innerHeight,
+    sceneHeight: document.querySelector("#scene").getBoundingClientRect().height,
+    sceneOverflow: getComputedStyle(document.querySelector("#scene")).overflowY
+  }));
+  expect(metrics.pageScrollWidth).toBeLessThanOrEqual(metrics.pageWidth + 1);
+  expect(metrics.rootHeight).toBeGreaterThan(metrics.viewportHeight * 3);
+  expect(metrics.sceneHeight).toBeLessThanOrEqual(metrics.viewportHeight + 1);
+  expect(metrics.sceneOverflow).not.toBe("auto");
+  await page.evaluate(() => window.scrollTo(0, document.querySelector(".sm-experience").offsetTop + document.querySelector(".sm-experience").offsetHeight * .88));
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(initial + 100);
+  await expect(page.locator('.sm-experience .chapter-nav a[aria-label="Return"]')).toHaveAttribute("aria-current", "location");
+});
