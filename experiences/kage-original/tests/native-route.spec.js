@@ -80,3 +80,60 @@ test("document scrolling advances the experience on small mobile screens without
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(initial + 100);
   await expect(page.locator('.sm-experience .chapter-nav a[aria-label="Return"]')).toHaveAttribute("aria-current", "location");
 });
+
+test("the WebGL scene stays visible and renders through all five chapters on every target viewport", async ({ page }) => {
+  const viewports = [
+    { width: 320, height: 640 },
+    { width: 375, height: 812 },
+    { width: 390, height: 844 },
+    { width: 430, height: 932 },
+    { width: 768, height: 1024 },
+    { width: 1440, height: 900 }
+  ];
+  const chapterIds = ["arrival", "threshold", "water", "lantern", "return"];
+
+  for (const viewport of viewports) {
+    await page.setViewportSize(viewport);
+    await page.goto("/experience");
+    const root = page.locator(".sm-experience");
+    const canvas = page.locator("#scene canvas");
+    await expect(canvas).toBeVisible({ timeout: 30000 });
+    await expect(root).toHaveClass(/is-scene-active/);
+    await expect.poll(() => root.getAttribute("data-webgl-context"), { timeout: 30000 }).toBe("ready");
+
+    for (let index = 0; index < chapterIds.length; index += 1) {
+      const chapter = page.locator(`#${chapterIds[index]}`);
+      await chapter.evaluate((element) => element.scrollIntoView({ block: "center", behavior: "instant" }));
+      const expectedProgress = index / (chapterIds.length - 1);
+
+      await expect.poll(async () => {
+        const value = Number(await root.getAttribute("data-experience-target-progress"));
+        return Number.isFinite(value) && Math.abs(value - expectedProgress) <= 0.09;
+      }, { timeout: 15000 }).toBe(true);
+
+      await expect.poll(async () => {
+        const value = Number(await root.getAttribute("data-experience-progress"));
+        return Number.isFinite(value) && Math.abs(value - expectedProgress) <= 0.12;
+      }, { timeout: 15000 }).toBe(true);
+
+      const frameBefore = Number(await root.getAttribute("data-experience-frames"));
+      await expect.poll(async () => {
+        const frameAfter = Number(await root.getAttribute("data-experience-frames"));
+        return frameAfter - frameBefore;
+      }, { timeout: 5000 }).toBeGreaterThan(5);
+
+      const box = await canvas.boundingBox();
+      expect(box).not.toBeNull();
+      expect(box.width).toBeGreaterThanOrEqual(viewport.width - 1);
+      expect(box.height).toBeGreaterThanOrEqual(viewport.height - 1);
+      expect(box.y).toBeLessThanOrEqual(1);
+      expect(await root.getAttribute("data-experience-draw-calls")).not.toBe("0");
+      expect(await root.getAttribute("data-webgl-context")).toBe("ready");
+    }
+
+    // Reverse navigation must drive the same camera path back to the opening chapter.
+    await page.locator("#arrival").evaluate((element) => element.scrollIntoView({ block: "center", behavior: "instant" }));
+    await expect.poll(() => root.getAttribute("data-experience-target-progress"), { timeout: 15000 }).toBe("0.000");
+    await expect.poll(() => root.getAttribute("data-experience-progress"), { timeout: 15000 }).toBe("0.000");
+  }
+});
