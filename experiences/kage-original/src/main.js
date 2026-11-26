@@ -504,14 +504,16 @@ function createScene() {
   farArch.scale.setScalar(.52);
 
   const starPositions = [];
-  for (let i = 0; i < 900; i++) starPositions.push(rand(-42, 42), rand(5, 28), rand(-42, 15));
+  const starCount = innerWidth < 700 ? 420 : 900;
+  for (let i = 0; i < starCount; i++) starPositions.push(rand(-42, 42), rand(5, 28), rand(-42, 15));
   const starsGeo = new THREE.BufferGeometry();
   starsGeo.setAttribute("position", new THREE.Float32BufferAttribute(starPositions, 3));
   const stars = new THREE.Points(starsGeo, new THREE.PointsMaterial({ color: "#c3d4c4", size: .045, transparent: true, opacity: .52 }));
   scene.add(stars);
 
-  const motePositions = new Float32Array(180 * 3);
-  for (let i = 0; i < 180; i++) {
+  const moteCount = innerWidth < 700 ? 90 : 180;
+  const motePositions = new Float32Array(moteCount * 3);
+  for (let i = 0; i < moteCount; i++) {
     motePositions[i * 3] = rand(-8, 8);
     motePositions[i * 3 + 1] = rand(.1, 5);
     motePositions[i * 3 + 2] = rand(-24, 9);
@@ -522,7 +524,8 @@ function createScene() {
   scene.add(motes);
 
   const fogCards = [];
-  for (let i = 0; i < 7; i++) {
+  const fogCardCount = innerWidth < 700 ? 4 : 7;
+  for (let i = 0; i < fogCardCount; i++) {
     const fog = new THREE.Mesh(new THREE.PlaneGeometry(12, 2.8),
       new THREE.MeshBasicMaterial({ color: "#a6b7a6", transparent: true, opacity: .035, depthWrite: false, side: THREE.DoubleSide }));
     fog.position.set(rand(-3, 3), .7 + i * .18, -3 - i * 3.2);
