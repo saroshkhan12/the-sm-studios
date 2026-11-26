@@ -121,10 +121,25 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       const root = document.documentElement;
       root.style.setProperty("--theme-origin-x", `${point.x}px`);
       root.style.setProperty("--theme-origin-y", `${point.y}px`);
-      try {
-        transitionDocument.startViewTransition(apply);
-      } catch {
+
+      // The theme is an application state change, not an animation side effect.
+      // Apply it once immediately if the browser delays or rejects the transition
+      // update callback; browsers that run the callback normally retain the reveal.
+      let applied = false;
+      const applyOnce = () => {
+        if (applied) return;
+        applied = true;
         apply();
+      };
+
+      try {
+        const transition = transitionDocument.startViewTransition(applyOnce);
+        requestAnimationFrame(() => {
+          if (!applied) applyOnce();
+        });
+        void transition?.updateCallbackDone?.catch(applyOnce);
+      } catch {
+        applyOnce();
       }
     } else {
       apply();
