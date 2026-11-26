@@ -687,8 +687,10 @@ function publishRenderDiagnostics() {
   const gl = renderer.getContext();
   root.dataset.webglContext = gl.isContextLost() ? "lost" : "ready";
 
-  // Read nine pixels from the live default framebuffer immediately after render().
-  // This verifies actual GPU output without invoking the browser screenshot compositor.
+  // Pixel readback is deliberately on-demand: synchronous GPU reads every few
+  // frames would add needless work to the live experience on slower mobile devices.
+  const sampleRequest = root.dataset.experiencePixelSampleRequest;
+  if (!sampleRequest || sampleRequest === root.dataset.experiencePixelSampledRequest) return;
   const width = gl.drawingBufferWidth;
   const height = gl.drawingBufferHeight;
   if (!width || !height || gl.isContextLost()) return;
@@ -707,6 +709,8 @@ function publishRenderDiagnostics() {
   }
   root.dataset.experiencePixelAverage = (luminanceTotal / 9).toFixed(2);
   root.dataset.experienceLitSamples = String(litSamples);
+  root.dataset.experiencePixelFrame = String(renderFrameCount);
+  root.dataset.experiencePixelSampledRequest = sampleRequest;
 }
 
 function animate() {
