@@ -248,7 +248,7 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
     }
 
     // Reverse through each chapter using immediate document scrolling, independent of CSS smooth-scroll preferences.
-    for (let index = chapterIds.length - 2; index >= 0; index -= 1) {
+    for (let index = chapterIds.length - 1; index >= 0; index -= 1) {
       const chapter = page.locator(`#${chapterIds[index]}`);
       await centerChapter(page, chapter);
       const expectedProgress = index / (chapterIds.length - 1);
