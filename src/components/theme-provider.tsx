@@ -110,7 +110,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       "(prefers-reduced-motion: reduce)",
     ).matches;
     const transitionDocument = document as Document & {
-      startViewTransition?: (callback: () => void) => unknown;
+      startViewTransition?: (callback: () => void) => {
+        updateCallbackDone?: Promise<unknown>;
+      };
     };
 
     if (
