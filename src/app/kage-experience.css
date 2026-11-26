@@ -448,3 +448,76 @@ html[data-theme="light"] .our-story-page .story-hero {
     animation-iteration-count: 1 !important;
   }
 }
+
+
+/* Shared studio chrome: preserve the existing navigation behavior and geometry. */
+.announcement {
+  color: #c8a979;
+  background: #0b0b0a;
+  border-bottom: 1px solid rgba(200,169,121,.18);
+  letter-spacing: .16em;
+}
+.header.glass-header {
+  color: #f1ede5;
+  background: rgba(11,11,10,.94);
+  border-bottom: 1px solid rgba(200,169,121,.2);
+  box-shadow: 0 12px 36px rgba(0,0,0,.12);
+  backdrop-filter: blur(18px);
+}
+.header.glass-header :where(.glass-nav-link,.icon-btn,.wordmark) {
+  color: #f1ede5;
+}
+.header.glass-header .glass-nav-link.active,
+.header.glass-header .glass-nav-link:hover,
+.header.glass-header .icon-btn:hover {
+  color: #c8a979;
+}
+.footer.glass-footer {
+  color: #f1ede5;
+  background:
+    radial-gradient(ellipse at 14% 0%, rgba(200,169,121,.09), transparent 34rem),
+    #090909;
+  border-top: 1px solid rgba(200,169,121,.24);
+}
+.footer.glass-footer :where(p,a,span,small) {
+  color: #aaa398;
+}
+.footer.glass-footer :where(a:hover,.footer-logo strong) {
+  color: #c8a979;
+}
+html[data-theme="light"] .announcement {
+  color: #70552f;
+  background: #e9e2d6;
+  border-color: rgba(112,85,48,.2);
+}
+html[data-theme="light"] .header.glass-header {
+  color: #171612;
+  background: rgba(242,238,230,.96);
+  border-color: rgba(112,85,48,.2);
+}
+html[data-theme="light"] .header.glass-header :where(.glass-nav-link,.icon-btn,.wordmark) {
+  color: #171612;
+}
+html[data-theme="light"] .header.glass-header :where(.glass-nav-link.active,.glass-nav-link:hover,.icon-btn:hover) {
+  color: #967342;
+}
+html[data-theme="light"] .footer.glass-footer {
+  color: #171612;
+  background: radial-gradient(ellipse at 14% 0%, rgba(150,115,66,.1), transparent 34rem), #e9e2d6;
+  border-color: rgba(112,85,48,.24);
+}
+html[data-theme="light"] .footer.glass-footer :where(p,a,span,small) {
+  color: #625d54;
+}
+html[data-theme="light"] .footer.glass-footer :where(a:hover,.footer-logo strong) {
+  color: #967342;
+}
+@media (max-width: 760px) {
+  .announcement {
+    letter-spacing: .1em;
+    font-size: .58rem;
+  }
+  .footer.glass-footer .footer-top {
+    gap: 2rem;
+  }
+}
