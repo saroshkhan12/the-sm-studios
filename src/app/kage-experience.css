@@ -824,3 +824,307 @@ html[data-theme="light"] .kage-home .newsletter .btn-light {
     --kage-public-muted: #454138;
   }
 }
+
+
+/* =========================================================
+   KAGE STUDIO ART DIRECTION — full public-site redesign layer
+   This layer deliberately changes composition, not business logic.
+   ========================================================= */
+:root {
+  --studio-night: #090a09;
+  --studio-panel: #121411;
+  --studio-paper: #eee9df;
+  --studio-muted: #aaa69c;
+  --studio-gold: #c6a777;
+  --studio-rule: rgba(198,167,119,.28);
+}
+html[data-theme="light"] {
+  --studio-night: #eee9df;
+  --studio-panel: #e4ded2;
+  --studio-paper: #211f1a;
+  --studio-muted: #625d53;
+  --studio-gold: #8c6939;
+  --studio-rule: rgba(95,72,39,.27);
+}
+body {
+  background: var(--studio-night);
+  color: var(--studio-paper);
+  transition: background-color .45s ease, color .45s ease;
+}
+.announcement {
+  height: 29px;
+  background: #090a09;
+  color: #d7c5a7;
+  border-bottom: 1px solid rgba(198,167,119,.2);
+  font-size: 8px;
+  letter-spacing: .22em;
+}
+.header.glass-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: 82px;
+  padding-inline: clamp(22px,5.5vw,88px);
+  background: color-mix(in srgb, var(--studio-night) 88%, transparent);
+  color: var(--studio-paper);
+  border-bottom: 1px solid var(--studio-rule);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+.wordmark-type { color: var(--studio-paper); letter-spacing: .12em; font-size: 17px; }
+.wordmark-type i { color: var(--studio-gold); }
+.wordmark-type small { color: var(--studio-muted); letter-spacing: .25em; font-size: 7px; }
+.desktop-nav { gap: clamp(18px,2.6vw,42px); margin-left: 0; }
+.desktop-nav a { color: var(--studio-muted); font-size: 9px; letter-spacing: .17em; }
+.desktop-nav a.active, .desktop-nav a:hover { color: var(--studio-paper); }
+.desktop-nav a:after, .desktop-nav .nav-indicator { background: var(--studio-gold); }
+.header-actions { gap: clamp(9px,1.3vw,19px); }
+.header-actions .icon-btn { color: var(--studio-paper); border: 1px solid transparent; width: 37px; height: 37px; }
+.header-actions .icon-btn:hover { border-color: var(--studio-rule); color: var(--studio-gold); }
+.header-count { background: var(--studio-gold) !important; color: #17140f !important; }
+.navigation-overlay.glass-navigation {
+  z-index: 60;
+  background: var(--studio-night);
+  color: var(--studio-paper);
+  border-top: 1px solid var(--studio-rule);
+}
+.navigation-overlay-links a { color: var(--studio-paper); }
+.navigation-overlay-links a:hover { color: var(--studio-gold); }
+.navigation-overlay-top { border-bottom-color: var(--studio-rule); }
+.navigation-overlay-brand span { color: var(--studio-paper); }
+
+/* Immersive homepage */
+.kage-home { background: var(--studio-night); color: var(--studio-paper); }
+.kage-home .hero {
+  min-height: min(860px, calc(100svh - 110px));
+  grid-template-columns: minmax(0,1.04fr) minmax(360px,.96fr);
+  padding: clamp(64px,8vw,126px) clamp(28px,9vw,145px) 110px;
+  gap: clamp(25px,5vw,82px);
+  background: var(--studio-night);
+  border-bottom: 1px solid var(--studio-rule);
+}
+.kage-home .hero:before {
+  content: "THE SM / STUDIO";
+  position: absolute; right: 4.5%; top: 12%;
+  writing-mode: vertical-rl; color: var(--studio-gold);
+  opacity: .55; font-size: 8px; letter-spacing: .34em;
+}
+.kage-home .hero-copy { max-width: 680px; padding: 0; }
+.kage-home .hero-copy .eyebrow { color: var(--studio-gold); }
+.kage-home .hero-copy h1 {
+  max-width: 760px;
+  font-size: clamp(66px,8.6vw,132px);
+  line-height: .82;
+  letter-spacing: -.065em;
+  margin: 34px 0 28px;
+  color: var(--studio-paper);
+}
+.kage-home .hero-copy h1 em { color: var(--studio-gold); }
+.kage-home .hero-copy > p { max-width: 390px; color: var(--studio-muted); font-size: 13px; line-height: 2; }
+.kage-home .hero-buttons { gap: 24px; margin-top: 38px; }
+.kage-home .hero-art {
+  width: min(100%,590px); height: min(64vw,650px);
+  min-height: 430px; padding: 0;
+  border: 1px solid var(--studio-rule);
+  background: var(--studio-panel);
+}
+.kage-home .hero-art-inner { background: #25251f; }
+.kage-home .hero-art-inner:before { inset: 18px; border-color: rgba(236,224,203,.35); }
+.kage-home .hero-art-word { font-size: clamp(42px,5vw,76px); left: 8%; top: 25%; }
+.kage-home .hero-art-foot, .kage-home .hero-side-note { color: #eee3d1; }
+.kage-home .hero-bottom { left: clamp(28px,9vw,145px); right: clamp(28px,9vw,145px); color: var(--studio-muted); }
+.kage-home .hero-bottom:before { content:""; height:1px; background:var(--studio-rule); position:absolute; top:-17px; left:0; right:0; }
+.kage-home .brand-values {
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
+  padding: 28px clamp(28px,9vw,145px);
+  gap: 24px; background:var(--studio-panel);
+}
+.kage-home .brand-values > div { justify-content:center; gap:13px; }
+.kage-home .brand-values svg { width:19px; height:19px; color:var(--studio-gold); }
+.kage-home .brand-values strong { color:var(--studio-paper); font-size:9px; letter-spacing:.16em; }
+.kage-home .brand-values small { color:var(--studio-muted); }
+.kage-home .editorial-manifesto {
+  padding: clamp(90px,12vw,180px) clamp(28px,9vw,145px);
+  background:var(--studio-night);
+}
+.kage-home .editorial-manifesto-inner {
+  max-width:1440px; margin:auto; display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);
+  align-items:center; gap:clamp(48px,9vw,140px);
+}
+.kage-home .manifesto-artwork {
+  min-height: min(68vw,690px); border:1px solid var(--studio-rule);
+  background:var(--studio-panel);
+}
+.kage-home .manifesto-artwork:before { content:""; position:absolute; inset:18px; border:1px solid rgba(198,167,119,.3); z-index:2; pointer-events:none; }
+.kage-home .manifesto-image { object-fit:cover; filter:saturate(.78); }
+.kage-home .editorial-manifesto-copy h2 {
+  color:var(--studio-paper); font:400 clamp(48px,6vw,88px)/.93 'Cormorant Garamond',Georgia,serif;
+  letter-spacing:-.045em; margin:25px 0;
+}
+.kage-home .editorial-manifesto-copy > p { color:var(--studio-muted); font-size:13px; line-height:2.05; }
+.kage-home .manifesto-signature { color:var(--studio-gold) !important; font-style:italic; }
+.kage-home .manifesto-link { color:var(--studio-paper); border-bottom:1px solid var(--studio-gold); padding:14px 0; display:inline-flex; margin-top:16px; font-size:9px; letter-spacing:.18em; }
+.kage-home .home-collections-section { padding:clamp(85px,10vw,150px) clamp(28px,9vw,145px); background:var(--studio-panel); }
+.kage-home .home-collections-intro { display:grid; grid-template-columns:1fr .7fr; gap:40px; align-items:end; margin-bottom:55px; }
+.kage-home .home-collections-title h2, .kage-home .section-heading h2 { color:var(--studio-paper); font:400 clamp(46px,6vw,82px)/.95 'Cormorant Garamond',Georgia,serif; letter-spacing:-.04em; margin-top:20px; }
+.kage-home .home-collections-description p { color:var(--studio-muted); font-size:12px; line-height:1.9; }
+.kage-home .home-collection-grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; }
+.kage-home .collection-card { background:transparent; border:0; }
+.kage-home .collection-card.card-1,.kage-home .collection-card.card-4 { transform:none; }
+.kage-home .collection-card .art-placeholder { height:clamp(220px,29vw,410px); border:1px solid var(--studio-rule); background:#24231f; }
+.kage-home .collection-card .collection-art-image { object-fit:cover; transition:transform .8s cubic-bezier(.2,.7,.2,1); }
+.kage-home .collection-card:hover .collection-art-image { transform:scale(1.055); }
+.kage-home .collection-meta { padding:20px 0; }
+.kage-home .collection-meta h3 { color:var(--studio-paper); font:400 clamp(23px,2.5vw,34px) 'Cormorant Garamond',Georgia,serif; }
+.kage-home .collection-meta p { color:var(--studio-muted); font-size:11px; }
+.kage-home .featured-section { padding:clamp(85px,10vw,145px) 0; background:var(--studio-night); }
+.kage-home .featured-section .section-wrap { padding-inline:clamp(28px,9vw,145px); }
+.kage-home .product-grid { gap:24px; }
+.kage-home .product-card { background:transparent; border:0; }
+.kage-home .product-image { background:var(--studio-panel); border:1px solid var(--studio-rule); }
+.kage-home .product-info h3 { color:var(--studio-paper); }
+.kage-home .product-info p { color:var(--studio-muted); }
+.kage-home .product-info strong { color:var(--studio-gold); }
+.kage-home .newsletter {
+  padding:clamp(70px,9vw,125px) clamp(28px,9vw,145px);
+  background:var(--studio-panel); border-top:1px solid var(--studio-rule);
+}
+.kage-home .newsletter h2 { color:var(--studio-paper); font-size:clamp(48px,6vw,82px); }
+
+/* Public route editorial system */
+main .page-shell, main .our-story-page {
+  min-height:65vh; padding:0 clamp(22px,7vw,112px) clamp(80px,10vw,140px);
+  background:var(--studio-night); color:var(--studio-paper);
+}
+main .page-shell .page-hero {
+  min-height:clamp(340px,42vw,560px);
+  display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+  padding:clamp(70px,10vw,145px) 0 clamp(55px,7vw,100px);
+  border-bottom:1px solid var(--studio-rule); margin-bottom:55px;
+  position:relative; overflow:hidden;
+}
+main .page-shell .page-hero:after {
+  content:""; position:absolute; width:38vw; height:38vw; max-width:560px; max-height:560px;
+  right:2%; top:8%; border:1px solid var(--studio-rule); border-radius:50%;
+  box-shadow:0 0 0 35px color-mix(in srgb,var(--studio-gold) 4%,transparent),0 0 0 90px color-mix(in srgb,var(--studio-gold) 3%,transparent);
+  pointer-events:none;
+}
+main .page-shell .page-hero .eyebrow { color:var(--studio-gold); z-index:1; }
+main .page-shell .page-hero h1 {
+  max-width:1000px; color:var(--studio-paper);
+  font:400 clamp(58px,9vw,132px)/.84 'Cormorant Garamond',Georgia,serif;
+  letter-spacing:-.055em; margin:28px 0; position:relative; z-index:1;
+}
+main .page-shell .page-hero h1 em { color:var(--studio-gold); }
+main .page-shell .page-hero p { max-width:490px; color:var(--studio-muted); line-height:1.9; font-size:13px; z-index:1; }
+main .page-shell .shop-toolbar {
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+  gap:16px; padding:18px 0 28px; border-bottom:1px solid var(--studio-rule);
+}
+main .page-shell .glass-control, main .page-shell .glass-filter-group,
+main .page-shell .glass-surface, main .page-shell .selection-footer {
+  background:var(--studio-panel); color:var(--studio-paper); border-color:var(--studio-rule);
+}
+main .page-shell input, main .page-shell select, main .page-shell textarea {
+  background:transparent; color:var(--studio-paper); border-color:var(--studio-rule);
+}
+main .page-shell input::placeholder, main .page-shell textarea::placeholder { color:var(--studio-muted); }
+main .page-shell .filter-row { display:flex; flex-wrap:wrap; gap:8px; }
+main .page-shell .glass-chip {
+  border:1px solid var(--studio-rule); color:var(--studio-muted); background:transparent;
+  padding:11px 16px; font-size:9px; letter-spacing:.12em; text-transform:uppercase;
+}
+main .page-shell .glass-chip.filter-active, main .page-shell .glass-chip:hover {
+  background:var(--studio-gold); color:#17140f; border-color:var(--studio-gold);
+}
+main .page-shell .product-grid { gap:clamp(14px,2vw,28px); }
+main .page-shell .product-card { background:transparent; border:0; box-shadow:none; }
+main .page-shell .product-image { background:var(--studio-panel); border:1px solid var(--studio-rule); }
+main .page-shell .product-info h3 { color:var(--studio-paper); }
+main .page-shell .product-info p { color:var(--studio-muted); }
+main .page-shell .product-info strong { color:var(--studio-gold); }
+main .page-shell .empty-catalog, main .page-shell .catalog-note,
+main .page-shell .selection-footer, main .page-shell .glass-surface {
+  color:var(--studio-paper); border-color:var(--studio-rule);
+}
+main .page-shell .empty-catalog p, main .page-shell .catalog-note p,
+main .page-shell .selection-footer p { color:var(--studio-muted); }
+main .page-shell .btn-dark { background:var(--studio-gold); color:#17140f; }
+main .page-shell .btn-outline-dark { color:var(--studio-paper); border-color:var(--studio-rule); }
+main .page-shell .btn-outline-dark:hover { background:var(--studio-gold); color:#17140f; }
+main .page-shell .eyebrow { color:var(--studio-gold); }
+main .page-shell .wishlist-btn, main .page-shell .remove-selection { color:var(--studio-paper); }
+main .page-shell .wishlist-btn.saved { color:var(--studio-gold); }
+main .page-shell .product-detail, main .page-shell .product-detail-content,
+main .page-shell .product-gallery { color:var(--studio-paper); }
+main .page-shell .product-detail h1, main .page-shell .product-detail h2 { color:var(--studio-paper); }
+main .page-shell .product-detail p, main .page-shell .product-detail li { color:var(--studio-muted); }
+main .page-shell .product-gallery, main .page-shell .product-gallery-main,
+main .page-shell .product-gallery-thumb { background:var(--studio-panel); border-color:var(--studio-rule); }
+main .page-shell .contact-form, main .page-shell form { color:var(--studio-paper); }
+main .page-shell label { color:var(--studio-muted); }
+main .page-shell button:focus-visible, main .page-shell a:focus-visible,
+.header a:focus-visible, .header button:focus-visible {
+  outline:2px solid var(--studio-gold); outline-offset:4px;
+}
+
+/* Theme-aware footer */
+footer, .site-footer {
+  background:var(--studio-night); color:var(--studio-paper);
+  border-top:1px solid var(--studio-rule);
+}
+footer p, footer small, .site-footer p { color:var(--studio-muted); }
+footer a:hover, .site-footer a:hover { color:var(--studio-gold); }
+
+@media (max-width: 900px) {
+  .kage-home .hero { grid-template-columns:1fr  .85fr; padding-inline:6%; }
+  .kage-home .hero-art { min-height:380px; height:55vw; }
+  .kage-home .home-collection-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .kage-home .editorial-manifesto-inner { gap:45px; }
+  .kage-home .brand-values { padding-inline:6%; }
+}
+@media (max-width: 680px) {
+  .announcement { font-size:7px; letter-spacing:.12em; gap:8px; }
+  .header.glass-header { height:70px; padding-inline:17px; }
+  .desktop-nav { display:none; }
+  .mobile-menu { display:inline-flex; color:var(--studio-paper); }
+  .wordmark-type { font-size:14px; }
+  .wordmark-type small { font-size:6px; letter-spacing:.16em; }
+  .header-actions { gap:4px; }
+  .header-actions .icon-btn { width:32px; height:34px; }
+  .kage-home .hero {
+    min-height:0; display:flex; flex-direction:column; align-items:stretch;
+    padding:68px 23px 76px; gap:35px;
+  }
+  .kage-home .hero-copy h1 { font-size:clamp(58px,15vw,86px); margin:26px 0 20px; }
+  .kage-home .hero-copy > p { font-size:12px; }
+  .kage-home .hero-art { width:100%; height:105vw; max-height:500px; min-height:320px; }
+  .kage-home .hero-bottom { left:23px; right:23px; bottom:22px; font-size:7px; }
+  .kage-home .brand-values { grid-template-columns:repeat(2,minmax(0,1fr)); padding:22px 20px; gap:20px 10px; }
+  .kage-home .brand-values > div { justify-content:flex-start; }
+  .kage-home .brand-values strong { font-size:8px; }
+  .kage-home .editorial-manifesto { padding:75px 23px; }
+  .kage-home .editorial-manifesto-inner { grid-template-columns:1fr; gap:38px; }
+  .kage-home .manifesto-artwork { min-height:115vw; }
+  .kage-home .editorial-manifesto-copy h2 { font-size:clamp(48px,13vw,70px); }
+  .kage-home .home-collections-section { padding:75px 23px; }
+  .kage-home .home-collections-intro { grid-template-columns:1fr; gap:18px; margin-bottom:32px; }
+  .kage-home .home-collection-grid { gap:22px 12px; }
+  .kage-home .collection-card .art-placeholder { height:62vw; }
+  .kage-home .collection-meta { padding:13px 0; }
+  .kage-home .collection-meta h3 { font-size:24px; }
+  .kage-home .featured-section .section-wrap { padding-inline:23px; }
+  .kage-home .section-heading { align-items:flex-start; flex-direction:column; gap:18px; }
+  .kage-home .newsletter { padding:70px 23px; }
+  main .page-shell, main .our-story-page { padding-inline:22px; }
+  main .page-shell .page-hero { min-height:330px; padding:70px 0 48px; margin-bottom:32px; }
+  main .page-shell .page-hero:after { width:62vw; height:62vw; right:-25%; top:20%; }
+  main .page-shell .page-hero h1 { font-size:clamp(55px,14vw,78px); }
+  main .page-shell .shop-toolbar { align-items:stretch; flex-direction:column; }
+  main .page-shell .filter-row { flex-wrap:nowrap; overflow-x:auto; padding-bottom:8px; scrollbar-width:thin; }
+  main .page-shell .glass-chip { flex:0 0 auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .header *, main .page-shell *, .kage-home * { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; }
+}
