@@ -199,12 +199,6 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
         return Number.isFinite(value) && Math.abs(value - expectedProgress) <= 0.12;
       }, { timeout: 15000 }).toBe(true);
 
-      const frameBefore = Number(await root.getAttribute("data-experience-frames"));
-      await expect.poll(async () => {
-        const frameAfter = Number(await root.getAttribute("data-experience-frames"));
-        return frameAfter - frameBefore;
-      }, { timeout: 5000 }).toBeGreaterThan(5);
-
       const box = await canvas.boundingBox();
       expect(box).not.toBeNull();
       expect(box.width).toBeGreaterThanOrEqual(viewport.width - 1);
@@ -212,6 +206,11 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
       expect(box.y).toBeLessThanOrEqual(1);
       expect(await root.getAttribute("data-experience-draw-calls")).not.toBe("0");
       expect(await root.getAttribute("data-webgl-context")).toBe("ready");
+      const expectedCameraZ = [12.5, 6.2, -0.2, -6.6, -14.7][index];
+      await expect.poll(async () => {
+        const cameraZ = Number(await root.getAttribute("data-experience-camera-z"));
+        return Number.isFinite(cameraZ) && Math.abs(cameraZ - expectedCameraZ) <= 3.5;
+      }, { timeout: 15000 }).toBe(true);
       // Capture the live canvas through the page compositor. Locator screenshots wait
       // for a continuously animated canvas to become "stable", which never happens.
       await page.addStyleTag({
