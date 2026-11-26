@@ -2,7 +2,10 @@ import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
   testDir: "./tests",
-  fullyParallel: true,
+  // WebGL/SwiftShader is resource-intensive in CI; serialize viewport tests to avoid GPU contention.
+  fullyParallel: false,
+  workers: 1,
+  timeout: 60000,
   reporter: [["list"], ["html", { outputFolder: "playwright-report", open: "never" }]],
   use: {
     baseURL: "http://127.0.0.1:4173",
