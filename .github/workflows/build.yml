@@ -7,6 +7,7 @@ on:
       - main
       - admin-registration-approval
       - feature/accessible-theme-switch
+      - feature/kage-inspired-transformation
   pull_request:
     branches:
       - main
@@ -19,10 +20,10 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js 24
+      - name: Set up Node.js 20
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 20
           cache: npm
 
       - name: Install locked dependencies
