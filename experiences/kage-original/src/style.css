@@ -1,0 +1,88 @@
+:root {
+  color-scheme: dark;
+  font-family: "DM Sans", sans-serif;
+  background: #111512;
+  color: #e8e5db;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --muted: #a5aaa0;
+  --gold: #d1ad79;
+  --serif: "Playfair Display", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
+body { margin: 0; min-width: 320px; background: #111512; }
+#scene { position: fixed; inset: 0; z-index: 0; }
+#scene canvas { display: block; width: 100%; height: 100%; }
+.grain { position: fixed; inset: 0; z-index: 2; pointer-events: none; opacity: .12; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E"); }
+.topbar { position: fixed; z-index: 5; inset: 0 0 auto; height: 82px; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(22px, 5vw, 76px); border-bottom: 1px solid #ffffff14; background: linear-gradient(#101511a8, transparent); }
+.wordmark { color: #eee9dd; text-decoration: none; font-size: 10px; letter-spacing: .2em; font-weight: 600; }
+.wordmark span { color: var(--gold); padding: 0 7px; }
+.sound-toggle { border: 0; background: transparent; color: #d3d2c8; font: inherit; font-size: 9px; letter-spacing: .18em; cursor: pointer; padding: 12px 0 12px 12px; }
+main { position: relative; z-index: 3; }
+.chapter { min-height: 100svh; position: relative; display: flex; align-items: center; padding: 120px clamp(26px, 12vw, 190px); scroll-snap-align: start; }
+.chapter--hero { display: block; padding-top: clamp(190px, 27vh, 270px); }
+.eyebrow { color: var(--gold); font-size: 9px; letter-spacing: .24em; font-weight: 600; }
+.eyebrow span { color: #7e887d; padding: 0 7px; }
+h1, h2 { margin: 28px 0 22px; font-family: var(--serif); font-weight: 400; letter-spacing: -.045em; line-height: 1.06; color: #f0ede4; }
+h1 { font-size: clamp(58px, 8.3vw, 118px); }
+h2 { font-size: clamp(48px, 6.1vw, 86px); }
+h1 em, h2 em { color: #c7b99f; font-weight: 400; }
+.intro, .chapter-copy p, .chapter--final p { max-width: 390px; color: #c0c4bb; font-size: 14px; line-height: 1.9; }
+.enter-link { margin-top: 40px; display: inline-flex; gap: 30px; align-items: center; color: #e8e4d9; text-decoration: none; border-bottom: 1px solid #c6a87880; padding: 0 0 13px; font-size: 9px; letter-spacing: .22em; transition: color .25s, gap .25s; }
+.enter-link i { color: var(--gold); font-style: normal; font-size: 17px; }
+.enter-link:hover { color: var(--gold); gap: 42px; }
+.hero-index { position: absolute; left: clamp(26px, 12vw, 190px); bottom: 54px; font-size: 10px; letter-spacing: .15em; color: #d8d7cd; }
+.hero-index span { color: var(--gold); padding: 0 6px; }
+.chapter--side { justify-content: flex-start; }
+.chapter-copy { width: min(460px, 48vw); padding: 28px 0; }
+.chapter-copy p { max-width: 370px; }
+.chapter-number { position: absolute; right: clamp(30px, 8vw, 120px); bottom: 68px; font-family: var(--serif); font-size: clamp(100px, 17vw, 230px); line-height: 1; color: #e6e6d8; opacity: .07; }
+.chapter--right { justify-content: flex-end; text-align: right; }
+.chapter--right .chapter-copy { margin-right: 2vw; }
+.chapter--right .chapter-copy p { margin-left: auto; }
+.chapter-note { display: inline-block; margin-top: 26px; color: #929c91; font-size: 8px; letter-spacing: .2em; }
+.chapter--final { display: block; padding-top: 24vh; text-align: center; }
+.chapter--final h2 { font-size: clamp(56px, 7vw, 98px); }
+.chapter--final p { margin: 0 auto; }
+.chapter--final .enter-link { margin-top: 36px; }
+.closing-mark { position: absolute; bottom: 42px; left: 0; right: 0; color: #9ba398; font-size: 8px; letter-spacing: .22em; }
+.closing-mark span { color: var(--gold); padding: 0 8px; }
+.chapter-nav { position: fixed; z-index: 6; right: 34px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 15px; }
+.chapter-nav a { width: 20px; height: 20px; display: grid; place-items: center; }
+.chapter-nav span { width: 4px; height: 4px; border-radius: 50%; background: #c4cbbd88; transition: transform .25s, background .25s; }
+.chapter-nav a.is-active span { transform: scale(2.1); background: var(--gold); }
+.scroll-cue { position: fixed; z-index: 4; right: 34px; bottom: 36px; color: #a9b0a5; font-size: 8px; letter-spacing: .18em; writing-mode: vertical-rl; }
+.scroll-cue span { color: var(--gold); margin-top: 12px; font-size: 14px; }
+.webgl-fallback { position: fixed; z-index: 8; inset: auto 20px 20px; padding: 16px 20px; background: #252d27; color: #eee; font-size: 12px; }
+[hidden] { display: none !important; }
+@media (max-width: 700px) {
+  .topbar { height: 68px; padding: 0 22px; }
+  .wordmark { font-size: 8px; letter-spacing: .14em; }
+  .sound-toggle { font-size: 8px; }
+  .chapter { min-height: 92svh; padding: 100px 28px; }
+  .chapter--hero { min-height: 100svh; padding-top: 28vh; }
+  h1 { font-size: clamp(54px, 14vw, 82px); }
+  h2 { font-size: clamp(46px, 12vw, 68px); }
+  .intro, .chapter-copy p, .chapter--final p { font-size: 13px; max-width: 310px; }
+  .chapter-copy { width: 100%; max-width: 390px; }
+  .chapter--right { justify-content: flex-start; text-align: left; }
+  .chapter--right .chapter-copy { margin: 0; }
+  .chapter--right .chapter-copy p { margin-left: 0; }
+  .chapter-number { right: 25px; bottom: 50px; font-size: 130px; }
+  .chapter-nav { right: 13px; gap: 10px; }
+  .scroll-cue { right: 16px; bottom: 22px; font-size: 7px; }
+  .hero-index { left: 28px; bottom: 34px; }
+  .chapter--final { padding-top: 26vh; }
+}
+@media (max-width: 390px) {
+  .wordmark { font-size: 7px; }
+  .chapter { padding-left: 22px; padding-right: 22px; }
+  .chapter--hero { padding-top: 25vh; }
+  h1 { font-size: 51px; }
+  h2 { font-size: 43px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
