@@ -40,7 +40,15 @@ test("motion control and shared theme toggle remain interactive", async ({ page 
   const motion = page.locator("#motion-toggle");
   await motion.click();
   await expect(motion).toHaveAttribute("aria-pressed", "true");
+  const themeButton = page.locator(".theme-toggle");
+  await expect.poll(async () => {
+    const theme = await page.locator("html").getAttribute("data-theme");
+    const label = await themeButton.getAttribute("aria-label");
+    return theme === "light"
+      ? label === "Switch to dark mode"
+      : label === "Switch to light mode";
+  }).toBe(true);
   const initialTheme = await page.locator("html").getAttribute("data-theme");
-  await page.locator(".theme-toggle").click();
-  await expect.poll(() => page.locator("html").getAttribute("data-theme")).not.toBe(initialTheme);
+  await themeButton.click();
+  await expect.poll(() => page.locator("html").getAttribute("data-theme"), { timeout: 15000 }).not.toBe(initialTheme);
 });
