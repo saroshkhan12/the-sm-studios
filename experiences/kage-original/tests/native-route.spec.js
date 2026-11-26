@@ -212,7 +212,21 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
       expect(box.y).toBeLessThanOrEqual(1);
       expect(await root.getAttribute("data-experience-draw-calls")).not.toBe("0");
       expect(await root.getAttribute("data-webgl-context")).toBe("ready");
-      const renderedCanvas = await canvas.screenshot();
+      // Capture the live canvas through the page compositor. Locator screenshots wait
+      // for a continuously animated canvas to become "stable", which never happens.
+      await page.addStyleTag({
+        content: `body * { visibility: hidden !important; }
+          .sm-experience, .sm-experience #scene, .sm-experience #scene canvas {
+            visibility: visible !important;
+            opacity: 1 !important;
+          }
+          .sm-experience::before { visibility: hidden !important; }`
+      });
+      const renderedCanvas = await page.screenshot({
+        clip: { x: box.x, y: box.y, width: box.width, height: box.height },
+        animations: "disabled",
+        timeout: 15000
+      });
       const brightness = samplePngBrightness(renderedCanvas);
       expect(brightness.average, `Expected a visible rendered scene in chapter ${chapterIds[index]} at ${viewport.width}x${viewport.height}`).toBeGreaterThan(8);
       expect(brightness.litSamples).toBeGreaterThanOrEqual(7);
