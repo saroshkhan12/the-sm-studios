@@ -187,8 +187,8 @@ html[data-theme="light"] {
 }
 
 /* The shared page canvas deliberately excludes the admin area. */
-main > .page-shell,
-main > .our-story-page {
+main .page-shell,
+main .our-story-page {
   position: relative;
   isolation: isolate;
   color: var(--kage-public-paper);
@@ -196,8 +196,8 @@ main > .our-story-page {
     radial-gradient(ellipse at 82% 4%, rgba(200, 169, 121, .075), transparent 34rem),
     var(--kage-public-ink);
 }
-main > .page-shell::before,
-main > .our-story-page::before {
+main .page-shell::before,
+main .our-story-page::before {
   content: "";
   position: absolute;
   z-index: -1;
@@ -440,8 +440,8 @@ html[data-theme="light"] .our-story-page .story-hero {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  main > .page-shell *,
-  main > .our-story-page * {
+  main .page-shell *,
+  main .our-story-page * {
     scroll-behavior: auto !important;
     transition-duration: .01ms !important;
     animation-duration: .01ms !important;
