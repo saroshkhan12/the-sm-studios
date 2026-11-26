@@ -39,6 +39,7 @@ const navigation = [
   { label: "Shop", href: "/shop" },
   { label: "Collections", href: "/collections" },
   { label: "Our Story", href: "/about" },
+  { label: "Experience", href: "/experience" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -428,6 +429,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <Link href="/shop">All artwork</Link>
             <Link href="/collections">Collections</Link>
             <Link href="/about">Our story</Link>
+            <Link href="/experience">Immersive experience</Link>
           </m.div>
           <m.div variants={staggerItem}>
             <h4>CUSTOMER CARE</h4>

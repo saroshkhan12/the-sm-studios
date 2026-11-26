@@ -1,0 +1,65 @@
+name: KAGE Original Experience QA
+
+on:
+  push:
+    branches:
+      - feature/kage-original-clean-room
+  pull_request:
+    branches:
+      - main
+      - feature/kage-original-clean-room
+  workflow_dispatch:
+
+jobs:
+  build-and-browser-qa:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: experiences/kage-original
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Build production bundle
+        run: npm run build
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run responsive browser tests
+        run: npm run test:e2e
+      - name: Upload screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kage-browser-qa-${{ github.run_number }}
+          path: |
+            experiences/kage-original/test-results/
+            experiences/kage-original/playwright-report/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  storefront-integration-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install storefront dependencies
+        run: npm ci
+      - name: Build storefront and integrated experience
+        run: npm run build
+      - name: Upload production experience assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: sm-studios-experience-production
+          path: public/experience/
+          if-no-files-found: error
+          retention-days: 14
