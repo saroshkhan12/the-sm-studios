@@ -80,21 +80,6 @@ async function centerChapter(page, chapter) {
   });
 }
 
-async function sampleLiveWebGLPixels(root) {
-  const request = await root.evaluate((element) => {
-    const next = String((Number(element.dataset.experiencePixelSampleRequest) || 0) + 1);
-    element.dataset.experiencePixelSampleRequest = next;
-    return next;
-  });
-  await expect.poll(
-    () => root.getAttribute("data-experience-pixel-sampled-request"),
-    { timeout: 5000 }
-  ).toBe(request);
-  return {
-    average: Number(await root.getAttribute("data-experience-pixel-average")),
-    litSamples: Number(await root.getAttribute("data-experience-lit-samples"))
-  };
-}
 
 test("native experience shares the storefront shell and renders all five chapters", async ({ page }, testInfo) => {
   const errors = [];
@@ -186,7 +171,7 @@ test("document scrolling advances the experience on small mobile screens without
 
 test("the WebGL scene stays visible and renders through all five chapters on every target viewport", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "native-mobile", "Run the full six-size viewport matrix once to avoid duplicate GPU-heavy runs.");
-  test.setTimeout(180000);
+  test.setTimeout(300000);
   const viewports = [
     { width: 320, height: 640 },
     { width: 375, height: 812 },
@@ -199,7 +184,7 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
 
   for (const viewport of viewports) {
     await page.setViewportSize(viewport);
-    await page.goto("/experience");
+    await page.goto("/experience?sm-studios-webgl-test=1");
     const root = page.locator(".sm-experience");
     const canvas = page.locator("#scene canvas");
     await expect(canvas).toBeVisible({ timeout: 30000 });
@@ -241,8 +226,11 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
       // Verify real GPU framebuffer pixels. The prior page.screenshot() call timed
       // out inside Chromium's SwiftShader compositor even after frame counters,
       // draw calls and the WebGL context proved the scene was rendering.
-      const brightness = await sampleLiveWebGLPixels(root);
-      expect(Number.isFinite(brightness.average), "Expected live WebGL pixel diagnostics").toBe(true);
+      // The test-only query flag preserves the WebGL drawing buffer so we can
+      // inspect the actual rendered canvas without a page screenshot or GL readPixels.
+      const renderedDataUrl = await canvas.evaluate((element) => element.toDataURL("image/png"));
+      const renderedPng = Buffer.from(renderedDataUrl.split(",")[1], "base64");
+      const brightness = samplePngBrightness(renderedPng);
       expect(brightness.average, `Expected a visible rendered scene in chapter ${chapterIds[index]} at ${viewport.width}x${viewport.height}`).toBeGreaterThan(8);
       expect(brightness.litSamples).toBeGreaterThanOrEqual(7);
     }
@@ -266,8 +254,9 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
         const value = Number(await root.getAttribute("data-experience-frames"));
         return value - reverseFrameBefore;
       }, { timeout: 5000 }).toBeGreaterThan(5);
-      const reverseBrightness = await sampleLiveWebGLPixels(root);
-      expect(Number.isFinite(reverseBrightness.average)).toBe(true);
+      const reverseDataUrl = await canvas.evaluate((element) => element.toDataURL("image/png"));
+      const reversePng = Buffer.from(reverseDataUrl.split(",")[1], "base64");
+      const reverseBrightness = samplePngBrightness(reversePng);
       expect(reverseBrightness.average).toBeGreaterThan(8);
       expect(reverseBrightness.litSamples).toBeGreaterThanOrEqual(7);
       expect(await root.getAttribute("data-experience-draw-calls")).not.toBe("0");
