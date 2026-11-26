@@ -56,3 +56,11 @@ jobs:
         run: npm ci
       - name: Build storefront and integrated experience
         run: npm run build
+      - name: Install native-route browser test dependencies
+        run: npm --prefix experiences/kage-original install --no-audit --no-fund
+      - name: Install Chromium for native-route tests
+        working-directory: experiences/kage-original
+        run: npx playwright install --with-deps chromium
+      - name: Test the integrated Next.js experience route
+        working-directory: experiences/kage-original
+        run: npx playwright test -c playwright.native.config.js tests/native-route.spec.js
