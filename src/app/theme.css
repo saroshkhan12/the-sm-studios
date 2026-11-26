@@ -8613,3 +8613,159 @@ html[data-theme="light"] .our-story-page .story-navigation-links a.active { colo
   .filter-row.glass-filter-group .glass-chip,
   .our-story-page .story-navigation-links a { transition: none; }
 }
+
+
+/* Header legibility: keep the wordmark and utility controls clearly visible
+   in both themes, with comfortable touch targets at every viewport. */
+.header.glass-header {
+  color: var(--ivory);
+}
+.header .wordmark {
+  min-height: 48px;
+  padding: 7px 12px;
+  border-color: rgba(198, 164, 119, .72);
+}
+.header .wordmark-type {
+  color: #F5F0E8;
+  font-size: clamp(14px, 1.05vw, 16px);
+  line-height: 1.15;
+  letter-spacing: 1.35px;
+}
+.header .wordmark-type i {
+  color: #D8B77F;
+}
+.header .wordmark-type small {
+  margin-top: 6px;
+  color: #C8C0B5;
+  font-size: 8px;
+  line-height: 1.35;
+  letter-spacing: 1.45px;
+}
+.header .desktop-nav .glass-nav-link {
+  color: #D2CBC0;
+}
+.header .desktop-nav .glass-nav-link:hover,
+.header .desktop-nav .glass-nav-link.active {
+  color: #E0BE83;
+}
+.header .header-actions .icon-btn,
+.header .mobile-menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 44px;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  padding: 0;
+  color: #F5F0E8;
+  opacity: 1;
+  visibility: visible;
+}
+.header .header-actions .icon-btn svg,
+.header .mobile-menu svg {
+  display: block;
+  width: 21px;
+  height: 21px;
+  stroke-width: 1.8;
+  opacity: 1;
+  visibility: visible;
+}
+.header .header-count {
+  color: #FFF9F0;
+  background: #762F3C;
+  border: 1px solid rgba(245, 240, 232, .42);
+}
+.header :is(a, button):focus-visible {
+  outline: 2px solid #D8B77F;
+  outline-offset: 3px;
+}
+html[data-theme="light"] .header.glass-header {
+  background: rgba(246, 242, 234, .97);
+  color: #29251F;
+  border-bottom-color: rgba(55, 46, 35, .18);
+}
+html[data-theme="light"] .header .wordmark {
+  border-color: rgba(118, 80, 29, .58);
+}
+html[data-theme="light"] .header .wordmark-type {
+  color: #29251F;
+}
+html[data-theme="light"] .header .wordmark-type i {
+  color: #71333D;
+}
+html[data-theme="light"] .header .wordmark-type small {
+  color: #62594E;
+}
+html[data-theme="light"] .header .desktop-nav .glass-nav-link {
+  color: #51483D;
+}
+html[data-theme="light"] .header .desktop-nav .glass-nav-link:hover,
+html[data-theme="light"] .header .desktop-nav .glass-nav-link.active {
+  color: #71333D;
+}
+html[data-theme="light"] .header .header-actions .icon-btn,
+html[data-theme="light"] .header .mobile-menu {
+  color: #29251F;
+}
+html[data-theme="light"] .header .header-count {
+  color: #FFF9F0;
+  background: #71333D;
+  border-color: rgba(113, 51, 61, .35);
+}
+html[data-theme="light"] .header :is(a, button):focus-visible {
+  outline-color: #76501D;
+}
+@media (max-width: 900px) {
+  .header .wordmark-type { font-size: 14px; }
+  .header .wordmark-type small { font-size: 7.5px; }
+  .header .nav { gap: 14px; }
+  .header .header-actions { gap: 4px; }
+}
+@media (max-width: 650px) {
+  .header.glass-header {
+    height: 72px;
+    padding-inline: 10px;
+    gap: 5px;
+  }
+  .header .wordmark {
+    min-width: 0;
+    max-width: min(54vw, 230px);
+    padding: 6px 8px;
+  }
+  .header .wordmark-type {
+    font-size: clamp(12px, 3.5vw, 14px);
+    letter-spacing: 1px;
+  }
+  .header .wordmark-type small {
+    font-size: clamp(6.5px, 1.9vw, 7.5px);
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+  .header .header-actions {
+    gap: 1px;
+  }
+  .header .header-actions .icon-btn,
+  .header .mobile-menu {
+    flex-basis: 40px;
+    width: 40px;
+    min-width: 40px;
+    height: 44px;
+  }
+  .header .header-actions .icon-btn svg,
+  .header .mobile-menu svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+@media (max-width: 360px) {
+  .header .wordmark { max-width: 48vw; }
+  .header .wordmark-type { font-size: 11.5px; }
+  .header .wordmark-type small { font-size: 6px; letter-spacing: .75px; }
+  .header .header-actions .icon-btn,
+  .header .mobile-menu {
+    flex-basis: 36px;
+    width: 36px;
+    min-width: 36px;
+  }
+}
