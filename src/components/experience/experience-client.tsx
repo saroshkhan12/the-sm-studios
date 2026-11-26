@@ -36,7 +36,7 @@ export function ExperienceClient() {
           PAUSE MOTION
         </button>
       </div>
-      <main className="experience-story">
+      <div className="experience-story">
         <section className="chapter chapter--hero" id="arrival" data-chapter="0">
           <div className="eyebrow">FIELD NOTE 001 <span>—</span> THE QUIET GARDEN</div>
           <h1>A quiet place<br /><em>between worlds.</em></h1>
@@ -81,7 +81,7 @@ export function ExperienceClient() {
           </div>
           <div className="closing-mark">THE SM STUDIOS <span>—</span> FROM ACTIVISM TO ART</div>
         </section>
-      </main>
+      </div>
       <nav className="chapter-nav" aria-label="Journey chapters">
         <a href="#arrival" className="is-active" aria-label="Arrival" aria-current="location"><span /></a>
         <a href="#threshold" aria-label="The threshold"><span /></a>
