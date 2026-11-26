@@ -664,91 +664,145 @@ const atmosphereScratch = {
   fill: new THREE.Color()
 };
 
-function animate() {
-  frame = requestAnimationFrame(animate);
-  if (!renderer || !world) return;
-  if (!clock) clock = new THREE.Clock();
-  const delta = Math.min(clock.getDelta(), .05);
-  const elapsed = clock.elapsedTime;
-  scrollProgress += (targetProgress - scrollProgress) * (1 - Math.exp(-delta * 3.4));
-  const p = scrollProgress;
-  const scaled = p * 4;
-  const index = Math.min(3, Math.floor(scaled));
-  const blend = THREE.MathUtils.smoothstep(scaled - index, 0, 1);
-  const a = chapterCamera[index];
-  const b = chapterCamera[index + 1];
-  const mix = (key) => THREE.MathUtils.lerp(a[key], b[key], blend);
-  const mobile = viewportWidth() < 650;
-  const desiredX = mix("x") * (mobile ? .62 : 1);
-  camera.position.x = THREE.MathUtils.damp(camera.position.x, desiredX, 3.1, delta);
-  camera.position.y = THREE.MathUtils.damp(camera.position.y, mix("y"), 3.1, delta);
-  camera.position.z = THREE.MathUtils.damp(camera.position.z, mix("z"), 3.1, delta);
-  camera.lookAt(mix("tx"), mix("ty"), mix("tz"));
+let animationRunning = false;
+let disposed = false;
 
-  const atmosphereA = chapterAtmosphere[index];
-  const atmosphereB = chapterAtmosphere[index + 1];
-  const colorsA = atmosphereColors[index];
-  const colorsB = atmosphereColors[index + 1];
-  const colorMix = (key) => atmosphereScratch[key].lerpColors(colorsA[key], colorsB[key], blend);
-  scene.background.copy(colorMix("fog"));
-  scene.fog.color.copy(atmosphereScratch.fog);
-  world.hemisphere.color.copy(colorMix("sky"));
-  world.hemisphere.groundColor.copy(colorMix("ground"));
-  world.hemisphere.intensity = THREE.MathUtils.lerp(atmosphereA.hemi, atmosphereB.hemi, blend);
-  world.fill.color.copy(colorMix("fill"));
-  world.fill.intensity = THREE.MathUtils.lerp(atmosphereA.fillPower, atmosphereB.fillPower, blend);
-
-  if (!paused) {
-    world.garden.rotation.y = Math.sin(elapsed * .08) * .006;
-    world.treeGroups.forEach((tree, i) => {
-      tree.rotation.z = Math.sin(elapsed * .32 + i * 1.7) * .006;
-    });
-    const lanternChapter = THREE.MathUtils.smoothstep(p, .56, .82);
-    world.lights.forEach((light, i) => {
-      const pulse = Math.sin(elapsed * 1.3 + i * 1.7) * .55;
-      const lanternFocus = i >= 3 ? lanternChapter : .35 + lanternChapter * .35;
-      light.intensity = 7.6 + lanternFocus * 4.8 + pulse;
-      light.distance = 10 + lanternFocus * 3;
-    });
-    world.water.material.uniforms.uTime.value = elapsed;
-    world.rippleRings.forEach((ring, i) => {
-      const phase = (elapsed * .22 + i / 3) % 1;
-      const expansion = .82 + phase * .62;
-      ring.scale.setScalar(expansion);
-      ring.material.opacity = .2 * (1 - phase) * (1 - phase);
-    });
-    const positions = world.motes.geometry.attributes.position;
-    for (let i = 0; i < positions.count; i++) {
-      positions.array[i * 3 + 1] += .003;
-      if (positions.array[i * 3 + 1] > 5.5) positions.array[i * 3 + 1] = .08;
-    }
-    positions.needsUpdate = true;
-    world.fogCards.forEach((fog, i) => {
-      fog.position.x = Math.sin(elapsed * .12 + i) * 2.4;
-      fog.material.opacity = .025 + lanternChapter * .012;
-    });
-  }
-  renderer.render(scene, camera);
-  renderFrameCount += 1;
-  // Publish lightweight diagnostics at 10Hz rather than mutating the DOM every frame.
-  if (renderFrameCount % 6 === 0) {
-    root.dataset.experienceProgress = p.toFixed(3);
-    root.dataset.experienceCameraZ = camera.position.z.toFixed(2);
-    root.dataset.experienceFrames = String(renderFrameCount);
-    root.dataset.experienceDrawCalls = String(renderer.info.render.calls);
-    root.dataset.webglContext = renderer.getContext().isContextLost() ? "lost" : "ready";
+function stopAnimation() {
+  animationRunning = false;
+  if (frame) {
+    cancelAnimationFrame(frame);
+    frame = 0;
   }
 }
-if (world) animate();
+
+function startAnimation() {
+  if (!world || disposed || document.hidden || animationRunning) return;
+  animationRunning = true;
+  frame = requestAnimationFrame(animate);
+}
+
+function publishRenderDiagnostics() {
+  root.dataset.experienceFrames = String(renderFrameCount);
+  root.dataset.experienceDrawCalls = String(renderer.info.render.calls);
+  root.dataset.webglContext = renderer.getContext().isContextLost() ? "lost" : "ready";
+}
+
+function animate() {
+  if (!animationRunning || disposed || document.hidden) {
+    stopAnimation();
+    return;
+  }
+
+  // Schedule exactly one successor. Visibility and context events share the same
+  // guarded start/stop functions so mobile browsers cannot create duplicate loops.
+  frame = requestAnimationFrame(animate);
+  if (!renderer || !world) return;
+
+  try {
+    if (!clock) clock = new THREE.Clock();
+    const delta = Math.min(clock.getDelta(), .05);
+    const elapsed = clock.elapsedTime;
+    scrollProgress += (targetProgress - scrollProgress) * (1 - Math.exp(-delta * 3.4));
+    const p = scrollProgress;
+    const scaled = p * 4;
+    const index = Math.min(3, Math.floor(scaled));
+    const blend = THREE.MathUtils.smoothstep(scaled - index, 0, 1);
+    const a = chapterCamera[index];
+    const b = chapterCamera[index + 1];
+    const mix = (key) => THREE.MathUtils.lerp(a[key], b[key], blend);
+    const mobile = viewportWidth() < 650;
+    const desiredX = mix("x") * (mobile ? .62 : 1);
+    camera.position.x = THREE.MathUtils.damp(camera.position.x, desiredX, 3.1, delta);
+    camera.position.y = THREE.MathUtils.damp(camera.position.y, mix("y"), 3.1, delta);
+    camera.position.z = THREE.MathUtils.damp(camera.position.z, mix("z"), 3.1, delta);
+    camera.lookAt(mix("tx"), mix("ty"), mix("tz"));
+
+    const atmosphereA = chapterAtmosphere[index];
+    const atmosphereB = chapterAtmosphere[index + 1];
+    const colorsA = atmosphereColors[index];
+    const colorsB = atmosphereColors[index + 1];
+    const colorMix = (key) => atmosphereScratch[key].lerpColors(colorsA[key], colorsB[key], blend);
+    scene.background.copy(colorMix("fog"));
+    scene.fog.color.copy(atmosphereScratch.fog);
+    world.hemisphere.color.copy(colorMix("sky"));
+    world.hemisphere.groundColor.copy(colorMix("ground"));
+    world.hemisphere.intensity = THREE.MathUtils.lerp(atmosphereA.hemi, atmosphereB.hemi, blend);
+    world.fill.color.copy(colorMix("fill"));
+    world.fill.intensity = THREE.MathUtils.lerp(atmosphereA.fillPower, atmosphereB.fillPower, blend);
+
+    if (!paused) {
+      world.garden.rotation.y = Math.sin(elapsed * .08) * .006;
+      world.treeGroups.forEach((tree, i) => {
+        tree.rotation.z = Math.sin(elapsed * .32 + i * 1.7) * .006;
+      });
+      const lanternChapter = THREE.MathUtils.smoothstep(p, .56, .82);
+      world.lights.forEach((light, i) => {
+        const pulse = Math.sin(elapsed * 1.3 + i * 1.7) * .55;
+        const lanternFocus = i >= 3 ? lanternChapter : .35 + lanternChapter * .35;
+        light.intensity = 7.6 + lanternFocus * 4.8 + pulse;
+        light.distance = 10 + lanternFocus * 3;
+      });
+      world.water.material.uniforms.uTime.value = elapsed;
+      world.rippleRings.forEach((ring, i) => {
+        const phase = (elapsed * .22 + i / 3) % 1;
+        const expansion = .82 + phase * .62;
+        ring.scale.setScalar(expansion);
+        ring.material.opacity = .2 * (1 - phase) * (1 - phase);
+      });
+      const positions = world.motes.geometry.attributes.position;
+      for (let i = 0; i < positions.count; i++) {
+        positions.array[i * 3 + 1] += .003;
+        if (positions.array[i * 3 + 1] > 5.5) positions.array[i * 3 + 1] = .08;
+      }
+      positions.needsUpdate = true;
+      world.fogCards.forEach((fog, i) => {
+        fog.position.x = Math.sin(elapsed * .12 + i) * 2.4;
+        fog.material.opacity = .025 + lanternChapter * .012;
+      });
+    }
+
+    renderer.render(scene, camera);
+    renderFrameCount += 1;
+    if (renderFrameCount % 6 === 0) {
+      root.dataset.experienceProgress = p.toFixed(3);
+      root.dataset.experienceCameraZ = camera.position.z.toFixed(2);
+      publishRenderDiagnostics();
+    }
+  } catch (error) {
+    root.dataset.experienceRenderError = error instanceof Error ? error.message : String(error);
+    console.error("The Quiet Garden render loop stopped after an error.", error);
+    stopAnimation();
+  }
+}
+
+const handleContextLost = (event) => {
+  event.preventDefault();
+  root.dataset.webglContext = "lost";
+  stopAnimation();
+};
+const handleContextRestored = () => {
+  delete root.dataset.experienceRenderError;
+  resize();
+  startAnimation();
+};
+renderer?.domElement.addEventListener("webglcontextlost", handleContextLost, false);
+renderer?.domElement.addEventListener("webglcontextrestored", handleContextRestored, false);
 
 const handleVisibility = () => {
-  if (document.hidden) cancelAnimationFrame(frame);
-  else if (world) animate();
+  if (document.hidden) stopAnimation();
+  else startAnimation();
 };
 document.addEventListener("visibilitychange", handleVisibility);
+root.dataset.experienceFrames = "0";
+root.dataset.experienceDrawCalls = "0";
+root.dataset.webglContext = renderer?.getContext().isContextLost() ? "lost" : "ready";
+startAnimation();
 
 return () => {
-  cancelAnimationFrame(frame);
+  disposed = true;
+  stopAnimation();
+  renderer?.domElement.removeEventListener("webglcontextlost", handleContextLost, false);
+  renderer?.domElement.removeEventListener("webglcontextrestored", handleContextRestored, false);
   scrollTarget.removeEventListener("scroll", updateScroll);
   window.removeEventListener("resize", resize);
   motionButton?.removeEventListener("click", handleMotionToggle);
