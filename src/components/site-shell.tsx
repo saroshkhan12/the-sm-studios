@@ -12,6 +12,8 @@ import {
   Menu,
   Search,
   ShoppingBag,
+  Sun,
+  Moon,
   X,
 } from "lucide-react";
 import {
@@ -174,7 +176,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           onClick={() => setMenuOpen((open) => !open)}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
-          aria-controls={menuOpen ? "site-navigation-overlay" : undefined}
+          aria-controls="site-navigation-overlay"
         >
           <m.span
             key={menuOpen ? "close" : "menu"}
@@ -286,101 +288,94 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             className="navigation-overlay glass-navigation"
             role="dialog"
             aria-modal="true"
-            aria-label="Site navigation"
+            aria-label="Main menu"
             onClick={(event) => {
               if (event.target === event.currentTarget) setMenuOpen(false);
             }}
-            initial={reduceMotion ? false : { opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduceMotion ? undefined : { opacity: 0, y: -8 }}
-            transition={{ duration: reduceMotion ? 0 : 0.24, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.25, ease: "easeOut" }}
           >
             <div className="navigation-overlay-top">
               <Link href="/" className="navigation-overlay-brand" onClick={() => setMenuOpen(false)}>
                 <Image
                   src="/images/sm-studios-logo-dark.png"
                   alt=""
-                  width={72}
-                  height={50}
+                  width={44}
+                  height={44}
                 />
                 <span>THE SM <i>STUDIOS</i></span>
               </Link>
               <MotionButton
                 type="button"
-                className="navigation-overlay-close icon-btn"
+                className="navigation-overlay-close"
                 data-navigation-close
-                data-cursor="CLOSE"
-                aria-label="Close navigation"
+                aria-label="Close menu"
                 onClick={() => setMenuOpen(false)}
               >
-                <X />
+                <X aria-hidden="true" />
               </MotionButton>
             </div>
+
             <div className="navigation-overlay-content">
               <m.nav
                 className="navigation-overlay-links"
                 aria-label="Main navigation"
-                initial={reduceMotion ? false : "hidden"}
-                animate="visible"
-                variants={staggerContainer}
               >
                 {navigation.map((item, index) => {
                   const active =
                     pathname === item.href || pathname.startsWith(`${item.href}/`);
                   return (
-                    <m.div key={item.href} variants={reduceMotion ? undefined : staggerItem}>
+                    <m.div
+                      key={item.href}
+                      className="navigation-overlay-row"
+                      initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: reduceMotion ? 0 : 0.35,
+                        delay: reduceMotion ? 0 : index * 0.06,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                    >
                       <Link
                         href={item.href}
                         onClick={() => setMenuOpen(false)}
-                        aria-label={item.label}
                         aria-current={active ? "page" : undefined}
                         className={active ? "active" : ""}
-                        data-cursor="OPEN"
                       >
-                        <span className="navigation-overlay-number">
+                        <span className="navigation-overlay-number" aria-hidden="true">
                           {String(index + 1).padStart(2, "0")}
                         </span>
-                        <span className="navigation-overlay-label" aria-hidden="true">
-                          {Array.from(item.label).map((character, characterIndex) => (
-                            <m.span
-                              key={`${character}-${characterIndex}`}
-                              initial={reduceMotion ? false : { y: "115%" }}
-                              animate={{ y: "0%" }}
-                              transition={{
-                                duration: reduceMotion ? 0 : 0.38,
-                                delay: reduceMotion ? 0 : index * 0.05 + characterIndex * 0.014,
-                                ease: [0.22, 1, 0.36, 1],
-                              }}
-                            >
-                              {character === " " ? "\u00a0" : character}
-                            </m.span>
-                          ))}
-                        </span>
+                        <span className="navigation-overlay-label">{item.label}</span>
                         <ArrowUpRight aria-hidden="true" />
                       </Link>
                     </m.div>
                   );
                 })}
               </m.nav>
-              <div className="navigation-overlay-aside">
-                <span className="eyebrow">ART · CULTURE · EXPRESSION</span>
-                <p>Meaningful artwork, expressive designs and original creative pieces.</p>
+            </div>
+
+            <div className="navigation-overlay-footer">
+              <span className="navigation-overlay-kicker">ART · CULTURE · EXPRESSION</span>
+              <p>Creative work with a point of view. Art that carries stories, culture and connection.</p>
+              <div className="navigation-overlay-actions">
                 <a
+                  className="navigation-overlay-etsy"
                   href="https://thesmstudios.etsy.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-cursor="ETSY"
                 >
-                  SHOP ON ETSY <ArrowUpRight size={15} />
+                  Shop on Etsy <ArrowUpRight size={16} aria-hidden="true" />
                 </a>
                 <button
                   type="button"
                   className="menu-theme"
-                  aria-label={"Switch to " + (theme === "dark" ? "light" : "dark") + " mode"}
                   aria-pressed={theme === "light"}
-                  onClick={() => toggleTheme()}
+                  onClick={() => document.getElementById("lamp")?.click()}
                 >
-                  {theme === "dark" ? "TURN LIGHT MODE ON" : "TURN DARK MODE ON"}
+                  {theme === "light" ? <Sun size={17} aria-hidden="true" /> : <Moon size={17} aria-hidden="true" />}
+                  <span>{theme === "light" ? "Light mode" : "Dark mode"}</span>
                 </button>
               </div>
             </div>
