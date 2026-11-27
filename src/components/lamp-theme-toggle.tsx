@@ -1,12 +1,10 @@
 "use client";
 
-import { useRef } from "react";
-import { useReducedMotion } from "framer-motion";
+import { useRef, type PointerEvent } from "react";
 import { useTheme } from "@/components/theme-provider";
 
 export function LampThemeToggle() {
   const { theme, toggleTheme } = useTheme();
-  const reduceMotion = useReducedMotion();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const pullRef = useRef<SVGGElement>(null);
   const pointerStart = useRef<number | null>(null);
@@ -22,21 +20,21 @@ export function LampThemeToggle() {
     );
   };
 
-  function handlePointerDown(event: React.PointerEvent<HTMLButtonElement>) {
+  function handlePointerDown(event: PointerEvent<HTMLButtonElement>) {
     if (event.button !== 0) return;
     pointerStart.current = event.clientY;
     dragged.current = false;
     event.currentTarget.setPointerCapture(event.pointerId);
   }
 
-  function handlePointerMove(event: React.PointerEvent<HTMLButtonElement>) {
+  function handlePointerMove(event: PointerEvent<HTMLButtonElement>) {
     if (pointerStart.current === null || !pullRef.current) return;
     const distance = Math.max(0, Math.min(34, event.clientY - pointerStart.current));
     pullRef.current.style.transform = `translateY(${distance}px)`;
     if (distance > 8) dragged.current = true;
   }
 
-  function finishPointer(event: React.PointerEvent<HTMLButtonElement>) {
+  function finishPointer(event: PointerEvent<HTMLButtonElement>) {
     if (pointerStart.current === null) return;
     const distance = Math.max(0, event.clientY - pointerStart.current);
     pointerStart.current = null;
@@ -50,11 +48,17 @@ export function LampThemeToggle() {
     }
   }
 
+  function cancelPointer() {
+    pointerStart.current = null;
+    dragged.current = false;
+    if (pullRef.current) pullRef.current.style.transform = "";
+  }
+
   return (
     <button
       ref={buttonRef}
       type="button"
-      className={`icon-btn lamp-theme-toggle${reduceMotion ? " is-reduced-motion" : ""}`}
+      className="icon-btn lamp-theme-toggle"
       data-cursor="THEME"
       role="switch"
       aria-checked={theme === "light"}
@@ -70,7 +74,7 @@ export function LampThemeToggle() {
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={finishPointer}
-      onPointerCancel={finishPointer}
+      onPointerCancel={cancelPointer}
     >
       <svg viewBox="0 0 120 180" aria-hidden="true" focusable="false">
         <line className="lamp-cord" x1="60" y1="0" x2="60" y2="48" />
