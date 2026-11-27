@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useRef, type PointerEvent, type MouseEvent } from "react";
+import { useEffect, useRef, type MouseEvent, type PointerEvent } from "react";
 import { useTheme } from "@/components/theme-provider";
 
-const AX = 60;
-const AY = 96;
-const LEN = 170;
+const AX = 80;
+const AY = 170;
+const LEN = 190;
 
 type CordMotion = {
   x: number; y: number; vx: number; vy: number;
@@ -19,9 +19,7 @@ export function LampThemeToggle() {
   const hitRef = useRef<SVGPathElement>(null);
   const beadRef = useRef<SVGGElement>(null);
   const flickerTimer = useRef<number | null>(null);
-  const motion = useRef<CordMotion>({
-    x: 0, y: 0, vx: 0, vy: 0, dragging: false, tx: 0, ty: 0,
-  });
+  const motion = useRef<CordMotion>({ x: 0, y: 0, vx: 0, vy: 0, dragging: false, tx: 0, ty: 0 });
   const pointer = useRef<{ startX: number; startY: number; moved: boolean; fired: boolean } | null>(null);
 
   useEffect(() => {
@@ -32,17 +30,17 @@ export function LampThemeToggle() {
       const { x, y } = motion.current;
       const bx = AX + x;
       const by = AY + LEN + y;
-      const cx = AX + x * 0.15;
+      const cx = AX + x * 0.2;
       const cy = (AY + by) / 2;
       const path = `M${AX} ${AY} Q${cx} ${cy} ${bx} ${by}`;
       cordRef.current?.setAttribute("d", path);
       hitRef.current?.setAttribute("d", path);
-      beadRef.current?.setAttribute("transform", `translate(${bx} ${by}) rotate(${-x * 0.6})`);
+      beadRef.current?.setAttribute("transform", `translate(${bx} ${by}) rotate(${-x * 0.7})`);
     };
 
     const frame = (now: number) => {
       const state = motion.current;
-      const sway = reduceMotion ? 0 : Math.sin(now / 1100) * 3.5;
+      const sway = reduceMotion ? 0 : Math.sin(now / 1200) * 4;
       if (state.dragging) {
         state.x += (state.tx - state.x) * 0.35;
         state.y += (state.ty - state.y) * 0.35;
@@ -68,8 +66,7 @@ export function LampThemeToggle() {
 
   const switchTheme = () => {
     const bounds = lampRef.current?.getBoundingClientRect();
-    toggleTheme(bounds ? { x: bounds.left + bounds.width / 2, y: bounds.top + 105 } : undefined);
-
+    toggleTheme(bounds ? { x: bounds.left + bounds.width / 2, y: bounds.top + 158 } : undefined);
     if (theme === "dark" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       const lamp = lampRef.current;
       if (lamp) {
@@ -112,18 +109,16 @@ export function LampThemeToggle() {
     lampRef.current?.classList.remove("grabbing");
     if (!state.moved) {
       switchTheme();
-      motion.current.vy = 9;
+      motion.current.vy = 10;
     } else if (state.fired) {
       motion.current.vy = -3;
     }
     motion.current.tx = 0;
     motion.current.ty = 0;
     try {
-      if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-        event.currentTarget.releasePointerCapture(event.pointerId);
-      }
+      if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
     } catch {
-      // The browser may already have released pointer capture.
+      // Pointer capture can already have been released by the browser.
     }
   }
 
@@ -140,27 +135,43 @@ export function LampThemeToggle() {
       role="switch"
       aria-label="Dark mode"
       aria-checked={theme === "dark"}
-      title={theme === "dark" ? "Pull the cord or press to turn the light on" : "Pull the cord or press to turn the light off"}
+      title={theme === "dark" ? "Pull the chain or press to turn the light on" : "Pull the chain or press to turn the light off"}
       onClick={handleKeyboardClick}
     >
       <svg
         id="lampSvg"
-        viewBox="0 0 120 330"
+        viewBox="0 0 160 400"
         aria-hidden="true"
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
       >
-        <line className="l-wire" x1="60" y1="0" x2="60" y2="42" />
-        <path className="l-shade" d="M32 44 Q60 32 88 44 L106 92 H14 Z" />
-        <rect className="l-rim" x="14" y="90" width="92" height="7" rx="3.5" />
-        <ellipse className="l-bulb" cx="60" cy="102" rx="12" ry="9" />
-        <path ref={hitRef} className="l-hit" id="lHit" d="M60 96 L60 266" />
-        <path ref={cordRef} className="l-cord" id="lCord" d="M60 96 L60 266" />
-        <g ref={beadRef} id="lBead" transform="translate(60 266)">
-          <rect className="l-cap" x="-2.5" y="-14" width="5" height="7" rx="2" />
-          <circle className="l-bead" r="8" />
+        <defs>
+          <linearGradient id="shadeGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stopColor="#b8924f" />
+            <stop offset=".35" stopColor="#e2c48a" />
+            <stop offset=".7" stopColor="#c9a46b" />
+            <stop offset="1" stopColor="#8f6f3a" />
+          </linearGradient>
+          <radialGradient id="beadGrad" cx=".35" cy=".3" r=".8">
+            <stop offset="0" stopColor="#f6e2b0" />
+            <stop offset="1" stopColor="#b8924f" />
+          </radialGradient>
+        </defs>
+        <rect className="l-brass" x="62" y="0" width="36" height="6" rx="3" />
+        <line className="l-wire" x1="80" y1="6" x2="80" y2="68" />
+        <rect className="l-brass l-cap" x="70" y="66" width="20" height="14" rx="3" />
+        <path className="l-shade" d="M34 150 C34 104 56 84 80 80 C104 84 126 104 126 150 Z" />
+        <path d="M47 144 C47 112 60 94 74 88" fill="none" stroke="#fff" strokeOpacity=".35" strokeWidth="3" strokeLinecap="round" />
+        <ellipse className="l-under" cx="80" cy="156" rx="44" ry="7" />
+        <circle className="l-bulb" cx="80" cy="160" r="11" />
+        <rect className="l-rim" x="30" y="148" width="100" height="8" rx="4" />
+        <path ref={hitRef} className="l-hit" id="lHit" d="M80 170 L80 360" />
+        <path ref={cordRef} className="l-chain" id="lCord" d="M80 170 L80 360" />
+        <g ref={beadRef} id="lBead" className="l-pull" transform="translate(80 360)">
+          <rect className="l-brass" x="-2" y="-14" width="4" height="8" rx="2" />
+          <circle r="8" fill="url(#beadGrad)" stroke="#8f6f3a" strokeWidth="1.2" />
         </g>
       </svg>
     </button>
