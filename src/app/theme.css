@@ -8416,3 +8416,67 @@ html[data-theme="light"] .home-collections-description .text-link:hover {
   z-index: 40;
 }
 
+/* Mobile navigation refinements: keep the pendant behind the menu and provide an in-menu theme control. */
+.lamp {
+  z-index: 40;
+  transition: opacity .25s ease, visibility 0s linear .25s;
+}
+
+body.menu-open .lamp {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.menu-theme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+  border: 1px solid rgba(201, 164, 107, .5);
+  border-radius: 999px;
+  padding: 10px 18px;
+  background: transparent;
+  color: #C9A46B;
+  font: inherit;
+  font-size: 10px;
+  letter-spacing: .12em;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+
+.menu-theme:hover,
+.menu-theme:focus-visible {
+  border-color: #D9B878;
+  background: rgba(201, 164, 107, .1);
+  color: #E2C48A;
+}
+
+.menu-theme:focus-visible {
+  outline: 2px solid #C9A46B;
+  outline-offset: 3px;
+}
+
+@media (max-width: 650px) {
+  .navigation-overlay {
+    box-sizing: border-box;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .navigation-overlay-content,
+  .navigation-overlay-aside {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .navigation-overlay-aside {
+    padding-right: 0;
+  }
+
+  .navigation-overlay-aside p {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+}
