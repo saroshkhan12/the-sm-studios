@@ -19,9 +19,11 @@ export type ArtworkStackItem = {
 export function ArtworkCardStack({
   items,
   label,
+  heading,
 }: {
   items: ArtworkStackItem[];
   label: string;
+  heading: string;
 }) {
   const [active, setActive] = useState(0);
   const [dragStart, setDragStart] = useState<number | null>(null);
@@ -69,7 +71,7 @@ export function ArtworkCardStack({
   return (
     <section className="artwork-stack-section" aria-label={label}>
       <div className="artwork-stack-heading">
-        <span className="eyebrow">A CLOSER LOOK</span>
+        <div><span className="eyebrow">A CLOSER LOOK</span><h2>{heading}</h2></div>
         <p>Move through the studio, one piece at a time.</p>
       </div>
 
