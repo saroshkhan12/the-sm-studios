@@ -87,6 +87,7 @@ export function ArtworkCardStack({
       </div>
 
       <div
+        id="artwork-stack-stage"
         className="artwork-stack-stage"
         role="region"
         aria-roledescription="carousel"
