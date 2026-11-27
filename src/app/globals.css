@@ -909,7 +909,7 @@ body.menu-open .lamp {
 .lamp svg .l-bulb {
   fill: #3b3830 !important;
   stroke: none !important;
-  transition: fill .35s ease;
+  transition: none;
 }
 
 .lamp svg .l-under {
