@@ -1,8 +1,8 @@
 
 import { collections } from "@/data/catalog";
 import { readEtsyProducts } from "@/lib/etsy";
-import { CollectionCard } from "@/components/collection-card";
-import { ScrollReveal, StaggerItem, StaggerReveal } from "@/components/scroll-reveal";
+import { ArtworkCardStack } from "@/components/artwork-card-stack";
+import { ScrollReveal } from "@/components/scroll-reveal";
 
 export const dynamic = "force-dynamic";
 
