@@ -152,6 +152,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
+      <LampThemeToggle />
       <div className="announcement">
         <span>FREE SHIPPING ON ORDERS OVER $50</span>
         <span className="announcement-separator" aria-hidden="true">✦</span>
@@ -231,7 +232,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           animate="visible"
           variants={fadeDown}
         >
-          <LampThemeToggle />
           <MotionButton
             type="button"
             className="icon-btn"
