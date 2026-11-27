@@ -54,7 +54,7 @@ function NavigationLabel({ label }: { label: string }) {
 }
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
