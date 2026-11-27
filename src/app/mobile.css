@@ -198,9 +198,35 @@ a {
     font-size: 8px;
   }
 
-  /* The decorative hanging lamp is intentionally replaced by the menu theme control on phones. */
+  /* Keep the pendant theme switch visible on phones without covering header controls. */
   .lamp {
-    display: none !important;
+    display: block !important;
+    position: fixed !important;
+    top: calc(env(safe-area-inset-top, 0px) + 104px) !important;
+    right: 8px !important;
+    left: auto !important;
+    width: 48px !important;
+    height: 114px !important;
+    z-index: 50 !important;
+    margin: 0 !important;
+  }
+
+  .lamp::before {
+    width: 180px;
+    height: 190px;
+    top: 54px;
+  }
+
+  .lamp svg .l-hit {
+    stroke-width: 80;
+  }
+
+  @media (max-width: 380px) {
+    .lamp {
+      right: 5px !important;
+      width: 42px !important;
+      height: 100px !important;
+    }
   }
 
   .navigation-overlay {
