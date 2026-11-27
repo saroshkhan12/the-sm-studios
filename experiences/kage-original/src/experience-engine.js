@@ -258,6 +258,31 @@ function createPathDetail(parent) {
       }
     }
   }
+  // Low bronze guide lights trace the route without turning the path into a runway.
+  const guideBronze = material("#62513a", .48, .52);
+  const guideGlow = new THREE.MeshStandardMaterial({
+    color: "#e6bd80",
+    emissive: "#ffbd70",
+    emissiveIntensity: 1.35,
+    roughness: .36,
+    metalness: .08
+  });
+  for (let i = 0; i < 8; i++) {
+    const side = i % 2 === 0 ? -1 : 1;
+    const x = side * 1.72;
+    const z = 3.1 - i * 3.45;
+    add(parent, new THREE.CylinderGeometry(.105, .14, .1, 10),
+      guideBronze, [x, .075, z]);
+    const beacon = add(parent, new THREE.SphereGeometry(.075, 10, 8),
+      guideGlow, [x, .155, z]);
+    beacon.scale.set(1, .58, 1);
+    if (i === 1 || i === 4 || i === 7) {
+      const guideLight = new THREE.PointLight("#ffc982", 1.65, 4.8, 2);
+      guideLight.position.set(x, .34, z);
+      parent.add(guideLight);
+    }
+  }
+
   // Small grass blades are grouped into tufts to add scale without excessive draw calls.
   for (let i = 0; i < 42; i++) {
     const x = (Math.random() > .5 ? 1 : -1) * rand(1.8,4.8), z = rand(-21,7);
@@ -341,13 +366,52 @@ function createChapterLandmarks(parent, leafMaterials, trunkMat) {
   const portal = new THREE.Group();
   portal.position.set(0, 0, -25.2);
   parent.add(portal);
-  for (const x of [-1.65, 1.65]) {
-    add(portal, new THREE.BoxGeometry(.34, 3.15, .38), pale, [x, 1.57, 0]);
-    add(portal, new THREE.BoxGeometry(.58, .18, .56), bronze, [x, 3.2, 0]);
+  // Layered stone plinths give the final threshold a deliberate, grounded arrival.
+  for (const width of [4.45, 3.9]) {
+    add(portal, new THREE.BoxGeometry(width, .16, .9),
+      width > 4 ? stone : pale, [0, .08, .08]);
   }
-  add(portal, new THREE.TorusGeometry(1.65, .16, 12, 48, Math.PI),
-    pale, [0, 3.1, 0]);
-  add(portal, new THREE.BoxGeometry(3.55, .2, .48), stone, [0, 3.12, 0]);
+  for (const x of [-1.65, 1.65]) {
+    add(portal, new THREE.BoxGeometry(.38, 3.18, .48), pale, [x, 1.66, 0]);
+    add(portal, new THREE.BoxGeometry(.58, .16, .62), bronze, [x, .34, 0]);
+    add(portal, new THREE.BoxGeometry(.62, .2, .66), bronze, [x, 3.25, 0]);
+    add(portal, new THREE.BoxGeometry(.075, 2.25, .035),
+      new THREE.MeshStandardMaterial({
+        color: "#d0ad77",
+        emissive: "#9c6737",
+        emissiveIntensity: .34,
+        metalness: .5,
+        roughness: .42
+      }), [x, 1.72, .252]);
+    add(portal, new THREE.SphereGeometry(.105, 12, 8), bronze, [x, 3.42, 0]);
+  }
+  add(portal, new THREE.TorusGeometry(1.65, .18, 14, 56, Math.PI),
+    pale, [0, 3.18, 0]);
+  const innerArchGlow = new THREE.MeshStandardMaterial({
+    color: "#e4c28e",
+    emissive: "#f4b96e",
+    emissiveIntensity: 1.15,
+    roughness: .34,
+    metalness: .22
+  });
+  add(portal, new THREE.TorusGeometry(1.43, .035, 8, 56, Math.PI),
+    innerArchGlow, [0, 3.18, .045]);
+  add(portal, new THREE.BoxGeometry(3.72, .22, .58), stone, [0, 3.2, 0]);
+  const thresholdLight = new THREE.PointLight("#ffd39a", 5.2, 10, 2);
+  thresholdLight.position.set(0, 2.15, -.35);
+  portal.add(thresholdLight);
+  const thresholdGlow = new THREE.Mesh(
+    new THREE.PlaneGeometry(2.65, 2.9),
+    new THREE.MeshBasicMaterial({
+      color: "#f3c98f",
+      transparent: true,
+      opacity: .075,
+      depthWrite: false,
+      side: THREE.DoubleSide
+    })
+  );
+  thresholdGlow.position.set(0, 1.62, -.12);
+  portal.add(thresholdGlow);
   portal.scale.setScalar(.82);
 }
 
@@ -387,9 +451,13 @@ function createScene() {
   moon.shadow.camera.left = moon.shadow.camera.bottom = -18;
   moon.shadow.camera.right = moon.shadow.camera.top = 18;
   scene.add(moon);
-  const fill = new THREE.DirectionalLight("#d3a875", .55);
+  const fill = new THREE.DirectionalLight("#d9b78d", .62);
   fill.position.set(6, 4, -10);
   scene.add(fill);
+  // A restrained warm backlight separates the final doorway and canopy from the fog.
+  const gardenRim = new THREE.DirectionalLight("#e9c18c", .72);
+  gardenRim.position.set(-2, 7, -27);
+  scene.add(gardenRim);
 
   const garden = new THREE.Group();
   scene.add(garden);
@@ -411,7 +479,27 @@ function createScene() {
     mat.bumpMap = stoneBump;
     mat.bumpScale = .035;
   });
-  for (let i = 0; i < 15; i++) createStone(garden, rand(-.22, .22), 5 - i * 1.12, rand(1.55, 2.25), rand(.72, 1.08), pathMats[i % pathMats.length]);
+  // A gently meandering sequence of broader, hand-laid flagstones gives the walk
+  // a clear rhythm and a more intentional approach to the garden.
+  const pathInlay = new THREE.MeshStandardMaterial({
+    color: "#987b53",
+    emissive: "#6d4826",
+    emissiveIntensity: .16,
+    roughness: .58,
+    metalness: .32
+  });
+  for (let i = 0; i < 17; i++) {
+    const z = 5.2 - i * 1.02;
+    const x = Math.sin(i * .48) * .16;
+    const width = 1.72 + Math.sin(i * .71) * .16;
+    const depth = .78 + Math.cos(i * .63) * .08;
+    createStone(garden, x, z, width, depth, pathMats[i % pathMats.length]);
+    if (i % 2 === 0) {
+      const inlay = add(garden, new THREE.TorusGeometry(.34, .014, 6, 32),
+        pathInlay, [x, .205, z], [Math.PI / 2, 0, rand(-.08, .08)]);
+      inlay.scale.set(1.65, .82, 1);
+    }
+  }
 
   const walls = material("#34443a");
   for (const side of [-1, 1]) {
@@ -535,7 +623,7 @@ function createScene() {
     scene.add(fog);
     fogCards.push(fog);
   }
-  return { garden, lights, motes, stars, water, rippleRings, fogCards, treeGroups, hemisphere, moon, fill };
+  return { garden, lights, motes, stars, water, rippleRings, fogCards, treeGroups, hemisphere, moon, fill, gardenRim };
 }
 
 let world;
