@@ -2,7 +2,7 @@ import "./artwork-stack-responsive.css";
 import { collections } from "@/data/catalog";
 import { readEtsyProducts } from "@/lib/etsy";
 import { ArtworkCardStack } from "@/components/artwork-card-stack";
-import { ScrollReveal } from "@/components/scroll-reveal";
+import { ScrollReveal } from "@/components/scroll-reveal";\nimport { ExploreCollectionsSection } from "@/components/explore-collections-section";
 
 export const dynamic = "force-dynamic";
 
