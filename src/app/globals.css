@@ -1061,6 +1061,9 @@ html[data-theme="light"] .lamp svg .l-under {
     width: min(100vw, 220px);
     height: 145px;
   }
+  .lamp svg .l-hit {
+    stroke-width: 150;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
