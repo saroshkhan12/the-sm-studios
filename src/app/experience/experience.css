@@ -23,79 +23,217 @@
 }@media (prefers-reduced-motion: reduce){.sm-experience{scroll-behavior:auto;}.sm-experience *, .sm-experience *::before, .sm-experience *::after{ transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
 
-
-/* Quiet Garden route fixes: keep its own controls inside the viewport and
-   prevent the global storefront .intro grid from leaking into the hero copy. */
+/* Refined route composition: the garden remains a full-viewport backdrop while
+   the normal site chrome stays in document flow above the experience. */
+.sm-experience {
+  min-height: 100svh;
+  overflow: clip;
+  isolation: isolate;
+  background: #111512;
+}
+.sm-experience #scene {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100svh;
+  min-height: 0;
+  margin: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.sm-experience #scene canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .sm-experience .experience-controls {
   position: relative;
-  inset: auto;
-  height: 64px;
-  margin-bottom: -64px;
-  padding: 0 clamp(22px, 5vw, 76px);
   z-index: 7;
+  height: 58px;
+  margin: 0;
+  padding: 0 clamp(22px, 5vw, 76px);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  background: linear-gradient(180deg, rgba(16, 21, 17, .82), rgba(16, 21, 17, .28) 78%, transparent);
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
+  color: #eee9dd;
+  background: linear-gradient(180deg, rgba(16, 21, 17, .72), rgba(16, 21, 17, .22));
+  border-bottom: 1px solid rgba(255,255,255,.055);
+  font-size: 9px;
+  letter-spacing: .16em;
+}
+.sm-experience .experience-controls > * { pointer-events: auto; }
+.sm-experience .experience-controls i {
+  color: var(--gold);
+  font-style: normal;
+  padding: 0 6px;
+}
+.sm-experience .sound-toggle {
+  border: 0;
+  background: transparent;
+  color: #e4dfd2;
+  font: inherit;
+  font-size: 9px;
+  letter-spacing: .16em;
+  padding: 12px 0 12px 12px;
+  cursor: pointer;
+}
+.sm-experience .chapter--hero {
+  min-height: calc(100svh - 58px);
+  padding: clamp(92px, 14vh, 150px) clamp(26px, 12vw, 190px) 100px;
+}
+.sm-experience .chapter--hero > .eyebrow,
+.sm-experience .chapter--hero > h1,
+.sm-experience .chapter--hero > .intro,
+.sm-experience .chapter--hero > .enter-link {
+  position: relative;
+  z-index: 3;
+}
+.sm-experience .chapter--hero > h1 {
+  max-width: 900px;
+  margin: 24px 0 18px;
 }
 .sm-experience .chapter--hero > .intro {
   display: block;
+  width: min(100%, 520px);
+  max-width: 520px;
+  margin: 0;
+  padding: 0;
   background: transparent !important;
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-  color: #d0d3ca !important;
-  width: min(100%, 520px);
-  max-width: 520px;
-  margin: 18px 0 0;
-  padding: 0;
-  grid-template-columns: none;
-  gap: 0;
+  color: #d9d9ce !important;
+  font-size: clamp(13px, 1.05vw, 15px);
+  line-height: 1.85;
+  letter-spacing: .015em;
+  text-shadow: 0 2px 18px rgba(0,0,0,.78);
 }
+.sm-experience .chapter--hero .enter-link { margin-top: 32px; }
+.sm-experience .chapter--side {
+  min-height: 100svh;
+  padding: 120px clamp(26px, 12vw, 190px);
+}
+.sm-experience .chapter-copy {
+  width: min(460px, 48vw);
+}
+.sm-experience .chapter-copy p {
+  max-width: 390px;
+  line-height: 1.9;
+}
+.sm-experience .chapter--right .chapter-copy p { margin-left: auto; }
+.sm-experience .chapter--final {
+  min-height: 100svh;
+  padding: clamp(150px, 22vh, 230px) 28px 110px;
+}
+.sm-experience .chapter-nav {
+  right: clamp(14px, 2.4vw, 34px);
+  gap: 13px;
+}
+.sm-experience .chapter-nav a {
+  width: 28px;
+  height: 28px;
+}
+.sm-experience .chapter-nav span {
+  width: 5px;
+  height: 5px;
+}
+.sm-experience .scroll-cue {
+  right: clamp(16px, 2.4vw, 34px);
+  bottom: 30px;
+}
+.sm-experience .experience-return-links {
+  gap: 18px 30px;
+}
+.sm-experience .experience-return-links .enter-link { margin-top: 32px; }
 @media (max-width: 700px) {
   .sm-experience .experience-controls {
-    height: 58px;
-    margin-bottom: -58px;
-    padding: 0 20px;
-    gap: 12px;
-    letter-spacing: .1em;
-    font-size: 8px;
+    height: 54px;
+    padding: 0 18px;
+    gap: 10px;
+    font-size: 7px;
+    letter-spacing: .11em;
   }
   .sm-experience .experience-controls > span {
     min-width: 0;
     line-height: 1.5;
   }
-  .sm-experience .experience-controls .sound-toggle {
+  .sm-experience .sound-toggle {
     flex: 0 0 auto;
     font-size: 7px;
-    letter-spacing: .12em;
+    letter-spacing: .1em;
+  }
+  .sm-experience .chapter--hero {
+    min-height: calc(100svh - 54px);
+    padding: clamp(76px, 13vh, 120px) 26px 90px;
+  }
+  .sm-experience .chapter--hero > h1 {
+    font-size: clamp(48px, 12.8vw, 76px);
+    line-height: 1.02;
+    margin: 22px 0 16px;
   }
   .sm-experience .chapter--hero > .intro {
+    width: min(100%, 410px);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  .sm-experience .chapter--side {
+    min-height: 92svh;
+    padding: 100px 28px 110px;
+  }
+  .sm-experience .chapter-copy {
     width: min(100%, 420px);
-    max-width: 420px;
-    margin-top: 16px;
+    padding: 20px 18px;
+  }
+  .sm-experience .chapter--right {
+    justify-content: flex-start;
+    text-align: left;
+  }
+  .sm-experience .chapter--right .chapter-copy {
+    margin: 0;
+    padding: 20px 18px;
+    border-right: 0;
+    border-left: 1px solid rgba(209,173,121,.48);
+  }
+  .sm-experience .chapter--right .chapter-copy p { margin-left: 0; }
+  .sm-experience .chapter--right .chapter-note { flex-direction: row; }
+  .sm-experience .chapter-number {
+    right: 24px;
+    bottom: 48px;
+    font-size: 124px;
+  }
+  .sm-experience .chapter-nav {
+    right: 8px;
+    gap: 7px;
+  }
+  .sm-experience .chapter-nav a {
+    width: 24px;
+    height: 24px;
+  }
+  .sm-experience .scroll-cue {
+    right: 12px;
+    bottom: 18px;
+    font-size: 6px;
+  }
+  .sm-experience .hero-index {
+    left: 26px;
+    bottom: 30px;
+  }
+  .sm-experience .chapter--final {
+    padding: 20vh 24px 100px;
+  }
+  .sm-experience .chapter--final h2 {
+    font-size: clamp(48px, 12vw, 72px);
+  }
+  .sm-experience .experience-return-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
   }
 }
-
-
-/* Keep the WebGL viewport directly below the restored global announcement + header.
-   The canvas was fixed to viewport top: 0, so it occupied the site chrome area. */
-.sm-experience #scene {
-  top: 123px;
-  right: 0;
-  bottom: auto;
-  left: 0;
-  height: calc(100svh - 123px);
-}
-.sm-experience #scene canvas {
-  height: 100%;
-}
-@media (max-width: 700px) {
-  .sm-experience #scene {
-    top: 99px;
-    height: calc(100svh - 99px);
-  }
+@media (max-width: 390px) {
+  .sm-experience .chapter--hero { padding-left: 22px; padding-right: 22px; }
+  .sm-experience .chapter--hero > h1 { font-size: clamp(46px, 12.5vw, 58px); }
+  .sm-experience .chapter--side { padding-left: 22px; padding-right: 22px; }
+  .sm-experience .experience-controls { padding-left: 14px; padding-right: 14px; }
 }
