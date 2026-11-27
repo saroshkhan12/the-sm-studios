@@ -505,13 +505,6 @@ function createScene() {
     rippleRings.push(ring);
   }
 
-  // A distant, softly lit second threshold gives the later chapters a new focal point.
-  const farArch = new THREE.Group();
-  farArch.position.set(0, 0, -21);
-  garden.add(farArch);
-  createArchitecture(farArch);
-  farArch.scale.setScalar(.52);
-
   const starPositions = [];
   const starCount = viewportWidth() < 700 ? 420 : 900;
   for (let i = 0; i < starCount; i++) starPositions.push(rand(-42, 42), rand(5, 28), rand(-42, 15));
