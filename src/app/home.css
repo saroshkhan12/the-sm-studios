@@ -354,6 +354,7 @@
 }
 @media (max-width: 650px) {
   .home-collections-section { padding: 43px 0 56px; }
+  .home-collection-grid { grid-template-columns: minmax(0, 1fr); }
   .home-collections-intro { grid-template-columns: minmax(0, 1fr); gap: 12px; margin-bottom: 22px; }
   .home-collections-title .eyebrow { margin-bottom: 8px; }
   .home-collections-title h2 { font-size: clamp(39px, 9vw, 49px); line-height: .98; }
