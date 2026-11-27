@@ -32,7 +32,7 @@ export function CollectionCard({
         {image ? (
           <Image
             src={image}
-            alt=""
+            alt={`${item.name} — ${item.subtitle}`}
             fill
             sizes={sizes}
             className="collection-art-image"
