@@ -157,8 +157,7 @@ export function LampThemeToggle() {
       const lamp = lampRef.current;
       if (lamp) {
         lamp.classList.remove("flicker");
-        void lamp.offsetWidth;
-        lamp.classList.add("flicker");
+        window.requestAnimationFrame(() => lamp.classList.add("flicker"));
         if (flickerTimer.current !== null) window.clearTimeout(flickerTimer.current);
         flickerTimer.current = window.setTimeout(() => lamp.classList.remove("flicker"), 700);
       }
