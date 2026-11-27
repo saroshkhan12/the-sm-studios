@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Diamond, Globe2, Heart, ShieldCheck } from "lucide-react";
+import { collections } from "@/data/catalog";
 import { readEtsyProducts } from "@/lib/etsy";
 import { ProductCard } from "@/components/product-card";
 import { ExploreCollectionsSection } from "@/components/explore-collections-section";
