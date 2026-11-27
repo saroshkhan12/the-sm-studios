@@ -4,7 +4,7 @@ import { ArrowUpRight, Diamond, Globe2, Heart, ShieldCheck } from "lucide-react"
 import { collections } from "@/data/catalog";
 import { readEtsyProducts } from "@/lib/etsy";
 import { CollectionCard } from "@/components/collection-card";
-import { ProductCard } from "@/components/product-card";
+import { ProductCard } from "@/components/product-card";\nimport { ExploreCollectionsSection } from "@/components/explore-collections-section";
 import { HeroSlider } from "@/components/hero-slider";
 import { ScrollReveal, StaggerItem, StaggerReveal } from "@/components/scroll-reveal";
 
@@ -13,14 +13,6 @@ export const dynamic = "force-dynamic";
 export default async function Home() {
   const products = await readEtsyProducts();
   const featuredProducts = products.slice(0, 4);
-
-  const featuredCollections = collections
-    .filter((item) =>
-      products.some(
-        (product) => product.collection === item.slug && product.image,
-      ),
-    )
-    .slice(0, 4);
 
   const philosophyArtwork =
     products.find(
@@ -140,32 +132,7 @@ export default async function Home() {
         </div>
       </section>
 
-<section className="collections-section home-collections-section section-wrap" aria-labelledby="home-collections-title">
-        <ScrollReveal className="home-collections-intro">
-          <div className="home-collections-title">
-            <span className="eyebrow">THE WORLD OF THE STUDIO</span>
-            <h2 id="home-collections-title">Explore our <em>collections.</em></h2>
-          </div>
-          <div className="home-collections-description">
-            <p>Six distinct creative worlds, brought together by art with meaning. Discover pieces shaped by culture, identity and imagination.</p>
-            <Link className="text-link" href="/collections">
-              VIEW ALL COLLECTIONS <ArrowUpRight size={15} />
-            </Link>
-          </div>
-        </ScrollReveal>
-        <StaggerReveal className="collection-grid home-collection-grid">
-          {featuredCollections.map((item, index) => (
-            <StaggerItem className="collection-reveal" key={item.slug}>
-              <CollectionCard
-                item={item}
-                index={index}
-                image={products.find((product) => product.collection === item.slug)?.image}
-                sizes="(max-width: 650px) 44vw, (max-width: 1000px) 44vw, 23vw"
-              />
-            </StaggerItem>
-          ))}
-        </StaggerReveal>
-      </section>
+<ExploreCollectionsSection products={products} />
 
 <section className="featured-section">
         <div className="section-wrap">
