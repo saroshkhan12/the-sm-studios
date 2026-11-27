@@ -6274,7 +6274,6 @@ select:focus-visible {
   --bg: #111111;
   --bg-elev: #1A1A1A;
   --text: #F5F1E9;
-  --text-muted-token: #A6A19A;
   --gold: #C9A46B;
   --gold-fill: #C9A46B;
   --on-gold: #171717;
@@ -6286,13 +6285,13 @@ select:focus-visible {
   --popover-foreground: #F5F1E9;
   --primary: #C9A46B;
   --primary-foreground: #171412;
-  --secondary: #202020;
-  --secondary-foreground: #F5F0E8;
+  --secondary: #1A1A1A;
+  --secondary-foreground: #F5F1E9;
   --muted: #202020;
   --muted-foreground: #A6A19A;
   --accent: #202020;
-  --accent-foreground: #F5F0E8;
-  --border: rgba(184, 179, 173, 0.2);
+  --accent-foreground: #F5F1E9;
+  --border: rgba(245, 241, 233, 0.12);
   --input: rgba(184, 179, 173, 0.28);
   --ring: #D7B46C;
   --radius: 0.125rem;
@@ -6331,7 +6330,6 @@ html[data-theme="light"] {
   --bg: #F5F1E9;
   --bg-elev: #FFFDF8;
   --text: #171717;
-  --text-muted-token: #6B665E;
   --gold: #8F6F3A;
   --gold-fill: #C9A46B;
   --on-gold: #171717;
@@ -6343,13 +6341,13 @@ html[data-theme="light"] {
   --popover-foreground: #171717;
   --primary: #8F6F3A;
   --primary-foreground: #FFFDFA;
-  --secondary: #EEE7DC;
-  --secondary-foreground: #252421;
-  --muted: #EEE7DC;
+  --secondary: #EDE7DC;
+  --secondary-foreground: #171717;
+  --muted: #EDE7DC;
   --muted-foreground: #6B665E;
-  --accent: #EEE7DC;
-  --accent-foreground: #252421;
-  --border: rgba(37, 36, 33, 0.17);
+  --accent: #EDE7DC;
+  --accent-foreground: #171717;
+  --border: rgba(23, 23, 23, 0.12);
   --input: rgba(37, 36, 33, 0.24);
   --ring: #704B20;
 
@@ -8418,56 +8416,3 @@ html[data-theme="light"] .home-collections-description .text-link:hover {
   z-index: 40;
 }
 
-
-/* Accessible switch-style theme control in the global header. */
-.header .theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  min-width: 48px;
-  height: 28px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-}
-.header .theme-toggle-track {
-  display: inline-flex;
-  align-items: center;
-  width: 44px;
-  height: 24px;
-  padding: 3px;
-  border: 1px solid rgba(198, 164, 119, 0.58);
-  border-radius: 999px;
-  background: #29251F;
-  transition: background-color 180ms ease, border-color 180ms ease;
-}
-.header .theme-toggle-thumb {
-  display: grid;
-  place-items: center;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #C6A477;
-  color: #171412;
-  transform: translateX(0);
-  transition: transform 180ms ease, background-color 180ms ease;
-}
-.header .theme-toggle-thumb svg {
-  width: 12px;
-  height: 12px;
-  stroke-width: 2;
-}
-.header .theme-toggle[aria-checked="true"] .theme-toggle-track {
-  background: #E8DDCB;
-  border-color: #76501D;
-}
-.header .theme-toggle[aria-checked="true"] .theme-toggle-thumb {
-  transform: translateX(18px);
-  background: #76501D;
-  color: #FFFFFF;
-}
-.header .theme-toggle:focus-visible {
-  outline: 2px solid var(--theme-focus);
-  outline-offset: 3px;
-}
