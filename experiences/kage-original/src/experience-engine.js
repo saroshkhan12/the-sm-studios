@@ -671,9 +671,12 @@ const atmosphereScratch = {
 
 let animationRunning = false;
 let disposed = false;
+let lastSuccessfulFrameAt = 0;
+let animationWatchdog = 0;
 
-function stopAnimation() {
+function stopAnimation(state = "stopped") {
   animationRunning = false;
+  root.dataset.experienceAnimationState = state;
   if (frame) {
     cancelAnimationFrame(frame);
     frame = 0;
@@ -681,8 +684,18 @@ function stopAnimation() {
 }
 
 function startAnimation() {
-  if (!world || disposed || document.hidden || animationRunning) return;
+  if (!world || disposed || animationRunning) return;
+  if (document.visibilityState !== "visible") {
+    root.dataset.experienceAnimationState = "waiting-for-visible-page";
+    return;
+  }
+  if (renderer?.getContext().isContextLost()) {
+    root.dataset.experienceAnimationState = "waiting-for-webgl-context";
+    return;
+  }
   animationRunning = true;
+  lastSuccessfulFrameAt = performance.now();
+  root.dataset.experienceAnimationState = "running";
   frame = requestAnimationFrame(animate);
 }
 
@@ -695,15 +708,24 @@ function publishRenderDiagnostics() {
 }
 
 function animate() {
-  if (!animationRunning || disposed || document.hidden) {
-    stopAnimation();
+  if (!animationRunning || disposed) {
+    stopAnimation("stopped");
+    return;
+  }
+  if (document.visibilityState !== "visible") {
+    stopAnimation("page-hidden");
+    return;
+  }
+  if (!renderer || !world) return;
+  if (renderer.getContext().isContextLost()) {
+    stopAnimation("webgl-context-lost");
+    root.dataset.webglContext = "lost";
     return;
   }
 
-  // Schedule exactly one successor. Visibility and context events share the same
-  // guarded start/stop functions so mobile browsers cannot create duplicate loops.
+  // Keep one pending frame only. The watchdog below can safely restart a loop
+  // if a mobile browser silently suspends RAF while the document is visible.
   frame = requestAnimationFrame(animate);
-  if (!renderer || !world) return;
 
   try {
     if (!clock) clock = new THREE.Clock();
@@ -770,6 +792,9 @@ function animate() {
 
     renderer.render(scene, camera);
     renderFrameCount += 1;
+    lastSuccessfulFrameAt = performance.now();
+    root.dataset.experienceFrames = String(renderFrameCount);
+    root.dataset.experienceAnimationState = "running";
     if (renderFrameCount % 6 === 0) {
       root.dataset.experienceProgress = p.toFixed(3);
       root.dataset.experienceCameraZ = camera.position.z.toFixed(2);
@@ -778,14 +803,14 @@ function animate() {
   } catch (error) {
     root.dataset.experienceRenderError = error instanceof Error ? error.message : String(error);
     console.error("The Quiet Garden render loop stopped after an error.", error);
-    stopAnimation();
+    stopAnimation("render-error");
   }
 }
 
 const handleContextLost = (event) => {
   event.preventDefault();
   root.dataset.webglContext = "lost";
-  stopAnimation();
+  stopAnimation("webgl-context-lost");
 };
 const handleContextRestored = () => {
   delete root.dataset.experienceRenderError;
@@ -796,14 +821,39 @@ renderer?.domElement.addEventListener("webglcontextlost", handleContextLost, fal
 renderer?.domElement.addEventListener("webglcontextrestored", handleContextRestored, false);
 
 const handleVisibility = () => {
-  if (document.hidden) stopAnimation();
+  if (document.visibilityState !== "visible") stopAnimation("page-hidden");
   else startAnimation();
 };
+const handlePageHide = () => stopAnimation("page-hidden");
+const handlePageShow = () => {
+  if (document.visibilityState === "visible") startAnimation();
+};
+const handleWindowFocus = () => {
+  if (document.visibilityState === "visible") startAnimation();
+};
 document.addEventListener("visibilitychange", handleVisibility);
+window.addEventListener("pagehide", handlePageHide);
+window.addEventListener("pageshow", handlePageShow);
+window.addEventListener("focus", handleWindowFocus);
 root.dataset.experienceFrames = "0";
 root.dataset.experienceDrawCalls = "0";
 root.dataset.webglContext = renderer?.getContext().isContextLost() ? "lost" : "ready";
 startAnimation();
+// Some mobile browsers can suspend a visible page's RAF loop without a
+// visibilitychange event. Recover only a stalled, otherwise healthy renderer.
+animationWatchdog = window.setInterval(() => {
+  if (disposed || document.visibilityState !== "visible" || !world || !renderer) return;
+  if (renderer.getContext().isContextLost()) {
+    root.dataset.webglContext = "lost";
+    stopAnimation("webgl-context-lost");
+    return;
+  }
+  if (root.dataset.experienceRenderError) return;
+  if (!animationRunning || performance.now() - lastSuccessfulFrameAt > 2500) {
+    stopAnimation("watchdog-restart");
+    startAnimation();
+  }
+}, 1000);
 
 return () => {
   disposed = true;
@@ -814,6 +864,10 @@ return () => {
   window.removeEventListener("resize", resize);
   motionButton?.removeEventListener("click", handleMotionToggle);
   document.removeEventListener("visibilitychange", handleVisibility);
+  window.removeEventListener("pagehide", handlePageHide);
+  window.removeEventListener("pageshow", handlePageShow);
+  window.removeEventListener("focus", handleWindowFocus);
+  if (animationWatchdog) window.clearInterval(animationWatchdog);
   observer?.disconnect();
   sceneObserver?.disconnect();
   root.classList.remove("is-scene-active");
