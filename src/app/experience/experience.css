@@ -23,14 +23,15 @@
 }@media (prefers-reduced-motion: reduce){.sm-experience{scroll-behavior:auto;}.sm-experience *, .sm-experience *::before, .sm-experience *::after{ transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
 
-/* Refined route composition: the garden remains a full-viewport backdrop while
-   the normal site chrome stays in document flow above the experience. */
+/* Quiet Garden — editorial composition refinement.
+   The control rail floats over the scene and never consumes document height. */
 .sm-experience {
   min-height: 100svh;
   overflow: clip;
   isolation: isolate;
   background: #111512;
 }
+
 .sm-experience #scene {
   position: fixed;
   inset: 0;
@@ -41,46 +42,67 @@
   z-index: 0;
   pointer-events: none;
 }
+
 .sm-experience #scene canvas {
   display: block;
   width: 100%;
   height: 100%;
 }
+
 .sm-experience .experience-controls {
-  position: relative;
+  position: absolute;
   z-index: 7;
-  height: 58px;
+  top: 16px;
+  left: clamp(22px, 5vw, 76px);
+  right: clamp(22px, 5vw, 76px);
+  height: 42px;
   margin: 0;
-  padding: 0 clamp(22px, 5vw, 76px);
+  padding: 0 2px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  color: #eee9dd;
-  background: linear-gradient(180deg, rgba(16, 21, 17, .72), rgba(16, 21, 17, .22));
-  border-bottom: 1px solid rgba(255,255,255,.055);
-  font-size: 9px;
-  letter-spacing: .16em;
+  pointer-events: none;
+  color: rgba(238, 233, 221, .88);
+  background: linear-gradient(90deg, rgba(13, 19, 15, .68), rgba(13, 19, 15, .28) 72%, rgba(13, 19, 15, .5));
+  border-top: 1px solid rgba(209, 173, 121, .34);
+  border-bottom: 1px solid rgba(255, 255, 255, .10);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 8px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
 }
+
 .sm-experience .experience-controls > * { pointer-events: auto; }
 .sm-experience .experience-controls i {
   color: var(--gold);
   font-style: normal;
-  padding: 0 6px;
+  padding: 0 7px;
 }
+
 .sm-experience .sound-toggle {
   border: 0;
   background: transparent;
   color: #e4dfd2;
   font: inherit;
-  font-size: 9px;
-  letter-spacing: .16em;
-  padding: 12px 0 12px 12px;
+  font-size: 8px;
+  letter-spacing: .18em;
+  padding: 10px 0 10px 12px;
   cursor: pointer;
+  transition: color .2s ease, opacity .2s ease;
 }
+.sm-experience .sound-toggle:hover { color: var(--gold); }
+.sm-experience .sound-toggle:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 5px;
+}
+
 .sm-experience .chapter--hero {
-  min-height: calc(100svh - 58px);
-  padding: clamp(92px, 14vh, 150px) clamp(26px, 12vw, 190px) 100px;
+  display: block;
+  min-height: 100svh;
+  padding: clamp(94px, 11.5vh, 132px) clamp(26px, 12vw, 190px) 100px;
 }
 .sm-experience .chapter--hero > .eyebrow,
 .sm-experience .chapter--hero > h1,
@@ -89,70 +111,116 @@
   position: relative;
   z-index: 3;
 }
+.sm-experience .chapter--hero > .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+  padding: 0 0 12px;
+  border-bottom: 1px solid rgba(209, 173, 121, .42);
+  font-size: 9px;
+  letter-spacing: .26em;
+}
 .sm-experience .chapter--hero > h1 {
-  max-width: 900px;
-  margin: 24px 0 18px;
+  max-width: 980px;
+  margin: 22px 0 20px;
+  font-size: clamp(66px, 8.8vw, 126px);
+  line-height: .96;
+  letter-spacing: -.058em;
+  text-shadow: 0 8px 42px rgba(0, 0, 0, .52);
+}
+.sm-experience .chapter--hero > h1 em {
+  color: #d0bea0;
+  text-shadow: 0 5px 34px rgba(0, 0, 0, .38);
 }
 .sm-experience .chapter--hero > .intro {
   display: block;
-  width: min(100%, 520px);
-  max-width: 520px;
+  width: min(100%, 490px);
+  max-width: 490px;
   margin: 0;
-  padding: 0;
-  background: transparent !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  color: #d9d9ce !important;
-  font-size: clamp(13px, 1.05vw, 15px);
-  line-height: 1.85;
+  padding: 2px 0 2px 18px;
+  border: 0;
+  border-left: 1px solid rgba(209, 173, 121, .72);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #d9d9ce;
+  font-size: clamp(13px, 1.02vw, 15px);
+  line-height: 1.9;
   letter-spacing: .015em;
-  text-shadow: 0 2px 18px rgba(0,0,0,.78);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .82);
 }
-.sm-experience .chapter--hero .enter-link { margin-top: 32px; }
+.sm-experience .chapter--hero .enter-link {
+  margin-top: 30px;
+  padding-bottom: 11px;
+  gap: 34px;
+  border-bottom-color: rgba(209, 173, 121, .66);
+}
+.sm-experience .chapter--hero .enter-link:hover { gap: 44px; }
+
 .sm-experience .chapter--side {
   min-height: 100svh;
   padding: 120px clamp(26px, 12vw, 190px);
 }
 .sm-experience .chapter-copy {
-  width: min(460px, 48vw);
+  width: min(480px, 48vw);
+  padding: 30px 32px;
+  border-left-color: rgba(209, 173, 121, .62);
+}
+.sm-experience .chapter-copy::before {
+  inset: -28px -54px -28px -32px;
+  background: radial-gradient(ellipse at 28% 50%, rgba(8, 14, 10, .82) 0%, rgba(8, 14, 10, .52) 48%, rgba(8, 14, 10, 0) 100%);
+}
+.sm-experience .chapter-copy h2 {
+  margin-top: 22px;
+  margin-bottom: 18px;
 }
 .sm-experience .chapter-copy p {
   max-width: 390px;
-  line-height: 1.9;
+  color: #d7d8ce;
+  line-height: 1.95;
 }
-.sm-experience .chapter--right .chapter-copy p { margin-left: auto; }
+.sm-experience .chapter--right .chapter-copy {
+  border-right-color: rgba(209, 173, 121, .62);
+}
+.sm-experience .chapter--right .chapter-copy::before {
+  background: radial-gradient(ellipse at 72% 50%, rgba(8, 14, 10, .82) 0%, rgba(8, 14, 10, .52) 48%, rgba(8, 14, 10, 0) 100%);
+}
 .sm-experience .chapter--final {
   min-height: 100svh;
-  padding: clamp(150px, 22vh, 230px) 28px 110px;
+  padding: clamp(150px, 21vh, 220px) 28px 110px;
+}
+.sm-experience .chapter--final h2 {
+  font-size: clamp(60px, 7.4vw, 104px);
+}
+.sm-experience .chapter--final p {
+  max-width: 430px;
+  margin: 0 auto;
+  color: #d0d2c9;
+  line-height: 1.95;
 }
 .sm-experience .chapter-nav {
   right: clamp(14px, 2.4vw, 34px);
   gap: 13px;
 }
-.sm-experience .chapter-nav a {
-  width: 28px;
-  height: 28px;
-}
-.sm-experience .chapter-nav span {
-  width: 5px;
-  height: 5px;
-}
+.sm-experience .chapter-nav a { width: 28px; height: 28px; }
+.sm-experience .chapter-nav span { width: 5px; height: 5px; }
 .sm-experience .scroll-cue {
   right: clamp(16px, 2.4vw, 34px);
   bottom: 30px;
 }
-.sm-experience .experience-return-links {
-  gap: 18px 30px;
-}
+.sm-experience .experience-return-links { gap: 18px 30px; }
 .sm-experience .experience-return-links .enter-link { margin-top: 32px; }
+
 @media (max-width: 700px) {
   .sm-experience .experience-controls {
-    height: 54px;
-    padding: 0 18px;
+    top: 12px;
+    left: 18px;
+    right: 18px;
+    height: 38px;
     gap: 10px;
-    font-size: 7px;
-    letter-spacing: .11em;
+    font-size: 6.5px;
+    letter-spacing: .13em;
   }
   .sm-experience .experience-controls > span {
     min-width: 0;
@@ -160,71 +228,62 @@
   }
   .sm-experience .sound-toggle {
     flex: 0 0 auto;
-    font-size: 7px;
+    font-size: 6.5px;
     letter-spacing: .1em;
   }
   .sm-experience .chapter--hero {
-    min-height: calc(100svh - 54px);
-    padding: clamp(76px, 13vh, 120px) 26px 90px;
+    min-height: 100svh;
+    padding: clamp(84px, 10vh, 104px) 26px 90px;
+  }
+  .sm-experience .chapter--hero > .eyebrow {
+    padding-bottom: 10px;
+    font-size: 8px;
+    letter-spacing: .2em;
   }
   .sm-experience .chapter--hero > h1 {
-    font-size: clamp(48px, 12.8vw, 76px);
-    line-height: 1.02;
-    margin: 22px 0 16px;
+    max-width: 620px;
+    margin: 20px 0 18px;
+    font-size: clamp(50px, 12.6vw, 78px);
+    line-height: .99;
   }
   .sm-experience .chapter--hero > .intro {
     width: min(100%, 410px);
+    padding-left: 14px;
     font-size: 13px;
-    line-height: 1.8;
+    line-height: 1.82;
   }
+  .sm-experience .chapter--hero .enter-link { margin-top: 26px; }
   .sm-experience .chapter--side {
     min-height: 92svh;
     padding: 100px 28px 110px;
   }
   .sm-experience .chapter-copy {
-    width: min(100%, 420px);
-    padding: 20px 18px;
+    width: min(100%, 430px);
+    padding: 22px 18px;
   }
-  .sm-experience .chapter--right {
-    justify-content: flex-start;
-    text-align: left;
+  .sm-experience .chapter-copy::before {
+    inset: -18px -18px;
+    background: radial-gradient(ellipse at 28% 50%, rgba(8, 14, 10, .86) 0%, rgba(8, 14, 10, .58) 60%, rgba(8, 14, 10, 0) 100%);
   }
+  .sm-experience .chapter--right { justify-content: flex-start; text-align: left; }
   .sm-experience .chapter--right .chapter-copy {
     margin: 0;
-    padding: 20px 18px;
+    padding: 22px 18px;
     border-right: 0;
-    border-left: 1px solid rgba(209,173,121,.48);
+    border-left: 1px solid rgba(209, 173, 121, .62);
+  }
+  .sm-experience .chapter--right .chapter-copy::before {
+    background: radial-gradient(ellipse at 28% 50%, rgba(8, 14, 10, .86) 0%, rgba(8, 14, 10, .58) 60%, rgba(8, 14, 10, 0) 100%);
   }
   .sm-experience .chapter--right .chapter-copy p { margin-left: 0; }
   .sm-experience .chapter--right .chapter-note { flex-direction: row; }
-  .sm-experience .chapter-number {
-    right: 24px;
-    bottom: 48px;
-    font-size: 124px;
-  }
-  .sm-experience .chapter-nav {
-    right: 8px;
-    gap: 7px;
-  }
-  .sm-experience .chapter-nav a {
-    width: 24px;
-    height: 24px;
-  }
-  .sm-experience .scroll-cue {
-    right: 12px;
-    bottom: 18px;
-    font-size: 6px;
-  }
-  .sm-experience .hero-index {
-    left: 26px;
-    bottom: 30px;
-  }
-  .sm-experience .chapter--final {
-    padding: 20vh 24px 100px;
-  }
-  .sm-experience .chapter--final h2 {
-    font-size: clamp(48px, 12vw, 72px);
-  }
+  .sm-experience .chapter-number { right: 24px; bottom: 48px; font-size: 124px; }
+  .sm-experience .chapter-nav { right: 8px; gap: 7px; }
+  .sm-experience .chapter-nav a { width: 24px; height: 24px; }
+  .sm-experience .scroll-cue { right: 12px; bottom: 18px; font-size: 6px; }
+  .sm-experience .hero-index { left: 26px; bottom: 30px; }
+  .sm-experience .chapter--final { padding: 20vh 24px 100px; }
+  .sm-experience .chapter--final h2 { font-size: clamp(48px, 12vw, 72px); }
   .sm-experience .experience-return-links {
     flex-direction: column;
     align-items: center;
@@ -232,8 +291,15 @@
   }
 }
 @media (max-width: 390px) {
+  .sm-experience .experience-controls { left: 14px; right: 14px; }
   .sm-experience .chapter--hero { padding-left: 22px; padding-right: 22px; }
   .sm-experience .chapter--hero > h1 { font-size: clamp(46px, 12.5vw, 58px); }
   .sm-experience .chapter--side { padding-left: 22px; padding-right: 22px; }
-  .sm-experience .experience-controls { padding-left: 14px; padding-right: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sm-experience, .sm-experience * {
+    scroll-behavior: auto;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
 }
