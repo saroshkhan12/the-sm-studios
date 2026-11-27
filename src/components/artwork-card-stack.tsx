@@ -71,7 +71,7 @@ export function ArtworkCardStack({
   return (
     <section className="artwork-stack-section" aria-label={label}>
       <div className="artwork-stack-heading">
-        <div><span className="eyebrow">A CLOSER LOOK</span><h2>{heading}</h2></div>
+        <div><span className="eyebrow">A CLOSER LOOK</span>{heading ? <h2>{heading}</h2> : null}</div>
         <p>Move through the studio, one piece at a time.</p>
       </div>
 
