@@ -31,6 +31,7 @@ export function LampThemeToggle() {
   const [showHint, setShowHint] = useState(false);
   const lampRef = useRef<HTMLButtonElement>(null);
   const cordRef = useRef<SVGPathElement>(null);
+  const chainBaseRef = useRef<SVGPathElement>(null);
   const hitRef = useRef<SVGPathElement>(null);
   const beadRef = useRef<SVGGElement>(null);
   const flickerTimer = useRef<number | null>(null);
@@ -73,6 +74,7 @@ export function LampThemeToggle() {
       const cy = (AY + by) / 2;
       const path = `M${AX} ${AY} Q${cx} ${cy} ${bx} ${by}`;
       cordRef.current?.setAttribute("d", path);
+      chainBaseRef.current?.setAttribute("d", path);
       hitRef.current?.setAttribute("d", path);
       beadRef.current?.setAttribute("transform", `translate(${bx} ${by}) rotate(${-x * 0.7})`);
     };
@@ -276,6 +278,7 @@ export function LampThemeToggle() {
             <circle className="l-bulb" cx="80" cy="157" r="10" />
             <rect className="l-rim" x="32" y="144" width="96" height="8" rx="4" />
             <path ref={hitRef} className="l-hit" id="lHit" d="M80 164 L80 334" />
+            <path ref={chainBaseRef} className="l-chain-base" d="M80 164 L80 334" />
             <path ref={cordRef} className="l-chain" id="lCord" d="M80 164 L80 334" />
             <g ref={beadRef} id="lBead" className="l-pull" transform="translate(80 334)">
               <rect className="l-brass l-bead-neck" x="-2" y="-14" width="4" height="8" rx="2" />
