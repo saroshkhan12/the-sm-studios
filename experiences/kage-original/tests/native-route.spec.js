@@ -214,10 +214,30 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
       }, { timeout: 15000 }).toBe(true);
 
       const frameBefore = Number(await root.getAttribute("data-experience-frames"));
-      await expect.poll(async () => {
-        const frameAfter = Number(await root.getAttribute("data-experience-frames"));
-        return frameAfter - frameBefore;
-      }, { timeout: 5000 }).toBeGreaterThan(5);
+      try {
+        await expect.poll(async () => {
+          const frameAfter = Number(await root.getAttribute("data-experience-frames"));
+          return frameAfter - frameBefore;
+        }, { timeout: 5000 }).toBeGreaterThan(5);
+      } catch (error) {
+        const diagnostics = await root.evaluate((element) => ({
+          viewport: { width: window.innerWidth, height: window.innerHeight },
+          chapter: element.querySelector(".chapter-nav a[aria-current='location']")?.getAttribute("aria-label") ?? null,
+          frames: element.dataset.experienceFrames ?? null,
+          animationState: element.dataset.experienceAnimationState ?? null,
+          renderError: element.dataset.experienceRenderError ?? null,
+          webglContext: element.dataset.webglContext ?? null,
+          drawCalls: element.dataset.experienceDrawCalls ?? null,
+          documentVisibility: document.visibilityState,
+          documentHidden: document.hidden,
+          focused: document.hasFocus()
+        }));
+        await testInfo.attach("webgl-animation-stall-diagnostics", {
+          body: Buffer.from(JSON.stringify(diagnostics, null, 2)),
+          contentType: "application/json"
+        });
+        throw new Error(`WebGL animation stopped progressing after viewport ${viewport.width}x${viewport.height}: ${JSON.stringify(diagnostics)}\n${error instanceof Error ? error.message : String(error)}`);
+      }
 
       const box = await canvas.boundingBox();
       expect(box).not.toBeNull();
