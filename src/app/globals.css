@@ -806,53 +806,27 @@ html[data-theme="dark"] .artwork-stack-hint {
   .artwork-stack-arrows button { transition: none !important; }
 }
 
-/* Header-drop brass lamp theme switch */
-.lamp {
-  position: absolute;
-  top: 192px;
-  left: calc(50% + 40px);
-  margin-left: -80px;
-  width: 160px;
-  height: 400px;
-  padding: 0;
-  border: 0;
-  background: none;
-  z-index: 50;
-  pointer-events: none;
-  -webkit-tap-highlight-color: transparent;
-}
-.lamp:focus-visible { outline: 2px solid #c9a46b; outline-offset: 4px; border-radius: 10px; }
-.lamp svg { width: 100%; height: 100%; overflow: visible; display: block; }
-.lamp::before {
-  content: "";
-  position: absolute;
-  top: 160px;
-  left: 50%;
-  width: 640px;
-  height: 640px;
-  transform: translateX(-50%);
-  background: radial-gradient(ellipse at 50% 0%, var(--glow), transparent 62%);
-  pointer-events: none;
-  transition: background .6s ease;
-}
-.l-wire { stroke: #8f6f3a; stroke-width: 2; }
-.l-brass { fill: #8f6f3a; }
-.l-shade, .l-rim, .l-cap { pointer-events: auto; cursor: pointer; }
-.l-rim { fill: #8f6f3a; }
-.l-bulb { fill: #4a463d; transition: fill .4s ease; }
-.l-under { fill: #ffe3a0; opacity: 0; transition: opacity .4s ease; }
-html[data-theme="light"] .l-bulb { fill: #fff0c0; filter: drop-shadow(0 0 14px #ffc95a); }
-html[data-theme="light"] .l-under { opacity: .85; }
-.l-chain { fill: none; stroke: #d9b878; stroke-width: 3.2; stroke-linecap: round; stroke-dasharray: .1 6.5; }
-.l-hit { fill: none; stroke: transparent; stroke-width: 30; pointer-events: stroke; cursor: grab; }
-.l-pull { pointer-events: auto; cursor: grab; }
-.lamp.grabbing .l-hit, .lamp.grabbing .l-pull { cursor: grabbing; }
-.lamp.flicker .l-bulb { animation: flick .6s steps(1) 1; }
-@keyframes flick {
-  0% { opacity: .2; } 15% { opacity: 1; } 30% { opacity: .35; }
-  50% { opacity: 1; } 65% { opacity: .6; } 100% { opacity: 1; }
-}
-@media (prefers-reduced-motion: reduce) { .lamp.flicker .l-bulb { animation: none; } }
-@media (max-width: 800px) {
-  .lamp { left: auto; right: 4%; margin-left: 0; width: 100px; height: 250px; }
-}
+/* Header-drop shaded brass pendant lamp theme switch */
+.lamp { position:absolute; top:118px; left:calc(50% - 14px); margin-left:-80px; width:160px; height:380px; padding:0; border:0; background:none; z-index:40; pointer-events:none; -webkit-tap-highlight-color:transparent; }
+.lamp:focus-visible { outline:2px solid #C9A46B; outline-offset:4px; border-radius:10px; }
+.lamp svg { width:100%; height:100%; overflow:visible; display:block; filter:drop-shadow(0 10px 12px rgba(0,0,0,.35)); }
+.lamp::before { content:""; position:absolute; top:150px; left:50%; width:700px; height:700px; transform:translateX(-50%); background:radial-gradient(ellipse at 50% 0%,var(--glow),transparent 62%); pointer-events:none; transition:background .6s ease; }
+.lamp svg .l-wire { fill:none !important; stroke:#8F6F3A !important; stroke-width:2; }
+.lamp svg .l-brass { fill:#8F6F3A !important; stroke:none !important; }
+.lamp svg .l-shade { fill:url(#shadeGrad) !important; stroke:none !important; pointer-events:auto; cursor:pointer; }
+.lamp svg .l-hl { fill:none !important; stroke:#fff !important; stroke-opacity:.35; stroke-width:3; stroke-linecap:round; }
+.lamp svg .l-rim { fill:#8F6F3A !important; pointer-events:auto; cursor:pointer; }
+.lamp svg .l-cap { pointer-events:auto; cursor:pointer; }
+.lamp svg .l-bulb { fill:#3b3830 !important; stroke:none !important; transition:fill .4s ease; }
+.lamp svg .l-under { fill:#FFE3A0 !important; stroke:none !important; opacity:0; transition:opacity .4s ease; }
+html[data-theme="light"] .lamp svg .l-bulb { fill:#FFE3A0 !important; filter:drop-shadow(0 0 14px #ffc95a); }
+html[data-theme="light"] .lamp svg .l-under { opacity:.8; }
+.lamp svg .l-chain { fill:none !important; stroke:#B99A62 !important; stroke-width:3.2; stroke-linecap:round; stroke-dasharray:.1 6.5; }
+.lamp svg .l-hit { fill:none !important; stroke:transparent !important; stroke-width:30; pointer-events:stroke; cursor:grab; }
+.lamp svg .l-pull { pointer-events:auto; cursor:grab; }
+.lamp svg .l-bead-sphere { fill:url(#beadGrad) !important; stroke:#8F6F3A !important; stroke-width:1.2; }
+.lamp.grabbing .l-hit, .lamp.grabbing .l-pull { cursor:grabbing; }
+.lamp.flicker .l-bulb { animation:flick .6s steps(1) 1; }
+@keyframes flick { 0%{opacity:.2;} 15%{opacity:1;} 30%{opacity:.35;} 50%{opacity:1;} 65%{opacity:.6;} 100%{opacity:1;} }
+@media (prefers-reduced-motion:reduce) { .lamp.flicker .l-bulb { animation:none; } }
+@media (max-width:1100px) { .lamp { left:auto; right:16px; margin-left:0; width:90px; height:214px; } }
