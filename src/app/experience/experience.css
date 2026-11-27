@@ -79,3 +79,23 @@
     margin-top: 16px;
   }
 }
+
+
+/* Keep the WebGL viewport directly below the restored global announcement + header.
+   The canvas was fixed to viewport top: 0, so it occupied the site chrome area. */
+.sm-experience #scene {
+  top: 123px;
+  right: 0;
+  bottom: auto;
+  left: 0;
+  height: calc(100svh - 123px);
+}
+.sm-experience #scene canvas {
+  height: 100%;
+}
+@media (max-width: 700px) {
+  .sm-experience #scene {
+    top: 99px;
+    height: calc(100svh - 99px);
+  }
+}
