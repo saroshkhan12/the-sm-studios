@@ -212,6 +212,7 @@
 #artwork-stack-stage { scroll-margin-top: 24px; }
 .artwork-stack-card[id] { scroll-margin-top: 24px; }
 @media (max-width: 1100px) {
+  .collections-page-shell { padding-inline: 24px; }
   .collections-hero {
     grid-template-columns: minmax(0,1fr);
     grid-template-rows: auto auto auto;
