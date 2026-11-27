@@ -238,15 +238,20 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             type="button"
             className="icon-btn theme-toggle"
             data-cursor="THEME"
-            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            aria-pressed={theme === "light"}
+            role="switch"
+            aria-checked={theme === "light"}
+            aria-label="Light mode"
             title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             onClick={(event) => {
               const bounds = event.currentTarget.getBoundingClientRect();
               toggleTheme({ x: bounds.left + bounds.width / 2, y: bounds.top + bounds.height / 2 });
             }}
           >
-            {theme === "dark" ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}
+            <span className="theme-toggle-track" aria-hidden="true">
+              <span className="theme-toggle-thumb">
+                {theme === "dark" ? <Moon /> : <Sun />}
+              </span>
+            </span>
           </MotionButton>
           <MotionButton
             type="button"
