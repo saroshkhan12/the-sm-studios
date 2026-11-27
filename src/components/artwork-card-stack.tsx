@@ -40,6 +40,17 @@ export function ArtworkCardStack({
     setActive((current) => (count ? current % count : 0));
   }, [count]);
 
+  useEffect(() => {
+    const activateHashTarget = () => {
+      const hash = window.location.hash.slice(1);
+      const targetIndex = items.findIndex((item) => `collection-${item.id}` === hash);
+      if (targetIndex >= 0) setActive(targetIndex);
+    };
+    activateHashTarget();
+    window.addEventListener("hashchange", activateHashTarget);
+    return () => window.removeEventListener("hashchange", activateHashTarget);
+  }, [items]);
+
   function onKeyDown(event: KeyboardEvent<HTMLElement>) {
     if (event.key === "ArrowRight") {
       event.preventDefault();
