@@ -818,7 +818,7 @@ html[data-theme="dark"] .artwork-stack-hint {
   padding: 0;
   border: 0;
   background: transparent;
-  z-index: 20;
+  z-index: 100;
   pointer-events: none;
   -webkit-tap-highlight-color: transparent;
 }
