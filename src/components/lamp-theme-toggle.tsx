@@ -267,6 +267,7 @@ export function LampThemeToggle() {
           <svg
             id="lampSvg"
             viewBox="0 0 160 380"
+            preserveAspectRatio="none"
             aria-hidden="true"
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
