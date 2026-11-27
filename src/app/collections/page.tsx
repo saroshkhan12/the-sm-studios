@@ -17,7 +17,7 @@ export default async function Collections() {
       </ScrollReveal>
       <ArtworkCardStack
         label="Explore our collections"
-        heading="Explore our collections."
+        heading=""
         items={collections.map((item) => {
           const featured = products.find((product) => product.collection === item.slug);
           return {
