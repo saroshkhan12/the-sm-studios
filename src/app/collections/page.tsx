@@ -1,8 +1,8 @@
 import "./artwork-stack-responsive.css";
-import { collections } from "@/data/catalog";
-import { readEtsyProducts } from "@/lib/etsy";
+import { collections } from "@/data/catalog";import { readEtsyProducts } from "@/lib/etsy";
 import { ArtworkCardStack } from "@/components/artwork-card-stack";
-import { ScrollReveal } from "@/components/scroll-reveal";\nimport { ExploreCollectionsSection } from "@/components/explore-collections-section";
+import { ScrollReveal } from "@/components/scroll-reveal";
+import { ExploreCollectionsSection } from "@/components/explore-collections-section";
 
 export const dynamic = "force-dynamic";
 
@@ -32,6 +32,7 @@ export default async function Collections() {
           };
         })}
       />
+      <ExploreCollectionsSection products={products} variant="collections-page" />
     </div>
   );
 }
