@@ -166,7 +166,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         <span>ART FOR A MORE INSPIRED LIFE</span>
       </div>
 
-      <header className={`header glass-header sm-floating-dock${menuOpen ? " is-menu-open" : ""}`} id="site-top">
+      <header className="header glass-header" id="site-top">
         <MotionButton
           type="button"
           className="icon-btn mobile-menu"
@@ -174,36 +174,71 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           onClick={() => setMenuOpen((open) => !open)}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
-          aria-controls="site-navigation-overlay"
+          aria-controls={menuOpen ? "site-navigation-overlay" : undefined}
         >
-          {menuOpen ? <X /> : <Menu />}
+          <m.span
+            key={menuOpen ? "close" : "menu"}
+            initial={false}
+            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+            transition={easeOutTransition}
+          >
+            {menuOpen ? <X /> : <Menu />}
+          </m.span>
         </MotionButton>
 
-        <Link href="/" className="wordmark glass-wordmark sm-dock-brand" aria-label="THE SM STUDIOS home">
-          <span className="wordmark-type">
-            THE SM <i>STUDIOS</i>
-            <small>ART · CULTURE · EXPRESSION</small>
-          </span>
-        </Link>
+        <m.div
+          className="wordmark-wrap"
+          initial="hidden"
+          animate="visible"
+          variants={fadeDown}
+        >
+          <Link href="/" className="wordmark glass-wordmark" aria-label="THE SM STUDIOS home">
+            <span className="wordmark-type">
+              THE SM <i>STUDIOS</i>
+              <small>ART · CULTURE · EXPRESSION</small>
+            </span>
+          </Link>
+        </m.div>
 
-        <nav className="nav desktop-nav sm-dock-links" aria-label="Main">
-          {navigation.map((item) => {
-            const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={active ? "active" : ""}
-                aria-current={active ? "page" : undefined}
-                data-cursor="OPEN"
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+        <nav className="nav desktop-nav" aria-label="Main navigation">
+          {navigation.map((item) => (
+            (() => {
+              const active =
+                pathname === item.href || pathname.startsWith(`${item.href}/`);
+              const homeShopHighlight = pathname === "/" && item.href === "/shop";
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`glass-nav-link${active || homeShopHighlight ? " active" : ""}`}
+                  aria-current={active ? "page" : undefined}
+                  data-cursor="OPEN"
+                >
+                  <NavigationLabel label={item.label} />
+                  <AnimatePresence initial={false}>
+                    {active && (
+                      <m.span
+                        key={item.href}
+                        className="nav-indicator"
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        exit={{ scaleX: 0 }}
+                        transition={easeOutTransition}
+                      />
+                    )}
+                  </AnimatePresence>
+                </Link>
+              );
+            })()
+          ))}
         </nav>
 
-        <div className="header-actions sm-dock-actions">
+        <m.div
+          className="header-actions"
+          initial="hidden"
+          animate="visible"
+          variants={fadeDown}
+        >
           <MotionButton
             type="button"
             className="icon-btn"
@@ -213,7 +248,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             aria-expanded={searchOpen}
             onClick={openSearch}
           >
-            <Search />
+            <m.span whileHover={reduceMotion ? undefined : { rotate: 8, scale: 1.08 }}>
+              <Search />
+            </m.span>
           </MotionButton>
           <Link
             href="/wishlist"
@@ -221,7 +258,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             aria-label={`Wishlist, ${favoritesCount} saved ${favoritesCount === 1 ? "item" : "items"}`}
             data-cursor="SAVE"
           >
-            <Heart />
+            <m.span whileHover={reduceMotion ? undefined : { scale: 1.12 }}>
+              <Heart />
+            </m.span>
             <span className="header-count">{favoritesCount}</span>
           </Link>
           <Link
@@ -230,10 +269,12 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             aria-label={`Shopping bag, ${cartCount} ${cartCount === 1 ? "item" : "items"}`}
             data-cursor="OPEN BAG"
           >
-            <ShoppingBag />
+            <m.span whileHover={reduceMotion ? undefined : { y: -2, scale: 1.08 }}>
+              <ShoppingBag />
+            </m.span>
             <span className="header-count">{cartCount}</span>
           </Link>
-        </div>
+        </m.div>
       </header>
 
       <AnimatePresence initial={false}>
