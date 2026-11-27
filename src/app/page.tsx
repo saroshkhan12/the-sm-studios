@@ -132,7 +132,9 @@ export default async function Home() {
         </div>
       </section>
 
-      <ExploreCollectionsSection products={products} variant="collections-page" />
+      <div className="home-collections-context">
+        <ExploreCollectionsSection products={products} variant="collections-page" />
+      </div>
 
 <section className="featured-section">
         <div className="section-wrap">
