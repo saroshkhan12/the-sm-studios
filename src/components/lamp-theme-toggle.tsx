@@ -29,7 +29,7 @@ export function LampThemeToggle() {
 
   function handlePointerMove(event: PointerEvent<HTMLButtonElement>) {
     if (pointerStart.current === null || !pullRef.current) return;
-    const distance = Math.max(0, Math.min(34, event.clientY - pointerStart.current));
+    const distance = Math.max(0, Math.min(52, event.clientY - pointerStart.current));
     pullRef.current.style.transform = `translateY(${distance}px)`;
     if (distance > 8) dragged.current = true;
   }
@@ -76,14 +76,14 @@ export function LampThemeToggle() {
       onPointerUp={finishPointer}
       onPointerCancel={cancelPointer}
     >
-      <svg viewBox="0 0 120 180" aria-hidden="true" focusable="false">
+      <svg viewBox="0 0 120 220" aria-hidden="true" focusable="false">
         <line className="lamp-cord" x1="60" y1="0" x2="60" y2="48" />
         <path className="lamp-shade" d="M30 50 Q60 36 90 50 L108 96 H12 Z" />
         <rect className="lamp-shade-rim" x="12" y="94" width="96" height="8" rx="4" />
         <ellipse className="lamp-bulb" cx="60" cy="108" rx="13" ry="10" />
         <g ref={pullRef} className="lamp-pull">
-          <line className="lamp-cord" x1="60" y1="100" x2="60" y2="150" />
-          <circle className="lamp-bead" cx="60" cy="156" r="8" />
+          <line className="lamp-cord" x1="60" y1="100" x2="60" y2="190" />
+          <circle className="lamp-bead" cx="60" cy="198" r="8" />
         </g>
       </svg>
       <span className="sr-only">{theme === "light" ? "Light mode is on" : "Dark mode is on"}</span>
