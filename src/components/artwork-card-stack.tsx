@@ -54,6 +54,7 @@ export function ArtworkCardStack({
     if (event.pointerType === "mouse" && event.button !== 0) return;
     setDragStart(event.clientX);
     suppressClick.current = false;
+    event.currentTarget.setPointerCapture(event.pointerId);
   }
 
   function onPointerUp(event: PointerEvent<HTMLDivElement>) {
@@ -64,6 +65,16 @@ export function ArtworkCardStack({
       move(delta < 0 ? 1 : -1);
     }
     setDragStart(null);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  }
+
+  function onPointerCancel(event: PointerEvent<HTMLDivElement>) {
+    setDragStart(null);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
   }
 
   if (!count) return null;
@@ -84,8 +95,7 @@ export function ArtworkCardStack({
         onKeyDown={onKeyDown}
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
-        onPointerCancel={() => setDragStart(null)}
-        onPointerLeave={() => setDragStart(null)}
+        onPointerCancel={onPointerCancel}
       >
         <div className="artwork-stack-orbit artwork-stack-orbit-one" aria-hidden="true" />
         <div className="artwork-stack-orbit artwork-stack-orbit-two" aria-hidden="true" />
@@ -101,7 +111,7 @@ export function ArtworkCardStack({
               data-position={offset}
               aria-hidden={!visible}
               style={{
-                transform: `translate3d(${offset * 76}px, ${Math.abs(offset) * 15}px, 0) rotate(${offset * 4.5}deg) scale(${offset === 0 ? 1 : Math.max(0.80, 1 - Math.abs(offset) * 0.075)})`,
+                transform: `translate3d(calc(var(--artwork-stack-offset, 92px) * ${offset}), ${Math.abs(offset) * 13}px, 0) rotate(${offset * 3.8}deg) scale(${offset === 0 ? 1 : Math.max(0.82, 1 - Math.abs(offset) * 0.065)})`,
                 zIndex: 10 - Math.abs(offset),
                 opacity: visible ? (offset === 0 ? 1 : Math.max(0.22, 0.68 - Math.abs(offset) * 0.2)) : 0,
                 transition: reduceMotion ? "none" : "transform 560ms cubic-bezier(.2,.75,.2,1), opacity 420ms ease",
