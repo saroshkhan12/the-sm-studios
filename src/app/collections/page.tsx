@@ -11,13 +11,10 @@ export const dynamic = "force-dynamic";
 
 export default async function Collections() {
   const products = await readEtsyProducts();
-  const visualItems = collections
-    .map((collection) => ({
-      collection,
-      product: products.find((product) => product.collection === collection.slug && product.image),
-    }))
-    .filter((item): item is (typeof visualItems)[number] => Boolean(item.product?.image))
-    .slice(0, 3);
+  const visualItems = collections.flatMap((collection) => {
+    const product = products.find((item) => item.collection === collection.slug && item.image);
+    return product?.image ? [{ collection, product }] : [];
+  }).slice(0, 3);
 
   const stackItems = collections.map((item) => {
     const featured = products.find((product) => product.collection === item.slug);
