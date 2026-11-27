@@ -8789,3 +8789,42 @@ body.menu-open .lamp {
     animation-delay: 0ms !important;
   }
 }
+
+
+@media (min-width: 1101px) {
+  .navigation-overlay { display: none; }
+}
+
+html[data-theme="light"] .navigation-overlay-footer p {
+  color: var(--text-muted);
+}
+
+html[data-theme="light"] .navigation-overlay-links a {
+  color: var(--text);
+}
+
+html[data-theme="light"] .navigation-overlay-links a.active,
+html[data-theme="light"] .navigation-overlay-links a:hover,
+html[data-theme="light"] .navigation-overlay-links a:focus-visible {
+  color: var(--gold);
+}
+
+html[data-theme="light"] .navigation-overlay-number,
+html[data-theme="light"] .navigation-overlay-kicker,
+html[data-theme="light"] .navigation-overlay-brand i {
+  color: var(--gold);
+}
+
+html[data-theme="light"] .navigation-overlay-close,
+html[data-theme="light"] .navigation-overlay .menu-theme {
+  color: var(--text);
+  border-color: var(--gold);
+}
+
+html[data-theme="light"] .navigation-overlay-links a > svg {
+  color: var(--text-muted);
+}
+html[data-theme="light"] .navigation-overlay-links a:hover > svg,
+html[data-theme="light"] .navigation-overlay-links a:focus-visible > svg {
+  color: var(--gold);
+}
