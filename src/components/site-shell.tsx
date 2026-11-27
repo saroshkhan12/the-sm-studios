@@ -166,7 +166,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         <span>ART FOR A MORE INSPIRED LIFE</span>
       </div>
 
-      <header className="header glass-header sm-floating-dock" id="site-top">
+      <header className={`header glass-header sm-floating-dock${menuOpen ? " is-menu-open" : ""}`} id="site-top">
         <MotionButton
           type="button"
           className="icon-btn mobile-menu"
@@ -174,7 +174,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           onClick={() => setMenuOpen((open) => !open)}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
-          aria-controls={menuOpen ? "site-navigation-overlay" : undefined}
+          aria-controls="site-navigation-overlay"
         >
           {menuOpen ? <X /> : <Menu />}
         </MotionButton>
@@ -186,7 +186,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           </span>
         </Link>
 
-        <nav className="nav desktop-nav sm-dock-links" aria-label="Main navigation">
+        <nav className="nav desktop-nav sm-dock-links" aria-label="Main">
           {navigation.map((item) => {
             const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
             return (
