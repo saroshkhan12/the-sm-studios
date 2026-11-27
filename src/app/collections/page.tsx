@@ -1,3 +1,4 @@
+import "./artwork-stack-responsive.css";
 import { collections } from "@/data/catalog";
 import { readEtsyProducts } from "@/lib/etsy";
 import { ArtworkCardStack } from "@/components/artwork-card-stack";
