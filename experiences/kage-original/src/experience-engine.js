@@ -419,10 +419,81 @@ function createChapterLandmarks(parent, leafMaterials, trunkMat) {
   portal.scale.setScalar(.82);
 }
 
+function createAmbientGlobe() {
+  // A restrained network globe sits beyond the garden as atmospheric depth.
+  // It shares the garden renderer and animation loop (no iframe or second WebGL context).
+  const group = new THREE.Group();
+  group.name = "quiet-garden-ambient-globe";
+  group.position.set(0, 7.2, -38);
+  group.scale.setScalar(viewportWidth() < 700 ? 0.78 : 1);
+
+  const radius = 4.4;
+  const segments = viewportWidth() < 700 ? 24 : 36;
+  const points = [];
+  const addSegment = (a, b) => points.push(a.x, a.y, a.z, b.x, b.y, b.z);
+
+  // Longitude and latitude arcs form a delicate, open spherical lattice.
+  for (let longitude = 0; longitude < segments; longitude += 1) {
+    const phi = longitude / segments * Math.PI * 2;
+    for (let step = 0; step < segments; step += 1) {
+      const t0 = -Math.PI / 2 + step / segments * Math.PI;
+      const t1 = -Math.PI / 2 + (step + 1) / segments * Math.PI;
+      const a = new THREE.Vector3(Math.cos(t0) * Math.cos(phi), Math.sin(t0), Math.cos(t0) * Math.sin(phi)).multiplyScalar(radius);
+      const b = new THREE.Vector3(Math.cos(t1) * Math.cos(phi), Math.sin(t1), Math.cos(t1) * Math.sin(phi)).multiplyScalar(radius);
+      addSegment(a, b);
+    }
+  }
+  for (let latitude = -3; latitude <= 3; latitude += 1) {
+    const theta = latitude * Math.PI / 8;
+    const ringRadius = Math.cos(theta) * radius;
+    const y = Math.sin(theta) * radius;
+    for (let step = 0; step < segments; step += 1) {
+      const a0 = step / segments * Math.PI * 2;
+      const a1 = (step + 1) / segments * Math.PI * 2;
+      addSegment(new THREE.Vector3(Math.cos(a0) * ringRadius, y, Math.sin(a0) * ringRadius),
+        new THREE.Vector3(Math.cos(a1) * ringRadius, y, Math.sin(a1) * ringRadius));
+    }
+  }
+
+  const latticeGeometry = new THREE.BufferGeometry();
+  latticeGeometry.setAttribute("position", new THREE.Float32BufferAttribute(points, 3));
+  const lattice = new THREE.LineSegments(latticeGeometry, new THREE.LineBasicMaterial({
+    color: "#9bb9b0", transparent: true, opacity: 0.19, depthWrite: false, fog: false
+  }));
+  group.add(lattice);
+
+  const nodePositions = [];
+  const nodeCount = viewportWidth() < 700 ? 42 : 76;
+  for (let i = 0; i < nodeCount; i += 1) {
+    const y = 1 - 2 * (i + 0.5) / nodeCount;
+    const radial = Math.sqrt(1 - y * y);
+    const angle = i * Math.PI * (3 - Math.sqrt(5));
+    nodePositions.push(Math.cos(angle) * radial * radius, y * radius, Math.sin(angle) * radial * radius);
+  }
+  const nodesGeometry = new THREE.BufferGeometry();
+  nodesGeometry.setAttribute("position", new THREE.Float32BufferAttribute(nodePositions, 3));
+  const nodes = new THREE.Points(nodesGeometry, new THREE.PointsMaterial({
+    color: "#d7c39c", size: viewportWidth() < 700 ? 0.055 : 0.07,
+    transparent: true, opacity: 0.46, sizeAttenuation: true, depthWrite: false, fog: false
+  }));
+  group.add(nodes);
+
+  const core = new THREE.Mesh(
+    new THREE.SphereGeometry(radius * 0.985, viewportWidth() < 700 ? 24 : 32, viewportWidth() < 700 ? 16 : 24),
+    new THREE.MeshBasicMaterial({ color: "#1c302e", transparent: true, opacity: 0.12, depthWrite: false, fog: false })
+  );
+  group.add(core);
+  group.userData.baseRotation = -0.18;
+  group.rotation.y = group.userData.baseRotation;
+  return group;
+}
+
 function createScene() {
   scene = new THREE.Scene();
   scene.background = new THREE.Color("#111713");
   scene.fog = new THREE.FogExp2("#1a2821", .026);
+  const globe = createAmbientGlobe();
+  scene.add(globe);
   camera = new THREE.PerspectiveCamera(42, viewportWidth() / viewportHeight(), .1, 130);
   camera.position.set(0, 3.6, 13);
 
@@ -630,7 +701,7 @@ function createScene() {
     scene.add(fog);
     fogCards.push(fog);
   }
-  return { garden, lights, motes, stars, water, rippleRings, fogCards, treeGroups, hemisphere, moon, fill, gardenRim };
+  return { garden, lights, motes, stars, water, rippleRings, fogCards, treeGroups, hemisphere, moon, fill, gardenRim, globe };
 }
 
 let world;
@@ -850,6 +921,7 @@ function animate() {
     world.fill.intensity = THREE.MathUtils.lerp(atmosphereA.fillPower, atmosphereB.fillPower, blend);
 
     if (!paused) {
+      world.globe.rotation.y = world.globe.userData.baseRotation + elapsed * 0.018;
       world.garden.rotation.y = Math.sin(elapsed * .08) * .006;
       world.treeGroups.forEach((tree, i) => {
         tree.rotation.z = Math.sin(elapsed * .32 + i * 1.7) * .006;
