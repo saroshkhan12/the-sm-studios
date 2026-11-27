@@ -652,3 +652,20 @@ body.menu-open .lamp { opacity: 0; visibility: hidden; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) {
   .sm-floating-dock, .sm-floating-dock *, .navigation-overlay * { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+
+
+/* Scroll compression is progressive-enhancement only; layout dimensions remain stable. */
+@supports (animation-timeline: scroll(root)) {
+  @media (prefers-reduced-motion: no-preference) {
+    .sm-floating-dock {
+      transform-origin: top center;
+      animation: sm-header-scroll linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0px 180px;
+    }
+    @keyframes sm-header-scroll {
+      from { transform: scaleY(1); box-shadow: 0 5px 18px transparent; }
+      to { transform: scaleY(.84); box-shadow: 0 12px 30px color-mix(in srgb, var(--text, var(--ink)) 13%, transparent); }
+    }
+  }
+}
