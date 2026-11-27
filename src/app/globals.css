@@ -845,11 +845,17 @@ html[data-theme="dark"] .artwork-stack-hint {
   transition: opacity 420ms ease;
 }
 html[data-theme="light"] .header .lamp-theme-toggle::before { opacity: 1; }
+.header .lamp-theme-toggle {
+  height: 82px;
+  overflow: visible;
+}
 .header .lamp-theme-toggle svg {
   display: block;
-  width: 39px;
-  height: 58px;
+  width: 42px;
+  height: 78px;
   overflow: visible;
+  animation: lamp-idle-sway 4.8s ease-in-out infinite;
+  transform-origin: 50% 0;
 }
 .header .lamp-theme-toggle .lamp-cord {
   fill: none;
@@ -879,13 +885,29 @@ html[data-theme="light"] .header .lamp-theme-toggle .lamp-bulb { opacity: 1; }
   stroke: #806B4D;
   stroke-width: 2.5;
 }
-.header .lamp-theme-toggle .lamp-pull {
+ .header .lamp-theme-toggle .lamp-pull {
   transform: translateY(0);
   transform-box: fill-box;
   transform-origin: center top;
-  transition: transform 300ms cubic-bezier(.22, 1.4, .45, 1);
+  transition: transform 460ms cubic-bezier(.18, 1.55, .38, 1);
 }
 .header .lamp-theme-toggle:active .lamp-pull { transition-duration: 90ms; }
+.header .lamp-theme-toggle .lamp-bead {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: lamp-bead-settle 4.8s ease-in-out infinite;
+}
+.header .lamp-theme-toggle:active .lamp-bead { animation-play-state: paused; }
+@keyframes lamp-idle-sway {
+  0%, 100% { transform: rotate(-1.1deg); }
+  50% { transform: rotate(1.1deg); }
+}
+@keyframes lamp-bead-settle {
+  0%, 84%, 100% { transform: translateY(0) rotate(0); }
+  88% { transform: translateY(2px) rotate(3deg); }
+  92% { transform: translateY(-1px) rotate(-2deg); }
+  96% { transform: translateY(1px) rotate(1deg); }
+}
 .header .lamp-theme-toggle:focus-visible {
   outline: 2px solid var(--theme-focus, #C6A477);
   outline-offset: 2px;
@@ -913,5 +935,6 @@ html[data-theme="dark"] .header .lamp-theme-toggle .lamp-bead {
   .header .lamp-theme-toggle *,
   .header .lamp-theme-toggle::before {
     transition: none !important;
+    animation: none !important;
   }
 }
