@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Diamond, Globe2, Heart, ShieldCheck } from "lucide-react";
-import { collections } from "@/data/catalog";
 import { readEtsyProducts } from "@/lib/etsy";
-import { CollectionCard } from "@/components/collection-card";
-import { ProductCard } from "@/components/product-card";\nimport { ExploreCollectionsSection } from "@/components/explore-collections-section";
+import { ProductCard } from "@/components/product-card";
+import { ExploreCollectionsSection } from "@/components/explore-collections-section";
 import { HeroSlider } from "@/components/hero-slider";
 import { ScrollReveal, StaggerItem, StaggerReveal } from "@/components/scroll-reveal";
 
