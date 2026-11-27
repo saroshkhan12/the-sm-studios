@@ -4,7 +4,8 @@
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
-  grid-template-rows: minmax(470px, 520px) auto;
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-height: 520px;
   align-items: center;
   column-gap: 64px;
   width: 100%;
@@ -128,8 +129,8 @@
   animation: collections-artwork-float 6s ease-in-out infinite;
 }
 .collections-artwork-frame-1 { z-index: 3; transform: translate(-50%, -48%) rotate(-4deg); animation-delay: -1.2s; }
-.collections-artwork-frame-2 { z-index: 2; transform: translate(-80%, -43%) rotate(-8deg) scale(.88); animation-delay: -3.2s; }
-.collections-artwork-frame-3 { z-index: 1; transform: translate(-20%, -53%) rotate(5deg) scale(.91); animation-delay: -4.5s; }
+.collections-artwork-frame-2 { z-index: 2; transform: translate(-80%, -43%) rotate(0deg) scale(.88); animation-delay: -3.2s; }
+.collections-artwork-frame-3 { z-index: 1; transform: translate(-20%, -53%) rotate(4deg) scale(.91); animation-delay: -4.5s; }
 .collections-artwork-image {
   position: relative;
   width: 100%;
@@ -236,8 +237,8 @@
   .collections-hero-visual { min-height: 280px; }
   .collections-artwork-composition { width: min(100%, 500px); height: 280px; }
   .collections-artwork-frame { width: clamp(145px, 28vw, 205px); }
-  .collections-artwork-frame-2 { transform: translate(-83%, -43%) rotate(-8deg) scale(.88); }
-  .collections-artwork-frame-3 { transform: translate(-17%, -53%) rotate(5deg) scale(.91); }
+  .collections-artwork-frame-2 { transform: translate(-83%, -43%) rotate(0deg) scale(.88); }
+  .collections-artwork-frame-3 { transform: translate(-17%, -53%) rotate(4deg) scale(.91); }
   .collections-artwork-placeholder { min-height: 250px; }
   .collections-visual-index { bottom: -8px; }
 }
@@ -252,8 +253,8 @@
   .collections-hero-visual { min-height: 230px; }
   .collections-artwork-composition { height: 230px; }
   .collections-artwork-frame { width: clamp(132px, 42vw, 170px); padding: 6px; }
-  .collections-artwork-frame-2 { transform: translate(-82%, -42%) rotate(-7deg) scale(.88); }
-  .collections-artwork-frame-3 { transform: translate(-18%, -52%) rotate(5deg) scale(.9); }
+  .collections-artwork-frame-2 { transform: translate(-82%, -42%) rotate(0deg) scale(.88); }
+  .collections-artwork-frame-3 { transform: translate(-18%, -52%) rotate(4deg) scale(.9); }
   .collections-artwork-placeholder { width: 75%; min-height: 210px; }
   .collections-artwork-placeholder strong { font-size: 42px; }
   .collections-visual-index { font-size: 7px; }
