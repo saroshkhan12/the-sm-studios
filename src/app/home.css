@@ -402,3 +402,10 @@
   border-color: var(--gold);
 }
 .home-collections-description .text-link:hover { color: var(--gold); }
+
+
+/* Match the page-shell inset used by the shared section on /collections. */
+.home-collections-context { padding-inline: 9%; }
+@media (max-width: 650px) {
+  .home-collections-context { padding-inline: 7%; }
+}
