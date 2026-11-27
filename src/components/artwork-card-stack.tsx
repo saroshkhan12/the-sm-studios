@@ -107,6 +107,7 @@ export function ArtworkCardStack({
           return (
             <article
               key={item.id}
+              id={`collection-${item.id}`}
               className={`artwork-stack-card${offset === 0 ? " is-active" : ""}`}
               data-position={offset}
               aria-hidden={!visible}
