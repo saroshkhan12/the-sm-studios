@@ -805,3 +805,113 @@ html[data-theme="dark"] .artwork-stack-hint {
   .artwork-stack-progress span,
   .artwork-stack-arrows button { transition: none !important; }
 }
+
+
+/* Header pull-cord lamp theme control */
+.header .lamp-theme-toggle {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  flex: 0 0 48px;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  min-width: 48px;
+  height: 58px;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  cursor: grab;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.header .lamp-theme-toggle:active { cursor: grabbing; }
+.header .lamp-theme-toggle::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 17px;
+  left: 50%;
+  width: 104px;
+  height: 82px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(230, 184, 94, .27), transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 420ms ease;
+}
+html[data-theme="light"] .header .lamp-theme-toggle::before { opacity: 1; }
+.header .lamp-theme-toggle svg {
+  display: block;
+  width: 39px;
+  height: 58px;
+  overflow: visible;
+}
+.header .lamp-theme-toggle .lamp-cord {
+  fill: none;
+  stroke: #9A8665;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+.header .lamp-theme-toggle .lamp-shade {
+  fill: #B9A17B;
+  stroke: #806B4D;
+  stroke-width: 2;
+  transition: fill 420ms ease, stroke 420ms ease;
+}
+.header .lamp-theme-toggle .lamp-shade-rim {
+  fill: #806B4D;
+  transition: fill 420ms ease;
+}
+.header .lamp-theme-toggle .lamp-bulb {
+  fill: #FFE7A0;
+  opacity: 0;
+  filter: drop-shadow(0 0 5px rgba(255, 218, 128, .85));
+  transition: opacity 320ms ease;
+}
+html[data-theme="light"] .header .lamp-theme-toggle .lamp-bulb { opacity: 1; }
+.header .lamp-theme-toggle .lamp-bead {
+  fill: #D5B16D;
+  stroke: #806B4D;
+  stroke-width: 2.5;
+}
+.header .lamp-theme-toggle .lamp-pull {
+  transform: translateY(0);
+  transform-box: fill-box;
+  transform-origin: center top;
+  transition: transform 300ms cubic-bezier(.22, 1.4, .45, 1);
+}
+.header .lamp-theme-toggle:active .lamp-pull { transition-duration: 90ms; }
+.header .lamp-theme-toggle:focus-visible {
+  outline: 2px solid var(--theme-focus, #C6A477);
+  outline-offset: 2px;
+}
+html[data-theme="dark"] .header .lamp-theme-toggle .lamp-shade {
+  fill: #55515A;
+  stroke: #332F36;
+}
+html[data-theme="dark"] .header .lamp-theme-toggle .lamp-shade-rim { fill: #332F36; }
+html[data-theme="dark"] .header .lamp-theme-toggle .lamp-cord { stroke: #77717A; }
+html[data-theme="dark"] .header .lamp-theme-toggle .lamp-bead {
+  fill: #A99A80;
+  stroke: #625746;
+}
+@media (max-width: 700px) {
+  .header .lamp-theme-toggle {
+    flex-basis: 42px;
+    width: 42px;
+    min-width: 42px;
+    height: 54px;
+  }
+  .header .lamp-theme-toggle svg { width: 35px; height: 53px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .header .lamp-theme-toggle *,
+  .header .lamp-theme-toggle::before {
+    transition: none !important;
+  }
+}
