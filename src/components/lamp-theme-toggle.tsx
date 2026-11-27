@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type MouseEvent, type PointerEvent } from "react";
+import { createPortal } from "react-dom";
 import { useTheme } from "@/components/theme-provider";
 
 const AX = 80;
@@ -126,8 +127,10 @@ export function LampThemeToggle() {
     if (event.detail === 0) switchTheme();
   }
 
-  return (
-    <button
+  return typeof document !== "undefined"
+    ? createPortal(
+      (
+        <button
       ref={lampRef}
       className="lamp"
       id="lamp"
@@ -174,6 +177,9 @@ export function LampThemeToggle() {
           <circle className="l-bead-sphere" r="8.5" />
         </g>
       </svg>
-    </button>
-  );
+        </button>
+      ),
+      document.body,
+    )
+    : null;
 }
