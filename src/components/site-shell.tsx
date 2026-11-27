@@ -32,6 +32,7 @@ import { PageTransition } from "@/components/page-transition";
 import { SearchOverlay } from "@/components/search-overlay";
 import { CustomCursor } from "@/components/custom-cursor";
 import { LampThemeToggle } from "@/components/lamp-theme-toggle";
+import { useTheme } from "@/components/theme-provider";
 
 const navigation = [
   { label: "Shop", href: "/shop" },
@@ -51,6 +52,7 @@ function NavigationLabel({ label }: { label: string }) {
 }
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
+  const { theme, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
@@ -85,6 +87,11 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    document.body.classList.toggle("menu-open", menuOpen);
+    return () => document.body.classList.remove("menu-open");
+  }, [menuOpen]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -366,6 +373,15 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 >
                   SHOP ON ETSY <ArrowUpRight size={15} />
                 </a>
+                <button
+                  type="button"
+                  className="menu-theme"
+                  aria-label={"Switch to " + (theme === "dark" ? "light" : "dark") + " mode"}
+                  aria-pressed={theme === "light"}
+                  onClick={() => toggleTheme()}
+                >
+                  {theme === "dark" ? "TURN LIGHT MODE ON" : "TURN DARK MODE ON"}
+                </button>
               </div>
             </div>
           </m.div>
