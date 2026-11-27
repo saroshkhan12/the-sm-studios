@@ -159,7 +159,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <LampThemeToggle />
+      {pathname !== "/experience" && <LampThemeToggle />}
       <div className="announcement">
         <span>FREE SHIPPING ON ORDERS OVER $50</span>
         <span className="announcement-separator" aria-hidden="true">✦</span>
