@@ -1,0 +1,264 @@
+/* Collections page hero — scoped to this section only. */
+.collections-page-shell { padding-bottom: 110px; }
+.collections-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+  grid-template-rows: minmax(470px, 520px) auto;
+  align-items: center;
+  column-gap: 64px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 48px 0 58px;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+}
+.collections-hero-copy { position: relative; z-index: 2; min-width: 0; padding: 4px 0; }
+.collections-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 36px;
+  color: var(--text-muted);
+  font-size: 10px;
+  letter-spacing: .45px;
+}
+.collections-breadcrumb a { transition: color 180ms ease; }
+.collections-breadcrumb a:hover { color: var(--gold); }
+.collections-breadcrumb [aria-current="page"] { color: var(--text); }
+.collections-hero-eyebrow { margin-bottom: 18px; color: var(--gold); }
+.collections-hero h1 {
+  max-width: 680px;
+  margin: 0;
+  color: var(--text);
+  font: clamp(58px, 6.3vw, 88px)/.91 "Cormorant Garamond", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -2.3px;
+  text-wrap: balance;
+}
+.collections-hero h1 em { color: var(--gold); font-weight: 400; }
+.collections-hero-subtitle {
+  max-width: 46ch;
+  margin: 22px 0 25px;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+.collections-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  max-width: 700px;
+}
+.collections-quick-links a {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  gap: 7px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text-muted);
+  font-size: 9px;
+  line-height: 1;
+  letter-spacing: .25px;
+  white-space: nowrap;
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+.collections-quick-links a:hover {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--bg);
+}
+.collections-hero :is(a, button):focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}
+.collections-hero-stats {
+  display: flex;
+  align-items: stretch;
+  gap: 25px;
+  margin-top: 27px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.collections-hero-stats > div { display: flex; align-items: baseline; gap: 9px; }
+.collections-hero-stats > div + div { padding-left: 25px; border-left: 1px solid var(--line); }
+.collections-hero-stats strong {
+  color: var(--text);
+  font: 25px/1 "Cormorant Garamond", Georgia, serif;
+  font-weight: 400;
+}
+.collections-hero-stats span { color: var(--text-muted); font-size: 9px; letter-spacing: .7px; }
+.collections-hero-visual {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 420px;
+  place-items: center;
+  isolation: isolate;
+}
+.collections-hero-glow {
+  position: absolute;
+  z-index: -1;
+  width: 82%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--gold) 20%, transparent), transparent 68%);
+  filter: blur(9px);
+}
+.collections-artwork-composition {
+  position: relative;
+  width: min(100%, 540px);
+  height: 410px;
+  perspective: 1000px;
+}
+.collections-artwork-frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(175px, 20vw, 250px);
+  margin: 0;
+  padding: 9px;
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+  box-shadow: 0 24px 58px color-mix(in srgb, var(--text) 13%, transparent), 0 4px 15px color-mix(in srgb, var(--text) 7%, transparent);
+  transform-origin: 50% 60%;
+  animation: collections-artwork-float 6s ease-in-out infinite;
+}
+.collections-artwork-frame-1 { z-index: 3; transform: translate(-50%, -48%) rotate(-4deg); animation-delay: -1.2s; }
+.collections-artwork-frame-2 { z-index: 2; transform: translate(-80%, -43%) rotate(-8deg) scale(.88); animation-delay: -3.2s; }
+.collections-artwork-frame-3 { z-index: 1; transform: translate(-20%, -53%) rotate(5deg) scale(.91); animation-delay: -4.5s; }
+.collections-artwork-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--bg);
+}
+.collections-artwork-image img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.collections-artwork-label {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  max-width: calc(100% - 30px);
+  overflow: hidden;
+  padding: 9px 12px;
+  border: 1px solid color-mix(in srgb, var(--line) 65%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  color: var(--text);
+  font-size: 8px;
+  letter-spacing: 1px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+}
+.collections-artwork-placeholder {
+  display: flex;
+  width: min(78%, 390px);
+  min-height: 360px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  border: 1px solid var(--line);
+  outline: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  outline-offset: 10px;
+  background: radial-gradient(ellipse at 50% 25%, color-mix(in srgb, var(--gold) 16%, transparent), transparent 45%), var(--bg-elev);
+  box-shadow: 0 25px 55px color-mix(in srgb, var(--text) 9%, transparent);
+  text-align: center;
+}
+.collections-artwork-placeholder > span,.collections-artwork-placeholder > small { color: var(--text-muted); font-size: 8px; letter-spacing: 2px; }
+.collections-artwork-placeholder strong { color: var(--text); font: 55px/.9 "Cormorant Garamond", Georgia, serif; font-weight: 400; }
+.collections-artwork-placeholder em { color: var(--gold); font-weight: 400; }
+.collections-visual-index {
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  color: var(--text-muted);
+  font-size: 8px;
+  letter-spacing: 1.8px;
+}
+.collections-scroll-cue {
+  grid-column: 1 / -1;
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  color: var(--text-muted);
+  font-size: 8px;
+  letter-spacing: 1.8px;
+}
+.collections-scroll-cue svg { animation: collections-scroll-nudge 1.8s ease-in-out infinite; }
+.collections-hero-divider { display: none; }
+@keyframes collections-artwork-float {
+  0%,100% { translate: 0 0; }
+  50% { translate: 0 -7px; }
+}
+@keyframes collections-scroll-nudge {
+  0%,100% { transform: translateY(0); opacity: .65; }
+  50% { transform: translateY(4px); opacity: 1; }
+}
+@keyframes collections-hero-enter {
+  from { opacity: 0; translate: 0 12px; }
+  to { opacity: 1; translate: 0 0; }
+}
+.collections-hero-copy { animation: collections-hero-enter 520ms ease-out both; }
+.collections-hero-visual { animation: collections-hero-enter 560ms 110ms ease-out both; }
+#artwork-stack-stage { scroll-margin-top: 24px; }
+.artwork-stack-card[id] { scroll-margin-top: 24px; }
+@media (max-width: 1100px) {
+  .collections-hero {
+    grid-template-columns: minmax(0,1fr);
+    grid-template-rows: auto auto auto;
+    gap: 22px;
+    padding: 32px 0 38px;
+  }
+  .collections-hero-copy { padding: 0; }
+  .collections-breadcrumb { margin-bottom: 25px; }
+  .collections-hero h1 { font-size: clamp(2.2rem, 8vw, 3.2rem); letter-spacing: -1px; }
+  .collections-hero-subtitle { margin: 16px 0 19px; font-size: 16px; line-height: 1.75; }
+  .collections-quick-links {
+    flex-wrap: nowrap;
+    max-width: calc(100vw - 48px);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding: 2px 2px 8px;
+  }
+  .collections-quick-links::-webkit-scrollbar { display: none; }
+  .collections-quick-links a { flex: 0 0 auto; scroll-snap-align: start; min-height: 38px; }
+  .collections-hero-stats { margin-top: 16px; }
+  .collections-hero-visual { min-height: 280px; }
+  .collections-artwork-composition { width: min(100%, 500px); height: 280px; }
+  .collections-artwork-frame { width: clamp(145px, 28vw, 205px); }
+  .collections-artwork-frame-2 { transform: translate(-83%, -43%) rotate(-8deg) scale(.88); }
+  .collections-artwork-frame-3 { transform: translate(-17%, -53%) rotate(5deg) scale(.91); }
+  .collections-artwork-placeholder { min-height: 250px; }
+  .collections-visual-index { bottom: -8px; }
+}
+@media (max-width: 479px) {
+  .collections-page-shell { padding-inline: 24px; padding-bottom: 70px; }
+  .collections-hero { padding-top: 25px; gap: 16px; }
+  .collections-breadcrumb { margin-bottom: 22px; font-size: 9px; }
+  .collections-hero-eyebrow { margin-bottom: 14px; font-size: 8px; }
+  .collections-hero h1 { font-size: clamp(2.2rem, 8vw, 3.2rem); line-height: .98; }
+  .collections-hero-subtitle { font-size: 16px; margin: 13px 0 15px; }
+  .collections-hero-stats { display: none; }
+  .collections-hero-visual { min-height: 230px; }
+  .collections-artwork-composition { height: 230px; }
+  .collections-artwork-frame { width: clamp(132px, 42vw, 170px); padding: 6px; }
+  .collections-artwork-frame-2 { transform: translate(-82%, -42%) rotate(-7deg) scale(.88); }
+  .collections-artwork-frame-3 { transform: translate(-18%, -52%) rotate(5deg) scale(.9); }
+  .collections-artwork-placeholder { width: 75%; min-height: 210px; }
+  .collections-artwork-placeholder strong { font-size: 42px; }
+  .collections-visual-index { font-size: 7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .collections-hero-copy,.collections-hero-visual { animation: none; }
+  .collections-artwork-frame,.collections-scroll-cue svg { animation: none; }
+}
