@@ -153,6 +153,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     return () => document.removeEventListener("keydown", handleQuickSearch);
   }, [menuOpen]);
 
+  if (pathname === "/experience") return <>{children}</>;
+
   return (
     <>
       <div className="announcement">
