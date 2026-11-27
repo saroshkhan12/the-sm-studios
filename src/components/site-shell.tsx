@@ -294,7 +294,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            exit={{ opacity: 0, transition: { duration: reduceMotion ? 0 : 0.2, ease: "easeOut" } }}
             transition={{ duration: reduceMotion ? 0 : 0.25, ease: "easeOut" }}
           >
             <div className="navigation-overlay-top">
@@ -358,7 +358,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
             <div className="navigation-overlay-footer">
               <span className="navigation-overlay-kicker">ART · CULTURE · EXPRESSION</span>
-              <p>Creative work with a point of view. Art that carries stories, culture and connection.</p>
+              <p>Art, culture and connection.</p>
               <div className="navigation-overlay-actions">
                 <a
                   className="navigation-overlay-etsy"
