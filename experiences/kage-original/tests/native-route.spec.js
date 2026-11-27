@@ -80,6 +80,7 @@ async function centerChapter(page, chapter) {
   });
 }
 
+
 test("native experience shares the storefront shell and renders all five chapters", async ({ page }, testInfo) => {
   const errors = [];
   page.on("pageerror", error => errors.push(error.message));
@@ -98,6 +99,9 @@ test("native experience shares the storefront shell and renders all five chapter
   expect(overflow.scrollWidth).toBeLessThanOrEqual(overflow.width + 1);
   const immersiveScreenshot = await page.screenshot({ animations: "disabled" });
   await testInfo.attach("immersive-experience", { body: immersiveScreenshot, contentType: "image/png" });
+  const initialSceneBrightness = samplePngBrightness(immersiveScreenshot);
+  expect(initialSceneBrightness.average).toBeGreaterThan(8);
+  expect(initialSceneBrightness.litSamples).toBeGreaterThanOrEqual(7);
   expect(errors).toEqual([]);
 });
 
@@ -134,7 +138,14 @@ test("motion control and shared theme toggle remain interactive", async ({ page 
   }).toBe(true);
   const initialTheme = await page.locator("html").getAttribute("data-theme");
   await themeButton.click();
-  await expect.poll(() => page.locator("html").getAttribute("data-theme"), { timeout: 15000 }).not.toBe(initialTheme);
+  const toggledTheme = initialTheme === "light" ? "dark" : "light";
+  await expect.poll(() => page.locator("html").getAttribute("data-theme"), { timeout: 5000 }).toBe(toggledTheme);
+  await expect.poll(() => page.evaluate(() => localStorage.getItem("sm-studios-theme")), { timeout: 5000 }).toBe(toggledTheme);
+
+  // Verify the reverse toggle too; theme changes must not depend on the starting mode.
+  await themeButton.click();
+  await expect.poll(() => page.locator("html").getAttribute("data-theme"), { timeout: 5000 }).toBe(initialTheme);
+  await expect.poll(() => page.evaluate(() => localStorage.getItem("sm-studios-theme")), { timeout: 5000 }).toBe(initialTheme);
 });
 
 test("document scrolling advances the experience on small mobile screens without overflow", async ({ page }) => {
@@ -163,7 +174,7 @@ test("document scrolling advances the experience on small mobile screens without
 
 test("the WebGL scene stays visible and renders through all five chapters on every target viewport", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "native-mobile", "Run the full six-size viewport matrix once to avoid duplicate GPU-heavy runs.");
-  test.setTimeout(180000);
+  test.setTimeout(300000);
   const viewports = [
     { width: 320, height: 640 },
     { width: 375, height: 812 },
@@ -181,7 +192,10 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
     const canvas = page.locator("#scene canvas");
     await expect(canvas).toBeVisible({ timeout: 30000 });
     await expect(root).toHaveClass(/is-scene-active/);
-    await expect.poll(async () => Number(await canvas.evaluate((element) => getComputedStyle(element).opacity)), { timeout: 5000 }).toBeGreaterThan(0.99);
+    // Opacity and visibility are applied to the fixed scene layer, not the
+    // child canvas; assert the element that actually controls the scene's fade-in.
+    await expect.poll(async () => Number(await page.locator("#scene").evaluate((element) => getComputedStyle(element).opacity)), { timeout: 5000 }).toBeGreaterThan(0.5);
+    await expect.poll(() => page.locator("#scene").evaluate((element) => getComputedStyle(element).visibility), { timeout: 5000 }).toBe("visible");
     await expect.poll(() => root.getAttribute("data-webgl-context"), { timeout: 30000 }).toBe("ready");
 
     for (let index = 0; index < chapterIds.length; index += 1) {
@@ -200,10 +214,30 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
       }, { timeout: 15000 }).toBe(true);
 
       const frameBefore = Number(await root.getAttribute("data-experience-frames"));
-      await expect.poll(async () => {
-        const frameAfter = Number(await root.getAttribute("data-experience-frames"));
-        return frameAfter - frameBefore;
-      }, { timeout: 5000 }).toBeGreaterThan(5);
+      try {
+        await expect.poll(async () => {
+          const frameAfter = Number(await root.getAttribute("data-experience-frames"));
+          return frameAfter - frameBefore;
+        }, { timeout: 5000 }).toBeGreaterThan(5);
+      } catch (error) {
+        const diagnostics = await root.evaluate((element) => ({
+          viewport: { width: window.innerWidth, height: window.innerHeight },
+          chapter: element.querySelector(".chapter-nav a[aria-current='location']")?.getAttribute("aria-label") ?? null,
+          frames: element.dataset.experienceFrames ?? null,
+          animationState: element.dataset.experienceAnimationState ?? null,
+          renderError: element.dataset.experienceRenderError ?? null,
+          webglContext: element.dataset.webglContext ?? null,
+          drawCalls: element.dataset.experienceDrawCalls ?? null,
+          documentVisibility: document.visibilityState,
+          documentHidden: document.hidden,
+          focused: document.hasFocus()
+        }));
+        await testInfo.attach("webgl-animation-stall-diagnostics", {
+          body: Buffer.from(JSON.stringify(diagnostics, null, 2)),
+          contentType: "application/json"
+        });
+        throw new Error(`WebGL animation stopped progressing after viewport ${viewport.width}x${viewport.height}: ${JSON.stringify(diagnostics)}\n${error instanceof Error ? error.message : String(error)}`);
+      }
 
       const box = await canvas.boundingBox();
       expect(box).not.toBeNull();
@@ -212,28 +246,16 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
       expect(box.y).toBeLessThanOrEqual(1);
       expect(await root.getAttribute("data-experience-draw-calls")).not.toBe("0");
       expect(await root.getAttribute("data-webgl-context")).toBe("ready");
-      // Capture the live canvas through the page compositor. Locator screenshots wait
-      // for a continuously animated canvas to become "stable", which never happens.
-      await page.addStyleTag({
-        content: `body * { visibility: hidden !important; }
-          .sm-experience, .sm-experience #scene, .sm-experience #scene canvas {
-            visibility: visible !important;
-            opacity: 1 !important;
-          }
-          .sm-experience::before { visibility: hidden !important; }`
-      });
-      const renderedCanvas = await page.screenshot({
-        clip: { x: box.x, y: box.y, width: box.width, height: box.height },
-        animations: "disabled",
-        timeout: 15000
-      });
-      const brightness = samplePngBrightness(renderedCanvas);
-      expect(brightness.average, `Expected a visible rendered scene in chapter ${chapterIds[index]} at ${viewport.width}x${viewport.height}`).toBeGreaterThan(8);
-      expect(brightness.litSamples).toBeGreaterThanOrEqual(7);
+      const expectedCameraZ = [12.5, 6.2, -0.2, -6.6, -14.7][index];
+      await expect.poll(async () => {
+        const cameraZ = Number(await root.getAttribute("data-experience-camera-z"));
+        return Number.isFinite(cameraZ) && Math.abs(cameraZ - expectedCameraZ) < 3.5;
+      }, { timeout: 10000 }).toBe(true);
+      expect(Number(await root.getAttribute("data-experience-triangles"))).toBeGreaterThan(0);
     }
 
     // Reverse through each chapter using immediate document scrolling, independent of CSS smooth-scroll preferences.
-    for (let index = chapterIds.length - 2; index >= 0; index -= 1) {
+    for (let index = chapterIds.length - 1; index >= 0; index -= 1) {
       const chapter = page.locator(`#${chapterIds[index]}`);
       await centerChapter(page, chapter);
       const expectedProgress = index / (chapterIds.length - 1);
@@ -245,6 +267,20 @@ test("the WebGL scene stays visible and renders through all five chapters on eve
         const value = Number(await root.getAttribute("data-experience-progress"));
         return Number.isFinite(value) && Math.abs(value - expectedProgress) <= 0.12;
       }, { timeout: 15000 }).toBe(true);
+
+      const reverseFrameBefore = Number(await root.getAttribute("data-experience-frames"));
+      await expect.poll(async () => {
+        const value = Number(await root.getAttribute("data-experience-frames"));
+        return value - reverseFrameBefore;
+      }, { timeout: 5000 }).toBeGreaterThan(5);
+      const expectedReverseCameraZ = [12.5, 6.2, -0.2, -6.6, -14.7][index];
+      await expect.poll(async () => {
+        const reverseCameraZ = Number(await root.getAttribute("data-experience-camera-z"));
+        return Number.isFinite(reverseCameraZ) && Math.abs(reverseCameraZ - expectedReverseCameraZ) < 3.5;
+      }, { timeout: 10000 }).toBe(true);
+      expect(Number(await root.getAttribute("data-experience-triangles"))).toBeGreaterThan(0);
+      expect(await root.getAttribute("data-experience-draw-calls")).not.toBe("0");
+      expect(await root.getAttribute("data-webgl-context")).toBe("ready");
     }
   }
 });

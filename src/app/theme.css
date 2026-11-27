@@ -8390,3 +8390,14 @@ html[data-theme="light"] .home-collections-description .text-link:hover {
   color: #523515;
   border-color: #523515;
 }
+
+
+/* Keep the global site chrome above route-level fixed scenes (e.g. Quiet Garden). */
+.announcement {
+  position: relative;
+  z-index: 40;
+}
+
+.header {
+  z-index: 40;
+}
