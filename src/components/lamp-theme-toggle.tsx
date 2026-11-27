@@ -227,6 +227,22 @@ export function LampThemeToggle() {
     }
   }
 
+  function handlePointerCancel(event: PointerEvent<SVGSVGElement>) {
+    pointer.current = null;
+    motion.current.dragging = false;
+    motion.current.tx = 0;
+    motion.current.ty = 0;
+    lampRef.current?.classList.remove("grabbing");
+    animateRef.current?.();
+    try {
+      if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+        event.currentTarget.releasePointerCapture(event.pointerId);
+      }
+    } catch {
+      // Pointer capture may already have been released.
+    }
+  }
+
   function handleKeyboardClick(event: MouseEvent<HTMLButtonElement>) {
     if (event.detail === 0) switchTheme();
   }
@@ -255,7 +271,7 @@ export function LampThemeToggle() {
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
-            onPointerCancel={handlePointerUp}
+            onPointerCancel={handlePointerCancel}
           >
             <defs>
               <linearGradient id="shadeGrad" x1="0" y1="0" x2="1" y2="0">
