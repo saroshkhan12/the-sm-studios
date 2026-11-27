@@ -6270,7 +6270,15 @@ select:focus-visible {
   color-scheme: dark;
 
   /* shadcn/ui-compatible semantic tokens */
-  --background: #111111;\n  --bg: #111111;\n  --bg-elev: #1A1A1A;\n  --text: #F5F1E9;\n  --text-muted-token: #A6A19A;\n  --gold: #C9A46B;\n  --gold-fill: #C9A46B;\n  --on-gold: #171717;\n  --glow: rgba(255, 227, 160, 0);
+  --background: #111111;
+  --bg: #111111;
+  --bg-elev: #1A1A1A;
+  --text: #F5F1E9;
+  --text-muted-token: #A6A19A;
+  --gold: #C9A46B;
+  --gold-fill: #C9A46B;
+  --on-gold: #171717;
+  --glow: rgba(255, 227, 160, 0);
   --foreground: #F5F1E9;
   --card: #1A1A1A;
   --card-foreground: #F5F1E9;
@@ -6319,7 +6327,15 @@ html[data-theme="light"] {
   color-scheme: light;
 
   /* shadcn/ui-compatible semantic tokens */
-  --background: #F5F1E9;\n  --bg: #F5F1E9;\n  --bg-elev: #FFFDF8;\n  --text: #171717;\n  --text-muted-token: #6B665E;\n  --gold: #8F6F3A;\n  --gold-fill: #C9A46B;\n  --on-gold: #171717;\n  --glow: rgba(255, 227, 160, .55);
+  --background: #F5F1E9;
+  --bg: #F5F1E9;
+  --bg-elev: #FFFDF8;
+  --text: #171717;
+  --text-muted-token: #6B665E;
+  --gold: #8F6F3A;
+  --gold-fill: #C9A46B;
+  --on-gold: #171717;
+  --glow: rgba(255, 227, 160, .55);
   --foreground: #171717;
   --card: #FFFDF8;
   --card-foreground: #171717;
