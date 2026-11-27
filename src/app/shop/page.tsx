@@ -4,7 +4,6 @@ import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { ArrowUpDown, Search, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { ProductCard } from "@/components/product-card";
-import { ArtworkCardStack } from "@/components/artwork-card-stack";
 import type { Product } from "@/data/catalog";
 import { MotionButton } from "@/components/motion-button";
 import { ScrollReveal } from "@/components/scroll-reveal";
@@ -200,21 +199,7 @@ export default function ShopPage() {
         </label>
       </ScrollReveal>
 
-      {!loading && !error && products.length > 0 && (
-        <ArtworkCardStack
-          label="Featured artwork"
-          heading="Featured artwork."
-          items={products.slice(0, 8).map((product) => ({
-            id: product.id,
-            title: product.title,
-            subtitle: product.description || product.category,
-            image: product.image,
-            href: `/shop/${product.slug}`,
-            eyebrow: product.collection.replace(/-/g, " ").toUpperCase(),
-            detail: `${product.category} · ${product.currency} ${product.price.toFixed(2)}`,
-          }))}
-        />
-      )}
+
 
       {!loading && !error && products.length > 0 && (
         <p className="results-count" role="status" aria-live="polite">
