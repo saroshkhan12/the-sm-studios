@@ -359,10 +359,12 @@ function createScene() {
   camera.position.set(0, 3.6, 13);
 
   renderer = new THREE.WebGLRenderer({
-    antialias: viewportWidth() > 700,
+    antialias: true,
     powerPreference: "high-performance"
   });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, viewportWidth() < 700 ? 1 : 1.25));
+  // A modest DPR ceiling improves edge clarity without allowing very dense
+  // displays to multiply the garden's fill-rate cost excessively.
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, viewportWidth() < 700 ? 1.25 : 1.5));
   renderer.setSize(viewportWidth(), viewportHeight());
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -633,7 +635,7 @@ function resize() {
   camera.aspect = viewportWidth() / viewportHeight();
   camera.fov = viewportWidth() < 650 ? 54 : 42;
   camera.updateProjectionMatrix();
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, viewportWidth() < 700 ? 1 : 1.25));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, viewportWidth() < 700 ? 1.25 : 1.5));
   renderer.setSize(viewportWidth(), viewportHeight());
   renderer.shadowMap.enabled = viewportWidth() > 700;
 }
