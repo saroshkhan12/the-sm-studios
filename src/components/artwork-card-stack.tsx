@@ -101,7 +101,7 @@ export function ArtworkCardStack({
               data-position={offset}
               aria-hidden={!visible}
               style={{
-                transform: `translate3d(${offset * 64}px, ${Math.abs(offset) * 13}px, 0) rotate(${offset * 5}deg) scale(${offset === 0 ? 1 : Math.max(0.78, 1 - Math.abs(offset) * 0.085)})`,
+                transform: `translate3d(${offset * 76}px, ${Math.abs(offset) * 15}px, 0) rotate(${offset * 4.5}deg) scale(${offset === 0 ? 1 : Math.max(0.80, 1 - Math.abs(offset) * 0.075)})`,
                 zIndex: 10 - Math.abs(offset),
                 opacity: visible ? (offset === 0 ? 1 : Math.max(0.22, 0.68 - Math.abs(offset) * 0.2)) : 0,
                 transition: reduceMotion ? "none" : "transform 560ms cubic-bezier(.2,.75,.2,1), opacity 420ms ease",
