@@ -8401,3 +8401,57 @@ html[data-theme="light"] .home-collections-description .text-link:hover {
 .header {
   z-index: 40;
 }
+
+
+/* Accessible switch-style theme control in the global header. */
+.header .theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  min-width: 48px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.header .theme-toggle-track {
+  display: inline-flex;
+  align-items: center;
+  width: 44px;
+  height: 24px;
+  padding: 3px;
+  border: 1px solid rgba(198, 164, 119, 0.58);
+  border-radius: 999px;
+  background: #29251F;
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+.header .theme-toggle-thumb {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #C6A477;
+  color: #171412;
+  transform: translateX(0);
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+.header .theme-toggle-thumb svg {
+  width: 12px;
+  height: 12px;
+  stroke-width: 2;
+}
+.header .theme-toggle[aria-checked="true"] .theme-toggle-track {
+  background: #E8DDCB;
+  border-color: #76501D;
+}
+.header .theme-toggle[aria-checked="true"] .theme-toggle-thumb {
+  transform: translateX(18px);
+  background: #76501D;
+  color: #FFFFFF;
+}
+.header .theme-toggle:focus-visible {
+  outline: 2px solid var(--theme-focus);
+  outline-offset: 3px;
+}
