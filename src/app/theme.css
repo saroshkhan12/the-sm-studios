@@ -6270,18 +6270,18 @@ select:focus-visible {
   color-scheme: dark;
 
   /* shadcn/ui-compatible semantic tokens */
-  --background: #111111;
-  --foreground: #F5F0E8;
-  --card: #171717;
-  --card-foreground: #F5F0E8;
+  --background: #111111;\n  --bg: #111111;\n  --bg-elev: #1A1A1A;\n  --text: #F5F1E9;\n  --text-muted-token: #A6A19A;\n  --gold: #C9A46B;\n  --gold-fill: #C9A46B;\n  --on-gold: #171717;\n  --glow: rgba(255, 227, 160, 0);
+  --foreground: #F5F1E9;
+  --card: #1A1A1A;
+  --card-foreground: #F5F1E9;
   --popover: #171717;
-  --popover-foreground: #F5F0E8;
-  --primary: #C6A477;
+  --popover-foreground: #F5F1E9;
+  --primary: #C9A46B;
   --primary-foreground: #171412;
   --secondary: #202020;
   --secondary-foreground: #F5F0E8;
   --muted: #202020;
-  --muted-foreground: #B8B3AD;
+  --muted-foreground: #A6A19A;
   --accent: #202020;
   --accent-foreground: #F5F0E8;
   --border: rgba(184, 179, 173, 0.2);
@@ -6319,18 +6319,18 @@ html[data-theme="light"] {
   color-scheme: light;
 
   /* shadcn/ui-compatible semantic tokens */
-  --background: #F7F4EE;
-  --foreground: #252421;
-  --card: #FFFDFA;
-  --card-foreground: #252421;
+  --background: #F5F1E9;\n  --bg: #F5F1E9;\n  --bg-elev: #FFFDF8;\n  --text: #171717;\n  --text-muted-token: #6B665E;\n  --gold: #8F6F3A;\n  --gold-fill: #C9A46B;\n  --on-gold: #171717;\n  --glow: rgba(255, 227, 160, .55);
+  --foreground: #171717;
+  --card: #FFFDF8;
+  --card-foreground: #171717;
   --popover: #FFFDFA;
-  --popover-foreground: #252421;
-  --primary: #80591F;
+  --popover-foreground: #171717;
+  --primary: #8F6F3A;
   --primary-foreground: #FFFDFA;
   --secondary: #EEE7DC;
   --secondary-foreground: #252421;
   --muted: #EEE7DC;
-  --muted-foreground: #625C55;
+  --muted-foreground: #6B665E;
   --accent: #EEE7DC;
   --accent-foreground: #252421;
   --border: rgba(37, 36, 33, 0.17);
