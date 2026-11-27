@@ -4,8 +4,8 @@ import { useEffect, useRef, type MouseEvent, type PointerEvent } from "react";
 import { useTheme } from "@/components/theme-provider";
 
 const AX = 80;
-const AY = 170;
-const LEN = 190;
+const AY = 162;
+const LEN = 170;
 
 type CordMotion = {
   x: number; y: number; vx: number; vy: number;
@@ -140,7 +140,7 @@ export function LampThemeToggle() {
     >
       <svg
         id="lampSvg"
-        viewBox="0 0 160 400"
+        viewBox="0 0 160 380"
         aria-hidden="true"
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
@@ -149,29 +149,29 @@ export function LampThemeToggle() {
       >
         <defs>
           <linearGradient id="shadeGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stopColor="#b8924f" />
-            <stop offset=".35" stopColor="#e2c48a" />
-            <stop offset=".7" stopColor="#c9a46b" />
-            <stop offset="1" stopColor="#8f6f3a" />
+            <stop offset="0" stopColor="#9c7a40" />
+            <stop offset=".35" stopColor="#E2C48A" />
+            <stop offset=".7" stopColor="#C9A46B" />
+            <stop offset="1" stopColor="#8F6F3A" />
           </linearGradient>
           <radialGradient id="beadGrad" cx=".35" cy=".3" r=".8">
-            <stop offset="0" stopColor="#f6e2b0" />
-            <stop offset="1" stopColor="#b8924f" />
+            <stop offset="0" stopColor="#F6E2B0" />
+            <stop offset="1" stopColor="#D9B878" />
           </radialGradient>
         </defs>
-        <rect className="l-brass" x="62" y="0" width="36" height="6" rx="3" />
-        <line className="l-wire" x1="80" y1="6" x2="80" y2="68" />
-        <rect className="l-brass l-cap" x="70" y="66" width="20" height="14" rx="3" />
-        <path className="l-shade" d="M34 150 C34 104 56 84 80 80 C104 84 126 104 126 150 Z" />
-        <path d="M47 144 C47 112 60 94 74 88" fill="none" stroke="#fff" strokeOpacity=".35" strokeWidth="3" strokeLinecap="round" />
-        <ellipse className="l-under" cx="80" cy="156" rx="44" ry="7" />
-        <circle className="l-bulb" cx="80" cy="160" r="11" />
-        <rect className="l-rim" x="30" y="148" width="100" height="8" rx="4" />
-        <path ref={hitRef} className="l-hit" id="lHit" d="M80 170 L80 360" />
-        <path ref={cordRef} className="l-chain" id="lCord" d="M80 170 L80 360" />
-        <g ref={beadRef} id="lBead" className="l-pull" transform="translate(80 360)">
+        <path className="l-brass" d="M60 0 H100 L93 12 H67 Z" />
+        <line className="l-wire" x1="80" y1="12" x2="80" y2="62" />
+        <rect className="l-brass l-cap" x="70" y="60" width="20" height="15" rx="3" />
+        <path className="l-shade" d="M36 146 C36 104 56 84 80 80 C104 84 124 104 124 146 Z" />
+        <path className="l-hl" d="M49 140 C49 112 62 95 76 89" />
+        <ellipse className="l-under" cx="80" cy="154" rx="46" ry="7" />
+        <circle className="l-bulb" cx="80" cy="157" r="10" />
+        <rect className="l-rim" x="32" y="144" width="96" height="8" rx="4" />
+        <path ref={hitRef} className="l-hit" id="lHit" d="M80 164 L80 334" />
+        <path ref={cordRef} className="l-chain" id="lCord" d="M80 164 L80 334" />
+        <g ref={beadRef} id="lBead" className="l-pull" transform="translate(80 334)">
           <rect className="l-brass" x="-2" y="-14" width="4" height="8" rx="2" />
-          <circle r="8" fill="url(#beadGrad)" stroke="#8f6f3a" strokeWidth="1.2" />
+          <circle className="l-bead-sphere" r="8.5" />
         </g>
       </svg>
     </button>
