@@ -846,14 +846,19 @@ html[data-theme="dark"] .artwork-stack-hint {
 }
 html[data-theme="light"] .header .lamp-theme-toggle::before { opacity: 1; }
 .header .lamp-theme-toggle {
-  height: 82px;
+  position: relative;
+  height: 58px;
   overflow: visible;
 }
 .header .lamp-theme-toggle svg {
+  position: absolute;
+  top: 0;
+  left: 50%;
   display: block;
   width: 42px;
   height: 78px;
   overflow: visible;
+  transform: translateX(-50%);
   animation: lamp-idle-sway 4.8s ease-in-out infinite;
   transform-origin: 50% 0;
 }
