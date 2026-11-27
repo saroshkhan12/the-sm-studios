@@ -122,7 +122,9 @@ export function LampThemeToggle() {
       if (event.currentTarget.hasPointerCapture(event.pointerId)) {
         event.currentTarget.releasePointerCapture(event.pointerId);
       }
-    } catch {}
+    } catch {
+      // The browser may already have released pointer capture.
+    }
   }
 
   function handleKeyboardClick(event: MouseEvent<HTMLButtonElement>) {
