@@ -127,7 +127,7 @@ function createTree(parent, x, z, scale, leafMaterials, trunkMat) {
   parent.add(group);
   add(group, sharedTreeTrunkGeometry, trunkMat, [0, 1.85, 0]);
   const branchMat = sharedTreeBranchMaterial;
-  for (let b = 0; b < 5; b++) {
+  for (let b = 0; b < 7; b++) {
     const angle = b * 2.399;
     const start = new THREE.Vector3(0, rand(1.4, 2.8), 0);
     const end = new THREE.Vector3(Math.cos(angle) * rand(1.1, 1.8), start.y + rand(.45, 1.3), Math.sin(angle) * rand(1.1, 1.8));
@@ -146,7 +146,7 @@ function createTree(parent, x, z, scale, leafMaterials, trunkMat) {
       crown.rotation.set(rand(-.28, .28), rand(0, Math.PI), rand(-.24, .24));
     }
   }
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 9; i++) {
     const crown = add(group, sharedTreeCrownGeometry,
       leafMaterials[i % leafMaterials.length],
       [rand(-1.2, 1.2), rand(2.7, 4.5), rand(-1.1, 1.1)]);
@@ -267,18 +267,22 @@ function createPathDetail(parent) {
     roughness: .36,
     metalness: .08
   });
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 10; i++) {
     const side = i % 2 === 0 ? -1 : 1;
-    const x = side * 1.72;
-    const z = 3.1 - i * 3.45;
-    add(parent, new THREE.CylinderGeometry(.105, .14, .1, 10),
-      guideBronze, [x, .075, z]);
-    const beacon = add(parent, new THREE.SphereGeometry(.075, 10, 8),
-      guideGlow, [x, .155, z]);
-    beacon.scale.set(1, .58, 1);
-    if (i === 1 || i === 4 || i === 7) {
-      const guideLight = new THREE.PointLight("#ffc982", 1.65, 4.8, 2);
-      guideLight.position.set(x, .34, z);
+    const x = side * (1.78 + Math.sin(i * .55) * .12);
+    const z = 3.5 - i * 2.85;
+    add(parent, new THREE.CylinderGeometry(.12, .15, .12, 10),
+      guideBronze, [x, .085, z]);
+    const beacon = add(parent, new THREE.SphereGeometry(.09, 12, 8),
+      guideGlow, [x, .18, z]);
+    beacon.scale.set(1, .62, 1);
+    const pool = add(parent, new THREE.CircleGeometry(.58, 24),
+      new THREE.MeshBasicMaterial({ color: "#e9b978", transparent: true, opacity: .075, depthWrite: false, side: THREE.DoubleSide }),
+      [x, .012, z], [-Math.PI / 2, 0, 0]);
+    pool.scale.set(1.35, 1, 1);
+    if (i % 2 === 1) {
+      const guideLight = new THREE.PointLight("#ffc982", 2.25, 5.6, 2);
+      guideLight.position.set(x, .42, z);
       parent.add(guideLight);
     }
   }
@@ -405,7 +409,7 @@ function createChapterLandmarks(parent, leafMaterials, trunkMat) {
     new THREE.MeshBasicMaterial({
       color: "#f3c98f",
       transparent: true,
-      opacity: .075,
+      opacity: .14,
       depthWrite: false,
       side: THREE.DoubleSide
     })
@@ -439,7 +443,7 @@ function createScene() {
 
   const hemisphere = new THREE.HemisphereLight("#c6d4c9", "#111a14", 1.25);
   scene.add(hemisphere);
-  const moon = new THREE.DirectionalLight("#c3d2df", 2.6);
+  const moon = new THREE.DirectionalLight("#f3d6aa", 2.9);
   moon.position.set(-7, 12, 8);
   moon.castShadow = viewportWidth() > 700;
   moon.shadow.mapSize.set(viewportWidth() < 1100 ? 768 : 1536, viewportWidth() < 1100 ? 768 : 1536);
@@ -451,11 +455,11 @@ function createScene() {
   moon.shadow.camera.left = moon.shadow.camera.bottom = -18;
   moon.shadow.camera.right = moon.shadow.camera.top = 18;
   scene.add(moon);
-  const fill = new THREE.DirectionalLight("#d9b78d", .62);
+  const fill = new THREE.DirectionalLight("#f0c58e", .82);
   fill.position.set(6, 4, -10);
   scene.add(fill);
   // A restrained warm backlight separates the final doorway and canopy from the fog.
-  const gardenRim = new THREE.DirectionalLight("#e9c18c", .72);
+  const gardenRim = new THREE.DirectionalLight("#ffd49a", .95);
   gardenRim.position.set(-2, 7, -27);
   scene.add(gardenRim);
 
@@ -488,16 +492,19 @@ function createScene() {
     roughness: .58,
     metalness: .32
   });
-  for (let i = 0; i < 17; i++) {
-    const z = 5.2 - i * 1.02;
-    const x = Math.sin(i * .48) * .16;
-    const width = 1.72 + Math.sin(i * .71) * .16;
-    const depth = .78 + Math.cos(i * .63) * .08;
+  for (let i = 0; i < 22; i++) {
+    const z = 5.45 - i * 1.12;
+    const x = Math.sin(i * .31) * .48;
+    const width = 2.02 + Math.sin(i * .67) * .22;
+    const depth = .86 + Math.cos(i * .53) * .12;
     createStone(garden, x, z, width, depth, pathMats[i % pathMats.length]);
+    // Fine bronze seams sit near the edges of selected slabs, like hand-set metalwork.
     if (i % 2 === 0) {
-      const inlay = add(garden, new THREE.TorusGeometry(.34, .014, 6, 32),
-        pathInlay, [x, .205, z], [Math.PI / 2, 0, rand(-.08, .08)]);
-      inlay.scale.set(1.65, .82, 1);
+      for (const edge of [-1, 1]) {
+        const seam = add(garden, new THREE.BoxGeometry(.34, .025, .045), pathInlay,
+          [x + edge * (width * .34), .205, z + rand(-.12, .12)], [0, rand(-.08, .08), 0]);
+        seam.castShadow = false;
+      }
     }
   }
 
@@ -816,7 +823,9 @@ function animate() {
     const p = scrollProgress;
     const scaled = p * 4;
     const index = Math.min(3, Math.floor(scaled));
-    const blend = THREE.MathUtils.smoothstep(scaled - index, 0, 1);
+    const segmentProgress = THREE.MathUtils.clamp(scaled - index, 0, 1);
+    const blend = segmentProgress * segmentProgress * segmentProgress *
+      (segmentProgress * (segmentProgress * 6 - 15) + 10);
     const a = chapterCamera[index];
     const b = chapterCamera[index + 1];
     const mix = (key) => THREE.MathUtils.lerp(a[key], b[key], blend);
