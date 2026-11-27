@@ -11,7 +11,11 @@
   --surface: #171717;
   --surface-raised: #202020;
   --text-muted: #B8B3AD;
-  --accent-gold: #C6A477;\n  --bg: var(--page-bg);\n  --bg-elev: var(--surface-raised);\n  --text: var(--ivory);\n  --gold: var(--accent-gold);
+  --accent-gold: #C6A477;
+  --bg: var(--page-bg);
+  --bg-elev: var(--surface-raised);
+  --text: var(--ivory);
+  --gold: var(--accent-gold);
 }
 
 html,
@@ -7943,7 +7947,11 @@ html[data-theme="light"] {
   --text-muted: var(--muted-foreground);
   --stone: var(--muted-foreground);
   --line: var(--border);
-  --accent-gold: var(--primary);\n  --bg: var(--background);\n  --bg-elev: var(--secondary);\n  --text: var(--foreground);\n  --gold: var(--primary);
+  --accent-gold: var(--primary);
+  --bg: var(--background);
+  --bg-elev: var(--secondary);
+  --text: var(--foreground);
+  --gold: var(--primary);
   --beige: var(--secondary);
   --clay: #87523D;
   --wine: #71333D;
