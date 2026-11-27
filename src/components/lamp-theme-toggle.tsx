@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type MouseEvent, type PointerEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent, type PointerEvent } from "react";
 import { createPortal } from "react-dom";
 import { useTheme } from "@/components/theme-provider";
 
@@ -15,6 +15,7 @@ type CordMotion = {
 
 export function LampThemeToggle() {
   const { theme, toggleTheme } = useTheme();
+  const [portalReady, setPortalReady] = useState(false);
   const lampRef = useRef<HTMLButtonElement>(null);
   const cordRef = useRef<SVGPathElement>(null);
   const hitRef = useRef<SVGPathElement>(null);
@@ -22,6 +23,10 @@ export function LampThemeToggle() {
   const flickerTimer = useRef<number | null>(null);
   const motion = useRef<CordMotion>({ x: 0, y: 0, vx: 0, vy: 0, dragging: false, tx: 0, ty: 0 });
   const pointer = useRef<{ startX: number; startY: number; moved: boolean; fired: boolean } | null>(null);
+
+  useEffect(() => {
+    setPortalReady(true);
+  }, []);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -127,7 +132,7 @@ export function LampThemeToggle() {
     if (event.detail === 0) switchTheme();
   }
 
-  return typeof document !== "undefined"
+  return portalReady && typeof document !== "undefined"
     ? createPortal(
       (
         <button
