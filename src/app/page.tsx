@@ -132,7 +132,7 @@ export default async function Home() {
         </div>
       </section>
 
-<ExploreCollectionsSection products={products} />
+      <ExploreCollectionsSection products={products} variant="collections-page" />
 
 <section className="featured-section">
         <div className="section-wrap">
