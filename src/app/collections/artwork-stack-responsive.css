@@ -1,0 +1,11 @@
+/* Keep the active artwork card centered on narrow viewports. */
+@media (max-width: 700px) {
+  .artwork-stack-card {
+    left: calc(50% - min(41vw, 170px));
+  }
+}
+@media (max-width: 380px) {
+  .artwork-stack-card {
+    left: calc(50% - 42vw);
+  }
+}
